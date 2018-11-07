@@ -51,4 +51,4 @@ repo sync -j"${cores}"
 source build/envsetup.sh
 
 lunch "aosp_${device}-userdebug"
-make -j32
+make -j"${cores}"
