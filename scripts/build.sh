@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-cd $HOME
+cd "$HOME"
 
 driver_version=pd1a.180720.030
 declare -A driver_sha256=(
@@ -22,6 +22,8 @@ release_dir="$HOME/android/"
 
 function sha256() { openssl sha256 "$@" | awk '{print $2}'; }
 
+cores=$(grep -c ^processor /proc/cpuinfo)
+
 mkdir -p "${download_dir}" "${release_dir}"
 
 for driver in "${drivers[@]}"; do
@@ -35,8 +37,7 @@ for driver in "${drivers[@]}"; do
 		mv "${download_dir}/${file}" "${release_dir}/${file}"
 	fi
 	tar -xvf "${release_dir}/${file}" -C "${release_dir}"
-	cat "${release_dir}/extract-${driver}-${device}.sh" \
-		| tail -n +315 \
+	tail -n +315 "${release_dir}/extract-${driver}-${device}.sh" \
 		| tar -xzv -C "${release_dir}"
 done
 
@@ -45,7 +46,7 @@ git config --global user.name "Hashbang Staff"
 git config --global color.ui false
 
 repo --no-pager --color=auto init -u "${manifest}"
-repo sync -j24
+repo sync -j"${cores}"
 
 source build/envsetup.sh
 
