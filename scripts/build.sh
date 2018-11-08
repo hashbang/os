@@ -4,12 +4,12 @@ cd "$HOME"
 
 driver_version=pd1a.180720.030
 declare -A driver_sha256=(
-    ["google_devices"]="43834afa6c28e342ad5d57616748dff92eab1dca5aa873ada104f37512a4b1c0"
-    ["qcom"]="b714836b7255b25b1ccfce9fe0820c348b4e07f44a536edce5763cd6de684fa6"
+    ["google_devices"]="22086d86287320ce7469d88b1378a6028fae1c1e0f8b72c35e4efcaef6d2a682"
+    ["qcom"]="22086d86287320ce7469d88b1378a6028fae1c1e0f8b72c35e4efcaef6d2a682"
 )
 declare -A driver_crc=(
-    ["google_devices"]="c47f3403"
-    ["qcom"]="e30f765a"
+    ["google_devices"]="d85db144"
+    ["qcom"]="bf86f269"
 )
 device="$RELEASE"
 manifest="https://android.googlesource.com/platform/manifest"
