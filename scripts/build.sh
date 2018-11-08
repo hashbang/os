@@ -5,7 +5,7 @@ cd "$HOME"
 driver_version=pd1a.180720.030
 declare -A driver_sha256=(
     ["google_devices"]="22086d86287320ce7469d88b1378a6028fae1c1e0f8b72c35e4efcaef6d2a682"
-    ["qcom"]="22086d86287320ce7469d88b1378a6028fae1c1e0f8b72c35e4efcaef6d2a682"
+    ["qcom"]="8338403a579c118165d66bf5833510fe7ada6c1893ab7ae4b06c42e4a7af3a35"
 )
 declare -A driver_crc=(
     ["google_devices"]="d85db144"
