@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-cd "$HOME"
 
 driver_version=pd1a.180720.030
 declare -A driver_sha256=(
@@ -18,7 +17,7 @@ mirror="https://dl.google.com/dl/android/aosp"
 
 temp_dir="$(mktemp -d)"
 download_dir="${temp_dir}/downloads/"
-release_dir="$HOME/android/"
+release_dir="$HOME"
 
 function sha256() { openssl sha256 "$@" | awk '{print $2}'; }
 
