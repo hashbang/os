@@ -1,11 +1,13 @@
-from ubuntu:bionic
+FROM ubuntu:bionic
 
-ENV RELEASE=blueline
+ENV HOME=/home/build
+ENV PWD=/home/build
+ENV PATH=/home/build/out/host/linux-x86/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN \
-    useradd -ms /bin/bash build && \
+    useradd -G plugdev -ms /bin/bash build && \
     apt-get update && \
     apt-get install -y \
         repo \
@@ -43,9 +45,8 @@ RUN \
         zlib1g-dev \
         wget
 
-ENV HOME=/home/build
 USER build
 
-ADD scripts/build.sh /usr/local/bin/build.sh
+ADD scripts/ /usr/local/bin/
 
 CMD [ "/bin/bash", "/usr/local/bin/build.sh" ]

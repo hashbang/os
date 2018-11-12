@@ -1,19 +1,23 @@
 #!/bin/bash
 set -e
-
-driver_version=pd1a.180720.030
+cd "$HOME"
+device="${DEVICE?}"
+build_type="${BUILD_TYPE?}"
+build_variant="${BUILD_VARIANT?}"
+manifest_branch="${MANIFEST_BRANCH?}"
+driver_build="${DRIVER_BUILD?}"
 declare -A driver_sha256=(
-    ["google_devices"]="22086d86287320ce7469d88b1378a6028fae1c1e0f8b72c35e4efcaef6d2a682"
-    ["qcom"]="8338403a579c118165d66bf5833510fe7ada6c1893ab7ae4b06c42e4a7af3a35"
+    ["google_devices"]="${DRIVER_SHA256_GOOGLE?}"
+    ["qcom"]="${DRIVER_SHA256_QCOM?}"
 )
 declare -A driver_crc=(
-    ["google_devices"]="d85db144"
-    ["qcom"]="bf86f269"
+    ["google_devices"]="${DRIVER_CRC_GOOGLE?}"
+    ["qcom"]="${DRIVER_CRC_QCOM?}"
 )
-device="$RELEASE"
-manifest="https://android.googlesource.com/platform/manifest"
 drivers=( google_devices qcom )
-mirror="https://dl.google.com/dl/android/aosp"
+
+manifest_url="https://android.googlesource.com/platform/manifest"
+driver_url="https://dl.google.com/dl/android/aosp"
 
 temp_dir="$(mktemp -d)"
 download_dir="${temp_dir}/downloads/"
@@ -26,9 +30,9 @@ cores=$(grep -c ^processor /proc/cpuinfo)
 mkdir -p "${download_dir}" "${release_dir}"
 
 for driver in "${drivers[@]}"; do
-	file="${driver}-${device}-${driver_version}-${driver_crc[$driver]}.tgz"
+	file="${driver}-${device}-${driver_build}-${driver_crc[$driver]}.tgz"
 	if [ ! -f "${release_dir}/${file}" ]; then
-		wget "${mirror}/${file}" -O "${download_dir}/${file}"
+		wget "${driver_url}/${file}" -O "${download_dir}/${file}"
 		file_hash="$(sha256 "${download_dir}/${file}")"
 		echo "$file_hash"
 		[[ "${driver_sha256[${driver}]}" == "$file_hash" ]] || \
@@ -44,10 +48,24 @@ git config --global user.email "staff@hashbang.sh"
 git config --global user.name "Hashbang Staff"
 git config --global color.ui false
 
-repo --no-pager --color=auto init -u "${manifest}"
-repo sync -j"${cores}"
+repo \
+	--no-pager \
+	--color=auto \
+	init \
+    --manifest-url "$manifest_url" \
+    --manifest-branch "$manifest_branch" \
+    --depth 1
+repo sync \
+	-c \
+	--no-tags \
+	--no-clone-bundle \
+	--jobs "${cores}"
 
+
+# shellcheck disable=SC1091
 source build/envsetup.sh
 
-lunch "aosp_${device}-userdebug"
-make -j"${cores}"
+choosecombo "${build_type}" "aosp_${device}" "${build_variant}"
+make -j "${cores}" fastboot
+make -j "${cores}" target-files-package
+make -j "${cores}" brillo_update_payload
