@@ -1,7 +1,6 @@
 FROM ubuntu:bionic
 
 ENV HOME=/home/build
-ENV PWD=/home/build
 ENV PATH=/home/build/out/host/linux-x86/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 ARG DEBIAN_FRONTEND=noninteractive
@@ -46,6 +45,7 @@ RUN \
         wget
 
 USER build
+WORKDIR /home/build
 
 ADD scripts/ /usr/local/bin/
 
