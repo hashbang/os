@@ -6,8 +6,9 @@ build_variant="${BUILD_VARIANT?}"
 manifest_branch="${MANIFEST_BRANCH?}"
 driver_build="${DRIVER_BUILD?}"
 kernel_name="${KERNEL_NAME?}"
-kernel_commit="${KERNEL_COMMIT?}"
+kernel_ref="${KERNEL_REF?}"
 kernel_defconfig="${KERNEL_DEFCONFIG?}"
+kernel_build="${KERNEL_BUILD:-true}"
 gcc_version="${GCC_VERSION?}"
 drivers=( google_devices qcom )
 manifest_url="https://android.googlesource.com/platform/manifest"
@@ -68,22 +69,24 @@ make -j "${cores}" dtc
 make -j "${cores}" mkdtimg
 
 # Build Kernel
-cat <<-EOF | bash
-	export ARCH=arm64
-	export CROSS_COMPILE="$PWD/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-${gcc_version}/bin/aarch64-linux-android-"
-	mkdir -p "kernel/${kernel_name}"
-	if [ ! -d "kernel/${kernel_name}" ]; then
-		git clone "${kernel_url}" "kernel/${kernel_name}"
-	fi
-	cd "kernel/${kernel_name}"
-	git pull origin "${kernel_commit}"
-	git checkout "${kernel_commit}"
-	make "${kernel_defconfig}_defconfig"
-	make -j "${cores}"
-	cd -
-	cp "kernel/arch/arm64/boot/dtbo.img" "device/google/${device}-kernel/"
-	cp "kernel/arch/arm64/boot/Image.lz4-dtb" "device/google/${device}-kernel/"
-EOF
+if [ "$kernel_build" = true ]; then
+	cat <<-EOF | bash
+		export ARCH=arm64
+		export CROSS_COMPILE="$PWD/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-${gcc_version}/bin/aarch64-linux-android-"
+		mkdir -p "kernel/${kernel_name}"
+		if [ ! -d "kernel/${kernel_name}" ]; then
+			git clone "${kernel_url}" "kernel/${kernel_name}"
+		fi
+		cd "kernel/${kernel_name}"
+		git pull origin "${kernel_ref}"
+		git checkout "${kernel_ref}"
+		make "${kernel_defconfig}_defconfig"
+		make -j "${cores}"
+		cd -
+		cp "kernel/arch/arm64/boot/dtbo.img" "device/google/${device}-kernel/"
+		cp "kernel/arch/arm64/boot/Image.lz4-dtb" "device/google/${device}-kernel/"
+	EOF
+fi
 
 # Build flashable image
 make -j "${cores}" target-files-package
