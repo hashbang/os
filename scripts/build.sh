@@ -6,6 +6,8 @@ build_type="${BUILD_TYPE?}"
 build_variant="${BUILD_VARIANT?}"
 manifest_branch="${MANIFEST_BRANCH?}"
 driver_build="${DRIVER_BUILD?}"
+kernel_name="${KERNEL_NAME?}"
+kernel_commit="${KERNEL_COMMIT?}"
 declare -A driver_sha256=(
     ["google_devices"]="${DRIVER_SHA256_GOOGLE?}"
     ["qcom"]="${DRIVER_SHA256_QCOM?}"
@@ -18,6 +20,7 @@ drivers=( google_devices qcom )
 
 manifest_url="https://android.googlesource.com/platform/manifest"
 driver_url="https://dl.google.com/dl/android/aosp"
+kernel_url="https://android.googlesource.com/kernel/${kernel_name}"
 
 temp_dir="$(mktemp -d)"
 download_dir="${temp_dir}/downloads/"
@@ -48,6 +51,20 @@ git config --global user.email "staff@hashbang.sh"
 git config --global user.name "Hashbang Staff"
 git config --global color.ui false
 
+# Build Kernel
+export ARCH=arm64
+export CROSS_COMPILE=aarch64-linux-android-
+mkdir -p "kernel/${kernel_name}"
+git clone "${kernel_url}" "kernel/${kernel_name}"
+cd "kernel/${kernel_name}"
+git checkout "${kernel_commit}"
+make "${device}_defconfig"
+make V=1 -j "${cores}"
+cd -
+cp "kernel/arch/arm64/boot/dtbo.img" "device/google/${device}-kernel/"
+cp "kernel/arch/arm64/boot/Image.lz4-dtb" "device/google/${device}-kernel/"
+
+# Build flashable android image
 repo \
 	--no-pager \
 	--color=auto \
