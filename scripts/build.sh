@@ -79,7 +79,7 @@ cd "kernel/${kernel_name}"
 git pull origin "${kernel_commit}"
 git checkout "${kernel_commit}"
 make "${kernel_defconfig}_defconfig"
-make V=1 -j "${cores}"
+make -j "${cores}"
 
 cd -
 cp "kernel/arch/arm64/boot/dtbo.img" "device/google/${device}-kernel/"
