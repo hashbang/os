@@ -73,8 +73,8 @@ if [ "$kernel_build" = true ]; then
 	cat <<-EOF | bash
 		export ARCH=arm64
 		export CROSS_COMPILE="$PWD/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-${gcc_version}/bin/aarch64-linux-android-"
-		mkdir -p "kernel/${kernel_name}"
 		if [ ! -d "kernel/${kernel_name}" ]; then
+			mkdir -p "kernel/${kernel_name}"
 			git clone "${kernel_url}" "kernel/${kernel_name}"
 		fi
 		cd "kernel/${kernel_name}"
