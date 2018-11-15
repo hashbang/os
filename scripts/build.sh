@@ -34,10 +34,7 @@ git config --global user.name "Hashbang Staff"
 git config --global color.ui false
 
 # Sync repos
-mkdir -p .repo/manifests
-cp /opt/android/manifest.xml .repo/manifests/default.xml
-
-repo init -m "default.xml" --depth 1
+repo init -u /opt/android/ -m manifest.xml
 repo sync -c --no-tags --no-clone-bundle --jobs "${cores}"
 
 # Fetch driver blobs
