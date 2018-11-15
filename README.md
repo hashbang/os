@@ -52,6 +52,7 @@ Build images for desired device:
 docker run \
   -it \
   -v android:/home/build \
+  -e "DEVICE=crosshatch" \
   --env-file config/crosshatch.env \
   hashbang/os
 ```

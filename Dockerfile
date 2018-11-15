@@ -48,5 +48,6 @@ USER build
 WORKDIR /home/build
 
 ADD scripts/ /usr/local/bin/
+ADD ./ /opt/android/
 
 CMD [ "/bin/bash", "/usr/local/bin/build.sh" ]
