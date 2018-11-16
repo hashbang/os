@@ -9,7 +9,7 @@
 
   <project groups="device" name="fdroid/fdroidclient" path="packages/apps/F-Droid" remote="gitlab" revision="refs/tags/1.4" />
   <project groups="device" name="fdroid/privileged-extension" path="packages/apps/F-DroidPrivilegedExtension" remote="gitlab" revision="refs/tags/0.2.8" />
-  <project groups="device,crosshatch" name="kernel/msm" path="kernel/crosshatch" revision="refs/tags/android-msm-crosshatch-4.9-pie-qpr1" />
+  <project groups="device,crosshatch" name="kernel/msm" path="kernel/crosshatch" revision="android-msm-crosshatch-4.9-pie-qpr1" />
 
   <project groups="pdk-cw-fs,pdk" name="device/common" revision="20e35d3569a0646dceb105ccc66524d969887759" upstream="refs/tags/android-9.0.0_r16"/>
   <project groups="pdk" name="device/generic/arm64" revision="325b7ec3eab920869050bbfedbd3461f9aed5eb5" upstream="refs/tags/android-9.0.0_r16"/>
