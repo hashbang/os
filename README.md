@@ -16,59 +16,43 @@ builds.
 
 ## Features ##
 
-  * Minimal changes from AOSP.
-  * Google Fi LTE, Bluetooth, Wifi all work as expected
-  * Chromium as default browser
-  * OMA Device management backdoors removed
-  * Build-in F-Droid as Play Store alternative
-  * No security shortcuts like disabling/crippling SELinux.
-  * Google Apps and Play Services are not supported
-  * Vendor blobs auto-extracted direct from Google Servers
+ * 100% Open Source and auditable
+  * Except for vendor driver blobs hash verified from Google Servers
+ * All hardware works
+  * Unless you use Sprint directly or via Fi, which requires [backdoors][1]
+ * No changes to stock AOSP functionality
+ * Built-in F-Droid
+  * Trusted as system app without need to enable "Unknown Sources"
 
-## Known Issues ##
+[1]: https://gist.github.com/thestinger/171b5ffdc54a50ee44497028aa137ed8
 
-  * Only Pixel 3 XL supported at this time
-  * Builds not yet reproducible
-  * Signing is not a thing yet
-  * Touchscreen and most other drivers not working
+## Devices ##
 
-## Requirements ##
+  * crosshatch (Pixel 3 XL)
 
- * A supported device
+## Development ##
+
+### Requirements ###
+
+ * Linux host system
+ * Docker
  * x86_64 CPU
  * 10GB+ available memory
  * 60GB+ disk
- * Docker
 
-## Building ##
-
-Create a volume for storing android sources and build artifacts:
-```
-docker volume create android
-```
+### Build ###
 
 Build images for desired device:
 ```
-docker run \
-  -it \
-  -v android:/home/build \
-  -e "DEVICE=crosshatch" \
-  --env-file config/crosshatch.env \
-  hashbang/os
+make DEVICE=crosshatch
 ```
 
-## Flashing ##
+### Flash ###
 
-Reboot into Fastboot mode.
+Reboot device into Fastboot mode.
 
 ```
-docker run \
-  -it \
-  --privileged \
-  -u root \
-  -v android:/home/build \
-  --env-file=configs/crosshatch.env \
-  hashbang/os flash.sh
+make install
 ```
 
 ## Notes ##
