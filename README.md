@@ -40,6 +40,17 @@ builds.
  * 10GB+ available memory
  * 60GB+ disk
 
+### Edit ###
+
+```
+make shell
+```
+
+### Patch ###
+```
+make diff > patches/my-feature.patch
+```
+
 ### Build ###
 
 Build images for desired device:

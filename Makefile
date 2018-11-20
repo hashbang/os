@@ -13,6 +13,18 @@ build: image
 	  --env-file config/$(device).env \
 	  hashbang/os
 
+shell: image
+	docker run \
+	  -it \
+	  -v android:/home/build \
+	  hashbang/os bash
+
+diff: image
+	docker run \
+	  -it \
+	  -v android:/home/build \
+	  hashbang/os repo diff -u
+
 install: image
 	docker run \
 	  -it \
@@ -28,4 +40,4 @@ clean:
 	  -v android:/home/build \
 	  hashbang/os make clean
 
-.PHONY: image build flash clean default
+.PHONY: image build shell diff flash clean default

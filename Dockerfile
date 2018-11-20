@@ -1,15 +1,18 @@
 FROM ubuntu:bionic
 
+MAINTAINER Hashbang Team <team@hashbang.sh>
+
 ENV HOME=/home/build
 ENV PATH=/home/build/out/host/linux-x86/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN \
-    useradd -G plugdev -ms /bin/bash build && \
+    useradd -G plugdev,sudo -ms /bin/bash build && \
     apt-get update && \
     apt-get install -y \
         repo \
+        sudo \
         openjdk-8-jdk \
         android-tools-adb \
         bc \
@@ -42,7 +45,9 @@ RUN \
         yasm \
         zip \
         zlib1g-dev \
-        wget
+        wget \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+    && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 USER build
 WORKDIR /home/build
