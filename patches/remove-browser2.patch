@@ -1,0 +1,14 @@
+
+project build/make/
+diff --git a/build/make/target/product/core.mk b/build/make/target/product/core.mk
+index c72bb2f26..7c1a72c54 100644
+--- a/build/make/target/product/core.mk
++++ b/build/make/target/product/core.mk
+@@ -24,7 +24,6 @@ PRODUCT_PACKAGES += \
+     BasicDreams \
+     BlockedNumberProvider \
+     BookmarkProvider \
+-    Browser2 \
+     BuiltInPrintService \
+     Calendar \
+     CalendarProvider \

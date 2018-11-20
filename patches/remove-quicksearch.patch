@@ -1,0 +1,14 @@
+
+project build/make/
+diff --git a/build/make/target/product/core.mk b/build/make/target/product/core.mk
+index c72bb2f26..729b8fb8e 100644
+--- a/build/make/target/product/core.mk
++++ b/build/make/target/product/core.mk
+@@ -50,7 +50,6 @@ PRODUCT_PACKAGES += \
+     PrintSpooler \
+     PrintRecommendationService \
+     ProxyHandler \
+-    QuickSearchBox \
+     SecureElement \
+     Settings \
+     SettingsIntelligence \

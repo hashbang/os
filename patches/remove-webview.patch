@@ -1,0 +1,14 @@
+
+project build/make/
+diff --git a/build/make/target/product/core_minimal.mk b/build/make/target/product/core_minimal.mk
+index 85646c1af..8d6b731a6 100644
+--- a/build/make/target/product/core_minimal.mk
++++ b/build/make/target/product/core_minimal.mk
+@@ -88,7 +88,6 @@ PRODUCT_PACKAGES += \
+     uncrypt \
+     vndk_snapshot_package \
+     voip-common \
+-    webview \
+     webview_zygote \
+ 
+ # Wifi modules

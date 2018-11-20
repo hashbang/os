@@ -1,0 +1,15 @@
+
+project build/make/
+diff --git a/build/make/target/product/core.mk b/build/make/target/product/core.mk
+index c72bb2f26..a8d0d1850 100644
+--- a/build/make/target/product/core.mk
++++ b/build/make/target/product/core.mk
+@@ -37,6 +37,8 @@ PRODUCT_PACKAGES += \
+     Email \
+     ExactCalculator \
+     ExternalStorageProvider \
++    F-Droid \
++    F-DroidPrivilegedExtension \
+     FusedLocation \
+     InputDevices \
+     KeyChain \
