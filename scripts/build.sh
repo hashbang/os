@@ -9,10 +9,10 @@ kernel_build="${KERNEL_BUILD:-true}"
 gcc_version="${GCC_VERSION:-4.9}"
 drivers=( google_devices qcom )
 driver_url="https://dl.google.com/dl/android/aosp"
-manifest_url="https://android.googlesource.com/platform/manifest"
 temp_dir="$(mktemp -d)"
 download_dir="${temp_dir}/downloads/"
 build_dir="$PWD"
+config_dir="/opt/android"
 cores=$(nproc)
 
 declare -A driver_sha256=(
@@ -34,8 +34,13 @@ git config --global user.name "Hashbang Staff"
 git config --global color.ui false
 
 # Sync repos
-repo init -u /opt/android/ -m manifest.xml
+repo init -u "${config_dir}" -m manifest.xml
 repo sync -c --no-tags --no-clone-bundle --jobs "${cores}"
+
+# Apply Patches
+for patch in "${config_dir}"/patches/*.patch; do
+	patch -p1 --no-backup-if-mismatch < "${patch}"
+done
 
 # Fetch driver blobs
 mkdir -p "${download_dir}" "${build_dir}"
