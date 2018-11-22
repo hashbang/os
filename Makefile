@@ -30,7 +30,7 @@ install: image
 	  --privileged \
 	  -u root \
 	  -v android:/home/build \
-	  --env-file=configs/$(device).env \
+	  --env-file=config/$(device).env \
 	  hashbang/os flash.sh
 
 clean: image

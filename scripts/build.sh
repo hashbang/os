@@ -6,15 +6,17 @@ build_variant="${BUILD_VARIANT?}"
 driver_build="${DRIVER_BUILD?}"
 kernel_defconfig="${KERNEL_DEFCONFIG?}"
 kernel_build="${KERNEL_BUILD:-true}"
+maintainer_name="${MAINTAINER_NAME:-aosp@null.com}"
+maintainer_email="${MAINTAINER_EMAIL:-AOSP User}"
 gcc_version="${GCC_VERSION:-4.9}"
-drivers=( google_devices qcom )
-driver_url="https://dl.google.com/dl/android/aosp"
+key_dir="${KEY_DIR/:-build/make/tools/releasetools/testdata}"
 temp_dir="$(mktemp -d)"
 download_dir="${temp_dir}/downloads/"
 build_dir="$PWD"
 config_dir="/opt/android"
 cores=$(nproc)
-
+drivers=( google_devices qcom )
+driver_url="https://dl.google.com/dl/android/aosp"
 declare -A driver_sha256=(
     ["google_devices"]="${DRIVER_SHA256_GOOGLE?}"
     ["qcom"]="${DRIVER_SHA256_QCOM?}"
@@ -24,15 +26,17 @@ declare -A driver_crc=(
     ["qcom"]="${DRIVER_CRC_QCOM?}"
 )
 
-function sha256() { openssl sha256 "$@" | awk '{print $2}'; }
+function sha256() { openssl sha256 "$@" | cut -c -64; }
+
+function key_hash(){ openssl x509 -in $1 -outform DER | sha256; }
 
 cd "${build_dir}"
 
 mkdir -p "${download_dir}" "${build_dir}"
 
 # Setup Git
-git config --global user.email "staff@hashbang.sh"
-git config --global user.name "Hashbang Staff"
+git config --global user.email "${maintainer_email}"
+git config --global user.name "${maintainer_name}"
 git config --global color.ui false
 
 # Sync/reset repos
@@ -57,11 +61,13 @@ for driver in "${drivers[@]}"; do
 done
 
 # Apply Patches
-for patch in "${config_dir}"/patches/*.patch; do
-	patch -p1 --no-backup-if-mismatch < "${patch}"
+for type in {global,${build_variant}} ; do
+	for patch in "${config_dir}"/patches/"${type}"/*.patch; do
+		patch -p1 --no-backup-if-mismatch < "${patch}"
+	done
 done
 
-# Setup enviornment
+# Setup environment
 # shellcheck disable=SC1091
 source build/envsetup.sh
 choosecombo "${build_type}" "aosp_${device}" "${build_variant}"
