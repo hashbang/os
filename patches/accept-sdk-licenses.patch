@@ -1,0 +1,47 @@
+
+project sdk/
+diff --git a/sdk/licenses/android-googletv-license b/sdk/licenses/android-googletv-license
+new file mode 100644
+index 000000000..07d43f0b8
+--- /dev/null
++++ b/sdk/licenses/android-googletv-license
+@@ -0,0 +1,2 @@
++
++601085b94cd77f0b54ff86406957099ebe79c4d6
+\ No newline at end of file
+diff --git a/sdk/licenses/android-sdk-license b/sdk/licenses/android-sdk-license
+new file mode 100644
+index 000000000..c311cf48c
+--- /dev/null
++++ b/sdk/licenses/android-sdk-license
+@@ -0,0 +1,2 @@
++
++d56f5187479451eabf01fb78af6dfcb131a6481e
+\ No newline at end of file
+diff --git a/sdk/licenses/android-sdk-preview-license b/sdk/licenses/android-sdk-preview-license
+new file mode 100644
+index 000000000..da4552d2c
+--- /dev/null
++++ b/sdk/licenses/android-sdk-preview-license
+@@ -0,0 +1,2 @@
++
++84831b9409646a918e30573bab4c9c91346d8abd
+\ No newline at end of file
+diff --git a/sdk/licenses/google-gdk-license b/sdk/licenses/google-gdk-license
+new file mode 100644
+index 000000000..db3b42fd8
+--- /dev/null
++++ b/sdk/licenses/google-gdk-license
+@@ -0,0 +1,2 @@
++
++33b6a2b64607f11b759f320ef9dff4ae5c47d97a
+\ No newline at end of file
+diff --git a/sdk/licenses/mips-android-sysimage-license b/sdk/licenses/mips-android-sysimage-license
+new file mode 100644
+index 000000000..8f4f164ec
+--- /dev/null
++++ b/sdk/licenses/mips-android-sysimage-license
+@@ -0,0 +1,2 @@
++
++e9acab5b5fbb560a72cfaecce8946896ff6aab9d
+\ No newline at end of file

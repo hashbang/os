@@ -28,22 +28,19 @@ function sha256() { openssl sha256 "$@" | awk '{print $2}'; }
 
 cd "${build_dir}"
 
+mkdir -p "${download_dir}" "${build_dir}"
+
 # Setup Git
 git config --global user.email "staff@hashbang.sh"
 git config --global user.name "Hashbang Staff"
 git config --global color.ui false
 
-# Sync repos
+# Sync/reset repos
 repo init -u "${config_dir}" -m manifest.xml
 repo sync -c --no-tags --no-clone-bundle --jobs "${cores}"
-
-# Apply Patches
-for patch in "${config_dir}"/patches/*.patch; do
-	patch -p1 --no-backup-if-mismatch < "${patch}"
-done
+repo forall -c 'git reset --hard ; git clean -fdx'
 
 # Fetch driver blobs
-mkdir -p "${download_dir}" "${build_dir}"
 for driver in "${drivers[@]}"; do
 	file="${driver}-${device}-${driver_build}-${driver_crc[$driver]}.tgz"
 	if [ ! -f "${build_dir}/${file}" ]; then
@@ -57,6 +54,11 @@ for driver in "${drivers[@]}"; do
 	tar -xvf "${build_dir}/${file}" -C "${build_dir}"
 	tail -n +315 "${build_dir}/extract-${driver}-${device}.sh" \
 		| tar -xzv -C "${build_dir}"
+done
+
+# Apply Patches
+for patch in "${config_dir}"/patches/*.patch; do
+	patch -p1 --no-backup-if-mismatch < "${patch}"
 done
 
 # Setup enviornment

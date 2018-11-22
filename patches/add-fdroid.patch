@@ -13,3 +13,39 @@ index c72bb2f26..a8d0d1850 100644
      FusedLocation \
      InputDevices \
      KeyChain \
+
+project packages/apps/F-Droid/
+diff --git a/packages/apps/F-Droid/Android.mk b/packages/apps/F-Droid/Android.mk
+index c6110a340..9793b7a11 100644
+--- a/packages/apps/F-Droid/Android.mk
++++ b/packages/apps/F-Droid/Android.mk
+@@ -10,13 +10,13 @@ fdroid_root  := $(LOCAL_PATH)
+ fdroid_dir   := app
+ fdroid_out   := $(PWD)/$(OUT_DIR)/target/common/obj/APPS/$(LOCAL_MODULE)_intermediates
+ fdroid_build := $(fdroid_root)/$(fdroid_dir)/build
+-fdroid_apk   := build/outputs/apk/$(fdroid_dir)-release-unsigned.apk
++fdroid_apk   := build/outputs/apk/full/release/app-full-release-unsigned.apk
+ 
+ $(fdroid_root)/$(fdroid_dir)/$(fdroid_apk):
+ 	rm -Rf $(fdroid_build)
+ 	mkdir -p $(fdroid_out)
+ 	ln -sf $(fdroid_out) $(fdroid_build)
+-	cd $(fdroid_root)/$(fdroid_dir) && gradle assembleRelease
++	cd $(fdroid_root)/$(fdroid_dir) && ../gradlew assembleRelease
+ 
+ LOCAL_CERTIFICATE := platform
+ LOCAL_SRC_FILES := $(fdroid_dir)/$(fdroid_apk)
+diff --git a/packages/apps/F-Droid/app/local.properties b/packages/apps/F-Droid/app/local.properties
+new file mode 100644
+index 000000000..af8d7785a
+--- /dev/null
++++ b/packages/apps/F-Droid/app/local.properties
+@@ -0,0 +1 @@
++sdk.dir=/home/build/sdk
+diff --git a/packages/apps/F-Droid/local.properties b/packages/apps/F-Droid/local.properties
+new file mode 100644
+index 000000000..af8d7785a
+--- /dev/null
++++ b/packages/apps/F-Droid/local.properties
+@@ -0,0 +1 @@
++sdk.dir=/home/build/sdk
