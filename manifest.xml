@@ -12,8 +12,13 @@
   <project groups="device" name="fdroid/privileged-extension" path="packages/apps/F-DroidPrivilegedExtension" remote="gitlab" revision="refs/tags/0.2.8" />
 
   <!-- Crosshatch Kernel Sources -->
+  <project name="kernel/msm" path="kernel/crosshatch/private/msm-google" >
+      <linkfile src="build.config" dest="build.config" />
+  </project>
   <project name="kernel/build" path="kernel/crosshatch/build" revision="529ce46811d5eb4add546f635906d31229262a13" upstream="android-msm-bluecross-4.9-pie-qpr1"/>
-  <project name="kernel/msm" path="kernel/crosshatch/private/msm-google" revision="833ea182c39ccd47bc2fb2fe3b17996a58ac4bbf" upstream="android-msm-bluecross-4.9-pie-qpr1"/>
+  <project name="kernel/msm" path="kernel/crosshatch/private/msm-google" revision="833ea182c39ccd47bc2fb2fe3b17996a58ac4bbf" upstream="android-msm-bluecross-4.9-pie-qpr1">
+      <linkfile dest="kernel/crosshatch/build.config" src="build.config"   />
+  </project>
   <project name="kernel/msm-extra" path="kernel/crosshatch/private/msm-google/techpack/audio" revision="523fdea385b9fdef0bd4630d0f54898d6d241d1d" upstream="android-msm-bluecross-4.9-pie-qpr1"/>
   <project name="kernel/msm-modules/qca-wfi-host-cmn" path="kernel/crosshatch/private/msm-google-modules/wlan/qca-wifi-host-cmn" revision="731dca5fb51a17765e49ba2f7654137b1e9ec01b" upstream="android-msm-bluecross-4.9-pie-qpr1"/>
   <project name="kernel/msm-modules/qcacld" path="kernel/crosshatch/private/msm-google-modules/wlan/qcacld-3.0" revision="29dfedb598500f85af6fa35923b7d905cea10131" upstream="android-msm-bluecross-4.9-pie-qpr1"/>
