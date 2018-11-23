@@ -12,9 +12,6 @@
   <project groups="device" name="fdroid/privileged-extension" path="packages/apps/F-DroidPrivilegedExtension" remote="gitlab" revision="refs/tags/0.2.8" />
 
   <!-- Crosshatch Kernel Sources -->
-  <project name="kernel/msm" path="kernel/crosshatch/private/msm-google" >
-      <linkfile src="build.config" dest="build.config" />
-  </project>
   <project name="kernel/build" path="kernel/crosshatch/build" revision="529ce46811d5eb4add546f635906d31229262a13" upstream="android-msm-bluecross-4.9-pie-qpr1"/>
   <project name="kernel/msm" path="kernel/crosshatch/private/msm-google" revision="833ea182c39ccd47bc2fb2fe3b17996a58ac4bbf" upstream="android-msm-bluecross-4.9-pie-qpr1">
       <linkfile dest="kernel/crosshatch/build.config" src="build.config"   />
