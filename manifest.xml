@@ -21,6 +21,13 @@
   <project name="kernel/msm-modules/qcacld" path="kernel/crosshatch/private/msm-google-modules/wlan/qcacld-3.0" revision="29dfedb598500f85af6fa35923b7d905cea10131" upstream="android-msm-bluecross-4.9-pie-qpr1"/>
   <project name="kernel/msm-modules/wlan-fw-api" path="kernel/crosshatch/private/msm-google-modules/wlan/fw-api" revision="c16fb8a901d149ab96b0ce6886845e3a82389d74" upstream="android-msm-bluecross-4.9-pie-qpr1"/>
 
+  <!--
+  <project clone-depth="1" groups="partner" name="platform/prebuilts/clang/host/linux-x86" path="kernel/crosshatch/prebuilts-master/clang/host/linux-x86" revision="c9cc9e7d29b8970d8ddb734c88fb62d01e0b7279" upstream="pie-release"/>
+  <project clone-depth="1" name="platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9" path="kernel/crosshatch/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9" revision="961622e926a1b21382dba4dd9fe0e5fb3ee5ab7c" upstream="pie-release"/>
+  <project clone-depth="1" name="platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9" path="kernel/crosshatch/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9" revision="cb7b3ac1b7fdb49474ff68761909934d1142f594" upstream="pie-release"/>
+  <project clone-depth="1" name="platform/prebuilts/misc" path="kernel/crosshatch/prebuilts-master/misc" revision="15560bb32cdb9b47db48eb4865b736df9708a8fe" upstream="pie-release"/>
+  -->
+
   <!-- AOSP Sources -->
   <project groups="pdk-cw-fs,pdk" name="device/common" revision="20e35d3569a0646dceb105ccc66524d969887759" upstream="refs/tags/android-9.0.0_r16"/>
   <project groups="pdk" name="device/generic/arm64" revision="325b7ec3eab920869050bbfedbd3461f9aed5eb5" upstream="refs/tags/android-9.0.0_r16"/>
@@ -576,17 +583,17 @@
   <project clone-depth="1" groups="pdk" name="platform/prebuilts/checkcolor" path="prebuilts/checkcolor" revision="ec3da48f25a3df5ae2ea605dba909a61172d0922" upstream="refs/tags/android-9.0.0_r16"/>
   <project clone-depth="1" groups="pdk" name="platform/prebuilts/checkstyle" path="prebuilts/checkstyle" revision="a098a2873549a4d5eaf0b7c6fc77ee79edf349a5" upstream="refs/tags/android-9.0.0_r16"/>
   <project clone-depth="1" groups="pdk" name="platform/prebuilts/clang-tools" path="prebuilts/clang-tools" revision="edb7e239e66152085b1dc54304e7ed58b8fd84f9" upstream="refs/tags/android-9.0.0_r16"/>
+
   <project clone-depth="1" groups="pdk" name="platform/prebuilts/clang/host/linux-x86" path="prebuilts/clang/host/linux-x86" revision="1be2ab6257915490176d09db0a7307595f7c3021" upstream="refs/tags/android-9.0.0_r16">
     <linkfile dest="kernel/crosshatch/prebuilts-master/clang/host/linux-x86" src="."/>
   </project>
+
+
+
   <project clone-depth="1" groups="pdk-fs" name="platform/prebuilts/deqp" path="prebuilts/deqp" revision="8298e0c19efeea93be8238cfff0b6aadab89412b" upstream="refs/tags/android-9.0.0_r16"/>
   <project clone-depth="1" groups="pdk-fs" name="platform/prebuilts/devtools" path="prebuilts/devtools" revision="64d9576a66c9e703f3d046e5bb3a939a6731d4c4" upstream="refs/tags/android-9.0.0_r16"/>
-  <project clone-depth="1" groups="pdk,linux,arm" name="platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9" path="prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9" revision="0d76fe448c221c8f5153c6e8d0073dae351ed157" upstream="refs/tags/android-9.0.0_r16">
-    <linkfile src="." dest="kernel/crosshatch/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9"/>
-  </project>
-  <project clone-depth="1" groups="pdk,linux,arm" name="platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9" path="prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9" revision="40e65a488cdefd4c800fc7cb3472f3b3c3a97c42" upstream="refs/tags/android-9.0.0_r16">
-    <linkfile src="." dest="kernel/crosshatch/prebuilts/gcc/linux-x86/arm/arm-linux-androidheabi-4.9"/>
-  </project>
+  <project clone-depth="1" groups="pdk,linux,arm" name="platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9" path="prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9" revision="0d76fe448c221c8f5153c6e8d0073dae351ed157" upstream="refs/tags/android-9.0.0_r16"/>
+  <project clone-depth="1" groups="pdk,linux,arm" name="platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9" path="prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9" revision="40e65a488cdefd4c800fc7cb3472f3b3c3a97c42" upstream="refs/tags/android-9.0.0_r16"/>
   <project clone-depth="1" groups="pdk,linux" name="platform/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.15-4.8" path="prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.15-4.8" revision="2ccb38af8c940f1feef62ff5986f4bbc5d899e66" upstream="refs/tags/android-9.0.0_r16"/>
   <project clone-depth="1" groups="pdk-fs" name="platform/prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8" path="prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8" revision="e76a9a506d7ad132f107eb2f7c27b6a8ccb68b91" upstream="refs/tags/android-9.0.0_r16"/>
   <project clone-depth="1" groups="pdk,linux,mips" name="platform/prebuilts/gcc/linux-x86/mips/mips64el-linux-android-4.9" path="prebuilts/gcc/linux-x86/mips/mips64el-linux-android-4.9" revision="388fdc4995d374d76a0c4b292afabac91638e134" upstream="refs/tags/android-9.0.0_r16"/>
@@ -601,9 +608,7 @@
   <project clone-depth="1" groups="pdk-cw-fs,pdk-fs" name="platform/prebuilts/maven_repo/android" path="prebuilts/maven_repo/android" revision="e114eb1538ededa5bd631be442493c17a0a595b7" upstream="refs/tags/android-9.0.0_r16"/>
   <project clone-depth="1" groups="pdk-cw-fs,pdk-fs" name="platform/prebuilts/maven_repo/bumptech" path="prebuilts/maven_repo/bumptech" revision="d166742cdd6eab44d07fdb7be1d271ceb0b73a17" upstream="refs/tags/android-9.0.0_r16"/>
   <project clone-depth="1" name="platform/prebuilts/maven_repo/google-play-service-client-libraries-3p" path="prebuilts/maven_repo/google-play-service-client-libraries-3p" revision="427e6e2267fd43142ddbd1a87268e0112ddb9b11" upstream="refs/tags/android-9.0.0_r16"/>
-  <project clone-depth="1" groups="pdk" name="platform/prebuilts/misc" path="prebuilts/misc" revision="21c18802acbcabbc6db54cd9963e858c03293db6" upstream="refs/tags/android-9.0.0_r16">
-    <linkfile src="." dest="kernel/crosshatch/prebuilts-master/misc"/>
-  </project>
+  <project clone-depth="1" groups="pdk" name="platform/prebuilts/misc" path="prebuilts/misc" revision="21c18802acbcabbc6db54cd9963e858c03293db6" upstream="refs/tags/android-9.0.0_r16"/>
   <project clone-depth="1" groups="pdk" name="platform/prebuilts/ndk" path="prebuilts/ndk" revision="5a5968849d605c124aa30f964a250c3485338d4a" upstream="refs/tags/android-9.0.0_r16"/>
   <project clone-depth="1" groups="linux,pdk,pdk-cw-fs,pdk-fs" name="platform/prebuilts/python/linux-x86/2.7.5" path="prebuilts/python/linux-x86/2.7.5" revision="5bcc5eb23dbb00d5e5dbf75835aa2fb79e8bafa2" upstream="refs/tags/android-9.0.0_r16"/>
   <project clone-depth="1" groups="pdk" name="platform/prebuilts/qemu-kernel" path="prebuilts/qemu-kernel" revision="9d931852f2c304eb2137d82d9834ad96d09d3bf3" upstream="refs/tags/android-9.0.0_r16"/>
