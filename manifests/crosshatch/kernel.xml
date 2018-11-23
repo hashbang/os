@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <remote fetch="https://android.googlesource.com/" name="aosp"/>
+  
+  <default remote="aosp" revision="android-msm-bluecross-4.9-pie-qpr1" sync-j="4"/>
+  
+  <project name="kernel/build" path="build" revision="529ce46811d5eb4add546f635906d31229262a13" upstream="android-msm-bluecross-4.9-pie-qpr1"/>
+  <project name="kernel/msm" path="private/msm-google" revision="833ea182c39ccd47bc2fb2fe3b17996a58ac4bbf" upstream="android-msm-bluecross-4.9-pie-qpr1">
+    <linkfile dest="build.config" src="build.config"/>
+  </project>
+  <project name="kernel/msm-extra" path="private/msm-google/techpack/audio" revision="523fdea385b9fdef0bd4630d0f54898d6d241d1d" upstream="android-msm-bluecross-4.9-pie-qpr1"/>
+  <project name="kernel/msm-modules/qca-wfi-host-cmn" path="private/msm-google-modules/wlan/qca-wifi-host-cmn" revision="731dca5fb51a17765e49ba2f7654137b1e9ec01b" upstream="android-msm-bluecross-4.9-pie-qpr1"/>
+  <project name="kernel/msm-modules/qcacld" path="private/msm-google-modules/wlan/qcacld-3.0" revision="29dfedb598500f85af6fa35923b7d905cea10131" upstream="android-msm-bluecross-4.9-pie-qpr1"/>
+  <project name="kernel/msm-modules/wlan-fw-api" path="private/msm-google-modules/wlan/fw-api" revision="c16fb8a901d149ab96b0ce6886845e3a82389d74" upstream="android-msm-bluecross-4.9-pie-qpr1"/>
+  <project clone-depth="1" groups="partner" name="platform/prebuilts/clang/host/linux-x86" path="prebuilts-master/clang/host/linux-x86" revision="c9cc9e7d29b8970d8ddb734c88fb62d01e0b7279" upstream="pie-release"/>
+  <project clone-depth="1" name="platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9" path="prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9" revision="961622e926a1b21382dba4dd9fe0e5fb3ee5ab7c" upstream="pie-release"/>
+  <project clone-depth="1" name="platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9" path="prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9" revision="cb7b3ac1b7fdb49474ff68761909934d1142f594" upstream="pie-release"/>
+  <project clone-depth="1" name="platform/prebuilts/misc" path="prebuilts-master/misc" revision="15560bb32cdb9b47db48eb4865b736df9708a8fe" upstream="pie-release"/>
+</manifest>
