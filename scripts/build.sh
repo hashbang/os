@@ -89,10 +89,9 @@ choosecombo "${build_type}" "aosp_${device}" "${build_variant}"
 make -j "${cores}" \
 	fastboot \
 	dtc \
-	mkdtimg
+	mkdtimg \
+	brillo_update_payload
 
 # Build flashable image
 make -j "${cores}" target-files-package
 
-# Build OTA Update
-make -j "${cores}" brillo_update_payload

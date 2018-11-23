@@ -41,11 +41,11 @@ index 000000000..af8d7785a
 --- /dev/null
 +++ b/packages/apps/F-Droid/app/local.properties
 @@ -0,0 +1 @@
-+sdk.dir=/home/build/sdk
++sdk.dir=/home/build/base/sdk
 diff --git a/packages/apps/F-Droid/local.properties b/packages/apps/F-Droid/local.properties
 new file mode 100644
 index 000000000..af8d7785a
 --- /dev/null
 +++ b/packages/apps/F-Droid/local.properties
 @@ -0,0 +1 @@
-+sdk.dir=/home/build/sdk
++sdk.dir=/home/build/base/sdk
