@@ -1,10 +1,9 @@
 #!/bin/bash
 set -e
 device="${DEVICE?}"
-build_type="${BUILD_TYPE?}"
-build_variant="${BUILD_VARIANT?}"
+build_type="${BUILD_TYPE:-release}"
+build_variant="${BUILD_VARIANT:-user}"
 driver_build="${DRIVER_BUILD?}"
-kernel_defconfig="${KERNEL_DEFCONFIG?}"
 kernel_build="${KERNEL_BUILD:-true}"
 maintainer_name="${MAINTAINER_NAME:-aosp@null.com}"
 maintainer_email="${MAINTAINER_EMAIL:-AOSP User}"
@@ -12,7 +11,9 @@ gcc_version="${GCC_VERSION:-4.9}"
 key_dir="${KEY_DIR/:-build/make/tools/releasetools/testdata}"
 temp_dir="$(mktemp -d)"
 download_dir="${temp_dir}/downloads/"
-build_dir="$PWD"
+base_dir="$PWD/base"
+kernel_dir="$PWD/kernel"
+driver_dir="$PWD/drivers"
 config_dir="/opt/android"
 cores=$(nproc)
 drivers=( google_devices qcom )
@@ -26,13 +27,11 @@ declare -A driver_crc=(
     ["qcom"]="${DRIVER_CRC_QCOM?}"
 )
 
-function sha256() { openssl sha256 "$@" | cut -c -64; }
+function sha256() { sha256sum "$@" | cut -c -64; }
 
 function key_hash(){ openssl x509 -in $1 -outform DER | sha256; }
 
-cd "${build_dir}"
-
-mkdir -p "${download_dir}" "${build_dir}"
+mkdir -p "${download_dir}" "${base_dir}" "${kernel_dir}" "${driver_dir}"
 
 # Setup Git
 git config --global user.email "${maintainer_email}"
@@ -40,24 +39,24 @@ git config --global user.name "${maintainer_name}"
 git config --global color.ui false
 
 # Sync/reset repos
-repo init -u "${config_dir}" -m manifest.xml
+cd "${base_dir}"
+repo init -u "${config_dir}" -m manifests/base.xml
 repo sync -c --no-tags --no-clone-bundle --jobs "${cores}"
 repo forall -c 'git reset --hard ; git clean -fdx'
 
-# Fetch driver blobs
+# Fetch/extract driver blobs
 for driver in "${drivers[@]}"; do
 	file="${driver}-${device}-${driver_build}-${driver_crc[$driver]}.tgz"
-	if [ ! -f "${build_dir}/${file}" ]; then
+	if [ ! -f "${driver_dir}/${file}" ]; then
 		wget "${driver_url}/${file}" -O "${download_dir}/${file}"
 		file_hash="$(sha256 "${download_dir}/${file}")"
-		echo "$file_hash"
 		[[ "${driver_sha256[${driver}]}" == "$file_hash" ]] || \
 			{ ( >&2 echo "Invalid hash for ${file}"); exit 1; }
-		mv "${download_dir}/${file}" "${build_dir}/${file}"
+		mv "${download_dir}/${file}" "${driver_dir}/${file}"
 	fi
-	tar -xvf "${build_dir}/${file}" -C "${build_dir}"
-	tail -n +315 "${build_dir}/extract-${driver}-${device}.sh" \
-		| tar -xzv -C "${build_dir}"
+	tar -xvf "${driver_dir}/${file}" -C "${temp_dir}"
+	tail -n +315 "${temp_dir}/extract-${driver}-${device}.sh" \
+		| tar -xzv -C "${base_dir}"
 done
 
 # Apply Patches
@@ -67,29 +66,30 @@ for type in {global,${build_variant}} ; do
 	done
 done
 
+# Build Kernel
+if [ "$kernel_build" = true ]; then
+	cat <<-EOF | bash
+		cd "${kernel_dir}/${device}"
+		repo init -u "${config_dir}" -m manifests/${device}/kernel.xml
+		repo sync -c --no-tags --no-clone-bundle --jobs "${cores}"
+		repo forall -c 'git reset --hard ; git clean -fdx'
+		source build/envsetup.sh
+		bash build/build.sh
+		rm -rf ${base_dir}/device/google/${device}-kernel
+		cp -R ${kernel_dir}/${device}/out/android-*/dist ${base_dir}/device/google/${device}-kernel
+	EOF
+fi
+
 # Setup environment
 # shellcheck disable=SC1091
 source build/envsetup.sh
 choosecombo "${build_type}" "aosp_${device}" "${build_variant}"
 
 # Build tools
-make -j "${cores}" fastboot
-make -j "${cores}" dtc
-make -j "${cores}" mkdtimg
-
-# Build Kernel
-if [ "$kernel_build" = true ]; then
-	cat <<-EOF | bash
-		export ARCH=arm64
-		export CROSS_COMPILE="$PWD/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-${gcc_version}/bin/aarch64-linux-android-"
-		cd "kernel/${device}"
-		make "${kernel_defconfig}_defconfig"
-		make -j "${cores}"
-		cd -
-		cp "kernel/${device}/kernel/arch/arm64/boot/dtbo.img" "device/google/${device}-kernel/"
-		cp "kernel/${device}/kernel/arch/arm64/boot/Image.lz4-dtb" "device/google/${device}-kernel/"
-	EOF
-fi
+make -j "${cores}" \
+	fastboot \
+	dtc \
+	mkdtimg
 
 # Build flashable image
 make -j "${cores}" target-files-package
