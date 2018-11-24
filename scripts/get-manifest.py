@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/usr/bin/python3
 
 from tempfile import mkdtemp
 from git import Git, Repo, cmd
