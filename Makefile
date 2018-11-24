@@ -22,7 +22,7 @@ shell: image
 diff:
 	@docker run \
 	  -v android:/home/build \
-	  hashbang/os repo diff -u
+	  hashbang/os bash -c "cd base; repo diff -u"
 
 install: image
 	@docker run \
