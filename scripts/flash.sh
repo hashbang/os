@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-cd "$HOME"
+cd "$HOME/base"
 
 device="${DEVICE?}"
 build_type="${BUILD_TYPE:-release}"
