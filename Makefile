@@ -11,7 +11,14 @@ build: image
 	  -it \
 	  -v android:/home/build \
 	  --env-file config/$(device).env \
-	  hashbang/os
+	  hashbang/os build.sh
+
+release: image
+	@docker run \
+	  -it \
+	  -v android:/home/build \
+	  --env-file config/$(device).env \
+	  hashbang/os release.sh
 
 shell: image
 	@docker run \
