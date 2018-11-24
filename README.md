@@ -51,6 +51,13 @@ make shell
 make diff > patches/my-feature.patch
 ```
 
+### Update ###
+
+Update to latest manifests for desired device:
+```
+make DEVICE=crosshatch update
+```
+
 ### Build ###
 
 Build images for desired device:
