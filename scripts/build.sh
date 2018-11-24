@@ -7,8 +7,6 @@ driver_build="${DRIVER_BUILD?}"
 kernel_build="${KERNEL_BUILD:-true}"
 maintainer_name="${MAINTAINER_NAME:-aosp@null.com}"
 maintainer_email="${MAINTAINER_EMAIL:-AOSP User}"
-gcc_version="${GCC_VERSION:-4.9}"
-key_dir="${KEY_DIR/:-build/make/tools/releasetools/testdata}"
 temp_dir="$(mktemp -d)"
 download_dir="${temp_dir}/downloads/"
 base_dir="$PWD/base"
@@ -28,8 +26,6 @@ declare -A driver_crc=(
 )
 
 function sha256() { sha256sum "$@" | cut -c -64; }
-
-function key_hash(){ openssl x509 -in $1 -outform DER | sha256; }
 
 mkdir -p "${download_dir}" "${base_dir}" "${kernel_dir}" "${driver_dir}"
 
@@ -76,7 +72,8 @@ if [ "$kernel_build" = true ]; then
 		source build/envsetup.sh
 		bash build/build.sh
 		rm -rf ${base_dir}/device/google/${device}-kernel
-		cp -R ${kernel_dir}/${device}/out/android-*/dist ${base_dir}/device/google/${device}-kernel
+		cp -R ${kernel_dir}/${device}/out/android-*/dist \
+			${base_dir}/device/google/${device}-kernel
 	EOF
 fi
 
@@ -90,8 +87,8 @@ make -j "${cores}" \
 	fastboot \
 	dtc \
 	mkdtimg \
+
+# Build target files
+make -j "${cores}" \
+	target-files-package \
 	brillo_update_payload
-
-# Build flashable image
-make -j "${cores}" target-files-package
-
