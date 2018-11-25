@@ -85,4 +85,4 @@ fi
 
 # Build Platform
 export BUILD_NUMBER="$build_number"
-make -j "${cores}" target-files-package brillo_upload_payload
+make -j "${cores}" target-files-package brillo_update_payload
