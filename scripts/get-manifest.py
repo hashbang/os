@@ -69,7 +69,7 @@ class AndroidManifest:
         for project in self.extra_projects:
             element = Element("project")
             element.attrib = project
-            self.manifest.insert(5,element)
+            self.manifest.insert(4,element)
 
     def _set_remotes(self):
         self.remotes={}
