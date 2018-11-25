@@ -3,16 +3,16 @@
 set -e
 
 device="${DEVICE?}"
-build_number=$(cat out/build_number.txt 2>/dev/null || date --utc +%Y.%m.%d.%H)
+base_dir="$PWD/base"
+build_number="$(cat "${base_dir}"/out/build_number.txt 2>/dev/null)"
 version=$(
 	grep -Po "export BUILD_ID=\\K.+" "${base_dir}/build/core/build_id.mk" \
 	| tr '[:upper:]' '[:lower:]' \
 )
 target_files="${device}-target_files-${build_number}.zip"
 prefix=aosp
-key_dir="${KEY_DIR:-${base_dir}/build/make/tools/releasetools/testdata}"
-release_dir="release/${device}-${build_number}"
-base_dir="base"
+key_dir="${KEY_DIR:-${PWD}/keys/${device}}"
+release_dir="$PWD/release/${device}/${build_number}"
 target_out_dir="${base_dir}/out/target/product/${device}"
 inter_dir="${target_out_dir}/obj/PACKAGING/target_files_intermediates"
 
@@ -26,6 +26,7 @@ export BUILD_NUMBER="$build_number"
 export PATH="${base_dir}/build/tools/releasetools:$PATH"
 
 mkdir -p "$release_dir"
+cd "$base_dir"
 
 echo "Running sign_target_files_apks"
 sign_target_files_apks \
