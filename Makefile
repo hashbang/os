@@ -31,7 +31,7 @@ shell: image
 	@docker run \
 	  -it \
 	  -v android:/home/build \
-	  hashbang/os bash
+	  hashbang/os shell
 
 diff:
 	@docker run \

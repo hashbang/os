@@ -1,0 +1,11 @@
+#!/bin/bash
+
+base_dir="$PWD/base"
+
+source "${base_dir}/build/envsetup.sh"
+export PATH="${base_dir}/build/tools/releasetools:$PATH"
+export PATH="${base_dir}/development/tools:$PATH"
+export PATH="${base_dir}/external/avb:$PATH"
+export PATH="/opt/android/scripts:$PATH"
+
+bash
