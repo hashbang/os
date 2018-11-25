@@ -40,6 +40,8 @@ RUN \
         libxml2-utils \
         lzop \
         pngcrush \
+        python3 \
+        python3-git \
         rsync \
         schedtool \
         squashfs-tools \
