@@ -20,6 +20,13 @@ release: image
 	  --env-file config/$(device).env \
 	  hashbang/os release.sh
 
+keys: image
+	@docker run \
+	  -it \
+	  -v android:/home/build \
+	  --env-file config/$(device).env \
+	  hashbang/os keys.sh
+
 shell: image
 	@docker run \
 	  -it \

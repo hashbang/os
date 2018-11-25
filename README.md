@@ -30,6 +30,20 @@ builds.
 
   * crosshatch (Pixel 3 XL)
 
+## Release ##
+
+### Generate Signing Keys ###
+
+Each device keys its own set of keys:
+```
+make DEVICE=crosshatch keys
+```
+
+### Build Release  ###
+```
+make DEVICE=crosshatch release
+```
+
 ## Development ##
 
 ### Requirements ###

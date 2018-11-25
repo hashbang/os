@@ -7,6 +7,7 @@ driver_build="${DRIVER_BUILD?}"
 kernel_build="${KERNEL_BUILD:-true}"
 maintainer_name="${MAINTAINER_NAME:-aosp@null.com}"
 maintainer_email="${MAINTAINER_EMAIL:-AOSP User}"
+build_number=$(date --utc +%Y%m%d.%H%M%S)
 temp_dir="$(mktemp -d)"
 download_dir="${temp_dir}/downloads/"
 base_dir="$PWD/base"
@@ -83,4 +84,5 @@ if [ "$kernel_build" = true ]; then
 fi
 
 # Build Platform
-m -j "${cores}" dist
+export BUILD_NUMBER="$build_number"
+make -j "${cores}" target-files-package brillo_upload_payload

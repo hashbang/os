@@ -12,6 +12,7 @@ RUN \
     apt-get update && \
     apt-get install -y \
         repo \
+        aapt \
         sudo \
         openjdk-8-jdk \
         android-tools-adb \
