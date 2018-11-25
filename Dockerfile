@@ -16,6 +16,8 @@ RUN \
         openjdk-8-jdk \
         android-tools-adb \
         bc \
+        bsdmainutils \
+        cgpt \
         bison \
         build-essential \
         curl \
