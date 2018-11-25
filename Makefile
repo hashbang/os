@@ -11,21 +11,21 @@ build: image
 	  -it \
 	  -v android:/home/build \
 	  --env-file config/$(device).env \
-	  hashbang/os build.sh
+	  hashbang/os build
 
 release: image
 	@docker run \
 	  -it \
 	  -v android:/home/build \
 	  --env-file config/$(device).env \
-	  hashbang/os release.sh
+	  hashbang/os release
 
 keys: image
 	@docker run \
 	  -it \
 	  -v android:/home/build \
 	  --env-file config/$(device).env \
-	  hashbang/os keys.sh
+	  hashbang/os keys
 
 shell: image
 	@docker run \
@@ -45,25 +45,25 @@ install: image
 	  -u root \
 	  -v android:/home/build \
 	  --env-file=config/$(device).env \
-	  hashbang/os flash.sh
+	  hashbang/os flash
 
-update: image
+manifest: image
 	@docker run \
 	  -it \
 	  -v android:/home/build \
 	  --env-file=config/$(device).env \
-	  hashbang/os get-manifest.py kernel > manifests/$(device)/kernel.xml && \
+	  hashbang/os manifest kernel > manifests/$(device)/kernel.xml && \
 	docker run \
 	  -it \
 	  -v android:/home/build \
 	  --env-file=config/$(device).env \
-	  hashbang/os get-manifest.py platform > manifests/base.xml
+	  hashbang/os manifest platform > manifests/base.xml
 
 clean: image
 	@docker run \
 	  -it \
 	  -v android:/home/build \
-	  hashbang/os clean.sh
+	  hashbang/os clean
 
 .PHONY: image build shell diff install update flash clean default
 

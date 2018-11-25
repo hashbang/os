@@ -67,9 +67,9 @@ make diff > patches/my-feature.patch
 
 ### Update ###
 
-Update to latest manifests for desired device:
+Build latest manifests from upstream sources for desired device:
 ```
-make DEVICE=crosshatch update
+make DEVICE=crosshatch manifest
 ```
 
 ### Build ###
