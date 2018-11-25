@@ -62,6 +62,11 @@ for type in {global,${build_variant}} ; do
 	done
 done
 
+# Setup environment
+# shellcheck disable=SC1091
+source build/envsetup.sh
+choosecombo "${build_type}" "aosp_${device}" "${build_variant}"
+
 # Build Kernel
 if [ "$kernel_build" = true ]; then
 	cat <<-EOF | bash
@@ -77,18 +82,5 @@ if [ "$kernel_build" = true ]; then
 	EOF
 fi
 
-# Setup environment
-# shellcheck disable=SC1091
-source build/envsetup.sh
-choosecombo "${build_type}" "aosp_${device}" "${build_variant}"
-
-# Build tools
-make -j "${cores}" \
-	fastboot \
-	dtc \
-	mkdtimg \
-
-# Build target files
-make -j "${cores}" \
-	target-files-package \
-	brillo_update_payload
+# Build Platform
+m -j "${cores}" dist
