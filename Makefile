@@ -1,4 +1,5 @@
 device = ${DEVICE}
+
 .DEFAULT_GOAL := default
 
 default: build
@@ -17,6 +18,7 @@ release: image
 	@docker run \
 	  -it \
 	  -v android:/home/build \
+	  -v $(PWD)/release:/home/build/release \
 	  --env-file config/$(device).env \
 	  hashbang/os release
 
