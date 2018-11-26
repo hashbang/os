@@ -19,7 +19,7 @@ config_dir="/opt/android"
 cores=$(nproc)
 factory_url="https://dl.google.com/dl/android/aosp"
 factory_file="${device}-${factory_build}-factory-${factory_crc}.zip"
-factory_dir="${vendor_dir}/${device}/${factory_build}/${factory_file}"
+factory_dir="${vendor_dir}/${device}/${factory_build}"
 
 function sha256() { sha256sum "$@" | cut -c -64; }
 
@@ -36,14 +36,15 @@ repo init -u "${config_dir}" -m manifests/base.xml
 repo sync -c --no-tags --no-clone-bundle --jobs "${cores}"
 repo forall -c 'git reset --hard ; git clean -fdx'
 
-# Fetch/extract driver blobs
-if [ -f "${factory_dir}/${factory_file}" ]; then
+# Fetch/extract proprietary blobs
+if [ ! -f "${factory_dir}/${factory_file}" ]; then
 	wget "${factory_url}/${factory_file}" -O "${download_dir}/${factory_file}"
 	file_hash="$(sha256 "${download_dir}/${factory_file}")"
 	[[ "${factory_hash}" == "$file_hash" ]] || \
 		{ ( >&2 echo "Invalid hash for ${factory_file}"); exit 1; }
 	mv "${download_dir}/${factory_file}" "${factory_dir}/${factory_file}"
 fi
+
 "${base_dir}/vendor/android-prepare-vendor/execute-all.sh" \
 	--debugfs \
 	--keep \
