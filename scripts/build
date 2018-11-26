@@ -3,7 +3,9 @@ set -e
 device="${DEVICE?}"
 build_type="${BUILD_TYPE:-release}"
 build_variant="${BUILD_VARIANT:-user}"
-driver_build="${DRIVER_BUILD?}"
+factory_build="${FACTORY_BUILD?}"
+factory_hash="${FACTORY_HASH?}"
+factory_crc="${FACTORY_CRC?}"
 kernel_build="${KERNEL_BUILD:-true}"
 maintainer_name="${MAINTAINER_NAME:-aosp@null.com}"
 maintainer_email="${MAINTAINER_EMAIL:-AOSP User}"
@@ -12,23 +14,16 @@ temp_dir="$(mktemp -d)"
 download_dir="${temp_dir}/downloads/"
 base_dir="$PWD/base"
 kernel_dir="$PWD/kernel"
-driver_dir="$PWD/drivers"
+vendor_dir="$PWD/vendor"
 config_dir="/opt/android"
 cores=$(nproc)
-drivers=( google_devices qcom )
-driver_url="https://dl.google.com/dl/android/aosp"
-declare -A driver_sha256=(
-    ["google_devices"]="${DRIVER_SHA256_GOOGLE?}"
-    ["qcom"]="${DRIVER_SHA256_QCOM?}"
-)
-declare -A driver_crc=(
-    ["google_devices"]="${DRIVER_CRC_GOOGLE?}"
-    ["qcom"]="${DRIVER_CRC_QCOM?}"
-)
+factory_url="https://dl.google.com/dl/android/aosp"
+factory_file="${device}-${factory_build}-factory-${factory_crc}.zip"
+factory_dir="${vendor_dir}/${device}/${factory_build}/${factory_file}"
 
 function sha256() { sha256sum "$@" | cut -c -64; }
 
-mkdir -p "${download_dir}" "${base_dir}" "${kernel_dir}" "${driver_dir}"
+mkdir -p "${download_dir}" "${base_dir}" "${kernel_dir}" "${factory_dir}"
 
 # Setup Git
 git config --global user.email "${maintainer_email}"
@@ -42,19 +37,20 @@ repo sync -c --no-tags --no-clone-bundle --jobs "${cores}"
 repo forall -c 'git reset --hard ; git clean -fdx'
 
 # Fetch/extract driver blobs
-for driver in "${drivers[@]}"; do
-	file="${driver}-${device}-${driver_build}-${driver_crc[$driver]}.tgz"
-	if [ ! -f "${driver_dir}/${file}" ]; then
-		wget "${driver_url}/${file}" -O "${download_dir}/${file}"
-		file_hash="$(sha256 "${download_dir}/${file}")"
-		[[ "${driver_sha256[${driver}]}" == "$file_hash" ]] || \
-			{ ( >&2 echo "Invalid hash for ${file}"); exit 1; }
-		mv "${download_dir}/${file}" "${driver_dir}/${file}"
-	fi
-	tar -xvf "${driver_dir}/${file}" -C "${temp_dir}"
-	tail -n +315 "${temp_dir}/extract-${driver}-${device}.sh" \
-		| tar -xzv -C "${base_dir}"
-done
+if [ -f "${factory_dir}/${factory_file}" ]; then
+	wget "${factory_url}/${factory_file}" -O "${download_dir}/${factory_file}"
+	file_hash="$(sha256 "${download_dir}/${factory_file}")"
+	[[ "${factory_hash}" == "$file_hash" ]] || \
+		{ ( >&2 echo "Invalid hash for ${factory_file}"); exit 1; }
+	mv "${download_dir}/${factory_file}" "${factory_dir}/${factory_file}"
+fi
+"${base_dir}/vendor/android-prepare-vendor/execute-all.sh" \
+	--debugfs \
+	--keep \
+	--yes \
+	--device "${device}" \
+	--buildID "${factory_build}" \
+	--output "${vendor_dir}"
 
 # Apply Patches
 for type in {global,${build_variant}} ; do

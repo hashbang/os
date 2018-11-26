@@ -34,16 +34,37 @@ platform_extra_projects = [
         "remote": "gitlab",
         "revision": "refs/tags/0.2.8"
     },
+    {
+        "name": "anestisb/android-prepare-vendor",
+        "groups": "device",
+        "path": "vendor/android-prepare-vendor",
+        "remote": "github",
+        "revision": "refs/heads/master"
+    },
+]
+platform_remove_projects = [
+    "chromium-webview",
+    "packages/apps/Calendar",
+    "packages/apps/QuickSearchBox",
 ]
 
 class AndroidManifest:
 
-    def __init__(self, url, exp, extra_remotes=[], extra_projects=[]):
+    def __init__(
+        self,
+        url,
+        exp,
+        extra_remotes=[],
+        extra_projects=[],
+        remove_projects=[]
+    ):
         self.url = url
         self.exp = exp
         self.extra_remotes = extra_remotes
         self.extra_projects = extra_projects
+        self.remove_projects = remove_projects
         self._fetch()
+        self._remove()
         self._extend()
         self._set_remotes()
         self._set_default_remote()
@@ -65,11 +86,19 @@ class AndroidManifest:
         for remote in self.extra_remotes:
             element = Element("remote")
             element.attrib = remote
+            element.tail = "\n"
             self.manifest.insert(1,element)
         for project in self.extra_projects:
             element = Element("project")
             element.attrib = project
             self.manifest.insert(4,element)
+
+    def _remove(self):
+        projects=self.manifest.findall(".//project")
+        for project in projects:
+            if 'name' in project.attrib:
+                if project.attrib['name'] in self.remove_projects:
+                    projects.remove(project)
 
     def _set_remotes(self):
         self.remotes={}
@@ -136,7 +165,8 @@ if __name__ == "__main__":
             platform_manifest_url,
             platform_manifest_exp,
             platform_extra_remotes,
-            platform_extra_projects
+            platform_extra_projects,
+            platform_remove_projects
         ).pretty_print()
 
     if manifest:

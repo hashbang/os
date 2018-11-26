@@ -11,6 +11,8 @@ build: image
 	@docker run \
 	  -it \
 	  -v android:/home/build \
+	  -e DEVICE=$(device) \
+	  --env-file config/global.env \
 	  --env-file config/$(device).env \
 	  hashbang/os build
 
@@ -19,6 +21,8 @@ release: image
 	  -it \
 	  -v android:/home/build \
 	  -v $(PWD)/release:/home/build/release \
+	  -e DEVICE=$(device) \
+	  --env-file config/global.env \
 	  --env-file config/$(device).env \
 	  hashbang/os release
 
@@ -26,6 +30,8 @@ keys: image
 	@docker run \
 	  -it \
 	  -v android:/home/build \
+	  -e DEVICE=$(device) \
+	  --env-file config/global.env \
 	  --env-file config/$(device).env \
 	  hashbang/os keys
 
@@ -33,6 +39,7 @@ shell: image
 	@docker run \
 	  -it \
 	  -v android:/home/build \
+	  --env-file config/global.env \
 	  -v $(PWD)/release:/home/build/release \
 	  hashbang/os shell
 
@@ -47,6 +54,8 @@ install: image
 	  --privileged \
 	  -u root \
 	  -v android:/home/build \
+	  -e DEVICE=$(device) \
+	  --env-file config/global.env \
 	  --env-file=config/$(device).env \
 	  hashbang/os flash
 
@@ -54,13 +63,19 @@ manifest: image
 	@docker run \
 	  -it \
 	  -v android:/home/build \
+	  -e DEVICE=$(device) \
+	  --env-file config/global.env \
 	  --env-file=config/$(device).env \
-	  hashbang/os manifest kernel > manifests/$(device)/kernel.xml && \
-	docker run \
+	  hashbang/os bash -c "manifest kernel | xmllint --format -" \
+	> manifests/$(device)/kernel.xml
+	@docker run \
 	  -it \
 	  -v android:/home/build \
+	  -e DEVICE=$(device) \
+	  --env-file config/global.env \
 	  --env-file=config/$(device).env \
-	  hashbang/os manifest platform > manifests/base.xml
+	  hashbang/os bash -c "manifest platform | xmllint --format -" \
+	> manifests/base.xml
 
 clean: image
 	@docker run \
