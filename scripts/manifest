@@ -13,8 +13,9 @@ major_version="9"
 kernel_device=environ['KERNEL']
 kernel_manifest_url="https://android.googlesource.com/kernel/manifest"
 kernel_manifest_exp="origin/android-msm-%s" % kernel_device
+platform_ref_url="https://android.googlesource.com/device/google/crosshatch"
 platform_manifest_url="https://android.googlesource.com/platform/manifest"
-platform_manifest_exp="origin/android-%s" % major_version
+platform_manifest_exp="android-%s" % major_version
 platform_extra_remotes = [
     { "name": "github" ,"fetch": "https://github.com/" },
     { "name": "gitlab" ,"fetch": "https://gitlab.com/" },
@@ -40,7 +41,7 @@ platform_extra_projects = [
         "path": "vendor/android-prepare-vendor",
         "remote": "github",
         "revision": "refs/heads/master"
-    },
+    }
 ]
 platform_remove_paths = [
     "external/chromium-webview"
@@ -50,6 +51,25 @@ platform_remove_paths = [
     "device/generic/car",
     "device/generic/goldfish",
     "device/generic/goldfish-opengl",
+    "device/google/cuttlefish",
+    "device/google/cuttlefish-kernel",
+    "device/google/cuttlefish-sepolicy",
+    "device/google/cuttlefish_common",
+    "device/google/marlin",
+    "device/google/marlin-kernel",
+    "device/google/marlin-sepolicy",
+    "device/google/muskie",
+    "device/google/taimen",
+    "device/google/wahoo",
+    "device/google/wahoo-kernel",
+    "device/generic/mips",
+    "device/generic/mips64",
+    "device/generic/mini-emulator-arm64",
+    "device/generic/mini-emulator-armv7-a-neon",
+    "device/generic/mini-emulator-mips",
+    "device/generic/mini-emulator-mips64",
+    "device/generic/mini-emulator-x86",
+    "device/generic/mini-emulator-x86_64",
 ]
 
 platform_remove_groups = ['darwin']
@@ -63,7 +83,8 @@ class AndroidManifest:
         extra_remotes=[],
         extra_projects=[],
         remove_paths=[],
-        remove_groups=[]
+        remove_groups=[],
+        ref_url=None
     ):
         self.default_fetch="https://android.googlesource.com"
         self.url = url
@@ -72,6 +93,7 @@ class AndroidManifest:
         self.extra_projects = extra_projects
         self.remove_paths = remove_paths
         self.remove_groups = remove_groups
+        self.ref_url = ref_url or url
         self._fetch()
         self._remove()
         self._extend()
@@ -81,14 +103,15 @@ class AndroidManifest:
         self._lock()
 
     def _fetch(self):
-        repo = Repo.clone_from(self.url, mkdtemp())
+        ref_repo = Repo.clone_from(self.ref_url, mkdtemp())
         ref = [
             str(ref) for ref in
-            sorted(repo.refs, key=lambda t: t.commit.committed_datetime)
+            sorted(ref_repo.refs, key=lambda t: t.commit.committed_datetime)
             if re.match(self.exp, str(ref))
         ][-1]
-        repo.head.reference = repo.commit(ref)
-        string = repo.git.show('HEAD:default.xml')
+        manifest_repo = Repo.clone_from(self.url, mkdtemp())
+        manifest_repo.head.reference = manifest_repo.commit(ref)
+        string = manifest_repo.git.show('HEAD:default.xml')
         self.manifest = ElementTree.fromstring(string)
 
     def _extend(self):
@@ -183,7 +206,8 @@ if __name__ == "__main__":
             platform_extra_remotes,
             platform_extra_projects,
             platform_remove_paths,
-            platform_remove_groups
+            platform_remove_groups,
+            platform_ref_url
         ).pretty_print()
 
     if manifest:
