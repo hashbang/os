@@ -47,7 +47,6 @@
   <project groups="device,crosshatch" name="device/google/crosshatch" path="device/google/crosshatch" revision="9a83ca7ab949fda7d2a14171642d87605ad6515c" upstream="refs/tags/android-9.0.0_r16"/>
   <project clone-depth="1" groups="device,crosshatch" name="device/google/crosshatch-kernel" path="device/google/crosshatch-kernel" revision="b364e28da2b8fcacaa548bc946a5ac669276ef0e" upstream="refs/tags/android-9.0.0_r16"/>
   <project groups="device,crosshatch" name="device/google/crosshatch-sepolicy" path="device/google/crosshatch-sepolicy" revision="0f77c7200f716bd887c5d0b9c81b73c119559930" upstream="refs/tags/android-9.0.0_r16"/>
-  <project groups="device" name="device/google/cuttlefish_common" path="device/google/cuttlefish_common" revision="af275a67f98d7f3e6659647d8201f4209ec6f359" upstream="refs/tags/android-9.0.0_r16"/>
   <project clone-depth="1" groups="device" name="device/google/cuttlefish_kernel" path="device/google/cuttlefish_kernel" revision="01da8a71e159103fa454daab5d85dccb4be8a23f" upstream="refs/tags/android-9.0.0_r16"/>
   <project clone-depth="1" groups="pdk" name="device/google/vrservices" path="device/google/vrservices" revision="41ee4144cfbaa723b1688a94bba0b3233a7ae2ea" upstream="refs/tags/android-9.0.0_r16"/>
   <project name="device/linaro/bootloader/arm-trusted-firmware" path="device/linaro/bootloader/arm-trusted-firmware" revision="fc7f4ea3ea2c79b2192079fac8597f72431a7925" upstream="refs/tags/android-9.0.0_r16"/>
