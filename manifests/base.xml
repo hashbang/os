@@ -35,10 +35,7 @@
   <project groups="pdk-cw-fs,pdk" name="device/common" path="device/common" revision="e0890abcb8485e63e5937318fcba79bc3a6ace4f" upstream="refs/tags/android-9.0.0_r18"/>
   <project groups="pdk" name="device/generic/arm64" path="device/generic/arm64" revision="e2dffe84ab1c92b20ce56714ad8f3f07c9444300" upstream="refs/tags/android-9.0.0_r18"/>
   <project groups="pdk" name="device/generic/armv7-a-neon" path="device/generic/armv7-a-neon" revision="6b3a8740242e42cf1b7e7e290a9e3e7435a59d1f" upstream="refs/tags/android-9.0.0_r18"/>
-  <project groups="pdk" name="device/generic/car" path="device/generic/car" revision="b7ef11b05b3172b49cb784f986f3cb9f0266df9e" upstream="refs/tags/android-9.0.0_r18"/>
   <project groups="pdk" name="device/generic/common" path="device/generic/common" revision="7ff2e9d0710ecce084785254625c83d75b5ed7e6" upstream="refs/tags/android-9.0.0_r18"/>
-  <project groups="pdk" name="device/generic/goldfish" path="device/generic/goldfish" revision="bb46e68138f4648a87e8096bba4a0e59d422e787" upstream="refs/tags/android-9.0.0_r18"/>
-  <project groups="pdk" name="device/generic/goldfish-opengl" path="device/generic/goldfish-opengl" revision="e700d29e6aaa4633403c8114ca26036392dac92b" upstream="refs/tags/android-9.0.0_r18"/>
   <project groups="pdk" name="device/generic/mips" path="device/generic/mips" revision="3218da64186a7abc94b429f05960f709358808ab" upstream="refs/tags/android-9.0.0_r18"/>
   <project groups="pdk" name="device/generic/mips64" path="device/generic/mips64" revision="a506677a283d5bdaedff012321fb1b58fc472793" upstream="refs/tags/android-9.0.0_r18"/>
   <project groups="pdk" name="device/generic/mini-emulator-arm64" path="device/generic/mini-emulator-arm64" revision="9fc717736d226c2ba02b5e90050ce0175d9c9222" upstream="refs/tags/android-9.0.0_r18"/>
@@ -492,7 +489,6 @@
   <project groups="pdk" name="platform/libnativehelper" path="libnativehelper" revision="bc2d80625fafbc820a80c00cd6c2796602a1485f" upstream="refs/tags/android-9.0.0_r18"/>
   <project groups="pdk-cw-fs,pdk-fs" name="platform/packages/apps/BasicSmsReceiver" path="packages/apps/BasicSmsReceiver" revision="19bda700e50b143e98db81a25ed304af1e35d7e5" upstream="refs/tags/android-9.0.0_r18"/>
   <project groups="pdk-cw-fs,pdk-fs" name="platform/packages/apps/Bluetooth" path="packages/apps/Bluetooth" revision="6b9e1915fdcbbe1e0d33ec2cca383b9da139c217" upstream="refs/tags/android-9.0.0_r18"/>
-  <project groups="pdk-fs" name="platform/packages/apps/Browser2" path="packages/apps/Browser2" revision="a647df44a21d6948923aa24150b5b36a769b8770" upstream="refs/tags/android-9.0.0_r18"/>
   <project groups="pdk-fs" name="platform/packages/apps/Calendar" path="packages/apps/Calendar" revision="74a881157a5eee2f2517cdfb2071ffcfe2f83878" upstream="refs/tags/android-9.0.0_r18"/>
   <project groups="pdk-fs" name="platform/packages/apps/Camera2" path="packages/apps/Camera2" revision="7b930a88d4edcbb6fda9b4befe0e3e9d5acf9735" upstream="refs/tags/android-9.0.0_r18"/>
   <project groups="pdk-fs" name="platform/packages/apps/Car/Dialer" path="packages/apps/Car/Dialer" revision="3661bb1e8259cf2006256aabf3ba2850a0a74345" upstream="refs/tags/android-9.0.0_r18"/>
@@ -537,7 +533,6 @@
   <project groups="pdk-cw-fs,pdk-fs" name="platform/packages/apps/PhoneCommon" path="packages/apps/PhoneCommon" revision="59a4a0db0acfbc6218e6febaf5a5476816fd3cf8" upstream="refs/tags/android-9.0.0_r18"/>
   <project groups="pdk-fs" name="platform/packages/apps/Protips" path="packages/apps/Protips" revision="fe590d1272e9f29d82bb34cd81634d8b2ddbf37e" upstream="refs/tags/android-9.0.0_r18"/>
   <project groups="pdk-fs" name="platform/packages/apps/Provision" path="packages/apps/Provision" revision="95a08740fa28903e16829fa2f7db8f37e95b93a4" upstream="refs/tags/android-9.0.0_r18"/>
-  <project groups="pdk-fs" name="platform/packages/apps/QuickSearchBox" path="packages/apps/QuickSearchBox" revision="8bed9bb31f0a98d78714e2af504ef59cebd704d4" upstream="refs/tags/android-9.0.0_r18"/>
   <project groups="pdk-fs" name="platform/packages/apps/SafetyRegulatoryInfo" path="packages/apps/SafetyRegulatoryInfo" revision="1b79c01a88f25f2579115885c61283ba539296fa" upstream="refs/tags/android-9.0.0_r18"/>
   <project groups="apps_se,pdk-fs" name="platform/packages/apps/SecureElement" path="packages/apps/SecureElement" revision="e60967edfa7d98acaed62926dc5de1607ab60b47" upstream="refs/tags/android-9.0.0_r18"/>
   <project groups="pdk-fs" name="platform/packages/apps/Settings" path="packages/apps/Settings" revision="2de339a4f6fe9935be4f3bf415dadebf539a1171" upstream="refs/tags/android-9.0.0_r18"/>
@@ -590,24 +585,16 @@
   <project clone-depth="1" groups="pdk" name="platform/prebuilts/checkcolor" path="prebuilts/checkcolor" revision="b4a075c8efdfc448c38bd038adacdd4f756e2260" upstream="refs/tags/android-9.0.0_r18"/>
   <project clone-depth="1" groups="pdk" name="platform/prebuilts/checkstyle" path="prebuilts/checkstyle" revision="2e7554f26bf7ae6e61aa5e7c9ce355481a8b4df2" upstream="refs/tags/android-9.0.0_r18"/>
   <project clone-depth="1" groups="pdk" name="platform/prebuilts/clang-tools" path="prebuilts/clang-tools" revision="4dac6b1607daee6ce0286b46e5a63934ca6d1fd9" upstream="refs/tags/android-9.0.0_r18"/>
-  <project clone-depth="1" groups="pdk,darwin" name="platform/prebuilts/clang/host/darwin-x86" path="prebuilts/clang/host/darwin-x86" revision="f768efa3d46e32afd0d2eae30d6f6a4afba07801" upstream="refs/tags/android-9.0.0_r18"/>
   <project clone-depth="1" groups="pdk" name="platform/prebuilts/clang/host/linux-x86" path="prebuilts/clang/host/linux-x86" revision="60cbfc1b812f6213e4e8e72a9291c4de197947d5" upstream="refs/tags/android-9.0.0_r18"/>
   <project clone-depth="1" groups="pdk-fs" name="platform/prebuilts/deqp" path="prebuilts/deqp" revision="7668c9078e965911a031b823da9260e9a217e356" upstream="refs/tags/android-9.0.0_r18"/>
   <project clone-depth="1" groups="pdk-fs" name="platform/prebuilts/devtools" path="prebuilts/devtools" revision="3a2f21a8ae30484bf0f8dd830c20904bfeb6f73f" upstream="refs/tags/android-9.0.0_r18"/>
-  <project clone-depth="1" groups="pdk,darwin,arm" name="platform/prebuilts/gcc/darwin-x86/aarch64/aarch64-linux-android-4.9" path="prebuilts/gcc/darwin-x86/aarch64/aarch64-linux-android-4.9" revision="221f8de7195b36c533e2d8806130398073f5cdd9" upstream="refs/tags/android-9.0.0_r18"/>
-  <project clone-depth="1" groups="pdk,darwin,arm" name="platform/prebuilts/gcc/darwin-x86/arm/arm-linux-androideabi-4.9" path="prebuilts/gcc/darwin-x86/arm/arm-linux-androideabi-4.9" revision="31481728cfc72deb776e4f20c1f979cc3cdabeb7" upstream="refs/tags/android-9.0.0_r18"/>
-  <project clone-depth="1" groups="pdk,darwin" name="platform/prebuilts/gcc/darwin-x86/host/i686-apple-darwin-4.2.1" path="prebuilts/gcc/darwin-x86/host/i686-apple-darwin-4.2.1" revision="300e1b3a5c130d85b26708d726b1b6cf9098c6d3" upstream="refs/tags/android-9.0.0_r18"/>
-  <project clone-depth="1" groups="pdk,darwin,mips" name="platform/prebuilts/gcc/darwin-x86/mips/mips64el-linux-android-4.9" path="prebuilts/gcc/darwin-x86/mips/mips64el-linux-android-4.9" revision="2a09bb1cb6758a702e54cb471d9ea96eaaf91e0d" upstream="refs/tags/android-9.0.0_r18"/>
-  <project clone-depth="1" groups="pdk,darwin,x86" name="platform/prebuilts/gcc/darwin-x86/x86/x86_64-linux-android-4.9" path="prebuilts/gcc/darwin-x86/x86/x86_64-linux-android-4.9" revision="9f0665551761079ba014afb3d3e39efb9f8528a5" upstream="refs/tags/android-9.0.0_r18"/>
   <project clone-depth="1" groups="pdk,linux,arm" name="platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9" path="prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9" revision="c60681670a2d383ed44ce4a93ca4e50e5a793331" upstream="refs/tags/android-9.0.0_r18"/>
   <project clone-depth="1" groups="pdk,linux,arm" name="platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9" path="prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9" revision="2021def3a06118689cc22d55a87ee12a33d30655" upstream="refs/tags/android-9.0.0_r18"/>
   <project clone-depth="1" groups="pdk,linux" name="platform/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.15-4.8" path="prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.15-4.8" revision="26b365057d95f4a5ef7337e9faeb556ab9c25fa3" upstream="refs/tags/android-9.0.0_r18"/>
   <project clone-depth="1" groups="pdk-fs" name="platform/prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8" path="prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8" revision="bc287bc73b109a54d52bed9019b95ecae51eccfb" upstream="refs/tags/android-9.0.0_r18"/>
   <project clone-depth="1" groups="pdk,linux,mips" name="platform/prebuilts/gcc/linux-x86/mips/mips64el-linux-android-4.9" path="prebuilts/gcc/linux-x86/mips/mips64el-linux-android-4.9" revision="6e6715288b22298bdffa5773dfe81ec937dc8f24" upstream="refs/tags/android-9.0.0_r18"/>
   <project clone-depth="1" groups="pdk,linux,x86" name="platform/prebuilts/gcc/linux-x86/x86/x86_64-linux-android-4.9" path="prebuilts/gcc/linux-x86/x86/x86_64-linux-android-4.9" revision="e7adaa496ca1ad32ebe3ef78351f3bd2fd2a508f" upstream="refs/tags/android-9.0.0_r18"/>
-  <project clone-depth="1" groups="darwin" name="platform/prebuilts/gdb/darwin-x86" path="prebuilts/gdb/darwin-x86" revision="57818b95d13a7f77ad50af3b2e470196c8158c7d" upstream="refs/tags/android-9.0.0_r18"/>
   <project clone-depth="1" groups="linux" name="platform/prebuilts/gdb/linux-x86" path="prebuilts/gdb/linux-x86" revision="2329f5383ab6724e91140ce8eb20d9fbc03c1ef1" upstream="refs/tags/android-9.0.0_r18"/>
-  <project clone-depth="1" groups="darwin,pdk,tradefed" name="platform/prebuilts/go/darwin-x86" path="prebuilts/go/darwin-x86" revision="5bd56bf5d2b50fa75189c3260d4c1792edd1584f" upstream="refs/tags/android-9.0.0_r18"/>
   <project clone-depth="1" groups="linux,pdk,tradefed" name="platform/prebuilts/go/linux-x86" path="prebuilts/go/linux-x86" revision="e19e342c445b9331a1645c9da89fbede80cfee16" upstream="refs/tags/android-9.0.0_r18"/>
   <project clone-depth="1" groups="pdk,pdk-cw-fs,pdk-fs" name="platform/prebuilts/gradle-plugin" path="prebuilts/gradle-plugin" revision="f79ad971a272d565feb17ffe118611742a46e827" upstream="refs/tags/android-9.0.0_r18"/>
   <project clone-depth="1" groups="pdk" name="platform/prebuilts/jdk/jdk8" path="prebuilts/jdk/jdk8" revision="1988f36d310e0537c5c6e2af58d0aea13fd2ec9d" upstream="refs/tags/android-9.0.0_r18"/>
@@ -619,7 +606,6 @@
   <project clone-depth="1" groups="pdk" name="platform/prebuilts/misc" path="prebuilts/misc" revision="f14274fea7bde5f831177fdbe9c10172591c05b2" upstream="refs/tags/android-9.0.0_r18"/>
   <project clone-depth="1" groups="pdk" name="platform/prebuilts/ndk" path="prebuilts/ndk" revision="f3f4fa1906ec7c9a25c2bab84d85e764cd364f93" upstream="refs/tags/android-9.0.0_r18"/>
   <project clone-depth="1" name="platform/prebuilts/ktlint" path="prebuilts/ktlint" revision="1481f3c9b850772f6078e38e2c3cc03220890890" upstream="refs/tags/android-9.0.0_r18"/>
-  <project clone-depth="1" groups="darwin,pdk,pdk-cw-fs,pdk-fs" name="platform/prebuilts/python/darwin-x86/2.7.5" path="prebuilts/python/darwin-x86/2.7.5" revision="de71500bfe8492796aa272a07d960da54eb653d3" upstream="refs/tags/android-9.0.0_r18"/>
   <project clone-depth="1" groups="linux,pdk,pdk-cw-fs,pdk-fs" name="platform/prebuilts/python/linux-x86/2.7.5" path="prebuilts/python/linux-x86/2.7.5" revision="415a2d4c3196cfd3f5f94e88dfbc7472200f77f9" upstream="refs/tags/android-9.0.0_r18"/>
   <project clone-depth="1" groups="pdk" name="platform/prebuilts/qemu-kernel" path="prebuilts/qemu-kernel" revision="0fe37e47e4b5d4f89461b59e75e7693b3b4bec93" upstream="refs/tags/android-9.0.0_r18"/>
   <project clone-depth="1" groups="pdk" name="platform/prebuilts/r8" path="prebuilts/r8" revision="cb41933df494c35198595f5dbb132de50897d8b2" upstream="refs/tags/android-9.0.0_r18"/>

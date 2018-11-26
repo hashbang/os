@@ -42,11 +42,17 @@ platform_extra_projects = [
         "revision": "refs/heads/master"
     },
 ]
-platform_remove_projects = [
-    "chromium-webview",
+platform_remove_paths = [
+    "external/chromium-webview"
     "packages/apps/Calendar",
     "packages/apps/QuickSearchBox",
+    "packages/apps/Browser2",
+    "device/generic/car",
+    "device/generic/goldfish",
+    "device/generic/goldfish-opengl",
 ]
+
+platform_remove_groups = ['darwin']
 
 class AndroidManifest:
 
@@ -56,14 +62,16 @@ class AndroidManifest:
         exp,
         extra_remotes=[],
         extra_projects=[],
-        remove_projects=[]
+        remove_paths=[],
+        remove_groups=[]
     ):
         self.default_fetch="https://android.googlesource.com"
         self.url = url
         self.exp = exp
         self.extra_remotes = extra_remotes
         self.extra_projects = extra_projects
-        self.remove_projects = remove_projects
+        self.remove_paths = remove_paths
+        self.remove_groups = remove_groups
         self._fetch()
         self._remove()
         self._extend()
@@ -97,9 +105,13 @@ class AndroidManifest:
     def _remove(self):
         projects=self.manifest.findall(".//project")
         for project in projects:
-            if 'name' in project.attrib:
-                if project.attrib['name'] in self.remove_projects:
-                    projects.remove(project)
+            if 'groups' in project.attrib:
+                groups = project.attrib['groups'].split(',')
+                if any(i in groups for i in self.remove_groups):
+                    self.manifest.remove(project)
+            if 'path' in project.attrib:
+                if project.attrib['path'] in self.remove_paths:
+                    self.manifest.remove(project)
 
     def _set_remotes(self):
         self.remotes={}
@@ -170,7 +182,8 @@ if __name__ == "__main__":
             platform_manifest_exp,
             platform_extra_remotes,
             platform_extra_projects,
-            platform_remove_projects
+            platform_remove_paths,
+            platform_remove_groups
         ).pretty_print()
 
     if manifest:
