@@ -58,6 +58,7 @@ class AndroidManifest:
         extra_projects=[],
         remove_projects=[]
     ):
+        self.default_fetch="https://android.googlesource.com"
         self.url = url
         self.exp = exp
         self.extra_remotes = extra_remotes
@@ -104,6 +105,9 @@ class AndroidManifest:
         self.remotes={}
         remote_nodes = self.manifest.findall(".//remote")
         for remote_node in remote_nodes:
+            if 'fetch' in remote_node.attrib:
+                if remote_node.attrib['fetch'] == '..':
+                    remote_node.attrib['fetch'] = self.default_fetch
             if 'review' in remote_node.attrib:
                 self.remotes[remote_node.attrib["name"]] = \
                     remote_node.attrib["review"]
