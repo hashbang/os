@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <manifest>
-  <remote fetch=".." name="aosp" review="https://android-review.googlesource.com/"/>
+  <remote fetch="https://android.googlesource.com" name="aosp" review="https://android-review.googlesource.com/"/>
   <remote fetch="https://gitlab.com/" name="gitlab"/>
   <remote fetch="https://github.com/" name="github"/>
   <default remote="aosp" revision="refs/tags/android-9.0.0_r18" sync-j="4"/>
