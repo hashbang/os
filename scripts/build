@@ -47,11 +47,12 @@ fi
 
 "${base_dir}/vendor/android-prepare-vendor/execute-all.sh" \
 	--debugfs \
-	--keep \
 	--yes \
+	--imgs "${factory_dir}/${factory_file}" \
 	--device "${device}" \
 	--buildID "${factory_build}" \
-	--output "${vendor_dir}"
+	--output "${base_dir}"
+
 
 # Apply Patches
 for type in {global,${build_variant}} ; do
