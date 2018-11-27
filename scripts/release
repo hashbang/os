@@ -7,7 +7,7 @@ img_path() {
 	path=${2?}
  	grep -Po \
  		"require version-${image}=\\K.+" \
- 		"${path}/android-info.txt" \
+ 		"${path}/vendor-board-info.txt" \
  	| tr '[:upper:]' '[:lower:]'
 }
 
@@ -36,7 +36,8 @@ export _JAVA_OPTIONS=-XX:-UsePerfData
 export BUILD_NUMBER="$build_number"
 
 cd "$base_dir"
-mkdir -p "$release_dir"
+sudo mkdir -p "$release_dir"
+sudo chown -R build:build "$release_dir"
 
 echo "Running sign_target_files_apks"
 sign_target_files_apks \
