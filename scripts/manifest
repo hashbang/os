@@ -27,18 +27,22 @@ platform_extra_projects = [
         "path": "packages/apps/F-Droid",
         "remote": "gitlab",
         "revision": "refs/tags/1.4"
-    },
-    {
+    },{
         "name": "fdroid/privileged-extension",
         "groups": "device",
         "path": "packages/apps/F-DroidPrivilegedExtension",
         "remote": "gitlab",
         "revision": "refs/tags/0.2.8"
-    },
-    {
+    },{
         "name": "anestisb/android-prepare-vendor",
         "groups": "device",
         "path": "vendor/android-prepare-vendor",
+        "remote": "github",
+        "revision": "refs/heads/master"
+    },{
+        "name": "stevesoltys/backup",
+        "groups": "device",
+        "path": "packages/apps/Backup",
         "remote": "github",
         "revision": "refs/heads/master"
     }

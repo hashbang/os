@@ -4,6 +4,7 @@
   <remote fetch="https://gitlab.com/" name="gitlab"/>
   <remote fetch="https://github.com/" name="github"/>
   <default remote="aosp" revision="refs/tags/android-9.0.0_r16" sync-j="4"/>
+  <project groups="device" name="stevesoltys/backup" path="packages/apps/Backup" remote="github" revision="98297537df92a437a7ff04769e5cb4a7dc05a43e" upstream="refs/heads/master"/>
   <project groups="device" name="anestisb/android-prepare-vendor" path="vendor/android-prepare-vendor" remote="github" revision="049a1fbf262197c193903dda39f21eafdb87004f" upstream="refs/heads/master"/>
   <project groups="device" name="fdroid/privileged-extension" path="packages/apps/F-DroidPrivilegedExtension" remote="gitlab" revision="94c050a2463678ef8ad431a8a7fb4e92b78e2920" upstream="refs/tags/0.2.8"/>
   <project groups="device" name="fdroid/fdroidclient" path="packages/apps/F-Droid" remote="gitlab" revision="5786708b3d524fa7cef9ef3af69ec88864787cea" upstream="refs/tags/1.4"/>
