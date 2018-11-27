@@ -34,14 +34,14 @@ builds.
 
 ### Generate Signing Keys ###
 
-Each device keys its own set of keys:
+Each device needs its own set of keys:
 ```
 make DEVICE=crosshatch keys
 ```
 
 ### Build Release  ###
 ```
-make DEVICE=crosshatch release
+make DEVICE=crosshatch clean build release
 ```
 
 ## Development ##
