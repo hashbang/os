@@ -89,6 +89,6 @@ clean: image
 	@docker run \
 	  -it \
 	  -v android:/home/build \
-	  hashbang/os clean.sh
+	  hashbang/os clean
 
 .PHONY: image build shell diff install update flash clean default

@@ -1,14 +1,15 @@
 #!/bin/bash
+set -e
 
 cd "$HOME/base" || exit
-rm -rf device/google/*-kernel
 repo forall -c 'git reset --hard ; git clean -fdx'
 make clean
-
-cd "$HOME/kernel" || exit
-mapfile -t -d '' dirs < <(find . -type d -print0)
+mapfile -t -d '' dirs \
+	< <(find "$HOME/kernel" -maxdepth 1 -mindepth 1 -type d -print0)
 for dir in "${dirs[@]}"; do (
-	cd "$dir" || exit;
-	repo forall -c 'git reset --hard ; git clean -fdx';
-	make clean
+	cat <<-EOF | bash
+		cd "$dir" || exit;
+		repo forall -c 'git reset --hard ; git clean -fdx';
+		rm -rf out
+	EOF
 ) done
