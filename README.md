@@ -17,12 +17,12 @@ builds.
 ## Features ##
 
  * 100% Open Source and auditable
-  * Except for vendor driver blobs hash verified from Google Servers
+   * Except for vendor driver blobs hash verified from Google Servers
  * All hardware works
-  * Unless you use Sprint directly or via Fi, which requires [backdoors][1]
+   * Unless you use Sprint directly or via Fi, which requires [backdoors][1]
  * No changes to stock AOSP functionality
  * Built-in F-Droid
-  * Trusted as system app without need to enable "Unknown Sources"
+   * Trusted as system app without need to enable "Unknown Sources"
 
 [1]: https://gist.github.com/thestinger/171b5ffdc54a50ee44497028aa137ed8
 
