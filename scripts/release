@@ -72,7 +72,6 @@ cat <<-EOF | bash
 	export PRODUCT="$device"
 	export VERSION="$version"
 	# radio/bootloader not supported by generate-factory-images-common atm
-	export BOOTLOADERSRC=boot.img
 	export BOOTLOADER="$bootloader"
 	export RADIO="$radio"
 	source "${base_dir}/device/common/generate-factory-images-common.sh"
