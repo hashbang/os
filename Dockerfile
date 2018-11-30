@@ -58,6 +58,9 @@ USER build
 WORKDIR /home/build
 
 ADD scripts/ /usr/local/bin/
-ADD ./ /opt/android/
+ADD .git /opt/android/.git
+ADD config /opt/android/config
+ADD patches /opt/android/patches
+ADD manifests /opt/android/manifests
 
 CMD [ "/bin/bash", "/usr/local/bin/build.sh" ]
