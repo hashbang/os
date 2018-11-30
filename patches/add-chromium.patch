@@ -1,0 +1,14 @@
+
+project build/make/
+diff --git a/build/make/target/product/core.mk b/build/make/target/product/core.mk
+index c72bb2f26..46ac94295 100644
+--- a/build/make/target/product/core.mk
++++ b/build/make/target/product/core.mk
+@@ -30,6 +30,7 @@ PRODUCT_PACKAGES += \
+     CalendarProvider \
+     CaptivePortalLogin \
+     CertInstaller \
++    chromium \
+     Contacts \
+     DeskClock \
+     DocumentsUI \
