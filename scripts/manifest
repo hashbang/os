@@ -45,7 +45,15 @@ platform_extra_projects = [
         "path": "packages/apps/Backup",
         "remote": "github",
         "revision": "refs/heads/master"
-    }
+    },{
+        "name": "AndroidHardening/platform_external_chromium",
+        "groups": "device",
+        "path": "external/chromium",
+        "remote": "github",
+        "revision": "refs/heads/master"
+    },
+
+
 ]
 platform_remove_paths = [
     "external/chromium-webview"
