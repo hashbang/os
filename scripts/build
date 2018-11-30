@@ -1,5 +1,8 @@
 #!/bin/bash
 set -e
+
+function sha256() { sha256sum "$@" | cut -c -64; }
+
 device="${DEVICE?}"
 build_type="${BUILD_TYPE:-release}"
 build_variant="${BUILD_VARIANT:-user}"
@@ -20,8 +23,15 @@ cores=$(nproc)
 factory_url="https://dl.google.com/dl/android/aosp"
 factory_file="${device}-${factory_build}-factory-${factory_crc}.zip"
 factory_dir="${vendor_dir}/${device}/${factory_build}"
-
-function sha256() { sha256sum "$@" | cut -c -64; }
+fdroid_whitelist="packages/apps/F-DroidPrivilegedExtension/app/src/main/java/org/fdroid/fdroid/privileged/ClientWhitelist.java"
+key_dir=$( \
+	[ "$build_variant" == "user" ] \
+	&& echo "${KEY_DIR:-${PWD}/keys/${device}}/" \
+	|| echo "${base_dir}/build/target/product/security/" \
+)
+key_hash=$(openssl x509 -in "${key_dir}/platform.x509.pem" -outform DER | sha256;)
+echo "Setting key directory to: $key_dir"
+echo "Setting platform key hash to: $key_hash"
 
 mkdir -p "${download_dir}" "${base_dir}" "${kernel_dir}" "${factory_dir}"
 
@@ -41,7 +51,7 @@ if [ ! -f "${factory_dir}/${factory_file}" ]; then
 	wget "${factory_url}/${factory_file}" -O "${download_dir}/${factory_file}"
 	file_hash="$(sha256 "${download_dir}/${factory_file}")"
 	[[ "${factory_hash}" == "$file_hash" ]] || \
-		{ ( >&2 echo "Invalid hash for ${factory_file}"); exit 1; }
+		{ ( >&2 echo "Invalid hash for ${factory_file}" ); exit 1; }
 	mv "${download_dir}/${factory_file}" "${factory_dir}/${factory_file}"
 fi
 
@@ -53,13 +63,12 @@ fi
 	--buildID "${factory_build}" \
 	--output "${base_dir}"
 
-
 # Apply Patches
-for type in {global,${build_variant}} ; do
-	for patch in "${config_dir}"/patches/"${type}"/*.patch; do
-		patch -p1 --no-backup-if-mismatch < "${patch}"
-	done
+for patch in "${config_dir}"/patches/*.patch; do
+	patch -p1 --no-backup-if-mismatch < "${patch}"
 done
+echo "patching file ${fdroid_whitelist}"
+sed -i "s/[a-f0-9]\{64\}/${key_hash}/g" "${base_dir}/${fdroid_whitelist}"
 
 # Setup environment
 # shellcheck disable=SC1091
