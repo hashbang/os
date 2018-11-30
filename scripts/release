@@ -36,6 +36,7 @@ export _JAVA_OPTIONS=-XX:-UsePerfData
 export BUILD_NUMBER="$build_number"
 
 cd "$base_dir"
+[ -d "${release_dir}" ] && sudo rm -rf "${release_dir}"
 sudo mkdir -p "$release_dir"
 sudo chown -R build:build "$release_dir"
 
@@ -44,9 +45,9 @@ sign_target_files_apks \
 	-o \
 	-d "$key_dir" \
 	--avb_vbmeta_key "${key_dir}/avb.pem" \
-    --avb_vbmeta_algorithm SHA256_RSA2048 \
-    --avb_system_key "${key_dir}/avb.pem" \
-    --avb_system_algorithm SHA256_RSA2048 \
+	--avb_vbmeta_algorithm SHA256_RSA2048 \
+	--avb_system_key "${key_dir}/avb.pem" \
+	--avb_system_algorithm SHA256_RSA2048 \
   	"${inter_dir}/${prefix}${device}-target_files-${build_number}.zip" \
 	"$release_dir/$target_files"
 
@@ -55,7 +56,7 @@ ota_from_target_files \
 	--block \
 	-k "${key_dir}/releasekey" \
   	"${release_dir}/${target_files}" \
-    "${release_dir}/${device}-ota_update-${build_number}.zip"
+	"${release_dir}/${device}-ota_update-${build_number}.zip"
 
 echo "Running img_from_target_files"
 img_from_target_files \
@@ -63,7 +64,6 @@ img_from_target_files \
 	"${release_dir}/${device}-img-${build_number}.zip"
 
 echo "Running generate-factory-images"
-
 cat <<-EOF | bash
 	cd "$release_dir"
 	source "${base_dir}/device/common/clear-factory-images-variables.sh"
@@ -71,9 +71,37 @@ cat <<-EOF | bash
 	export DEVICE="$device"
 	export PRODUCT="$device"
 	export VERSION="$version"
-	# radio/bootloader not supported by generate-factory-images-common atm
-	export BOOTLOADERSRC=boot.img
 	export BOOTLOADER="$bootloader"
 	export RADIO="$radio"
 	source "${base_dir}/device/common/generate-factory-images-common.sh"
 EOF
+
+echo "Copy avb key and scripts into factory zip"
+cd "${release_dir}"
+factory_zip="$(ls ${device}-${version}-factory-*.zip)"
+factory_tmp="${device}-${version}-factory.zip"
+factory_dir="${device}-${version}"
+unzip "${factory_zip}"
+rm "${factory_zip}"
+cp "${key_dir}/avb_pkmd.bin" "${factory_dir}/${device}-avb_pkmd.bin"
+rm "${factory_dir}/flash-all.sh"
+rm "${factory_dir}/flash-all.bat"
+rm "${factory_dir}/flash-base.sh"
+cat <<-EOF > "${factory_dir}/flash-all.sh"
+	if ! grep -q partition-exists \$(which fastboot); then
+		echo "fastboot too old; please install updated version from your OS package manager"
+		exit 1
+	fi
+	fastboot flash avb_custom_key ${device}-avb_pkmd.bin
+	fastboot flash bootloader bootloader-${device}-${bootloader}.img
+	fastboot reboot-bootloader
+	sleep 5
+	fastboot flash radio radio-${device}-${radio}.img
+	fastboot reboot-bootloader
+	sleep 5
+	fastboot -w update image-${device}-${version}.zip
+EOF
+zip -r "${factory_tmp}" "${factory_dir}"
+rm -rf "${factory_dir}"
+factory_hash="$(sha256sum "${factory_tmp}" | cut -b -8)"
+mv "${factory_tmp}" "${device}-${version}-factory-${factory_hash}.zip"
