@@ -1,0 +1,28 @@
+
+project device/google/crosshatch/
+diff --git a/device/google/crosshatch/aosp_blueline.mk b/device/google/crosshatch/aosp_blueline.mk
+index 77f9c7f..a73c479 100644
+--- a/device/google/crosshatch/aosp_blueline.mk
++++ b/device/google/crosshatch/aosp_blueline.mk
+@@ -33,7 +33,7 @@ PRODUCT_MANUFACTURER := Google
+ PRODUCT_BRAND := Android
+ PRODUCT_NAME := aosp_blueline
+ PRODUCT_DEVICE := blueline
+-PRODUCT_MODEL := AOSP on blueline
++PRODUCT_MODEL := Pixel 3
+ 
+ # Audio XMLs
+ PRODUCT_COPY_FILES += \
+diff --git a/device/google/crosshatch/aosp_crosshatch.mk b/device/google/crosshatch/aosp_crosshatch.mk
+index 9e871a4..8811c5a 100644
+--- a/device/google/crosshatch/aosp_crosshatch.mk
++++ b/device/google/crosshatch/aosp_crosshatch.mk
+@@ -33,7 +33,7 @@ PRODUCT_MANUFACTURER := Google
+ PRODUCT_BRAND := Android
+ PRODUCT_NAME := aosp_crosshatch
+ PRODUCT_DEVICE := crosshatch
+-PRODUCT_MODEL := AOSP on crosshatch
++PRODUCT_MODEL := Pixel 3 XL
+ 
+ # Audio XMLs
+ PRODUCT_COPY_FILES += \
