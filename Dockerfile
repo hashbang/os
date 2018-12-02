@@ -3,7 +3,7 @@ FROM ubuntu:bionic
 MAINTAINER Hashbang Team <team@hashbang.sh>
 
 ENV HOME=/home/build
-ENV PATH=/home/build/out/host/linux-x86/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV PATH=/opt/android/scripts:/home/build/out/host/linux-x86/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -57,10 +57,6 @@ RUN \
 USER build
 WORKDIR /home/build
 
-ADD scripts/ /usr/local/bin/
-ADD .git /opt/android/.git
-ADD config /opt/android/config
-ADD patches /opt/android/patches
-ADD manifests /opt/android/manifests
+ADD . /opt/android/
 
 CMD [ "/bin/bash", "/usr/local/bin/build.sh" ]
