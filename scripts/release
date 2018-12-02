@@ -13,6 +13,7 @@ img_path() {
 
 device="${DEVICE?}"
 base_dir="$PWD/base"
+build_datetime="$(cat "${base_dir}"/out/build_date.txt 2>/dev/null)"
 build_number="$(cat "${base_dir}"/out/build_number.txt 2>/dev/null)"
 prefix=aosp_
 target_files="${device}-target_files-${build_number}.zip"
@@ -29,11 +30,11 @@ version=$(
 	| tr '[:upper:]' '[:lower:]' \
 )
 
-
 export PATH="${base_dir}/build/tools/releasetools:$PATH"
 export LANG=C
 export _JAVA_OPTIONS=-XX:-UsePerfData
 export BUILD_NUMBER="$build_number"
+export BUILD_DATETIME="$build_datetime"
 
 cd "$base_dir"
 [ -d "${release_dir}" ] && sudo rm -rf "${release_dir}"

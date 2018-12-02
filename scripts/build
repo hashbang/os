@@ -12,7 +12,8 @@ factory_crc="${FACTORY_CRC?}"
 kernel_build="${KERNEL_BUILD:-true}"
 maintainer_name="${MAINTAINER_NAME:-aosp@null.com}"
 maintainer_email="${MAINTAINER_EMAIL:-AOSP User}"
-build_number=$(date --utc +%Y%m%d.%H%M%S)
+build_datetime="${BUILD_DATETIME:-$(date --utc +%s)}"
+build_number="${BUILD_NUMBER:-$(date --utc -d "@$build_datetime" +%m%d%H%M )}"
 temp_dir="$(mktemp -d)"
 download_dir="${temp_dir}/downloads/"
 base_dir="$PWD/base"
@@ -91,5 +92,7 @@ if [ "$kernel_build" = true ]; then
 fi
 
 # Build Platform
+export LANG=C
 export BUILD_NUMBER="$build_number"
+export BUILD_DATETIME="$build_datetime"
 make -j "${cores}" target-files-package brillo_update_payload
