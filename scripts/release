@@ -17,6 +17,7 @@ build_datetime="$(cat "${base_dir}"/out/build_date.txt 2>/dev/null)"
 build_number="$(cat "${base_dir}"/out/build_number.txt 2>/dev/null)"
 prefix=aosp_
 target_files="${device}-target_files-${build_number}.zip"
+config_dir="${CONFIG_DIR:-/opt/android}"
 key_dir="${KEY_DIR:-${PWD}/keys/${device}}"
 release_dir="$PWD/release/${device}/${build_number}"
 target_out_dir="${base_dir}/out/target/product/${device}"
@@ -88,14 +89,16 @@ cp "${key_dir}/avb_pkmd.bin" "${factory_dir}/${device}-avb_pkmd.bin"
 rm "${factory_dir}/flash-all.sh"
 rm "${factory_dir}/flash-all.bat"
 rm "${factory_dir}/flash-base.sh"
-mkdir -p "${factory_dir}/build/"
+mkdir -p "${factory_dir}/build/patches" "${factory_dir}/build/manifests"
 {
 	echo "DEVICE=${device}";
-	cat "/opt/android/configs/global.env";
-	cat "/opt/android/configs/${device}.env";
+	cat "${config_dir}/configs/global.env";
+	cat "${config_dir}/configs/${device}.env";
 } > "${factory_dir}/build/config.env"
-cp "/opt/android/manifests/base.xml" "${factory_dir}/build/"
-cp "/opt/android/manifests/${device}/kernel.xml" "${factory_dir}/build/"
+cp -R "${config_dir}/patches" "${factory_dir}/build/patches"
+cp "${config_dir}/manifests/base.xml" "${factory_dir}/build/manifests"
+cp "${config_dir}/manifests/${device}/kernel.xml" \
+	"${factory_dir}/build/manifests/"
 cat <<-EOF > "${factory_dir}/flash-all.sh"
 	if ! grep -q partition-exists \$(which fastboot); then
 		echo "fastboot too old; please update via your OS package manager"

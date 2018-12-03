@@ -19,7 +19,7 @@ download_dir="${temp_dir}/downloads/"
 base_dir="$PWD/base"
 kernel_dir="$PWD/kernel"
 vendor_dir="$PWD/vendor"
-config_dir="/opt/android"
+config_dir="${CONFIG_DIR:-/opt/android}"
 cores=$(nproc)
 factory_url="https://dl.google.com/dl/android/aosp"
 factory_file="${device}-${factory_build}-factory-${factory_crc}.zip"
@@ -34,7 +34,7 @@ key_hash=$(openssl x509 -in "${key_dir}/platform.x509.pem" -outform DER | sha256
 echo "Setting key directory to: $key_dir"
 echo "Setting platform key hash to: $key_hash"
 
-mkdir -p "${download_dir}" "${base_dir}" "${kernel_dir}" "${factory_dir}"
+mkdir -p "${download_dir}" "${base_dir}" "${factory_dir}"
 
 # Setup Git
 git config --global user.email "${maintainer_email}"
@@ -79,6 +79,7 @@ choosecombo "${build_type}" "aosp_${device}" "${build_variant}"
 # Build Kernel
 if [ "$kernel_build" = true ]; then
 	cat <<-EOF | bash
+		mkdir -p "${kernel_dir}/${device}"
 		cd "${kernel_dir}/${device}"
 		repo init -u "${config_dir}" -m manifests/${device}/kernel.xml
 		repo sync -c --no-tags --no-clone-bundle --jobs "${cores}"
