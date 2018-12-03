@@ -88,9 +88,17 @@ cp "${key_dir}/avb_pkmd.bin" "${factory_dir}/${device}-avb_pkmd.bin"
 rm "${factory_dir}/flash-all.sh"
 rm "${factory_dir}/flash-all.bat"
 rm "${factory_dir}/flash-base.sh"
+mkdir -p "${factory_dir}/build/"
+{
+	echo "DEVICE=${device}";
+	cat "/opt/android/configs/global.env";
+	cat "/opt/android/configs/${device}.env";
+} > "${factory_dir}/build/config.env"
+cp "/opt/android/manifests/base.xml" "${factory_dir}/build/"
+cp "/opt/android/manifests/${device}/kernel.xml" "${factory_dir}/build/"
 cat <<-EOF > "${factory_dir}/flash-all.sh"
 	if ! grep -q partition-exists \$(which fastboot); then
-		echo "fastboot too old; please install updated version from your OS package manager"
+		echo "fastboot too old; please update via your OS package manager"
 		exit 1
 	fi
 	fastboot flash avb_custom_key ${device}-avb_pkmd.bin
