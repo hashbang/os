@@ -52,7 +52,10 @@ RUN \
         zlib1g-dev \
         wget \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-    && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+    && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
+    && git config --global user.email "aosp@null.com" \
+    && git config --global user.name "AOSP User" \
+    && git config --global color.ui false
 
 USER build
 WORKDIR /home/build

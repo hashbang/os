@@ -5,10 +5,12 @@ set -e
 chromium_src_ref=${CHROMIUM_SRC_REF?}
 chromium_depot_tools_ref=${CHROMIUM_DEPOT_TOOLS_REF?}
 chromium_version=${CHROMIUM_VERSION?}
-chromium_code=$(echo $chromium_version | awk -F"." '{ printf "%s%03d52\n",$3,$4}')
 chromium_dir="${CHROMIUM_DIR:-$PWD/external/chromium}"
 chromium_repo="https://chromium.googlesource.com/chromium/"
 chromium_build_tools_url="${chromium_repo}/tools/depot_tools.git"
+chromium_code="$(
+	echo "$chromium_version" | awk -F"." '{ printf "%s%03d52\n",$3,$4}'
+)"
 cores=$(nproc)
 
 export PATH="$PATH:$chromium_dir/depot_tools"
@@ -24,7 +26,7 @@ git reset --hard "$chromium_depot_tools_ref"
 mkdir -p "$chromium_dir"
 cd "$chromium_dir"
 [ ! -d "$chromium_dir/src/.git" ] && \
-	yes Y | fetch --nohooks android;
+	yes Y | fetch --nohooks --target_os_only=true android
 yes Y | gclient sync --with_branch_heads --jobs "${cores}" -RDf
 gclient runhooks
 

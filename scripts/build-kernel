@@ -1,0 +1,22 @@
+#!/bin/bash
+set -e
+
+device="${DEVICE?}"
+config_dir="${CONFIG_DIR:-/opt/android}"
+kernel_dir="$PWD/external/kernel/${device}"
+build_datetime="${BUILD_DATETIME:-$(date --utc +%s)}"
+build_number="${BUILD_NUMBER:-$(date --utc -d "@$build_datetime" +%m%d%H%M )}"
+cores=$(nproc)
+
+mkdir -p "${kernel_dir}"
+cd "${kernel_dir}"
+repo init -u "${config_dir}" -m "manifests/${device}/kernel.xml"
+repo sync -c --no-tags --no-clone-bundle --jobs "${cores}"
+repo forall -c 'git reset --hard ; git clean -fdx'
+
+# shellcheck disable=SC1090
+source "${kernel_dir}/build/envsetup.sh"
+export LANG=C
+export BUILD_NUMBER="$build_number"
+export BUILD_DATETIME="$build_datetime"
+bash "${kernel_dir}/build/build.sh"

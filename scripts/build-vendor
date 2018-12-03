@@ -1,0 +1,34 @@
+#!/bin/bash
+set -e
+
+device="${DEVICE?}"
+base_dir="${BASE_DIR:-$PWD/base}"
+external_dir="${EXTERNAL_DIR:-$PWD/external}"
+temp_dir="$(mktemp -d)"
+download_dir="${temp_dir}/downloads/"
+vendor_dir="${external_dir}/vendor"
+vendor_out="${external_dir}/vendor/out"
+factory_url="https://dl.google.com/dl/android/aosp"
+factory_build="${FACTORY_BUILD?}"
+factory_hash="${FACTORY_HASH?}"
+factory_crc="${FACTORY_CRC?}"
+factory_file="${device}-${factory_build}-factory-${factory_crc}.zip"
+factory_dir="${vendor_dir}/${device}/${factory_build}"
+
+mkdir -p "${download_dir}" "${factory_dir}" "${vendor_out}"
+
+# Fetch/extract proprietary blobs
+if [ ! -f "${factory_dir}/${factory_file}" ]; then
+	wget "${factory_url}/${factory_file}" -O "${download_dir}/${factory_file}"
+	file_hash="$(sha256sum "${download_dir}/${factory_file}" | cut -c1-64)"
+	[[ "${factory_hash}" == "$file_hash" ]] || \
+		{ ( >&2 echo "Invalid hash for ${factory_file}" ); exit 1; }
+	mv "${download_dir}/${factory_file}" "${factory_dir}/${factory_file}"
+fi
+"${base_dir}/vendor/android-prepare-vendor/execute-all.sh" \
+	--debugfs \
+	--yes \
+	--imgs "${factory_dir}/${factory_file}" \
+	--device "${device}" \
+	--buildID "${factory_build}" \
+	--output "${vendor_out}"

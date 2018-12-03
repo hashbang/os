@@ -16,7 +16,25 @@ build: image
 	  --env-file config/$(device).env \
 	  hashbang/os build
 
-build-chromium: image
+kernel: image
+	docker run \
+	  -it \
+	  -v android:/home/build \
+	  -e DEVICE=$(device) \
+	  --env-file config/global.env \
+	  --env-file config/$(device).env \
+	  hashbang/os build-kernel
+
+vendor: image
+	docker run \
+	  -it \
+	  -v android:/home/build \
+	  -e DEVICE=$(device) \
+	  --env-file config/global.env \
+	  --env-file config/$(device).env \
+	  hashbang/os build-vendor
+
+chromium: image
 	docker run \
 	  -it \
 	  -v android:/home/build \

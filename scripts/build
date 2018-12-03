@@ -1,99 +1,31 @@
 #!/bin/bash
 set -e
 
-function sha256() { sha256sum "$@" | cut -c -64; }
-
 device="${DEVICE?}"
-build_type="${BUILD_TYPE:-release}"
-build_variant="${BUILD_VARIANT:-user}"
-factory_build="${FACTORY_BUILD?}"
-factory_hash="${FACTORY_HASH?}"
-factory_crc="${FACTORY_CRC?}"
-kernel_build="${KERNEL_BUILD:-true}"
-maintainer_name="${MAINTAINER_NAME:-aosp@null.com}"
-maintainer_email="${MAINTAINER_EMAIL:-AOSP User}"
-build_datetime="${BUILD_DATETIME:-$(date --utc +%s)}"
-build_number="${BUILD_NUMBER:-$(date --utc -d "@$build_datetime" +%m%d%H%M )}"
-temp_dir="$(mktemp -d)"
-download_dir="${temp_dir}/downloads/"
 base_dir="$PWD/base"
-kernel_dir="$PWD/kernel"
-vendor_dir="$PWD/vendor"
-config_dir="${CONFIG_DIR:-/opt/android}"
-cores=$(nproc)
-factory_url="https://dl.google.com/dl/android/aosp"
-factory_file="${device}-${factory_build}-factory-${factory_crc}.zip"
-factory_dir="${vendor_dir}/${device}/${factory_build}"
-fdroid_whitelist="packages/apps/F-DroidPrivilegedExtension/app/src/main/java/org/fdroid/fdroid/privileged/ClientWhitelist.java"
-key_dir=$( \
-	[ "$build_variant" == "user" ] \
-	&& echo "${KEY_DIR:-${PWD}/keys/${device}}/" \
-	|| echo "${base_dir}/build/target/product/security/" \
+external_dir="${EXTERNAL_DIR:-$PWD/external}"
+version=$(
+	grep -Po \
+		"export BUILD_ID=\\K.+" \
+		"${base_dir}/build/core/build_id.mk" \
+	| tr '[:upper:]' '[:lower:]' \
 )
-key_hash=$(openssl x509 -in "${key_dir}/platform.x509.pem" -outform DER | sha256;)
-echo "Setting key directory to: $key_dir"
-echo "Setting platform key hash to: $key_hash"
+vendor_dist="${external_dir}/vendor/out/${device}/${version}/vendor"
+vendor_dest="${base_dir}/vendor"
+chromium_dist="${external_dir}/chromium/src/out/Default/apks"
+chromium_dest="${base_dir}/external/chromium/prebuilt/arm64"
+kernel_dist="${external_dir}/kernel/${device}/out/android-*/dist"
+kernel_dest="${base_dir}/device/google/${device}-kernel"
 
-mkdir -p "${download_dir}" "${base_dir}" "${factory_dir}"
+rm -rf "$vendor_dest" "$chromium_dest" "$kernel_dest"
 
-# Setup Git
-git config --global user.email "${maintainer_email}"
-git config --global user.name "${maintainer_name}"
-git config --global color.ui false
+[ -d "${vendor_dist}" ] || build-vendor
+cp -R "${vendor_dist}" "${vendor_dest}"
 
-# Sync/reset repos
-cd "${base_dir}"
-repo init -u "${config_dir}" -m manifests/base.xml
-repo sync -c --no-tags --no-clone-bundle --jobs "${cores}"
-repo forall -c 'git reset --hard ; git clean -fdx'
+[ -d "${chromium_dist}" ] || build-chromium
+cp -f "${chromium_dist}" "${chromium_dest}"
 
-# Fetch/extract proprietary blobs
-if [ ! -f "${factory_dir}/${factory_file}" ]; then
-	wget "${factory_url}/${factory_file}" -O "${download_dir}/${factory_file}"
-	file_hash="$(sha256 "${download_dir}/${factory_file}")"
-	[[ "${factory_hash}" == "$file_hash" ]] || \
-		{ ( >&2 echo "Invalid hash for ${factory_file}" ); exit 1; }
-	mv "${download_dir}/${factory_file}" "${factory_dir}/${factory_file}"
-fi
+[ -d "$kernel_dist" ] || build-kernel
+cp -R "${kernel_dist}" "${kernel_dest}"
 
-"${base_dir}/vendor/android-prepare-vendor/execute-all.sh" \
-	--debugfs \
-	--yes \
-	--imgs "${factory_dir}/${factory_file}" \
-	--device "${device}" \
-	--buildID "${factory_build}" \
-	--output "${base_dir}"
-
-# Apply Patches
-for patch in "${config_dir}"/patches/*.patch; do
-	patch -p1 --no-backup-if-mismatch < "${patch}"
-done
-echo "patching file ${fdroid_whitelist}"
-sed -i "s/[a-f0-9]\{64\}/${key_hash}/g" "${base_dir}/${fdroid_whitelist}"
-
-# Setup environment
-# shellcheck disable=SC1091
-source build/envsetup.sh
-choosecombo "${build_type}" "aosp_${device}" "${build_variant}"
-
-# Build Kernel
-if [ "$kernel_build" = true ]; then
-	cat <<-EOF | bash
-		mkdir -p "${kernel_dir}/${device}"
-		cd "${kernel_dir}/${device}"
-		repo init -u "${config_dir}" -m manifests/${device}/kernel.xml
-		repo sync -c --no-tags --no-clone-bundle --jobs "${cores}"
-		repo forall -c 'git reset --hard ; git clean -fdx'
-		source build/envsetup.sh
-		bash build/build.sh
-		rm -rf ${base_dir}/device/google/${device}-kernel
-		cp -R ${kernel_dir}/${device}/out/android-*/dist \
-			${base_dir}/device/google/${device}-kernel
-	EOF
-fi
-
-# Build Platform
-export LANG=C
-export BUILD_NUMBER="$build_number"
-export BUILD_DATETIME="$build_datetime"
-make -j "${cores}" target-files-package brillo_update_payload
+build-platform
