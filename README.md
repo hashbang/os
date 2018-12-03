@@ -10,9 +10,8 @@ binary blobs in order for all hardware to function.
 Additionally, we seek to produce signed deterministic builds allowing for high
 accountability via redundant CI systems all getting the same hash.
 
-Heavily inspired by CopperheadOS (RIP) and its spiritual successor
-RattlesnakeOS with a focus on providing a trustable path to free public AOSP
-builds.
+Heavily inspired by the former CopperheadOS (RIP) project. We seek to provide a
+trustable path to free public AOSP builds patched for privacy and security.
 
 ## Features ##
 
