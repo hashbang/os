@@ -12,3 +12,18 @@ index c72bb2f26..46ac94295 100644
      Contacts \
      DeskClock \
      DocumentsUI \
+
+project frameworks/base/
+diff --git a/frameworks/base/core/res/res/xml/config_webview_packages.xml b/frameworks/base/core/res/res/xml/config_webview_packages.xml
+index f062b59a008..5c21c7ffb40 100644
+--- a/frameworks/base/core/res/res/xml/config_webview_packages.xml
++++ b/frameworks/base/core/res/res/xml/config_webview_packages.xml
+@@ -15,7 +15,6 @@
+ -->
+ 
+ <webviewproviders>
+-    <!-- The default WebView implementation -->
+-    <webviewprovider description="Android WebView" packageName="com.android.webview" availableByDefault="true">
++    <webviewprovider description="Chromium" packageName="org.chromium.chrome" availableByDefault="true">
+     </webviewprovider>
+ </webviewproviders>

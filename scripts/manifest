@@ -19,6 +19,7 @@ platform_manifest_exp="android-%s" % major_version
 platform_extra_remotes = [
     { "name": "github" ,"fetch": "https://github.com/" },
     { "name": "gitlab" ,"fetch": "https://gitlab.com/" },
+    { "name": "chromium" ,"fetch": "https://chromium.googlesource.com/" },
 ]
 platform_extra_projects = [
     {
@@ -50,10 +51,21 @@ platform_extra_projects = [
         "groups": "device",
         "path": "external/chromium",
         "remote": "github",
+        "revision": "refs/heads/pie"
+    },{
+        "name": "chromium/tools/depot_tools",
+        "groups": "device",
+        "path": "external/depot_tools",
+        "remote": "chromium",
         "revision": "refs/heads/master"
     },
-
-
+    {
+        "name": "chromium/src",
+        "groups": "device",
+        "path": "packages/apps/Chromium",
+        "remote": "chromium",
+        "revision": "refs/heads/master"
+    }
 ]
 platform_remove_paths = [
     "external/chromium-webview"

@@ -1,13 +1,17 @@
 <?xml version="1.0"?>
 <manifest>
   <remote fetch="https://android.googlesource.com" name="aosp" review="https://android-review.googlesource.com/"/>
+  <remote fetch="https://chromium.googlesource.com/" name="chromium"/>
   <remote fetch="https://gitlab.com/" name="gitlab"/>
   <remote fetch="https://github.com/" name="github"/>
-  <default remote="aosp" revision="refs/tags/android-9.0.0_r16" sync-j="4"/>
+  <project groups="device" name="chromium/src" path="packages/apps/Chromium" remote="chromium" revision="5b3c3ff0a2b5b3f8410fbc95b98de29627d4aed6" upstream="refs/heads/master"/>
+  <project groups="device" name="chromium/tools/depot_tools" path="external/depot_tools" remote="chromium" revision="0b287c5bcafd13a43147fd339aab60be6d5f56e0" upstream="refs/heads/master"/>
+  <project groups="device" name="AndroidHardening/platform_external_chromium" path="external/chromium" remote="github" revision="136b1c581edbd4482ada7e62a59d7ac1d13ab481" upstream="refs/heads/pie"/>
   <project groups="device" name="stevesoltys/backup" path="packages/apps/Backup" remote="github" revision="98297537df92a437a7ff04769e5cb4a7dc05a43e" upstream="refs/heads/master"/>
   <project groups="device" name="anestisb/android-prepare-vendor" path="vendor/android-prepare-vendor" remote="github" revision="049a1fbf262197c193903dda39f21eafdb87004f" upstream="refs/heads/master"/>
   <project groups="device" name="fdroid/privileged-extension" path="packages/apps/F-DroidPrivilegedExtension" remote="gitlab" revision="94c050a2463678ef8ad431a8a7fb4e92b78e2920" upstream="refs/tags/0.2.8"/>
   <project groups="device" name="fdroid/fdroidclient" path="packages/apps/F-Droid" remote="gitlab" revision="5786708b3d524fa7cef9ef3af69ec88864787cea" upstream="refs/tags/1.4"/>
+  <default remote="aosp" revision="refs/tags/android-9.0.0_r16" sync-j="4"/>
   <project groups="pdk" name="platform/build" path="build/make" revision="20c8981306304d25a1e548d081152fe9a303c21d" upstream="refs/tags/android-9.0.0_r16">
     <copyfile dest="Makefile" src="core/root.mk"/>
     <linkfile dest="build/CleanSpec.mk" src="CleanSpec.mk"/>
