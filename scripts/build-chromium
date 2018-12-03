@@ -15,14 +15,16 @@ export PATH="$PATH:$chromium_dir/depot_tools"
 mkdir -p "$chromium_dir"
 cd "$chromium_dir"
 
-git clone "${chromium_build_tools_url}" "$chromium_dir/depot_tools"
+[ ! -d "$chromium_dir/depot_tools" ] && \
+	git clone "${chromium_build_tools_url}" "$chromium_dir/depot_tools"
 cd "$chromium_dir/depot_tools"
+git fetch
 git reset --hard "$chromium_depot_tools_ref"
 
-fetch --nohooks android
 cd "$chromium_dir/src"
+yes Y | fetch --nohooks android
 git checkout "$chromium_src_ref" -f
-yes | gclient sync --with_branch_heads --jobs "${cores}" -RDf
+yes Y | gclient sync --with_branch_heads --jobs "${cores}" -RDf
 git clean -dff
 git checkout -- .
 
