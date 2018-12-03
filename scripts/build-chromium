@@ -1,0 +1,45 @@
+#!/bin/bash
+
+set -e
+
+chromium_src_ref=${CHROMIUM_SRC_REF?}
+chromium_depot_tools_ref=${CHROMIUM_DEPOT_TOOLS_REF?}
+chromium_version=${CHROMIUM_VERSION?}
+chromium_code=$(echo $chromium_version | awk -F"." '{ printf "%s%03d52\n",$3,$4}')
+chromium_dir="${CHROMIUM_DIR:-$PWD/external/chromium}"
+chromium_repo="https://chromium.googlesource.com/chromium/"
+chromium_build_tools_url="${chromium_repo}/tools/depot_tools.git"
+cores=$(nproc)
+
+export PATH="$PATH:$chromium_dir/depot_tools"
+mkdir -p "$chromium_dir"
+cd "$chromium_dir"
+
+git clone "${chromium_build_tools_url}" "$chromium_dir/depot_tools"
+cd "$chromium_dir/depot_tools"
+git reset --hard "$chromium_depot_tools_ref"
+
+fetch --nohooks android
+cd "$chromium_dir/src"
+git checkout "$chromium_src_ref" -f
+yes | gclient sync --with_branch_heads --jobs "${cores}" -RDf
+git clean -dff
+git checkout -- .
+
+mkdir -p out/Default
+cat <<-EOF > out/Default/args.gn
+	target_os = "android"
+	target_cpu = "arm64"
+	android_channel = "stable"
+	android_default_version_name = "${chromium_version}"
+	android_default_version_code = "${chromium_code}"
+	is_component_build = false
+	is_debug = false
+	is_official_build = true
+	symbol_level = 1
+	fieldtrial_testing_like_official_build = true
+	ffmpeg_branding = "Chrome"
+	proprietary_codecs = true
+EOF
+gn gen out/Default
+autoninja -C out/Default/ monochrome_public_apk
