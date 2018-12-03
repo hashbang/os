@@ -21,14 +21,17 @@ cd "$chromium_dir/depot_tools"
 git fetch
 git reset --hard "$chromium_depot_tools_ref"
 
-cd "$chromium_dir/src"
-yes Y | fetch --nohooks android
-git checkout "$chromium_src_ref" -f
+mkdir -p "$chromium_dir"
+cd "$chromium_dir"
+[ ! -d "$chromium_dir/src/.git" ] && \
+	yes Y | fetch --nohooks android;
 yes Y | gclient sync --with_branch_heads --jobs "${cores}" -RDf
-git clean -dff
-git checkout -- .
+gclient runhooks
 
-mkdir -p out/Default
+cd "$chromium_dir/src"
+git checkout "$chromium_src_ref" -f
+
+mkdir -p "$chromium_dir/src/out/Default"
 cat <<-EOF > out/Default/args.gn
 	target_os = "android"
 	target_cpu = "arm64"
@@ -43,5 +46,6 @@ cat <<-EOF > out/Default/args.gn
 	ffmpeg_branding = "Chrome"
 	proprietary_codecs = true
 EOF
-gn gen out/Default
-autoninja -C out/Default/ monochrome_public_apk
+gn gen "$chromium_dir/src/out/Default"
+
+autoninja -C "$chromium_dir/src/out/Default/" monochrome_public_apk
