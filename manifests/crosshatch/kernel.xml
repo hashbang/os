@@ -3,7 +3,7 @@
   <remote fetch="https://android.googlesource.com/" name="aosp"/>
   <default remote="aosp" revision="android-msm-bluecross-4.9-pie-qpr1" sync-j="4"/>
   <project name="kernel/build" path="build" revision="529ce46811d5eb4add546f635906d31229262a13" upstream="refs/heads/android-msm-bluecross-4.9-pie-qpr1"/>
-  <project name="kernel/msm" path="private/msm-google" revision="833ea182c39ccd47bc2fb2fe3b17996a58ac4bbf" upstream="refs/heads/android-msm-bluecross-4.9-pie-qpr1">
+  <project name="kernel/msm" path="private/msm-google" revision="641303def9a59cbf05c4068df5c30f0bb538dee0" upstream="refs/heads/android-msm-bluecross-4.9-pie-qpr1">
     <linkfile dest="build.config" src="build.config"/>
   </project>
   <project name="kernel/msm-extra" path="private/msm-google/techpack/audio" revision="523fdea385b9fdef0bd4630d0f54898d6d241d1d" upstream="refs/heads/android-msm-bluecross-4.9-pie-qpr1"/>

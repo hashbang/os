@@ -23,34 +23,48 @@ platform_extra_remotes = [
 platform_extra_projects = [
     {
         "name": "fdroid/fdroidclient",
-        "groups": "device",
         "path": "packages/apps/F-Droid",
+        "groups": "device",
         "remote": "gitlab",
         "revision": "refs/tags/1.4"
     },{
         "name": "fdroid/privileged-extension",
-        "groups": "device",
         "path": "packages/apps/F-DroidPrivilegedExtension",
+        "groups": "device",
         "remote": "gitlab",
         "revision": "refs/tags/0.2.8"
     },{
         "name": "anestisb/android-prepare-vendor",
-        "groups": "device",
         "path": "vendor/android-prepare-vendor",
+        "groups": "device",
         "remote": "github",
         "revision": "refs/heads/master"
     },{
         "name": "stevesoltys/backup",
-        "groups": "device",
         "path": "packages/apps/Backup",
+        "groups": "device",
         "remote": "github",
         "revision": "refs/heads/master"
     },{
         "name": "AndroidHardening/platform_external_chromium",
-        "groups": "device",
         "path": "external/chromium",
+        "groups": "device",
         "remote": "github",
         "revision": "refs/heads/pie"
+    },{
+        "name": "AndroidHardening/platform_packages_apps_Updater",
+        "path": "packages/apps/Updater",
+        "groups": "device",
+        "remote": "github",
+        "revision": "refs/heads/pie"
+    },{
+        "name": "device/google/crosshatch",
+        "path": "device/google/crosshatch",
+        "groups": "device,crosshatch",
+    },{
+        "name": "device/google/crosshatch-sepolicy",
+        "path": "device/google/crosshatch-sepolicy",
+        "groups": "device,crosshatch",
     }
 ]
 platform_remove_paths = [
@@ -61,6 +75,7 @@ platform_remove_paths = [
     "device/generic/car",
     "device/generic/goldfish",
     "device/generic/goldfish-opengl",
+    "device/google/crosshatch-kernel",
     "device/google/cuttlefish",
     "device/google/cuttlefish-kernel",
     "device/google/cuttlefish-sepolicy",
