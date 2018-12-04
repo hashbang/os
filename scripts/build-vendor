@@ -15,6 +15,8 @@ factory_crc="${FACTORY_CRC?}"
 factory_file="${device}-${factory_build}-factory-${factory_crc}.zip"
 factory_dir="${vendor_dir}/${device}/${factory_build}"
 
+echo "base_dir=${base_dir}"
+
 mkdir -p "${download_dir}" "${factory_dir}" "${vendor_out}"
 
 # Fetch/extract proprietary blobs

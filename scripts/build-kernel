@@ -2,8 +2,9 @@
 set -e
 
 device="${DEVICE?}"
+external_dir="${EXTERNAL_DIR:-$PWD/external}"
 config_dir="${CONFIG_DIR:-/opt/android}"
-kernel_dir="$PWD/external/kernel/${device}"
+kernel_dir="${external_dir}/kernel/${device}"
 build_datetime="${BUILD_DATETIME:-$(date --utc +%s)}"
 build_number="${BUILD_NUMBER:-$(date --utc -d "@$build_datetime" +%m%d%H%M )}"
 cores=$(nproc)

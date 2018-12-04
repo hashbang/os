@@ -5,7 +5,7 @@ cd "$HOME/base" || exit
 repo forall -c 'git reset --hard ; git clean -fdx'
 make clean
 mapfile -t -d '' dirs \
-	< <(find "$HOME/kernel" -maxdepth 1 -mindepth 1 -type d -print0)
+	< <(find "$HOME/external/kernel" -maxdepth 1 -mindepth 1 -type d -print0)
 for dir in "${dirs[@]}"; do (
 	cat <<-EOF | bash
 		cd "$dir" || exit;
