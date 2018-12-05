@@ -60,8 +60,6 @@
   <project groups="device,pdk" name="device/google/accessory/demokit" path="device/google/accessory/demokit" revision="f00967ef043079dcc8fa386aab9d87cc83dadfdc" upstream="refs/tags/android-9.0.0_r21"/>
   <project groups="device,broadcom_pdk,generic_fs,pdk" name="device/google/atv" path="device/google/atv" revision="36cd183690ec6b2bb513b5659435311d1ae8da95" upstream="refs/tags/android-9.0.0_r21"/>
   <project groups="device,marlin,pdk" name="device/google/contexthub" path="device/google/contexthub" revision="3560918328316196991a07fd7d1d6a01f6bb79df" upstream="refs/tags/android-9.0.0_r21"/>
-  <project groups="device,crosshatch" name="device/google/crosshatch" path="device/google/crosshatch" revision="725f982eec7c295ff8893a4b5c72b58e4984631e" upstream="refs/tags/android-9.0.0_r21"/>
-  <project groups="device,crosshatch" name="device/google/crosshatch-sepolicy" path="device/google/crosshatch-sepolicy" revision="1e6862a7dd46a15a527486c9db63805c7f232cbc" upstream="refs/tags/android-9.0.0_r21"/>
   <project clone-depth="1" groups="device" name="device/google/cuttlefish_kernel" path="device/google/cuttlefish_kernel" revision="1539ff941603e52f32da1e423cdca2165c4d90c0" upstream="refs/tags/android-9.0.0_r21"/>
   <project clone-depth="1" groups="pdk" name="device/google/vrservices" path="device/google/vrservices" revision="354a7a2de5e4f4f2b92dd8eb9e9eeb5c1e0bc295" upstream="refs/tags/android-9.0.0_r21"/>
   <project name="device/linaro/bootloader/arm-trusted-firmware" path="device/linaro/bootloader/arm-trusted-firmware" revision="8c8350bde22706d8103ec38fe33b0fa239a62131" upstream="refs/tags/android-9.0.0_r21"/>
