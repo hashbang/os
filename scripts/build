@@ -50,7 +50,7 @@ cp -R "${chromium_dist}." "${chromium_dest}"
 cp -R "${kernel_dist}." "${kernel_dest}"
 
 # Apply Patches
-for patch in "${config_dir}"/patches/*.patch; do
+for patch in "${config_dir}"/patches/platform/*.patch; do
 	patch -p1 --no-backup-if-mismatch < "${patch}"
 done
 echo "patching file ${fdroid_whitelist}"

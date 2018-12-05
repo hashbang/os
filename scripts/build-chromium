@@ -2,10 +2,11 @@
 
 set -e
 
+external_dir="${EXTERNAL_DIR:-$PWD/external}"
 chromium_src_ref=${CHROMIUM_SRC_REF?}
 chromium_depot_tools_ref=${CHROMIUM_DEPOT_TOOLS_REF?}
 chromium_version=${CHROMIUM_VERSION?}
-chromium_dir="${CHROMIUM_DIR:-$PWD/external/chromium}"
+chromium_dir="${external_dir}/chromium"
 chromium_repo="https://chromium.googlesource.com/chromium/"
 chromium_build_tools_url="${chromium_repo}/tools/depot_tools.git"
 chromium_code="$(
