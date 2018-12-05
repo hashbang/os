@@ -30,49 +30,6 @@ platform_extra_projects = [
         "path": "device/google/crosshatch-sepolicy",
         "groups": "device,crosshatch",
     },{
-	"name": "platform/hardware/qcom/sdm845/bt",
- 	"path": "hardware/qcom/sdm845/bt",
-	"groups": "qcom_sdm845",
-    },{
- 	"name": "platform/hardware/qcom/sdm845/data/ipacfg-mgr",
-	"path": "hardware/qcom/sdm845/data/ipacfg-mgr",
-	"groups":"vendor,qcom_sdm845",
-	"children": [
-            {
-                "type": "linkfile",
-                "dest":"hardware/qcom/sdm845/Android.mk",
-                "src":"os_pickup.mk"
-            }, {
-                "type": "linkfile",
-                "dest":"hardware/qcom/sdm845/Android.bp",
-                "src":"os_pickup.bp"
-            }
-	]
-    },{
-	"name": "platform/hardware/qcom/sdm845/display",
-	"path": "hardware/qcom/sdm845/display",
-	"groups": "qcom_sdm845",
-    },{
-	"name": "platform/hardware/qcom/sdm845/gps",
-	"path": "hardware/qcom/sdm845/gps",
-	"groups": "qcom_sdm845",
-    },{
-        "name": "platform/hardware/qcom/sdm845/media",
-        "path": "hardware/qcom/sdm845/media",
-        "groups": "qcom_sdm845",
-    },{
-	"name": "platform/hardware/qcom/sdm845/thermal",
-	"path": "hardware/qcom/sdm845/thermal",
-	"groups": "qcom_sdm845",
-    },{
-	"name": "platform/hardware/qcom/sdm845/vr",
-	"path": "hardware/qcom/sdm845/vr",
-	"groups":"qcom_sdm845",
-    },{
-	"name": "platform/hardware/qcom/wlan",
-	"path": "hardware/qcom/wlan",
-	"groups":"qcom_wlan,pdk-qcom",
-    },{
         "name": "fdroid/fdroidclient",
         "path": "packages/apps/F-Droid",
         "groups": "device",

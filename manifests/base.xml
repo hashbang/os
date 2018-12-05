@@ -10,17 +10,6 @@
   <project groups="device" name="anestisb/android-prepare-vendor" path="vendor/android-prepare-vendor" remote="github" revision="049a1fbf262197c193903dda39f21eafdb87004f" upstream="refs/heads/master"/>
   <project groups="device" name="fdroid/privileged-extension" path="packages/apps/F-DroidPrivilegedExtension" remote="gitlab" revision="94c050a2463678ef8ad431a8a7fb4e92b78e2920" upstream="refs/tags/0.2.8"/>
   <project groups="device" name="fdroid/fdroidclient" path="packages/apps/F-Droid" remote="gitlab" revision="5786708b3d524fa7cef9ef3af69ec88864787cea" upstream="refs/tags/1.4"/>
-  <project groups="qcom_wlan,pdk-qcom" name="platform/hardware/qcom/wlan" path="hardware/qcom/wlan" revision="7c079a1ae27a73cfc318692b5fa7f1c6132475ac" upstream="refs/tags/android-9.0.0_r21"/>
-  <project groups="qcom_sdm845" name="platform/hardware/qcom/sdm845/vr" path="hardware/qcom/sdm845/vr" revision="cfd3d0a370092d8d75353f604abe0e09e4d255d3" upstream="refs/tags/android-9.0.0_r21"/>
-  <project groups="qcom_sdm845" name="platform/hardware/qcom/sdm845/thermal" path="hardware/qcom/sdm845/thermal" revision="b293f81be6a96de957ec22b06bef09896876d788" upstream="refs/tags/android-9.0.0_r21"/>
-  <project groups="qcom_sdm845" name="platform/hardware/qcom/sdm845/media" path="hardware/qcom/sdm845/media" revision="51c0891761c9141998bf0f9d10257a70c8aba534" upstream="refs/tags/android-9.0.0_r21"/>
-  <project groups="qcom_sdm845" name="platform/hardware/qcom/sdm845/gps" path="hardware/qcom/sdm845/gps" revision="a8b4026a1496dc259aba1b69260981131d925056" upstream="refs/tags/android-9.0.0_r21"/>
-  <project groups="qcom_sdm845" name="platform/hardware/qcom/sdm845/display" path="hardware/qcom/sdm845/display" revision="71223803ad4b826fd5a14ce811d26e4777d39e1d" upstream="refs/tags/android-9.0.0_r21"/>
-  <project groups="vendor,qcom_sdm845" name="platform/hardware/qcom/sdm845/data/ipacfg-mgr" path="hardware/qcom/sdm845/data/ipacfg-mgr" revision="ddcc9bcdcb09fe3e141e43d33147f7e6a6782c6a" upstream="refs/tags/android-9.0.0_r21">
-    <linkfile dest="hardware/qcom/sdm845/Android.mk" src="os_pickup.mk"/>
-    <linkfile dest="hardware/qcom/sdm845/Android.bp" src="os_pickup.bp"/>
-  </project>
-  <project groups="qcom_sdm845" name="platform/hardware/qcom/sdm845/bt" path="hardware/qcom/sdm845/bt" revision="397fb03f6c90a699a839e6693c34f921fa60053b" upstream="refs/tags/android-9.0.0_r21"/>
   <project groups="device,crosshatch" name="device/google/crosshatch-sepolicy" path="device/google/crosshatch-sepolicy" revision="1e6862a7dd46a15a527486c9db63805c7f232cbc" upstream="refs/tags/android-9.0.0_r21"/>
   <project groups="device,crosshatch" name="device/google/crosshatch" path="device/google/crosshatch" revision="725f982eec7c295ff8893a4b5c72b58e4984631e" upstream="refs/tags/android-9.0.0_r21"/>
   <project groups="pdk" name="platform/build" path="build/make" revision="9ba65f9e8828a748e78fc49f5b0ea371fcee6261" upstream="refs/tags/android-9.0.0_r21">
