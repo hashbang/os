@@ -4,14 +4,25 @@
   <remote fetch="https://gitlab.com/" name="gitlab"/>
   <remote fetch="https://github.com/" name="github"/>
   <default remote="aosp" revision="refs/tags/android-9.0.0_r21" sync-j="4"/>
-  <project groups="device,crosshatch" name="device/google/crosshatch-sepolicy" path="device/google/crosshatch-sepolicy" revision="1e6862a7dd46a15a527486c9db63805c7f232cbc" upstream="refs/tags/android-9.0.0_r21"/>
-  <project groups="device,crosshatch" name="device/google/crosshatch" path="device/google/crosshatch" revision="725f982eec7c295ff8893a4b5c72b58e4984631e" upstream="refs/tags/android-9.0.0_r21"/>
   <project groups="device" name="AndroidHardening/platform_packages_apps_Updater" path="packages/apps/Updater" remote="github" revision="3fdb96877c501b55f744d85a0430f5e3960de9e8" upstream="refs/heads/pie"/>
   <project groups="device" name="AndroidHardening/platform_external_chromium" path="external/chromium" remote="github" revision="136b1c581edbd4482ada7e62a59d7ac1d13ab481" upstream="refs/heads/pie"/>
   <project groups="device" name="stevesoltys/backup" path="packages/apps/Backup" remote="github" revision="98297537df92a437a7ff04769e5cb4a7dc05a43e" upstream="refs/heads/master"/>
   <project groups="device" name="anestisb/android-prepare-vendor" path="vendor/android-prepare-vendor" remote="github" revision="049a1fbf262197c193903dda39f21eafdb87004f" upstream="refs/heads/master"/>
   <project groups="device" name="fdroid/privileged-extension" path="packages/apps/F-DroidPrivilegedExtension" remote="gitlab" revision="94c050a2463678ef8ad431a8a7fb4e92b78e2920" upstream="refs/tags/0.2.8"/>
   <project groups="device" name="fdroid/fdroidclient" path="packages/apps/F-Droid" remote="gitlab" revision="5786708b3d524fa7cef9ef3af69ec88864787cea" upstream="refs/tags/1.4"/>
+  <project groups="qcom_wlan,pdk-qcom" name="platform/hardware/qcom/wlan" path="hardware/qcom/wlan" revision="7c079a1ae27a73cfc318692b5fa7f1c6132475ac" upstream="refs/tags/android-9.0.0_r21"/>
+  <project groups="qcom_sdm845" name="platform/hardware/qcom/sdm845/vr" path="hardware/qcom/sdm845/vr" revision="cfd3d0a370092d8d75353f604abe0e09e4d255d3" upstream="refs/tags/android-9.0.0_r21"/>
+  <project groups="qcom_sdm845" name="platform/hardware/qcom/sdm845/thermal" path="hardware/qcom/sdm845/thermal" revision="b293f81be6a96de957ec22b06bef09896876d788" upstream="refs/tags/android-9.0.0_r21"/>
+  <project groups="qcom_sdm845" name="platform/hardware/qcom/sdm845/media" path="hardware/qcom/sdm845/media" revision="51c0891761c9141998bf0f9d10257a70c8aba534" upstream="refs/tags/android-9.0.0_r21"/>
+  <project groups="qcom_sdm845" name="platform/hardware/qcom/sdm845/gps" path="hardware/qcom/sdm845/gps" revision="a8b4026a1496dc259aba1b69260981131d925056" upstream="refs/tags/android-9.0.0_r21"/>
+  <project groups="qcom_sdm845" name="platform/hardware/qcom/sdm845/display" path="hardware/qcom/sdm845/display" revision="71223803ad4b826fd5a14ce811d26e4777d39e1d" upstream="refs/tags/android-9.0.0_r21"/>
+  <project groups="vendor,qcom_sdm845" name="platform/hardware/qcom/sdm845/data/ipacfg-mgr" path="hardware/qcom/sdm845/data/ipacfg-mgr" revision="ddcc9bcdcb09fe3e141e43d33147f7e6a6782c6a" upstream="refs/tags/android-9.0.0_r21">
+    <linkfile dest="hardware/qcom/sdm845/Android.mk" src="os_pickup.mk"/>
+    <linkfile dest="hardware/qcom/sdm845/Android.bp" src="os_pickup.bp"/>
+  </project>
+  <project groups="qcom_sdm845" name="platform/hardware/qcom/sdm845/bt" path="hardware/qcom/sdm845/bt" revision="397fb03f6c90a699a839e6693c34f921fa60053b" upstream="refs/tags/android-9.0.0_r21"/>
+  <project groups="device,crosshatch" name="device/google/crosshatch-sepolicy" path="device/google/crosshatch-sepolicy" revision="1e6862a7dd46a15a527486c9db63805c7f232cbc" upstream="refs/tags/android-9.0.0_r21"/>
+  <project groups="device,crosshatch" name="device/google/crosshatch" path="device/google/crosshatch" revision="725f982eec7c295ff8893a4b5c72b58e4984631e" upstream="refs/tags/android-9.0.0_r21"/>
   <project groups="pdk" name="platform/build" path="build/make" revision="9ba65f9e8828a748e78fc49f5b0ea371fcee6261" upstream="refs/tags/android-9.0.0_r21">
     <copyfile dest="Makefile" src="core/root.mk"/>
     <linkfile dest="build/CleanSpec.mk" src="CleanSpec.mk"/>
@@ -49,6 +60,8 @@
   <project groups="device,pdk" name="device/google/accessory/demokit" path="device/google/accessory/demokit" revision="f00967ef043079dcc8fa386aab9d87cc83dadfdc" upstream="refs/tags/android-9.0.0_r21"/>
   <project groups="device,broadcom_pdk,generic_fs,pdk" name="device/google/atv" path="device/google/atv" revision="36cd183690ec6b2bb513b5659435311d1ae8da95" upstream="refs/tags/android-9.0.0_r21"/>
   <project groups="device,marlin,pdk" name="device/google/contexthub" path="device/google/contexthub" revision="3560918328316196991a07fd7d1d6a01f6bb79df" upstream="refs/tags/android-9.0.0_r21"/>
+  <project groups="device,crosshatch" name="device/google/crosshatch" path="device/google/crosshatch" revision="725f982eec7c295ff8893a4b5c72b58e4984631e" upstream="refs/tags/android-9.0.0_r21"/>
+  <project groups="device,crosshatch" name="device/google/crosshatch-sepolicy" path="device/google/crosshatch-sepolicy" revision="1e6862a7dd46a15a527486c9db63805c7f232cbc" upstream="refs/tags/android-9.0.0_r21"/>
   <project clone-depth="1" groups="device" name="device/google/cuttlefish_kernel" path="device/google/cuttlefish_kernel" revision="1539ff941603e52f32da1e423cdca2165c4d90c0" upstream="refs/tags/android-9.0.0_r21"/>
   <project clone-depth="1" groups="pdk" name="device/google/vrservices" path="device/google/vrservices" revision="354a7a2de5e4f4f2b92dd8eb9e9eeb5c1e0bc295" upstream="refs/tags/android-9.0.0_r21"/>
   <project name="device/linaro/bootloader/arm-trusted-firmware" path="device/linaro/bootloader/arm-trusted-firmware" revision="8c8350bde22706d8103ec38fe33b0fa239a62131" upstream="refs/tags/android-9.0.0_r21"/>
@@ -470,6 +483,16 @@
   <project groups="qcom_msm8x84,pdk-qcom" name="platform/hardware/qcom/msm8x84" path="hardware/qcom/msm8x84" revision="0a381fe031d90d12a8fe6d50b0233b3b20c58544" upstream="refs/tags/android-9.0.0_r21"/>
   <project groups="wahoo" name="platform/hardware/qcom/neuralnetworks/hvxservice" path="hardware/qcom/neuralnetworks/hvxservice" revision="2b42b834e197f94127a8f175315b2aec98ff4fc5" upstream="refs/tags/android-9.0.0_r21"/>
   <project groups="qcom,pdk-qcom" name="platform/hardware/qcom/power" path="hardware/qcom/power" revision="be869ca6eec1a87bdb57e76013f40eaeb83e766b" upstream="refs/tags/android-9.0.0_r21"/>
+  <project groups="qcom_sdm845" name="platform/hardware/qcom/sdm845/bt" path="hardware/qcom/sdm845/bt" revision="397fb03f6c90a699a839e6693c34f921fa60053b" upstream="refs/tags/android-9.0.0_r21"/>
+  <project groups="vendor,qcom_sdm845" name="platform/hardware/qcom/sdm845/data/ipacfg-mgr" path="hardware/qcom/sdm845/data/ipacfg-mgr" revision="ddcc9bcdcb09fe3e141e43d33147f7e6a6782c6a" upstream="refs/tags/android-9.0.0_r21">
+    <linkfile dest="hardware/qcom/sdm845/Android.mk" src="os_pickup.mk"/>
+    <linkfile dest="hardware/qcom/sdm845/Android.bp" src="os_pickup.bp"/>
+  </project>
+  <project groups="qcom_sdm845" name="platform/hardware/qcom/sdm845/display" path="hardware/qcom/sdm845/display" revision="71223803ad4b826fd5a14ce811d26e4777d39e1d" upstream="refs/tags/android-9.0.0_r21"/>
+  <project groups="qcom_sdm845" name="platform/hardware/qcom/sdm845/gps" path="hardware/qcom/sdm845/gps" revision="a8b4026a1496dc259aba1b69260981131d925056" upstream="refs/tags/android-9.0.0_r21"/>
+  <project groups="qcom_sdm845" name="platform/hardware/qcom/sdm845/media" path="hardware/qcom/sdm845/media" revision="51c0891761c9141998bf0f9d10257a70c8aba534" upstream="refs/tags/android-9.0.0_r21"/>
+  <project groups="qcom_sdm845" name="platform/hardware/qcom/sdm845/thermal" path="hardware/qcom/sdm845/thermal" revision="b293f81be6a96de957ec22b06bef09896876d788" upstream="refs/tags/android-9.0.0_r21"/>
+  <project groups="qcom_sdm845" name="platform/hardware/qcom/sdm845/vr" path="hardware/qcom/sdm845/vr" revision="cfd3d0a370092d8d75353f604abe0e09e4d255d3" upstream="refs/tags/android-9.0.0_r21"/>
   <project groups="qcom_wlan,pdk-qcom" name="platform/hardware/qcom/wlan" path="hardware/qcom/wlan" revision="7c079a1ae27a73cfc318692b5fa7f1c6132475ac" upstream="refs/tags/android-9.0.0_r21"/>
   <project groups="pdk" name="platform/hardware/ril" path="hardware/ril" revision="3e27cdd29178983e971ff08fd9181273c5f2ad60" upstream="refs/tags/android-9.0.0_r21"/>
   <project groups="vts,pdk" name="kernel/configs" path="kernel/configs" revision="73d676f79859506c40b4919b8be81ae8035e8679" upstream="refs/tags/android-9.0.0_r21"/>

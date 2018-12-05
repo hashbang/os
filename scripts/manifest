@@ -3,7 +3,7 @@
 from tempfile import mkdtemp
 from git import Git, Repo, cmd
 from xml.etree import ElementTree
-from xml.etree.ElementTree import Element
+from xml.etree.ElementTree import Element, SubElement
 from xml.dom import minidom
 from sys import argv
 from os import environ
@@ -22,6 +22,57 @@ platform_extra_remotes = [
 ]
 platform_extra_projects = [
     {
+        "name": "device/google/crosshatch",
+        "path": "device/google/crosshatch",
+        "groups": "device,crosshatch",
+    },{
+        "name": "device/google/crosshatch-sepolicy",
+        "path": "device/google/crosshatch-sepolicy",
+        "groups": "device,crosshatch",
+    },{
+	"name": "platform/hardware/qcom/sdm845/bt",
+ 	"path": "hardware/qcom/sdm845/bt",
+	"groups": "qcom_sdm845",
+    },{
+ 	"name": "platform/hardware/qcom/sdm845/data/ipacfg-mgr",
+	"path": "hardware/qcom/sdm845/data/ipacfg-mgr",
+	"groups":"vendor,qcom_sdm845",
+	"children": [
+            {
+                "type": "linkfile",
+                "dest":"hardware/qcom/sdm845/Android.mk",
+                "src":"os_pickup.mk"
+            }, {
+                "type": "linkfile",
+                "dest":"hardware/qcom/sdm845/Android.bp",
+                "src":"os_pickup.bp"
+            }
+	]
+    },{
+	"name": "platform/hardware/qcom/sdm845/display",
+	"path": "hardware/qcom/sdm845/display",
+	"groups": "qcom_sdm845",
+    },{
+	"name": "platform/hardware/qcom/sdm845/gps",
+	"path": "hardware/qcom/sdm845/gps",
+	"groups": "qcom_sdm845",
+    },{
+        "name": "platform/hardware/qcom/sdm845/media",
+        "path": "hardware/qcom/sdm845/media",
+        "groups": "qcom_sdm845",
+    },{
+	"name": "platform/hardware/qcom/sdm845/thermal",
+	"path": "hardware/qcom/sdm845/thermal",
+	"groups": "qcom_sdm845",
+    },{
+	"name": "platform/hardware/qcom/sdm845/vr",
+	"path": "hardware/qcom/sdm845/vr",
+	"groups":"qcom_sdm845",
+    },{
+	"name": "platform/hardware/qcom/wlan",
+	"path": "hardware/qcom/wlan",
+	"groups":"qcom_wlan,pdk-qcom",
+    },{
         "name": "fdroid/fdroidclient",
         "path": "packages/apps/F-Droid",
         "groups": "device",
@@ -57,15 +108,7 @@ platform_extra_projects = [
         "groups": "device",
         "remote": "github",
         "revision": "refs/heads/pie"
-    },{
-        "name": "device/google/crosshatch",
-        "path": "device/google/crosshatch",
-        "groups": "device,crosshatch",
-    },{
-        "name": "device/google/crosshatch-sepolicy",
-        "path": "device/google/crosshatch-sepolicy",
-        "groups": "device,crosshatch",
-    }
+    },
 ]
 platform_remove_paths = [
     "external/chromium-webview"
@@ -147,7 +190,17 @@ class AndroidManifest:
             self.manifest.insert(1,element)
         for project in self.extra_projects:
             element = Element("project")
-            element.attrib = project
+            for key, value in project.items():
+                if isinstance(value, list) and key == 'children':
+                    for child in value:
+                        SubElement(
+                            element,
+                            child['type'],
+                            dest=child['dest'],
+                            src=child['src'],
+                        )
+                else:
+                    element.set(key, value)
             self.manifest.insert(4,element)
 
     def _remove(self):
