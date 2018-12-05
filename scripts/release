@@ -80,7 +80,7 @@ EOF
 
 echo "Copy avb key and scripts into factory zip"
 cd "${release_dir}"
-factory_zip="$(ls ${device}-${version}-factory-*.zip)"
+factory_zip="$(ls "${device}"-"${version}"-factory-*.zip)"
 factory_tmp="${device}-${version}-factory.zip"
 factory_dir="${device}-${version}"
 unzip "${factory_zip}"
@@ -92,11 +92,11 @@ rm "${factory_dir}/flash-base.sh"
 mkdir -p "${factory_dir}/build/patches" "${factory_dir}/build/manifests"
 {
 	echo "DEVICE=${device}";
-	cat "${config_dir}/configs/global.env";
-	cat "${config_dir}/configs/${device}.env";
+	cat "${config_dir}/config/global.env";
+	cat "${config_dir}/config/${device}.env";
 } > "${factory_dir}/build/config.env"
-cp -R "${config_dir}/patches" "${factory_dir}/build/patches"
-cp "${config_dir}/manifests/base.xml" "${factory_dir}/build/manifests"
+cp -R "${config_dir}/patches/." "${factory_dir}/build/patches/"
+cp "${config_dir}/manifests/base.xml" "${factory_dir}/build/manifests/"
 cp "${config_dir}/manifests/${device}/kernel.xml" \
 	"${factory_dir}/build/manifests/"
 cat <<-EOF > "${factory_dir}/flash-all.sh"
