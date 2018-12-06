@@ -34,6 +34,7 @@ cores=$(nproc)
 
 # Sync/reset repos
 rm -rf "$vendor_dest" "$chromium_dest" "$kernel_dest"
+mkdir -p "${base_dir}"
 cd "${base_dir}"
 repo init -u "${config_dir}" -m manifests/base.xml
 repo sync -c --no-tags --no-clone-bundle --jobs "${cores}"
