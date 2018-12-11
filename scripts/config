@@ -1,0 +1,287 @@
+#!/usr/bin/python3
+
+from tempfile import mkdtemp
+from git import Git, Repo, cmd
+from xml.etree import ElementTree
+from xml.etree.ElementTree import Element
+from xml.dom import minidom
+from sys import argv
+from os import environ
+from html.parser import HTMLParser
+from urllib.request import urlopen
+import re
+import json
+import re
+
+config = {
+    "version":"9",
+    "images": {
+        "url": "https://developers.google.com/android/images"
+    },
+    "kernel": {
+        "url": "https://android.googlesource.com/kernel/manifest",
+        "refs": {
+            "crosshatch": "android-msm-bluecross",
+            "blueline": "android-msm-bluecross",
+            "taimen": "android-msm-taimen",
+            "walleye": "android-msm-walleye",
+            "marlin": "android-msm-marlin",
+            "sailfish": "android-msm-sailfish",
+        },
+    },
+    "platform": {
+        "ref_url": "https://android.googlesource.com/device/google/crosshatch",
+        "url": "https://android.googlesource.com/platform/manifest",
+        "extra_remotes": [
+            { "name": "github" ,"fetch": "https://github.com/" },
+            { "name": "gitlab" ,"fetch": "https://gitlab.com/" },
+        ],
+        "extra_projects": [
+            {
+                "name": "fdroid/fdroidclient",
+                "groups": "device",
+                "path": "packages/apps/F-Droid",
+                "remote": "gitlab",
+                "revision": "refs/tags/1.4"
+            },{
+                "name": "fdroid/privileged-extension",
+                "groups": "device",
+                "path": "packages/apps/F-DroidPrivilegedExtension",
+                "remote": "gitlab",
+                "revision": "refs/tags/0.2.8"
+            },{
+                "name": "anestisb/android-prepare-vendor",
+                "groups": "device",
+                "path": "vendor/android-prepare-vendor",
+                "remote": "github",
+                "revision": "refs/heads/master"
+            },{
+                "name": "stevesoltys/backup",
+                "groups": "device",
+                "path": "packages/apps/Backup",
+                "remote": "github",
+                "revision": "refs/heads/master"
+            },{
+                "name": "AndroidHardening/platform_external_chromium",
+                "groups": "device",
+                "path": "external/chromium",
+                "remote": "github",
+                "revision": "refs/heads/master"
+            },
+        ],
+        "remove_paths": [
+            "external/chromium-webview"
+            "packages/apps/Calendar",
+            "packages/apps/QuickSearchBox",
+            "packages/apps/Browser2",
+            "device/generic/car",
+            "device/generic/goldfish",
+            "device/generic/goldfish-opengl",
+            "device/google/cuttlefish",
+            "device/google/cuttlefish-kernel",
+            "device/google/cuttlefish-sepolicy",
+            "device/google/cuttlefish_common",
+            "device/google/muskie",
+            "device/google/wahoo",
+            "device/google/wahoo-kernel",
+            "device/generic/mips",
+            "device/generic/mips64",
+            "device/generic/mini-emulator-arm64",
+            "device/generic/mini-emulator-armv7-a-neon",
+            "device/generic/mini-emulator-mips",
+            "device/generic/mini-emulator-mips64",
+            "device/generic/mini-emulator-x86",
+            "device/generic/mini-emulator-x86_64",
+        ],
+        "remove_groups": ['darwin']
+    }
+}
+
+class AndroidImagesParser(HTMLParser):
+
+    def __init__(self, config):
+        HTMLParser.__init__(self)
+        self.devices = self.config['devices']
+        self.version = self.config['version']
+        self.version_open = False
+        self.hash_pattern = re.compile(r'\b[0-9a-f]{64}\b')
+        self.images = {}
+        self.image = {}
+        self.build = False
+        self.variant = False
+        self.device = False
+
+    def handle_starttag(self, tag, attrs):
+        if tag == 'tr':
+            for attr in attrs:
+                if attr[0] == 'id':
+                    for device in self.devices:
+                        if attr[1].startswith(device):
+                            self.image = {}
+                            self.device = device
+        if tag == 'a' \
+        and self.version_open == True \
+        and self.device:
+            for attr in attrs:
+                if attr[0] == 'href':
+                    self.image['url'] = attr[1]
+
+    def handle_data(self, data):
+        if self.device:
+            if len(data) > 6:
+                if self.hash_pattern.match(data) \
+                and self.version_open == True:
+                    self.image['hash'] = data
+                elif data.split(' ')[0].startswith("%s." % self.version):
+                    self.version_open = True
+                    tokens = data.split(" ")
+                    self.build = tokens[1].replace("(","").replace(",", "")
+                    self.image['version'] = tokens[0]
+                    self.image['date'] = \
+                        " ".join(tokens[2:4]).replace(")","").replace(",","")
+                    variant = tokens[4:5]
+                    if variant:
+                        self.variant = variant[0].replace(")","").lower()
+                    else:
+                        self.variant = "global"
+
+    def handle_endtag(self, tag):
+        if tag == 'tr' and self.device and self.variant:
+            if self.version_open == True:
+                self.images.setdefault(
+                    self.device,{}
+                ).setdefault(
+                    self.variant,{}
+                )[self.build] = self.image
+                self.version_open = False
+            self.device = False
+            self.build = False
+            self.variant = False
+
+
+    def print(self):
+        html = urlopen(self.config['images'][url]).read()
+        parser.feed(str(html))
+        manifest = json.dumps(parser.images, indent=4)
+
+
+class AndroidManifest:
+
+    def __init__(self, config):
+        self.default_fetch="https://android.googlesource.com"
+        self.url = url
+        self.exp = exp
+        self.extra_remotes = extra_remotes
+        self.extra_projects = extra_projects
+        self.remove_paths = remove_paths
+        self.remove_groups = remove_groups
+        self.ref_url = ref_url or url
+        self._fetch()
+        self._remove()
+        self._extend()
+        self._set_remotes()
+        self._set_default_remote()
+        self._set_default_revision()
+        self._lock()
+
+    def _fetch(self):
+        ref_repo = Repo.clone_from(self.ref_url, mkdtemp())
+        ref = [
+            str(ref) for ref in
+            sorted(ref_repo.refs, key=lambda t: t.commit.committed_datetime)
+            if re.match(self.exp, str(ref))
+        ][-1]
+        manifest_repo = Repo.clone_from(self.url, mkdtemp())
+        manifest_repo.head.reference = manifest_repo.commit(ref)
+        string = manifest_repo.git.show('HEAD:default.xml')
+        self.manifest = ElementTree.fromstring(string)
+
+    def _extend(self):
+        for remote in self.extra_remotes:
+            element = Element("remote")
+            element.attrib = remote
+            element.tail = "\n"
+            self.manifest.insert(1,element)
+        for project in self.extra_projects:
+            element = Element("project")
+            element.attrib = project
+            self.manifest.insert(4,element)
+
+    def _remove(self):
+        projects=self.manifest.findall(".//project")
+        for project in projects:
+            if 'groups' in project.attrib:
+                groups = project.attrib['groups'].split(',')
+                if any(i in groups for i in self.remove_groups):
+                    self.manifest.remove(project)
+            if 'path' in project.attrib:
+                if project.attrib['path'] in self.remove_paths:
+                    self.manifest.remove(project)
+
+    def _set_remotes(self):
+        self.remotes={}
+        remote_nodes = self.manifest.findall(".//remote")
+        for remote_node in remote_nodes:
+            if 'fetch' in remote_node.attrib:
+                if remote_node.attrib['fetch'] == '..':
+                    remote_node.attrib['fetch'] = self.default_fetch
+            if 'review' in remote_node.attrib:
+                self.remotes[remote_node.attrib["name"]] = \
+                    remote_node.attrib["review"]
+            else:
+                self.remotes[remote_node.attrib["name"]] = \
+                    remote_node.attrib["fetch"]
+
+    def _set_default_revision(self):
+        self.default_revision = \
+            revision=self.manifest.findall(".//default")[0].attrib['revision']
+
+    def _set_default_remote(self):
+        default_remote_name = \
+            self.manifest.findall(".//default")[0].attrib['remote']
+        self.default_remote = self.remotes[default_remote_name]
+
+    def _lock(self):
+        projects=self.manifest.findall(".//project")
+        for project in projects:
+            if 'remote' in project.attrib:
+                remote = self.remotes[project.attrib['remote']]
+            else:
+                remote = self.default_remote
+            if 'revision' in project.attrib:
+                revision = project.attrib['revision']
+            else:
+                revision = self.default_revision
+            if 'refs' not in revision:
+                revision = "refs/heads/%s" % revision
+            project_repo_url="%s%s.git" % (remote, project.attrib['name'])
+            remote_refs = self._lsremote(project_repo_url)
+            project.attrib['upstream'] = revision
+            project.attrib['revision'] = remote_refs[revision]
+
+    def _lsremote(self, url):
+        remote_refs = {}
+        g = cmd.Git()
+        for ref in g.ls_remote(url).split('\n'):
+            hash_ref_list = ref.split('\t')
+            remote_refs[hash_ref_list[1]] = hash_ref_list[0]
+        return remote_refs
+
+    def pretty_print(self):
+        rough_string = ElementTree.tostring(self.manifest, 'utf-8')
+        reparsed = minidom.parseString(rough_string)
+        return reparsed.toprettyxml(indent="  ", newl="")
+
+
+if __name__ == "__main__":
+
+    device=argv[1]
+    kind=argv[1]
+
+    if kind == 'kernel' or kind == 'platform':
+        manifest = AndroidManifest(device, config[kind]).pretty_print()
+        if manifest:
+            print(manifest)
+
+    elif kind == 'images':
+        AndroidImagesParser(config).print()

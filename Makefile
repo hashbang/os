@@ -84,23 +84,31 @@ install: image
 	  --env-file=config/$(device).env \
 	  hashbang/os flash
 
-manifest: image
+config: image
 	docker run \
 	  -it \
 	  -v android:/home/build \
 	  -e DEVICE=$(device) \
 	  --env-file config/global.env \
 	  --env-file=config/$(device).env \
-	  hashbang/os bash -c "manifest kernel | xmllint --format -" \
-	> manifests/$(device)/kernel.xml
+	  hashbang/os bash -c "config $(device) kernel | xmllint --format -" \
+	> config/$(device)-kernel.xml
 	docker run \
 	  -it \
 	  -v android:/home/build \
 	  -e DEVICE=$(device) \
 	  --env-file config/global.env \
 	  --env-file=config/$(device).env \
-	  hashbang/os bash -c "manifest platform | xmllint --format -" \
-	> manifests/base.xml
+	  hashbang/os bash -c "config $(device) platform | xmllint --format -" \
+	> config/base.xml
+	docker run \
+	  -it \
+	  -v android:/home/build \
+	  -e DEVICE=$(device) \
+	  --env-file config/global.env \
+	  --env-file=config/$(device).env \
+	  hashbang/os bash -c "config $(device) images" \
+	> config/images.jsonl
 
 clean: image
 	docker run \
