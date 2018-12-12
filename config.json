@@ -1,0 +1,93 @@
+{
+    "version": "9",
+    "type": "release",
+    "variant": "user",
+    "datetime": "1543792453",
+    "images": {
+        "url": "https://developers.google.com/android/images"
+    },
+    "apps":{
+      "chromium":{
+        "version": "70.0.3538.110",
+        "src_ref": "ec3092c8d21e20e39698f5272c8a7f71c3ee88a2",
+        "depot_tools_ref": "61ea30737c65fb3a6ad7096f447465e58f8b915c"
+      }
+    },
+    "kernel": {
+        "url": "https://android.googlesource.com/kernel/manifest",
+        "refs": {
+            "crosshatch": "android-msm-bluecross",
+            "blueline": "android-msm-bluecross",
+            "taimen": "android-msm-taimen",
+            "walleye": "android-msm-walleye",
+            "marlin": "android-msm-marlin",
+            "sailfish": "android-msm-sailfish"
+        }
+    },
+    "platform": {
+        "ref_url": "https://android.googlesource.com/device/google/crosshatch",
+        "url": "https://android.googlesource.com/platform/manifest",
+        "extra_remotes": [
+            { "name": "github" ,"fetch": "https://github.com/" },
+            { "name": "gitlab" ,"fetch": "https://gitlab.com/" }
+        ],
+        "extra_projects": [
+            {
+                "name": "fdroid/fdroidclient",
+                "groups": "device",
+                "path": "packages/apps/F-Droid",
+                "remote": "gitlab",
+                "revision": "refs/tags/1.4"
+            },{
+                "name": "fdroid/privileged-extension",
+                "groups": "device",
+                "path": "packages/apps/F-DroidPrivilegedExtension",
+                "remote": "gitlab",
+                "revision": "refs/tags/0.2.8"
+            },{
+                "name": "anestisb/android-prepare-vendor",
+                "groups": "device",
+                "path": "vendor/android-prepare-vendor",
+                "remote": "github",
+                "revision": "refs/heads/master"
+            },{
+                "name": "stevesoltys/backup",
+                "groups": "device",
+                "path": "packages/apps/Backup",
+                "remote": "github",
+                "revision": "refs/heads/master"
+            },{
+                "name": "AndroidHardening/platform_external_chromium",
+                "groups": "device",
+                "path": "external/chromium",
+                "remote": "github",
+                "revision": "refs/heads/master"
+            }
+        ],
+        "remove_paths": [
+            "external/chromium-webview",
+            "packages/apps/Calendar",
+            "packages/apps/QuickSearchBox",
+            "packages/apps/Browser2",
+            "device/generic/car",
+            "device/generic/goldfish",
+            "device/generic/goldfish-opengl",
+            "device/google/cuttlefish",
+            "device/google/cuttlefish-kernel",
+            "device/google/cuttlefish-sepolicy",
+            "device/google/cuttlefish_common",
+            "device/google/muskie",
+            "device/google/wahoo",
+            "device/google/wahoo-kernel",
+            "device/generic/mips",
+            "device/generic/mips64",
+            "device/generic/mini-emulator-arm64",
+            "device/generic/mini-emulator-armv7-a-neon",
+            "device/generic/mini-emulator-mips",
+            "device/generic/mini-emulator-mips64",
+            "device/generic/mini-emulator-x86",
+            "device/generic/mini-emulator-x86_64"
+        ],
+        "remove_groups": ["darwin"]
+    }
+}

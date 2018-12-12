@@ -13,95 +13,12 @@ import re
 import json
 import re
 
-config = {
-    "version":"9",
-    "images": {
-        "url": "https://developers.google.com/android/images"
-    },
-    "kernel": {
-        "url": "https://android.googlesource.com/kernel/manifest",
-        "refs": {
-            "crosshatch": "android-msm-bluecross",
-            "blueline": "android-msm-bluecross",
-            "taimen": "android-msm-taimen",
-            "walleye": "android-msm-walleye",
-            "marlin": "android-msm-marlin",
-            "sailfish": "android-msm-sailfish",
-        },
-    },
-    "platform": {
-        "ref_url": "https://android.googlesource.com/device/google/crosshatch",
-        "url": "https://android.googlesource.com/platform/manifest",
-        "extra_remotes": [
-            { "name": "github" ,"fetch": "https://github.com/" },
-            { "name": "gitlab" ,"fetch": "https://gitlab.com/" },
-        ],
-        "extra_projects": [
-            {
-                "name": "fdroid/fdroidclient",
-                "groups": "device",
-                "path": "packages/apps/F-Droid",
-                "remote": "gitlab",
-                "revision": "refs/tags/1.4"
-            },{
-                "name": "fdroid/privileged-extension",
-                "groups": "device",
-                "path": "packages/apps/F-DroidPrivilegedExtension",
-                "remote": "gitlab",
-                "revision": "refs/tags/0.2.8"
-            },{
-                "name": "anestisb/android-prepare-vendor",
-                "groups": "device",
-                "path": "vendor/android-prepare-vendor",
-                "remote": "github",
-                "revision": "refs/heads/master"
-            },{
-                "name": "stevesoltys/backup",
-                "groups": "device",
-                "path": "packages/apps/Backup",
-                "remote": "github",
-                "revision": "refs/heads/master"
-            },{
-                "name": "AndroidHardening/platform_external_chromium",
-                "groups": "device",
-                "path": "external/chromium",
-                "remote": "github",
-                "revision": "refs/heads/master"
-            },
-        ],
-        "remove_paths": [
-            "external/chromium-webview"
-            "packages/apps/Calendar",
-            "packages/apps/QuickSearchBox",
-            "packages/apps/Browser2",
-            "device/generic/car",
-            "device/generic/goldfish",
-            "device/generic/goldfish-opengl",
-            "device/google/cuttlefish",
-            "device/google/cuttlefish-kernel",
-            "device/google/cuttlefish-sepolicy",
-            "device/google/cuttlefish_common",
-            "device/google/muskie",
-            "device/google/wahoo",
-            "device/google/wahoo-kernel",
-            "device/generic/mips",
-            "device/generic/mips64",
-            "device/generic/mini-emulator-arm64",
-            "device/generic/mini-emulator-armv7-a-neon",
-            "device/generic/mini-emulator-mips",
-            "device/generic/mini-emulator-mips64",
-            "device/generic/mini-emulator-x86",
-            "device/generic/mini-emulator-x86_64",
-        ],
-        "remove_groups": ['darwin']
-    }
-}
-
 class AndroidImagesParser(HTMLParser):
 
     def __init__(self, config):
         HTMLParser.__init__(self)
-        self.devices = self.config['devices']
+        self.config = config
+        self.devices = self.config['kernel']['refs'].keys()
         self.version = self.config['version']
         self.version_open = False
         self.hash_pattern = re.compile(r'\b[0-9a-f]{64}\b')
@@ -157,11 +74,6 @@ class AndroidImagesParser(HTMLParser):
             self.device = False
             self.build = False
             self.variant = False
-
-
-    def print(self):
-        html = urlopen(self.config['images'][url]).read()
-        parser.feed(str(html))
         manifest = json.dumps(parser.images, indent=4)
 
 
@@ -272,16 +184,22 @@ class AndroidManifest:
         reparsed = minidom.parseString(rough_string)
         return reparsed.toprettyxml(indent="  ", newl="")
 
-
 if __name__ == "__main__":
 
-    device=argv[1]
     kind=argv[1]
+    if len(argv) > 2:
+        device=argv[2];
+    with open('config.json', encoding='utf-8') as data_file:
+        config = json.loads(data_file.read())
 
     if kind == 'kernel' or kind == 'platform':
-        manifest = AndroidManifest(device, config[kind]).pretty_print()
+        manifest = AndroidManifest(config).pretty_print()
         if manifest:
             print(manifest)
 
     elif kind == 'images':
-        AndroidImagesParser(config).print()
+        html = urlopen(config['images']['url']).read()
+        parser = AndroidImagesParser(config)
+        parser.images = {}
+        parser.feed(str(html))
+        print(json.dumps(parser.images,indent=4))
