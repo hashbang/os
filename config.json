@@ -6,8 +6,14 @@
     "platform": {
         "url": "https://android.googlesource.com/platform/manifest",
         "extra_remotes": [
-            { "name": "github" ,"fetch": "https://github.com/" },
-            { "name": "gitlab" ,"fetch": "https://gitlab.com/" }
+            {
+                "name": "github",
+                "fetch": "https://github.com/"
+            },
+            {
+                "name": "gitlab",
+                "fetch": "https://gitlab.com/"
+            }
         ],
         "extra_projects": [
             {
@@ -16,25 +22,29 @@
                 "path": "packages/apps/F-Droid",
                 "remote": "gitlab",
                 "revision": "refs/tags/1.4"
-            },{
+            },
+            {
                 "name": "fdroid/privileged-extension",
                 "groups": "device",
                 "path": "packages/apps/F-DroidPrivilegedExtension",
                 "remote": "gitlab",
                 "revision": "refs/tags/0.2.8"
-            },{
+            },
+            {
                 "name": "anestisb/android-prepare-vendor",
                 "groups": "device",
                 "path": "vendor/android-prepare-vendor",
                 "remote": "github",
                 "revision": "refs/heads/master"
-            },{
+            },
+            {
                 "name": "stevesoltys/backup",
                 "groups": "device",
                 "path": "packages/apps/Backup",
                 "remote": "github",
                 "revision": "refs/heads/master"
-            },{
+            },
+            {
                 "name": "AndroidHardening/platform_external_chromium",
                 "groups": "device",
                 "path": "external/chromium",
@@ -66,14 +76,16 @@
             "device/generic/mini-emulator-x86",
             "device/generic/mini-emulator-x86_64"
         ],
-        "remove_groups": ["darwin"]
+        "remove_groups": [
+            "darwin"
+        ]
     },
-    "apps":{
-      "chromium":{
-        "version": "70.0.3538.110",
-        "src_ref": "ec3092c8d21e20e39698f5272c8a7f71c3ee88a2",
-        "depot_tools_ref": "61ea30737c65fb3a6ad7096f447465e58f8b915c"
-      }
+    "apps": {
+        "chromium": {
+            "version": "70.0.3538.110",
+            "src_ref": "ec3092c8d21e20e39698f5272c8a7f71c3ee88a2",
+            "depot_tools_ref": "61ea30737c65fb3a6ad7096f447465e58f8b915c"
+        }
     },
     "devices": {
         "crosshatch": {
