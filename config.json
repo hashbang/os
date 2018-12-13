@@ -91,7 +91,10 @@
         "crosshatch": {
             "global": {
                 "build": "PQ1A.181205.006",
-                "factory_hash": "96b235048c53d3b37039c092889f1b8a749e9a407fea63659e0b3b90bd91c50e"
+                "factory_hash": "96b235048c53d3b37039c092889f1b8a749e9a407fea63659e0b3b90bd91c50e",
+                "kernel_name": "bluecross",
+                "kernel_ref": "origin/android-msm-bluecross-4.9-pie-qpr1",
+                "kernel_repo": "kernel/manifest"
             },
             "verizon": {
                 "build": "PD1A.180720.031",
@@ -105,7 +108,10 @@
         "blueline": {
             "global": {
                 "build": "PQ1A.181205.006",
-                "factory_hash": "af1829a69d8c041729725a2dbd7033f12e4ef346f41353b8416bc25f6609e5cc"
+                "factory_hash": "af1829a69d8c041729725a2dbd7033f12e4ef346f41353b8416bc25f6609e5cc",
+                "kernel_name": "bluecross",
+                "kernel_ref": "origin/android-msm-bluecross-4.9-pie-qpr1",
+                "kernel_repo": "kernel/manifest"
             },
             "verizon": {
                 "build": "PD1A.180720.031",
@@ -119,7 +125,10 @@
         "taimen": {
             "global": {
                 "build": "PQ1A.181205.002",
-                "factory_hash": "4d01cf614a511bfdf84928eb976a04e5f203741b5ea200db3024557244a6bbbb"
+                "factory_hash": "4d01cf614a511bfdf84928eb976a04e5f203741b5ea200db3024557244a6bbbb",
+                "kernel_name": "wahoo",
+                "kernel_ref": "android-msm-wahoo-4.4-pie-qpr1",
+                "kernel_repo": "kernel/msm"
             },
             "telstra": {
                 "build": "PPR1.180610.011",
@@ -129,7 +138,10 @@
         "walleye": {
             "global": {
                 "build": "PQ1A.181205.002",
-                "factory_hash": "fb27eb5ac91d339f5cc426fdd8202db7579d0ee72b7b2674d67d4449c342066d"
+                "factory_hash": "fb27eb5ac91d339f5cc426fdd8202db7579d0ee72b7b2674d67d4449c342066d",
+                "kernel_name": "wahoo",
+                "kernel_ref": "android-msm-wahoo-4.4-pie-qpr1",
+                "kernel_repo": "kernel/msm"
             },
             "telstra": {
                 "build": "PPR1.180610.011",
@@ -139,7 +151,10 @@
         "marlin": {
             "global": {
                 "build": "PQ1A.181205.002.A1",
-                "factory_hash": "9a129f3e1bed577fd87078042384648ce88d541d0d76ced3bc08bd78626adadd"
+                "factory_hash": "9a129f3e1bed577fd87078042384648ce88d541d0d76ced3bc08bd78626adadd",
+                "kernel_name": "marlin",
+                "kernel_ref": "android-msm-marlin-3.18-pie-qpr1-s2",
+                "kernel_repo": "kernel/msm"
             },
             "telus": {
                 "build": "PPR1.181005.003.A1",
@@ -153,7 +168,10 @@
         "sailfish": {
             "global": {
                 "build": "PQ1A.181205.002.A1",
-                "factory_hash": "6a61ff636875d6dd382ffb9ce3103ebc85b55754c7926179e03a8525833144ee"
+                "factory_hash": "6a61ff636875d6dd382ffb9ce3103ebc85b55754c7926179e03a8525833144ee",
+                "kernel_name": "marlin",
+                "kernel_ref": "android-msm-marlin-3.18-pie-qpr1-s2",
+                "kernel_repo": "kernel/msm"
             },
             "telus": {
                 "build": "PPR1.181005.003.A1",
