@@ -7,20 +7,28 @@ from xml.etree.ElementTree import Element
 from xml.dom import minidom
 from sys import argv
 from os import environ
+from os.path import isfile
 import re
 import json
 
 class AndroidManifest:
 
-    def __init__(self, config):
+    def __init__(
+        self,
+        repo,
+        ref,
+        extra_remotes=[],
+        extra_projects=[],
+        remove_paths=[],
+        remove_groups=[]
+    ):
         self.default_fetch="https://android.googlesource.com"
-        self.url = url
-        self.exp = exp
+        self.repo = repo
+        self.ref = ref
         self.extra_remotes = extra_remotes
         self.extra_projects = extra_projects
         self.remove_paths = remove_paths
         self.remove_groups = remove_groups
-        self.ref_url = ref_url or url
         self._fetch()
         self._remove()
         self._extend()
@@ -30,14 +38,11 @@ class AndroidManifest:
         self._lock()
 
     def _fetch(self):
-        ref_repo = Repo.clone_from(self.ref_url, mkdtemp())
-        ref = [
-            str(ref) for ref in
-            sorted(ref_repo.refs, key=lambda t: t.commit.committed_datetime)
-            if re.match(self.exp, str(ref))
-        ][-1]
-        manifest_repo = Repo.clone_from(self.url, mkdtemp())
-        manifest_repo.head.reference = manifest_repo.commit(ref)
+        manifest_repo = Repo.clone_from(
+            "%s/%s" % (self.default_fetch, self.repo),
+            mkdtemp()
+        )
+        manifest_repo.head.reference = manifest_repo.commit(self.ref)
         string = manifest_repo.git.show('HEAD:default.xml')
         self.manifest = ElementTree.fromstring(string)
 
@@ -121,19 +126,30 @@ if __name__ == "__main__":
 
     if 'CONFIG_FILE' in environ:
         config_file=environ['CONFIG_FILE']
-    elif os.path.isfile('/opt/android/config.json'):
+    elif isfile('/opt/android/config.json'):
         config_file="/opt/android/config.json"
-    elif os.path.isfile('./config.json'):
+    elif isfile('./config.json'):
         config_file="./config.json"
     with open('config.json', encoding='utf-8') as data_file:
         config = json.loads(data_file.read())
 
-    if len(argv) < 0:
-        sys.exit("Please provide device name as first argument")
+    if len(argv) < 1:
+        sys.exit("Please provide 'platform' or 'kernel' as first argument")
+
+    if len(argv) < 2:
+        sys.exit("Please provide valid device as second argument")
 
     kind=argv[1]
+    device=argv[2]
 
-    if kind == 'kernel' or kind == 'platform':
-        manifest = AndroidManifest(config).pretty_print()
-        if manifest:
-            print(manifest)
+    if kind == 'kernel':
+        repo = config['devices'][device]['global']['kernel_repo']
+        ref = config['devices'][device]['global']['kernel_ref']
+
+    if kind == 'platform':
+        repo = config['platform']['url']
+        ref = config['platform']['ref']
+
+    manifest = AndroidManifest(repo, ref).pretty_print()
+    if manifest:
+        print(manifest)
