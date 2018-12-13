@@ -12,8 +12,6 @@ build: image
 	  -it \
 	  -v android:/home/build \
 	  -e DEVICE=$(device) \
-	  --env-file config/global.env \
-	  --env-file config/$(device).env \
 	  hashbang/os build
 
 kernel: image
@@ -21,8 +19,6 @@ kernel: image
 	  -it \
 	  -v android:/home/build \
 	  -e DEVICE=$(device) \
-	  --env-file config/global.env \
-	  --env-file config/$(device).env \
 	  hashbang/os build-kernel
 
 vendor: image
@@ -30,15 +26,12 @@ vendor: image
 	  -it \
 	  -v android:/home/build \
 	  -e DEVICE=$(device) \
-	  --env-file config/global.env \
-	  --env-file config/$(device).env \
 	  hashbang/os build-vendor
 
 chromium: image
 	docker run \
 	  -it \
 	  -v android:/home/build \
-	  --env-file config/global.env \
 	  hashbang/os build-chromium
 
 release: image
@@ -47,8 +40,6 @@ release: image
 	  -v android:/home/build \
 	  -v $(PWD)/release:/home/build/release \
 	  -e DEVICE=$(device) \
-	  --env-file config/global.env \
-	  --env-file config/$(device).env \
 	  hashbang/os release
 
 keys: image
@@ -56,15 +47,12 @@ keys: image
 	  -it \
 	  -v android:/home/build \
 	  -e DEVICE=$(device) \
-	  --env-file config/global.env \
-	  --env-file config/$(device).env \
 	  hashbang/os keys
 
 shell: image
 	docker run \
 	  -it \
 	  -v android:/home/build \
-	  --env-file config/global.env \
 	  -v $(PWD)/release:/home/build/release \
 	  hashbang/os shell
 
@@ -80,43 +68,29 @@ install: image
 	  -u root \
 	  -v android:/home/build \
 	  -e DEVICE=$(device) \
-	  --env-file config/global.env \
-	  --env-file=config/$(device).env \
 	  hashbang/os flash
+
+manifest: image
+	docker run \
+	  -it \
+	  -v android:/home/build \
+	  -e DEVICE=$(device) \
+	  hashbang/os bash -c "manifest $(device) kernel | xmllint --format -" \
+	> manifests/$(device)-kernel.xml
+	docker run \
+	  -it \
+	  -v android:/home/build \
+	  -e DEVICE=$(device) \
+	  hashbang/os bash -c "manifest $(device) platform | xmllint --format -" \
+	> manifests/base.xml
 
 config: image
 	docker run \
 	  -it \
 	  -v android:/home/build \
 	  -e DEVICE=$(device) \
-	  --env-file config/global.env \
-	  --env-file=config/$(device).env \
-	  hashbang/os bash -c "config $(device) kernel | xmllint --format -" \
-	> config/$(device)-kernel.xml
-	docker run \
-	  -it \
-	  -v android:/home/build \
-	  -e DEVICE=$(device) \
-	  --env-file config/global.env \
-	  --env-file=config/$(device).env \
-	  hashbang/os bash -c "config $(device) platform | xmllint --format -" \
-	> config/base.xml
-	docker run \
-	  -it \
-	  -v android:/home/build \
-	  -e DEVICE=$(device) \
-	  --env-file config/global.env \
-	  --env-file=config/$(device).env \
-	  hashbang/os bash -c "config $(device) images" \
-	> config/images.jsonl
-
-clean: image
-	docker run \
-	  -it \
-	  -v android:/home/build \
-	  hashbang/os clean
-
-.PHONY: image build shell diff install update flash clean default
+	  hashbang/os bash -c "config" \
+	> config.json
 
 clean: image
 	docker run \

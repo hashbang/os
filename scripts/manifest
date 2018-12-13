@@ -1,0 +1,139 @@
+#!/usr/bin/python3
+
+from tempfile import mkdtemp
+from git import Git, Repo, cmd
+from xml.etree import ElementTree
+from xml.etree.ElementTree import Element
+from xml.dom import minidom
+from sys import argv
+from os import environ
+import re
+import json
+
+class AndroidManifest:
+
+    def __init__(self, config):
+        self.default_fetch="https://android.googlesource.com"
+        self.url = url
+        self.exp = exp
+        self.extra_remotes = extra_remotes
+        self.extra_projects = extra_projects
+        self.remove_paths = remove_paths
+        self.remove_groups = remove_groups
+        self.ref_url = ref_url or url
+        self._fetch()
+        self._remove()
+        self._extend()
+        self._set_remotes()
+        self._set_default_remote()
+        self._set_default_revision()
+        self._lock()
+
+    def _fetch(self):
+        ref_repo = Repo.clone_from(self.ref_url, mkdtemp())
+        ref = [
+            str(ref) for ref in
+            sorted(ref_repo.refs, key=lambda t: t.commit.committed_datetime)
+            if re.match(self.exp, str(ref))
+        ][-1]
+        manifest_repo = Repo.clone_from(self.url, mkdtemp())
+        manifest_repo.head.reference = manifest_repo.commit(ref)
+        string = manifest_repo.git.show('HEAD:default.xml')
+        self.manifest = ElementTree.fromstring(string)
+
+    def _extend(self):
+        for remote in self.extra_remotes:
+            element = Element("remote")
+            element.attrib = remote
+            element.tail = "\n"
+            self.manifest.insert(1,element)
+        for project in self.extra_projects:
+            element = Element("project")
+            element.attrib = project
+            self.manifest.insert(4,element)
+
+    def _remove(self):
+        projects=self.manifest.findall(".//project")
+        for project in projects:
+            if 'groups' in project.attrib:
+                groups = project.attrib['groups'].split(',')
+                if any(i in groups for i in self.remove_groups):
+                    self.manifest.remove(project)
+            if 'path' in project.attrib:
+                if project.attrib['path'] in self.remove_paths:
+                    self.manifest.remove(project)
+
+    def _set_remotes(self):
+        self.remotes={}
+        remote_nodes = self.manifest.findall(".//remote")
+        for remote_node in remote_nodes:
+            if 'fetch' in remote_node.attrib:
+                if remote_node.attrib['fetch'] == '..':
+                    remote_node.attrib['fetch'] = self.default_fetch
+            if 'review' in remote_node.attrib:
+                self.remotes[remote_node.attrib["name"]] = \
+                    remote_node.attrib["review"]
+            else:
+                self.remotes[remote_node.attrib["name"]] = \
+                    remote_node.attrib["fetch"]
+
+    def _set_default_revision(self):
+        self.default_revision = \
+            revision=self.manifest.findall(".//default")[0].attrib['revision']
+
+    def _set_default_remote(self):
+        default_remote_name = \
+            self.manifest.findall(".//default")[0].attrib['remote']
+        self.default_remote = self.remotes[default_remote_name]
+
+    def _lock(self):
+        projects=self.manifest.findall(".//project")
+        for project in projects:
+            if 'remote' in project.attrib:
+                remote = self.remotes[project.attrib['remote']]
+            else:
+                remote = self.default_remote
+            if 'revision' in project.attrib:
+                revision = project.attrib['revision']
+            else:
+                revision = self.default_revision
+            if 'refs' not in revision:
+                revision = "refs/heads/%s" % revision
+            project_repo_url="%s%s.git" % (remote, project.attrib['name'])
+            remote_refs = self._lsremote(project_repo_url)
+            project.attrib['upstream'] = revision
+            project.attrib['revision'] = remote_refs[revision]
+
+    def _lsremote(self, url):
+        remote_refs = {}
+        g = cmd.Git()
+        for ref in g.ls_remote(url).split('\n'):
+            hash_ref_list = ref.split('\t')
+            remote_refs[hash_ref_list[1]] = hash_ref_list[0]
+        return remote_refs
+
+    def pretty_print(self):
+        rough_string = ElementTree.tostring(self.manifest, 'utf-8')
+        reparsed = minidom.parseString(rough_string)
+        return reparsed.toprettyxml(indent="  ", newl="")
+
+if __name__ == "__main__":
+
+    if 'CONFIG_FILE' in environ:
+        config_file=environ['CONFIG_FILE']
+    elif os.path.isfile('/opt/android/config.json'):
+        config_file="/opt/android/config.json"
+    elif os.path.isfile('./config.json'):
+        config_file="./config.json"
+    with open('config.json', encoding='utf-8') as data_file:
+        config = json.loads(data_file.read())
+
+    if len(argv) < 0:
+        sys.exit("Please provide device name as first argument")
+
+    kind=argv[1]
+
+    if kind == 'kernel' or kind == 'platform':
+        manifest = AndroidManifest(config).pretty_print()
+        if manifest:
+            print(manifest)
