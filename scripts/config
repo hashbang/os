@@ -1,11 +1,13 @@
 #!/usr/bin/python3
 
-from html.parser import HTMLParser
-from urllib.request import urlopen
-from os import environ
-import json
+import yaml
 import re
 import os.path
+from os import environ
+from html.parser import HTMLParser
+from urllib.request import urlopen
+from collections import OrderedDict
+from yaml.resolver import BaseResolver
 
 class AndroidImagesParser(HTMLParser):
 
@@ -58,16 +60,23 @@ class AndroidImagesParser(HTMLParser):
             self.build = False
             self.variant = False
 
+def dict_representer(dumper, data):
+    return dumper.represent_dict(data.items())
+def dict_constructor(loader, node):
+    return OrderedDict(loader.construct_pairs(node))
+yaml.add_representer(OrderedDict, dict_representer)
+yaml.add_constructor(BaseResolver.DEFAULT_MAPPING_TAG, dict_constructor)
+
 if __name__ == "__main__":
 
     if 'CONFIG_FILE' in environ:
         config_file=environ['CONFIG_FILE']
-    elif os.path.isfile('/opt/android/config.json'):
-        config_file="/opt/android/config.json"
-    elif os.path.isfile('./config.json'):
-        config_file="./config.json"
+    elif os.path.isfile('/opt/android/config.yml'):
+        config_file="/opt/android/config.yml"
+    elif os.path.isfile('./config.yml'):
+        config_file="./config.yml"
     with open(config_file, encoding='utf-8') as data_file:
-        config = json.loads(data_file.read())
+        config = yaml.load(data_file.read())
 
     url = "https://developers.google.com/android/images"
     html = urlopen(url).read()
@@ -76,4 +85,4 @@ if __name__ == "__main__":
     parser.feed(str(html))
     config['devices'] = parser.images
 
-    print(json.dumps(config,indent=4))
+    print(yaml.dump(config,default_flow_style=False))

@@ -43,6 +43,7 @@ RUN \
         pngcrush \
         python3 \
         python3-git \
+        python3-yaml \
         rsync \
         schedtool \
         squashfs-tools \

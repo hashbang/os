@@ -90,7 +90,7 @@ config: image
 	  -v android:/home/build \
 	  -e DEVICE=$(device) \
 	  hashbang/os bash -c "config" \
-	> config.json
+	> config.yml
 
 clean: image
 	docker run \
