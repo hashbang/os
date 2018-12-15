@@ -6,7 +6,7 @@ import os.path
 from os import environ
 from html.parser import HTMLParser
 from urllib.request import urlopen
-from collections import OrderedDict
+from collections import OrderedDict, Counter
 from yaml.resolver import BaseResolver
 
 class AndroidImagesParser(HTMLParser):
@@ -42,7 +42,8 @@ class AndroidImagesParser(HTMLParser):
                 elif data.split(' ')[0].startswith("%s." % self.version):
                     self.version_open = True
                     tokens = data.split(" ")
-                    self.image['build'] = tokens[1].replace("(","").replace(",", "")
+                    self.image['build'] = \
+                        tokens[1].replace("(","").replace(",", "")
                     variant = tokens[4:5]
                     if variant:
                         self.variant = variant[0].replace(")","").lower()
@@ -83,6 +84,14 @@ if __name__ == "__main__":
     parser = AndroidImagesParser(config)
     parser.images = {}
     parser.feed(str(html))
-    config['devices'] = parser.images
+
+    for device in config['devices']:
+        for variant, values in parser.images[device].items():
+            for key, value in values.items():
+                config['devices'].setdefault(
+                    device,{}
+                ).setdefault(
+                    variant,{}
+                )[key] = value
 
     print(yaml.dump(config,default_flow_style=False))
