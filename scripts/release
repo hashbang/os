@@ -2,6 +2,8 @@
 # shellcheck disable=SC1091,SC1090
 set -e
 
+eval "$(environment)"
+
 img_path() {
 	image=${1?}
 	path=${2?}

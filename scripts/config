@@ -42,7 +42,7 @@ class AndroidImagesParser(HTMLParser):
                 elif data.split(' ')[0].startswith("%s." % self.version):
                     self.version_open = True
                     tokens = data.split(" ")
-                    self.image['build'] = \
+                    self.image['factory_build'] = \
                         tokens[1].replace("(","").replace(",", "")
                     variant = tokens[4:5]
                     if variant:

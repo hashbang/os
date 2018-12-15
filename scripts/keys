@@ -1,4 +1,7 @@
 #!/bin/bash
+set -e
+
+eval "$(environment)"
 
 device="${DEVICE?}"
 key_dir="${KEY_DIR:-${PWD}/keys/${device}}"

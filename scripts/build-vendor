@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+eval "$(environment)"
+
 device="${DEVICE?}"
 base_dir="${BASE_DIR:-$PWD/base}"
 external_dir="${EXTERNAL_DIR:-$PWD/external}"
@@ -11,7 +13,7 @@ vendor_out="${external_dir}/vendor/out"
 factory_url="https://dl.google.com/dl/android/aosp"
 factory_build="${FACTORY_BUILD?}"
 factory_hash="${FACTORY_HASH?}"
-factory_crc="${FACTORY_CRC?}"
+factory_crc="${FACTORY_HASH:0:8}"
 factory_file="${device}-${factory_build}-factory-${factory_crc}.zip"
 factory_dir="${vendor_dir}/${device}/${factory_build}"
 

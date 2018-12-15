@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+eval "$(environment)"
+
 device="${DEVICE?}"
 base_dir="${BASE_DIR:-$PWD/base}"
 build_type="${BUILD_TYPE:-release}"
@@ -9,6 +11,7 @@ build_datetime="${BUILD_DATETIME:-$(date --utc +%s)}"
 build_number="${BUILD_NUMBER:-$(date --utc -d "@$build_datetime" +%m%d%H%M )}"
 config_dir="${CONFIG_DIR:-/opt/android}"
 external_dir="${EXTERNAL_DIR:-$PWD/external}"
+kernel_name="${KERNEL_NAME?}"
 key_dir=$( \
 	[ "$build_variant" == "user" ] \
 	&& echo "${KEY_DIR:-${PWD}/keys/${device}}/" \
@@ -28,7 +31,8 @@ vendor_dist="${external_dir}/vendor/out/${device}/${version}/vendor/"
 vendor_dest="${base_dir}/vendor/"
 chromium_dist="${external_dir}/chromium/src/out/Default/apks/"
 chromium_dest="${base_dir}/external/chromium/prebuilt/arm64/"
-kernel_dist="${external_dir}/kernel/${device}/out/android-msm-bluecross-4.9/dist/"
+kernel_dir="${external_dir}/kernel/${device}"
+kernel_dist="${kernel_dir}/out/android-msm-${kernel_name}-4.9/dist/"
 kernel_dest="${base_dir}/device/google/${device}-kernel/"
 cores=$(nproc)
 
@@ -55,7 +59,7 @@ for patch in "${config_dir}"/patches/platform/*.patch; do
 	patch -p1 --no-backup-if-mismatch < "${patch}"
 done
 echo "patching file ${fdroid_whitelist}"
-sed -i "s/[a-f0-9]\{64\}/${key_hash}/g" "${base_dir}/${fdroid_whitelist}"
+sed -i "s/[a-f0-9]\\{64\\}/${key_hash}/g" "${base_dir}/${fdroid_whitelist}"
 
 # Build Platform
 # shellcheck disable=SC1091

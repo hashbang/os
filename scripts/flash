@@ -1,5 +1,8 @@
 #!/bin/bash
 set -e
+
+eval "$(environment)"
+
 cd "$HOME/base"
 
 device="${DEVICE?}"

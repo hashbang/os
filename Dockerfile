@@ -54,7 +54,7 @@ RUN \
         wget \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
-    && echo "[user]\nemail = aosp@null.com\nname = AOSP User" >> /etc/gitconfig
+    && echo "[color]\nui = auto\n[user]\nemail = aosp@null.com\nname = AOSP User" >> /etc/gitconfig
 
 USER build
 WORKDIR /home/build

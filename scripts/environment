@@ -1,0 +1,33 @@
+#!/usr/bin/python3
+
+import yaml
+import os
+from time import strftime, gmtime
+
+if 'CONFIG_FILE' in os.environ:
+    config_file=os.environ['CONFIG_FILE']
+elif os.path.isfile('/opt/android/config.yml'):
+    config_file="/opt/android/config.yml"
+elif os.path.isfile('./config.yml'):
+    config_file="./config.yml"
+with open(config_file, encoding='utf-8') as data_file:
+    config = yaml.load(data_file.read())
+
+environment = {
+    "DEVICES": ",".join(config['devices'].keys()),
+    "BUILD_TYPE": config['type'],
+    "BUILD_VARIANT": config['variant'],
+    "BUILD_DATETIME": config['datetime'],
+    "BUILD_NUMBER": strftime('%m%d%H%M', gmtime(config['datetime'])),
+    "CHROMIUM_VERSION": config['apps']['chromium']['version'],
+    "CHROMIUM_SRC_REF": config['apps']['chromium']['src_ref'],
+    "CHROMIUM_DEPOT_TOOLS_REF": config['apps']['chromium']['depot_tools_ref']
+}
+if 'DEVICE' in os.environ:
+    device=os.environ['DEVICE']
+    device_config=config['devices'][device]['global']
+    for key, value in device_config.items():
+        environment[key.upper()]=value.lower()
+
+for name, value in environment.items():
+    print('export {}="{}"'.format(name, value))
