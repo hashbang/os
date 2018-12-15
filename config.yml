@@ -2,7 +2,7 @@ version: '9'
 type: release
 variant: user
 platform:
-  url: https://android.googlesource.com/platform/manifest
+  ref: android-9.0.0_r22
   extra_remotes:
   - name: github
     fetch: https://github.com/
@@ -33,23 +33,38 @@ platform:
     groups: device
     path: external/chromium
     remote: github
-    revision: refs/heads/master
+    revision: refs/heads/pie
   remove_paths:
   - external/chromium-webview
   - packages/apps/Calendar
   - packages/apps/QuickSearchBox
   - packages/apps/Browser2
+  - platform/prebuilts/qemu-kernel
+  - platform/developers/samples/android
+  - platform/developers/demos
   - device/generic/car
+  - device/generic/qemu
   - device/generic/goldfish
   - device/generic/goldfish-opengl
+  - device/lenaro/bootloader/arm-trusted-firmware
+  - device/lenaro/bootloader/edk2
+  - device/lenaro/bootloader/OpenPlatformPkg
+  - device/lenaro/hikey
+  - device/lenaro/hikey-kernel
+  - device/lenaro/
+  - device/sample
+  - device/google/atv
+  - device/google/contexthub
   - device/google/cuttlefish
-  - device/google/cuttlefish-kernel
-  - device/google/cuttlefish-sepolicy
+  - device/google/cuttlefish_kernel
+  - device/google/cuttlefish_sepolicy
   - device/google/cuttlefish_common
   - device/google/muskie
-  - device/google/wahoo
-  - device/google/wahoo-kernel
   - device/generic/mips
+  - device/google/wahoo-kernel
+  - device/google/marlin-kernel
+  - device/google/hikey-kernel
+  - device/google/crosshatch-kernel
   - device/generic/mips64
   - device/generic/mini-emulator-arm64
   - device/generic/mini-emulator-armv7-a-neon
@@ -57,6 +72,8 @@ platform:
   - device/generic/mini-emulator-mips64
   - device/generic/mini-emulator-x86
   - device/generic/mini-emulator-x86_64
+  - device/google/accessory/arduino
+  - device/google/accessory/demokit
   remove_groups:
   - darwin
 apps:

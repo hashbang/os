@@ -74,15 +74,7 @@ manifest: image
 	docker run \
 	  -it \
 	  -v android:/home/build \
-	  -e DEVICE=$(device) \
-	  hashbang/os bash -c "manifest $(device) kernel | xmllint --format -" \
-	> manifests/$(device)-kernel.xml
-	docker run \
-	  -it \
-	  -v android:/home/build \
-	  -e DEVICE=$(device) \
-	  hashbang/os bash -c "manifest $(device) platform | xmllint --format -" \
-	> manifests/base.xml
+	  hashbang/os bash -c "manifest"
 
 config: image
 	docker run \
