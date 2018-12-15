@@ -166,3 +166,7 @@ if __name__ == "__main__":
         remove_groups = config['platform']['remove_groups'],
     ).pretty_print()
     open('%s/base.xml' % (path),'w').write(manifest)
+
+    repo = Repo.init(path)
+    repo.index.add(['*'])
+    repo.index.commit("manifest commit")
