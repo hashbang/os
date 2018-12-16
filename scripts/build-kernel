@@ -1,40 +1,43 @@
 #!/bin/bash
+# shellcheck disable=SC1090
 set -e
 
 eval "$(environment)"
 
-external_dir="${EXTERNAL_DIR:-$PWD/external}"
-manifest_dir="${MANIFEST_DIR:-$PWD/manifests}"
+device="${DEVICE?}"
+base_dir="${BASE_DIR?}"
+external_dir="${EXTERNAL_DIR?}"
+manifest_dir="${MANIFEST_DIR?}"
+key_dir="${KEY_DIR:-${PWD}/keys/${device}}"
 kernel_name="${KERNEL_NAME?}"
 kernel_repo="${KERNEL_REPO?}"
 kernel_ref="${KERNEL_REF?}"
 kernel_dir="${external_dir}/kernel/${kernel_name}"
 cores=$(nproc)
 
-mkdir -p "${kernel_dir}"
-
 if [[ $kernel_repo == *"manifest"* ]]; then
 
+	mkdir -p "${kernel_dir}"
 	cd "${kernel_dir}"
 	cat /etc/gitconfig > "$HOME/.gitconfig"
 	repo init -u "${manifest_dir}" -m "kernel-${kernel_name}.xml"
 	repo sync -c --no-tags --no-clone-bundle --jobs "${cores}"
 	repo forall -c 'git reset --hard ; git clean -fdx'
 
-	# shellcheck disable=SC1090
 	source "${kernel_dir}/build/envsetup.sh"
-	export LANG=C
 	bash "${kernel_dir}/build/build.sh"
 
 else
+	cd "$base_dir"
+	ln -vs \
+		"${key_dir}/${device}/verity_user.der.x509" \
+		"${kernel_dir}/verity_user.der.x509";
 
 	kernel_url="https://android.googlesource.com/${kernel_repo}"
 	[ ! -d "$kernel_dir" ] && git clone "$kernel_url" "$kernel_dir"
 	cd "$kernel_dir"
 	git checkout "$kernel_ref"
 
-	export ARCH=arm64
-	export CROSS_COMPILE=aarch64-linux-android-
 	make "${kernel_name}_defconfig"
 	make
 
