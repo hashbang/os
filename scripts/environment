@@ -4,6 +4,9 @@ import yaml
 import os
 from time import strftime, gmtime
 
+cross64="prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin"
+cross32="prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin"
+
 if 'CONFIG_FILE' in os.environ:
     config_file=os.environ['CONFIG_FILE']
 elif os.path.isfile('/opt/android/config.yml'):
@@ -14,6 +17,12 @@ with open(config_file, encoding='utf-8') as data_file:
     config = yaml.load(data_file.read())
 
 environment = {
+    "OS_NAME": config['name'],
+    "BASE_DIR": "%s/base" % os.getcwd(),
+    "MANIFEST_DIR": "%s/manifests" % os.getcwd(),
+    "CONFIG_DIR": "/opt/android",
+    "KEY_DIR": "%s/keys" % os.getcwd(),
+    "EXTERNAL_DIR": "%s/external" % os.getcwd(),
     "DEVICES": ",".join(config['devices'].keys()),
     "BUILD_TYPE": config['type'],
     "BUILD_VARIANT": config['variant'],
@@ -29,5 +38,27 @@ if 'DEVICE' in os.environ:
     for key, value in device_config.items():
         environment[key.upper()]=value.lower()
 
+print('source {}/build/envsetup.sh'.format(environment['BASE_DIR']))
+print('export PATH="/opt/android/scripts:$PATH"')
+print('export ARCH="arm64"')
+print('export LANG="C"')
+print('export CROSS_COMPILE={}/{}/aarch64-linux-android-'.format(
+    environment['BASE_DIR'], cross64
+))
+print('export CROSS_COMPILE_ARM32={}/{}/arm-linux-androideabi-'.format(
+    environment['BASE_DIR'], cross32
+))
+print('export CONFIG_COMPAT_VDSO=n')
 for name, value in environment.items():
     print('export {}="{}"'.format(name, value))
+
+paths = [
+    'build/tools/releasetools',
+    'development/tools',
+    'external/avb',
+    'out/host/linux-x86/bin',
+    cross32,
+    cross64,
+]
+for path in paths:
+    print('export PATH="{}/{}:$PATH"'.format(environment['BASE_DIR'], path))
