@@ -54,7 +54,6 @@ platform:
   - device/lenaro/hikey
   - device/lenaro/hikey-kernel
   - device/lenaro/
-  - device/sample
   - device/google/atv
   - device/google/contexthub
   - device/google/cuttlefish
