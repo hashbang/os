@@ -4,21 +4,28 @@ set -e
 eval "$(environment)"
 
 device="${DEVICE?}"
-key_dir="${KEY_DIR:-${PWD}/keys/${device}}"
-base_dir="$PWD/base"
-cert_subject="${CERT_SUBJECT:-/CN=HashbangOS}"
+key_dir="${KEY_DIR?}"
+cert_subject="/CN=${OS_NAME?}"
 
-[ ! -d "$key_dir" ] || {
+[ ! -d "$key_dir/${device}" ] || {
 	echo "Key directory already exists. Refusing to overwrite"; exit 1;
 }
-mkdir -p "$key_dir"
-cd "$key_dir" || exit
-export PATH="${base_dir}/development/tools:$PATH"
-export PATH="${base_dir}/external/avb:$PATH"
+mkdir -p "${key_dir}/${device}"
+cd "${key_dir}/${device}" || exit
 
 for key in {releasekey,platform,shared,media,verity} ; do
-	make_key "$key" "$cert_subject"
+	echo "Generating Key: \"$key\""
+	! make_key "$key" "$cert_subject"
 done
 
+echo "Generating Key: \"avb\""
 openssl genrsa -out avb.pem 2048
+
+echo "Generating Key: \"avb_pkmd\""
 avbtool extract_public_key --key avb.pem --output avb_pkmd.bin
+
+echo "Generating Key: \"verity_user\""
+openssl x509 -outform der -in verity.x509.pem -out verity_user.der.x509
+
+echo "Generating Key: \"verity_key\""
+generate_verity_key -convert verity.x509.pem verity_key

@@ -1,4 +1,5 @@
 version: '9'
+name: "HashbangOS"
 type: release
 variant: user
 datetime: 1543792453
@@ -62,10 +63,7 @@ platform:
   - device/google/cuttlefish_common
   - device/google/muskie
   - device/generic/mips
-  - device/google/wahoo-kernel
-  - device/google/marlin-kernel
   - device/google/hikey-kernel
-  - device/google/crosshatch-kernel
   - device/generic/mips64
   - device/generic/mini-emulator-arm64
   - device/generic/mini-emulator-armv7-a-neon
@@ -88,6 +86,7 @@ devices:
       kernel_name: bluecross
       kernel_ref: origin/android-msm-bluecross-4.9-pie-qpr1
       kernel_repo: kernel/manifest
+      avb_mode: vbmeta_chained
       factory_build: PQ1A.181205.006
       factory_hash: 96b235048c53d3b37039c092889f1b8a749e9a407fea63659e0b3b90bd91c50e
     verizon:
@@ -101,6 +100,7 @@ devices:
       kernel_name: bluecross
       kernel_ref: origin/android-msm-bluecross-4.9-pie-qpr1
       kernel_repo: kernel/manifest
+      avb_mode: vbmeta_chained
       factory_build: PQ1A.181205.006
       factory_hash: af1829a69d8c041729725a2dbd7033f12e4ef346f41353b8416bc25f6609e5cc
     verizon:
@@ -114,6 +114,7 @@ devices:
       kernel_name: wahoo
       kernel_ref: android-msm-wahoo-4.4-pie-qpr1
       kernel_repo: kernel/msm
+      avb_mode: vbmeta_simple
       factory_build: PQ1A.181205.002
       factory_hash: 4d01cf614a511bfdf84928eb976a04e5f203741b5ea200db3024557244a6bbbb
     telstra:
@@ -124,6 +125,7 @@ devices:
       kernel_name: wahoo
       kernel_ref: android-msm-wahoo-4.4-pie-qpr1
       kernel_repo: kernel/msm
+      avb_mode: vbmeta_simple
       factory_build: PQ1A.181205.002
       factory_hash: fb27eb5ac91d339f5cc426fdd8202db7579d0ee72b7b2674d67d4449c342066d
     telstra:
@@ -134,6 +136,7 @@ devices:
       kernel_name: marlin
       kernel_ref: android-msm-marlin-3.18-pie-qpr1-s2
       kernel_repo: kernel/msm
+      avb_mode: verity_only
       factory_build: PQ1A.181205.002.A1
       factory_hash: 9a129f3e1bed577fd87078042384648ce88d541d0d76ced3bc08bd78626adadd
     telus:
@@ -147,6 +150,7 @@ devices:
       kernel_name: marlin
       kernel_ref: android-msm-marlin-3.18-pie-qpr1-s2
       kernel_repo: kernel/msm
+      avb_mode: verity_only
       factory_build: PQ1A.181205.002.A1
       factory_hash: 6a61ff636875d6dd382ffb9ce3103ebc85b55754c7926179e03a8525833144ee
     telus:
