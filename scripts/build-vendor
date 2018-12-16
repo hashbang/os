@@ -1,11 +1,9 @@
 #!/bin/bash
-set -e
-
-eval "$(environment)"
+set -e; eval "$(environment)"
 
 device="${DEVICE?}"
-base_dir="${BASE_DIR:-$PWD/base}"
-external_dir="${EXTERNAL_DIR:-$PWD/external}"
+base_dir="${BASE_DIR?}"
+external_dir="${EXTERNAL_DIR?}"
 temp_dir="$(mktemp -d)"
 download_dir="${temp_dir}/downloads/"
 vendor_dir="${external_dir}/vendor"
@@ -16,8 +14,6 @@ factory_hash="${FACTORY_HASH?}"
 factory_crc="${FACTORY_HASH:0:8}"
 factory_file="${device}-${factory_build}-factory-${factory_crc}.zip"
 factory_dir="${vendor_dir}/${device}/${factory_build}"
-
-echo "base_dir=${base_dir}"
 
 mkdir -p "${download_dir}" "${factory_dir}" "${vendor_out}"
 

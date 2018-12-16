@@ -1,71 +1,89 @@
 #!/bin/bash
-set -e
-
-eval "$(environment)"
+set -e; eval "$(environment)"
 
 device="${DEVICE?}"
-base_dir="${BASE_DIR:-$PWD/base}"
-build_type="${BUILD_TYPE:-release}"
-build_variant="${BUILD_VARIANT:-user}"
-build_datetime="${BUILD_DATETIME:-$(date --utc +%s)}"
-build_number="${BUILD_NUMBER:-$(date --utc -d "@$build_datetime" +%m%d%H%M )}"
-config_dir="${CONFIG_DIR:-/opt/android}"
-external_dir="${EXTERNAL_DIR:-$PWD/external}"
+base_dir="${BASE_DIR?}"
+build_type="${BUILD_TYPE?}"
+build_id="${BUILD_ID?}"
+build_variant="${BUILD_VARIANT?}"
+config_dir="${CONFIG_DIR?}"
+external_dir="${EXTERNAL_DIR?}"
+manifest_dir="${MANIFEST_DIR?}"
 kernel_name="${KERNEL_NAME?}"
-key_dir=$( \
-	[ "$build_variant" == "user" ] \
-	&& echo "${KEY_DIR:-${PWD}/keys/${device}}/" \
-	|| echo "${base_dir}/build/target/product/security/" \
-)
-key_hash=$( \
-	openssl x509 -in "${key_dir}/platform.x509.pem" -outform DER \
-	| sha256sum | cut -c 64; \
-)
-version=$( \
-	grep -Po "export BUILD_ID=\\K.+" "${base_dir}/build/core/build_id.mk" \
-	| tr '[:upper:]' '[:lower:]' \
-)
-fdroid_org="packages/apps/F-DroidPrivilegedExtension/app/src/main/java/org"
-fdroid_whitelist="${fdroid_org}/fdroid/fdroid/privileged/ClientWhitelist.java"
-vendor_dist="${external_dir}/vendor/out/${device}/${version}/vendor/"
-vendor_dest="${base_dir}/vendor/"
-chromium_dist="${external_dir}/chromium/src/out/Default/apks/"
-chromium_dest="${base_dir}/external/chromium/prebuilt/arm64/"
-kernel_dir="${external_dir}/kernel/${device}"
-kernel_dist="${kernel_dir}/out/android-msm-${kernel_name}-4.9/dist/"
-kernel_dest="${base_dir}/device/google/${device}-kernel/"
+factory_build="${FACTORY_BUILD?}"
+key_dir="${KEY_DIR?}"
 cores=$(nproc)
 
-# Sync/reset repos
-rm -rf "$vendor_dest" "$chromium_dest" "$kernel_dest"
-mkdir -p "${base_dir}"
-cd "${base_dir}"
-repo init -u "${config_dir}" -m manifests/base.xml
-repo sync -c --no-tags --no-clone-bundle --jobs "${cores}"
-repo forall -c 'git reset --hard ; git clean -fdx'
+function sync_repos(){
+	rm -rf "$vendor_dest" "$chromium_dest" "$kernel_dest"
+	mkdir -p "${base_dir}"
+	cd "${base_dir}"
+	repo init -u "${manifest_dir}" -m base.xml
+	repo sync -c --no-tags --no-clone-bundle --jobs "${cores}"
+	repo forall -c 'git reset --hard ; git clean -fdx'
+	cd -
+}
 
-# Build/Copy external builds
-export BASE_DIR=${base_dir}
-export EXTERNAL_DIR=${external_dir}
-[ -d "${vendor_dist}" ] || build-vendor
-cp -R "${vendor_dist}." "${vendor_dest}"
-[ -d "${chromium_dist}" ] || build-chromium
-cp -R "${chromium_dist}." "${chromium_dest}"
-[ -d "$kernel_dist" ] || build-kernel
-cp -R "${kernel_dist}." "${kernel_dest}"
+function build_tools(){
+	cd "${base_dir}"
+	ALLOW_MISSING_DEPENDENCIES=true \
+	make -j"$cores" \
+		generate_verity_key \
+		dtc \
+		mkdtimg;
+	cd -
+}
 
-# Apply Patches
-for patch in "${config_dir}"/patches/platform/*.patch; do
-	patch -p1 --no-backup-if-mismatch < "${patch}"
-done
-echo "patching file ${fdroid_whitelist}"
-sed -i "s/[a-f0-9]\\{64\\}/${key_hash}/g" "${base_dir}/${fdroid_whitelist}"
+function build_external(){
+	local vendor_dist="${external_dir}/vendor/out/${device}/${factory_build}/vendor/"
+	local vendor_dest="${base_dir}/vendor/"
+	[ -d "${vendor_dist}" ] || build-vendor
+	cp -R "${vendor_dist}." "${vendor_dest}"
 
-# Build Platform
-# shellcheck disable=SC1091
-source build/envsetup.sh
-choosecombo "${build_type}" "aosp_${device}" "${build_variant}"
-export LANG=C
-export BUILD_NUMBER="$build_number"
-export BUILD_DATETIME="$build_datetime"
-make -j "${cores}" target-files-package brillo_update_payload
+	local chromium_dist="${external_dir}/chromium/src/out/Default/apks/"
+	local chromium_dest="${base_dir}/external/chromium/prebuilt/arm64/"
+	[ -d "${chromium_dist}" ] || build-chromium
+	cp -R "${chromium_dist}." "${chromium_dest}"
+
+	local kernel_dir="${external_dir}/kernel/${kernel_name}"
+	local kernel_dist="${kernel_dir}/out/android-msm-${kernel_name}-4.9/dist/"
+	local kernel_dest="${base_dir}/device/google/${device}-kernel/"
+	[ -d "$kernel_dist" ] || build-kernel
+	cp -R "${kernel_dist}." "${kernel_dest}"
+}
+
+function apply_patches(){
+	cd "${base_dir}"
+	local fdroid_org="packages/apps/F-DroidPrivilegedExtension/app/src/main/java/org"
+	local fdroid_whitelist="${fdroid_org}/fdroid/fdroid/privileged/ClientWhitelist.java"
+	local platform_key_hash; platform_key_hash=$( \
+		openssl x509 -in "${key_dir}/platform.x509.pem" -outform DER \
+		| sha256sum | cut -c 64; \
+	)
+	for patch in "${config_dir}"/patches/platform/*.patch; do
+		echo "Applying patch: ${patch}"
+		patch -p1 --no-backup-if-mismatch < "${patch}"
+	done
+	echo "patching file ${fdroid_whitelist}"
+	sed -i \
+		"s/[a-f0-9]\\{64\\}/${platform_key_hash}/g" \
+		"${base_dir}/${fdroid_whitelist}"
+	echo "export BUILD_ID=${build_id}" > "${base_dir}/build/core/build_id.mk"
+	cd -
+}
+
+function build_platform(){
+	cd "$base_dir"
+	choosecombo "${build_type}" "aosp_${device}" "${build_variant}"
+	make -j "${cores}" target-files-package brillo_update_payload
+	cd -
+}
+
+function main(){
+	sync_repos
+	apply_patches
+	build_tools
+	build_external
+	build_platform
+}; main
+

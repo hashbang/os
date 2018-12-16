@@ -1,6 +1,5 @@
 #!/bin/bash
-
-set -e
+set -e; eval "$(environment)"
 
 external_dir="${EXTERNAL_DIR:-$PWD/external}"
 chromium_src_ref=${CHROMIUM_SRC_REF?}
