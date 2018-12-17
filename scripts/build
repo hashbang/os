@@ -14,6 +14,10 @@ factory_build="${FACTORY_BUILD?}"
 key_dir="${KEY_DIR?}"
 cores=$(nproc)
 
+function build_manifests(){
+	[ -d "${manifest_dir}" ] || manifest
+}
+
 function sync_repos(){
 	rm -rf "$vendor_dest" "$chromium_dest" "$kernel_dest"
 	mkdir -p "${base_dir}"
@@ -27,10 +31,9 @@ function sync_repos(){
 function build_tools(){
 	cd "${base_dir}"
 	ALLOW_MISSING_DEPENDENCIES=true \
-	make -j"$cores" \
-		generate_verity_key \
-		dtc \
-		mkdtimg;
+	command -v generate_verity_key || make -j"$cores" generate_verity_key
+	command -v dtc || make -j"$cores" dtc
+	command -v mkdtimg || make -j"$cores" mkdtimg
 	cd -
 }
 
@@ -81,6 +84,7 @@ function build_platform(){
 }
 
 function main(){
+	build_manifests
 	sync_repos
 	apply_patches
 	build_tools
