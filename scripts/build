@@ -29,12 +29,13 @@ function sync_repos(){
 }
 
 function build_tools(){
+cat <<-EOF | bash
 	cd "${base_dir}"
-	ALLOW_MISSING_DEPENDENCIES=true \
+	export ALLOW_MISSING_DEPENDENCIES=true
 	command -v generate_verity_key || make -j"$cores" generate_verity_key
 	command -v dtc || make -j"$cores" dtc
 	command -v mkdtimg || make -j"$cores" mkdtimg
-	cd -
+EOF
 }
 
 function build_external(){
