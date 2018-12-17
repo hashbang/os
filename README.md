@@ -38,13 +38,13 @@ trustable path to free public AOSP builds patched for privacy and security.
 
 ## Install ##
 
-Extract:
+### Extract
 ```
 unzip crosshatch-PQ1A.181205.006-factory-1947dcec.zip
 cd crosshatch-PQ1A.181205.006/
 ```
 
-Flash:
+### Flash
 ```
 adb reboot fastboot
 ./flash-all.sh
