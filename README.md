@@ -18,7 +18,7 @@ trustable path to free public AOSP builds patched for privacy and security.
  * 100% Open Source and auditable
    * Except for vendor driver blobs hash verified from Google Servers
  * All hardware works
-   * Unless you use Sprint directly or via Fi, which requires [backdoors][1]
+   * Unless you use Sprint directly (or via Fi), which requires [backdoors][1]
  * No changes to stock AOSP functionality
  * Built-in F-Droid
    * Trusted as system app without need to enable "Unknown Sources"
@@ -27,7 +27,14 @@ trustable path to free public AOSP builds patched for privacy and security.
 
 ## Devices ##
 
-  * crosshatch (Pixel 3 XL)
+  | Device     | Codename   | Builds   | Boots    | All H/W  | CTS      |
+  |------------|------------|----------|----------|----------|----------|
+  | Pixel 3 XL | Crosshatch | TRUE     | TRUE     | TRUE     | Untested |
+  | Pixel 3    | Blueline   | TRUE     | Untested | Untested | Untested |
+  | Pixel 2 XL | Taimen     | TRUE     | Untested | Untested | Untested |
+  | Pixel 2    | Walleye    | Untested | Untested | Untested | Untested |
+  | Pixel XL   | Marlin     | Untested | Untested | Untested | Untested |
+  | Pixel      | Sailfish   | Untested | Untested | Untested | Untested |
 
 ## Release ##
 
