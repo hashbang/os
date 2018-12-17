@@ -27,14 +27,14 @@ trustable path to free public AOSP builds patched for privacy and security.
 
 ## Devices ##
 
-  | Device     | Codename   | Builds   | Boots    | All H/W  | CTS      |
-  |------------|------------|----------|----------|----------|----------|
-  | Pixel 3 XL | Crosshatch | TRUE     | TRUE     | TRUE     | Untested |
-  | Pixel 3    | Blueline   | TRUE     | Untested | Untested | Untested |
-  | Pixel 2 XL | Taimen     | TRUE     | Untested | Untested | Untested |
-  | Pixel 2    | Walleye    | Untested | Untested | Untested | Untested |
-  | Pixel XL   | Marlin     | Untested | Untested | Untested | Untested |
-  | Pixel      | Sailfish   | Untested | Untested | Untested | Untested |
+  | Device     | Codename   | Builds | Boots    | All H/W  | CTS      |
+  |------------|:----------:|:------:|:--------:|:--------:|:--------:|
+  | Pixel 3 XL | Crosshatch | TRUE   | TRUE     | TRUE     | Untested |
+  | Pixel 3    | Blueline   | TRUE   | Untested | Untested | Untested |
+  | Pixel 2 XL | Taimen     | FALSE  | Untested | Untested | Untested |
+  | Pixel 2    | Walleye    | FALSE  | Untested | Untested | Untested |
+  | Pixel XL   | Marlin     | FALSE  | Untested | Untested | Untested |
+  | Pixel      | Sailfish   | FALSE  | Untested | Untested | Untested |
 
 ## Install ##
 
