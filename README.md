@@ -36,6 +36,20 @@ trustable path to free public AOSP builds patched for privacy and security.
   | Pixel XL   | Marlin     | Untested | Untested | Untested | Untested |
   | Pixel      | Sailfish   | Untested | Untested | Untested | Untested |
 
+## Install ##
+
+Extract:
+```
+unzip crosshatch-PQ1A.181205.006-factory-1947dcec.zip
+cd crosshatch-PQ1A.181205.006/
+```
+
+Flash:
+```
+adb reboot fastboot
+./flash-all.sh
+```
+
 ## Building ##
 
 ### Requirements ###
