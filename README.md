@@ -36,21 +36,7 @@ trustable path to free public AOSP builds patched for privacy and security.
   | Pixel XL   | Marlin     | Untested | Untested | Untested | Untested |
   | Pixel      | Sailfish   | Untested | Untested | Untested | Untested |
 
-## Release ##
-
-### Generate Signing Keys ###
-
-Each device needs its own set of keys:
-```
-make DEVICE=crosshatch keys
-```
-
-### Build Release  ###
-```
-make DEVICE=crosshatch clean build release
-```
-
-## Development ##
+## Building ##
 
 ### Requirements ###
 
@@ -60,8 +46,31 @@ make DEVICE=crosshatch clean build release
  * 10GB+ available memory
  * 60GB+ disk
 
-### Edit ###
+### Generate Signing Keys ###
 
+Each device needs its own set of keys:
+```
+make DEVICE=crosshatch keys
+```
+
+### Build Factory Image ###
+
+Build flashable images for desired device:
+```
+make DEVICE=crosshatch clean build release
+```
+
+## Develop ##
+
+### Update ###
+
+Build latest manifests/config from upstream sources:
+
+```
+make DEVICE=crosshatch config manifest
+```
+
+### Edit ###
 ```
 make shell
 ```
@@ -71,25 +80,9 @@ make shell
 make diff > patches/my-feature.patch
 ```
 
-### Update ###
-
-Build latest manifests from upstream sources for desired device:
-```
-make DEVICE=crosshatch manifest
-```
-
-### Build ###
-
-Build images for desired device:
-```
-make DEVICE=crosshatch
-```
-
 ### Flash ###
-
-Reboot device into Fastboot mode.
-
 ```
+adb reboot fastboot
 make install
 ```
 
