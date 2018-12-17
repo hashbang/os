@@ -1,15 +1,14 @@
 #!/bin/bash
 set -e; eval "$(environment)"
 
-device="${DEVICE?}"
 key_dir="${KEY_DIR?}"
 cert_subject="/CN=${OS_NAME?}"
 
-[ ! -d "$key_dir/${device}" ] || {
+[ ! -d "$key_dir" ] || {
 	echo "Key directory already exists. Refusing to overwrite"; exit 1;
 }
-mkdir -p "${key_dir}/${device}"
-cd "${key_dir}/${device}" || exit
+mkdir -p "${key_dir}"
+cd "${key_dir}" || exit
 
 for key in {releasekey,platform,shared,media,verity} ; do
 	echo "Generating Key: \"$key\""

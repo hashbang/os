@@ -38,6 +38,7 @@ function build_external(){
 	local vendor_dist="${external_dir}/vendor/out/${device}/${factory_build}/vendor/"
 	local vendor_dest="${base_dir}/vendor/"
 	[ -d "${vendor_dist}" ] || build-vendor
+	sudo rm -rf "${vendor_dest}"
 	cp -R "${vendor_dist}." "${vendor_dest}"
 
 	local chromium_dist="${external_dir}/chromium/src/out/Default/apks/"

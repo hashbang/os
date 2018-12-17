@@ -35,6 +35,7 @@ environment = {
 if 'DEVICE' in os.environ:
     device=environment['DEVICE']=os.environ['DEVICE']
     variant=environment['BUILD_VARIANT']
+    build_number=environment['BUILD_NUMBER']
     device_config=config['devices'][device]['global']
     for key, value in device_config.items():
         environment[key.upper()]=value.lower()
@@ -43,6 +44,8 @@ if 'DEVICE' in os.environ:
     else:
         key_dir = "%s/build/target/product/security/" % base_dir
     environment["KEY_DIR"] = key_dir
+    environment["RELEASE_DIR"] = \
+            "%s/releases/%s/%s" % (os.getcwd(), device, build_number)
     environment['BUILD_ID'] = device_config['factory_build']
 
 environment['ARCH'] = "arm64"
@@ -53,8 +56,9 @@ environment['CROSS_COMPILE'] = \
 environment['CROSS_COMPILE_ARM32'] = \
     '{}/{}/arm-linux-androideabi-'.format(base_dir, cross32)
 
+environment['_JAVA_OPTIONS'] = "-XX:-UsePerfData"
 paths = [
-    'opt/android/scripts'
+    'opt/android/scripts',
     'build/tools/releasetools',
     'development/tools',
     'external/avb',
