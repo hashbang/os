@@ -27,16 +27,21 @@ if [[ $kernel_repo == *"manifest"* ]]; then
 
 else
 	cd "$base_dir"
-	ln -vs \
-		"${key_dir}/${device}/verity_user.der.x509" \
-		"${kernel_dir}/verity_user.der.x509";
+	[ ! -f "${kernel_dir}/verity_user.der.x509" ] && \
+		ln -vs \
+			"${key_dir}/${device}/verity_user.der.x509" \
+			"${kernel_dir}/verity_user.der.x509";
 
 	kernel_url="https://android.googlesource.com/${kernel_repo}"
+	kernel_dist="${kernel_dir}/out/android-msm-${kernel_name}-4.9/dist/"
 	[ ! -d "$kernel_dir" ] && git clone "$kernel_url" "$kernel_dir"
 	cd "$kernel_dir"
 	git checkout "$kernel_ref"
 
 	make "${kernel_name}_defconfig"
 	make
+	mkdir -p "${kernel_dist}"
+	cp -R arch/arm64/boot/. "${kernel_dist}"
+
 
 fi
