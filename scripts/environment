@@ -45,7 +45,7 @@ if 'DEVICE' in os.environ:
         key_dir = "%s/build/target/product/security/" % base_dir
     environment["KEY_DIR"] = key_dir
     environment["RELEASE_DIR"] = \
-            "%s/releases/%s/%s" % (os.getcwd(), device, build_number)
+            "%s/release/%s/%s" % (os.getcwd(), device, build_number)
     environment['BUILD_ID'] = device_config['factory_build']
 
 environment['ARCH'] = "arm64"
