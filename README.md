@@ -33,8 +33,8 @@ trustable path to free public AOSP builds patched for privacy and security.
   | Pixel 3    | Blueline   | TRUE   | Untested | Untested | Untested |
   | Pixel 2 XL | Taimen     | TRUE   | Untested | Untested | Untested |
   | Pixel 2    | Walleye    | TRUE   | Untested | Untested | Untested |
-  | Pixel XL   | Marlin     | FALSE  | Untested | Untested | Untested |
-  | Pixel      | Sailfish   | FALSE  | Untested | Untested | Untested |
+  | Pixel XL   | Marlin     | TRUE   | Untested | Untested | Untested |
+  | Pixel      | Sailfish   | TRUE   | Untested | Untested | Untested |
 
 ## Install ##
 

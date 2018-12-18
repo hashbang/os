@@ -2,6 +2,7 @@
 
 import yaml
 import os
+from os.path import isfile
 from time import strftime, gmtime
 
 cross64 = "prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin"
@@ -67,7 +68,9 @@ paths = [
     cross64,
 ]
 
-print('source {}/build/envsetup.sh'.format(base_dir))
+envsetup = '{}/build/envsetup.sh'.format(base_dir)
+if isfile(envsetup):
+    print('source {}'.format(envsetup))
 for path in paths:
     print('export PATH="{}/{}:$PATH"'.format(environment['BASE_DIR'], path))
 for name, value in environment.items():

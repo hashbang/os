@@ -13,5 +13,3 @@ for dir in "${dirs[@]}"; do (
 		rm -rf out
 	EOF
 ) done
-
-rm -rf "$HOME/manifests"
