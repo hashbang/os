@@ -13,20 +13,17 @@ chromium_code="$(
 )"
 cores=$(nproc)
 
-export PATH="$PATH:$chromium_dir/depot_tools"
-mkdir -p "$chromium_dir"
-cd "$chromium_dir"
-
 [ ! -d "$chromium_dir/depot_tools" ] && \
 	git clone "${chromium_build_tools_url}" "$chromium_dir/depot_tools"
 cd "$chromium_dir/depot_tools"
 git fetch
 git reset --hard "$chromium_depot_tools_ref"
 
+export PATH="$PATH:$chromium_dir/depot_tools"
 mkdir -p "$chromium_dir"
 cd "$chromium_dir"
 [ ! -d "$chromium_dir/src/.git" ] && \
-	yes Y | fetch --nohooks --target_os_only=true android
+	yes Y | "$chromium_dir/depot_tools/fetch" --nohooks android
 yes Y | gclient sync --with_branch_heads --jobs "${cores}" -RDf
 gclient runhooks
 

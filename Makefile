@@ -7,34 +7,67 @@ default: build
 image:
 	docker build -t hashbang/os:latest .
 
-build: image
+config: image
+	docker run \
+	  -it \
+	  -v android:/home/build \
+	  -e DEVICE=$(device) \
+	  hashbang/os bash -c "config" \
+	> config.yml
+
+manifest: image
+	docker run \
+	  -it \
+	  -v android:/home/build \
+	  hashbang/os bash -c "manifest"
+
+fetch: manifest
+	docker run \
+	  -it \
+	  -v android:/home/build \
+	  hashbang/os bash -c "fetch"
+
+tools: fetch
+	docker run \
+	  -it \
+	  -v android:/home/build \
+	  hashbang/os bash -c "tools"
+
+keys: tools
+	docker run \
+	  -it \
+	  -v android:/home/build \
+	  -e DEVICE=$(device) \
+	  hashbang/os keys
+
+build: tools
 	docker run \
 	  -it \
 	  -v android:/home/build \
 	  -e DEVICE=$(device) \
 	  hashbang/os build
 
-kernel: image
+kernel: tools
 	docker run \
 	  -it \
 	  -v android:/home/build \
 	  -e DEVICE=$(device) \
 	  hashbang/os build-kernel
 
-vendor: image
+vendor: tools
 	docker run \
 	  -it \
 	  -v android:/home/build \
 	  -e DEVICE=$(device) \
 	  hashbang/os build-vendor
 
-chromium: image
+chromium: tools
 	docker run \
 	  -it \
 	  -v android:/home/build \
 	  hashbang/os build-chromium
 
-release: image
+release: tools
 	docker run \
 	  -it \
 	  -v android:/home/build \
@@ -42,14 +75,7 @@ release: image
 	  -e DEVICE=$(device) \
 	  hashbang/os release
 
-keys: image
-	docker run \
-	  -it \
-	  -v android:/home/build \
-	  -e DEVICE=$(device) \
-	  hashbang/os keys
-
-shell: image
+shell:
 	docker run \
 	  -it \
 	  -v android:/home/build \
@@ -61,7 +87,7 @@ diff:
 	  -v android:/home/build \
 	  hashbang/os bash -c "cd base; repo diff -u"
 
-install: image
+install: tools
 	docker run \
 	  -it \
 	  --privileged \
@@ -70,24 +96,10 @@ install: image
 	  -e DEVICE=$(device) \
 	  hashbang/os flash
 
-manifest: image
-	docker run \
-	  -it \
-	  -v android:/home/build \
-	  hashbang/os bash -c "manifest"
-
-config: image
-	docker run \
-	  -it \
-	  -v android:/home/build \
-	  -e DEVICE=$(device) \
-	  hashbang/os bash -c "config" \
-	> config.yml
-
 clean: image
 	docker run \
 	  -it \
 	  -v android:/home/build \
 	  hashbang/os clean
 
-.PHONY: image build shell diff install update flash clean default
+.PHONY: image build shell diff install update flash clean tools default

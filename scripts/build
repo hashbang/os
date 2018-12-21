@@ -8,35 +8,10 @@ build_id="${BUILD_ID?}"
 build_variant="${BUILD_VARIANT?}"
 config_dir="${CONFIG_DIR?}"
 external_dir="${EXTERNAL_DIR?}"
-manifest_dir="${MANIFEST_DIR?}"
 kernel_name="${KERNEL_NAME?}"
 factory_build="${FACTORY_BUILD?}"
 key_dir="${KEY_DIR?}"
 cores=$(nproc)
-
-function build_manifests(){
-	[ -d "${manifest_dir}" ] || manifest
-}
-
-function sync_repos(){
-	rm -rf "$vendor_dest" "$chromium_dest" "$kernel_dest"
-	mkdir -p "${base_dir}"
-	cd "${base_dir}"
-	repo init -u "${manifest_dir}" -m base.xml
-	repo sync -c --no-tags --no-clone-bundle --jobs "${cores}"
-	repo forall -c 'git reset --hard ; git clean -fdx'
-	cd -
-}
-
-function build_tools(){
-cat <<-EOF | bash
-	cd "${base_dir}"
-	export ALLOW_MISSING_DEPENDENCIES=true
-	command -v generate_verity_key || make -j"$cores" generate_verity_key
-	command -v dtc || make -j"$cores" dtc
-	command -v mkdtimg || make -j"$cores" mkdtimg
-EOF
-}
 
 function build_external(){
 	local vendor_dist="${external_dir}/vendor/out/${device}/${factory_build}/vendor/"
@@ -85,10 +60,7 @@ function build_platform(){
 }
 
 function main(){
-	build_manifests
-	sync_repos
 	apply_patches
-	build_tools
 	build_external
 	build_platform
 }; main

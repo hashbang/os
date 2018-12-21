@@ -5,9 +5,9 @@ from git import Git, Repo, cmd
 from xml.etree import ElementTree
 from xml.etree.ElementTree import Element
 from xml.dom import minidom
-from sys import argv
+from sys import argv, exit
 from os import environ, getcwd, makedirs
-from os.path import isfile
+from os.path import isfile, isdir
 import re
 import yaml
 
@@ -142,6 +142,10 @@ if __name__ == "__main__":
         config = yaml.load(data_file.read())
 
     path="%s/manifests" % getcwd()
+    if isdir(path):
+        print("Manifest directory already exists. Not overwriting.")
+        exit()
+
     makedirs(path, exist_ok=True)
 
     kernel_names=[]

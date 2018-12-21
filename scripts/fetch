@@ -1,0 +1,13 @@
+#!/bin/bash
+set -e; eval "$(environment)"
+
+base_dir="${BASE_DIR?}"
+manifest_dir="${MANIFEST_DIR?}"
+cores=$(nproc)
+
+mkdir -p "${base_dir}"
+cd "${base_dir}"
+
+repo init -u "${manifest_dir}" -m base.xml
+repo sync -c --no-tags --no-clone-bundle --jobs "${cores}"
+repo forall -c 'git reset --hard ; git clean -fdx'

@@ -7,7 +7,10 @@ from time import strftime, gmtime
 
 cross64 = "prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin"
 cross32 = "prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin"
-base_dir = "%s/base" % os.getcwd()
+if 'BASE_DIR' in os.environ:
+    base_dir = os.environ['BASE_DIR']
+else:
+    base_dir = "%s/base" % os.getcwd()
 
 if 'CONFIG_FILE' in os.environ:
     config_file=os.environ['CONFIG_FILE']
