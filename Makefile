@@ -10,6 +10,7 @@ image:
 config: image
 	docker run \
 	  -it \
+	  -h "android" \
 	  -v android:/home/build \
 	  -e DEVICE=$(device) \
 	  hashbang/os bash -c "config" \
@@ -18,24 +19,28 @@ config: image
 manifest: image
 	docker run \
 	  -it \
+	  -h "android" \
 	  -v android:/home/build \
 	  hashbang/os bash -c "manifest"
 
 fetch: manifest
 	docker run \
 	  -it \
+	  -h "android" \
 	  -v android:/home/build \
 	  hashbang/os bash -c "fetch"
 
 tools: fetch
 	docker run \
 	  -it \
+	  -h "android" \
 	  -v android:/home/build \
 	  hashbang/os bash -c "tools"
 
 keys: tools
 	docker run \
 	  -it \
+	  -h "android" \
 	  -v android:/home/build \
 	  -e DEVICE=$(device) \
 	  hashbang/os keys
@@ -43,6 +48,7 @@ keys: tools
 build: tools
 	docker run \
 	  -it \
+	  -h "android" \
 	  -v android:/home/build \
 	  -e DEVICE=$(device) \
 	  hashbang/os build
@@ -50,6 +56,7 @@ build: tools
 kernel: tools
 	docker run \
 	  -it \
+	  -h "android" \
 	  -v android:/home/build \
 	  -e DEVICE=$(device) \
 	  hashbang/os build-kernel
@@ -57,6 +64,7 @@ kernel: tools
 vendor: tools
 	docker run \
 	  -it \
+	  -h "android" \
 	  -v android:/home/build \
 	  -e DEVICE=$(device) \
 	  hashbang/os build-vendor
@@ -64,12 +72,14 @@ vendor: tools
 chromium: tools
 	docker run \
 	  -it \
+	  -h "android" \
 	  -v android:/home/build \
 	  hashbang/os build-chromium
 
 release: tools
 	docker run \
 	  -it \
+	  -h "android" \
 	  -v android:/home/build \
 	  -v $(PWD)/release:/home/build/release \
 	  -e DEVICE=$(device) \
@@ -78,6 +88,7 @@ release: tools
 shell:
 	docker run \
 	  -it \
+	  -h "android" \
 	  -v android:/home/build \
 	  -v $(PWD)/release:/home/build/release \
 	  hashbang/os shell
@@ -90,6 +101,7 @@ diff:
 install: tools
 	docker run \
 	  -it \
+	  -h "android" \
 	  --privileged \
 	  -u root \
 	  -v android:/home/build \
@@ -99,6 +111,7 @@ install: tools
 clean: image
 	docker run \
 	  -it \
+	  -h "android" \
 	  -v android:/home/build \
 	  hashbang/os clean
 

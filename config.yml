@@ -3,6 +3,8 @@ name: "HashbangOS"
 type: release
 variant: user
 datetime: 1543792453
+host: android
+user: build
 platform:
   ref: android-9.0.0_r22
   extra_remotes:

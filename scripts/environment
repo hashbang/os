@@ -28,6 +28,8 @@ environment = {
     "CONFIG_DIR": "/opt/android",
     "EXTERNAL_DIR": "%s/external" % os.getcwd(),
     "DEVICES": ",".join(config['devices'].keys()),
+    "BUILD_HOST": config['host'],
+    "BUILD_USER": config['user'],
     "BUILD_TYPE": config['type'],
     "BUILD_VARIANT": config['variant'],
     "BUILD_DATETIME": config['datetime'],
