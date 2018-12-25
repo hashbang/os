@@ -38,8 +38,9 @@ function apply_patches(){
 	local fdroid_whitelist="${fdroid_org}/fdroid/fdroid/privileged/ClientWhitelist.java"
 	local platform_key_hash; platform_key_hash=$( \
 		openssl x509 -in "${key_dir}/platform.x509.pem" -outform DER \
-		| sha256sum | cut -c 64; \
+		| sha256sum | cut -c1-64; \
 	)
+	echo "Platform Key Hash: ${platform_key_hash}"
 	for patch in "${config_dir}"/patches/platform/*.patch; do
 		echo "Applying patch: ${patch}"
 		patch -p1 --no-backup-if-mismatch < "${patch}"
