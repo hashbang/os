@@ -16,14 +16,29 @@ trustable path to free public AOSP builds patched for privacy and security.
 ## Features ##
 
  * 100% Open Source and auditable
-   * Except for vendor driver blobs hash verified from Google Servers
- * All hardware works
-   * Unless you use Sprint directly (or via Fi), which requires [backdoors][1]
- * No changes to stock AOSP functionality
- * Built-in F-Droid
-   * Trusted as system app without need to enable "Unknown Sources"
+   * Except for mandatory vendor blobs hash verified from Google Servers
+ * Automated build system:
+   * Customize builds from central config file.
+   * Automatically pin hashes from upstreams for reproducibility
+   * Automated patching/inclusion of upstream Android Sources
+ * Minimal changes to stock AOSP functionality
+ * Removed:
+   * Google Play Services
+   * Proprietary system apps
+   * OMA-DM [backdoors][1]
+   * Browser2 - Mostly unmaintained
+   * Calendar - Mostly unmaintained
+   * Quicksearch - Requires Google Play Services. Also removed from Launcher.
+ * Added:
+   * Custom Android Verified Boot included in factory images
+   * F-Droid - Trusted as system app without need to enable "Unknown Sources"
+   * Chromium - With several privacy/security patches
+   * [Backup][2] - Minor OS changes made to allow backing up any app
+   * [Updater][3] - Patched to use os.hashbang.sh update server
 
 [1]: https://gist.github.com/thestinger/171b5ffdc54a50ee44497028aa137ed8
+[2]: https://github.com/stevesoltys/backup
+[3]: https://github.com/AndroidHardening/platform_packages_apps_Updater
 
 ## Devices ##
 
