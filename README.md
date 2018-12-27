@@ -17,16 +17,18 @@ trustable path to free public AOSP builds patched for privacy and security.
 
  * 100% Open Source and auditable
    * Except for mandatory vendor blobs hash verified from Google Servers
+ * Minimal changes to stock AOSP functionality
  * Automated build system:
+   * Completely run inside Docker for portability
    * Customize builds from central config file.
    * Automatically pin hashes from upstreams for reproducibility
    * Automated patching/inclusion of upstream Android Sources
- * Minimal changes to stock AOSP functionality
  * Removed:
    * Google Play Services
    * Proprietary system apps
    * OMA-DM [backdoors][1]
    * Browser2 - Mostly unmaintained
+   * Webview - Mostly unmaintained
    * Calendar - Mostly unmaintained
    * Quicksearch - Requires Google Play Services. Also removed from Launcher.
  * Added:
