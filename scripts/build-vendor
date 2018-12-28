@@ -9,6 +9,7 @@ download_dir="${temp_dir}/downloads/"
 vendor_dir="${external_dir}/vendor"
 vendor_out="${external_dir}/vendor/out"
 factory_url="https://dl.google.com/dl/android/aosp"
+build_datetime="${BUILD_DATETIME?}"
 factory_build="${FACTORY_BUILD?}"
 factory_hash="${FACTORY_HASH?}"
 factory_crc="${FACTORY_HASH:0:8}"
@@ -25,10 +26,11 @@ if [ ! -f "${factory_dir}/${factory_file}" ]; then
 		{ ( >&2 echo "Invalid hash for ${factory_file}" ); exit 1; }
 	mv "${download_dir}/${factory_file}" "${factory_dir}/${factory_file}"
 fi
-"${base_dir}/vendor/android-prepare-vendor/execute-all.sh" \
+echo "${base_dir}/vendor/android-prepare-vendor/execute-all.sh" \
 	--debugfs \
 	--yes \
 	--imgs "${factory_dir}/${factory_file}" \
 	--device "${device}" \
 	--buildID "${factory_build}" \
-	--output "${vendor_out}"
+	--output "${vendor_out}" \
+	--timestamp "${build_datetime}"
