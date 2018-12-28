@@ -11,6 +11,7 @@ RUN \
     useradd -G plugdev,sudo -ms /bin/bash build && \
     apt-get update && \
     apt-get install -y \
+        vim \
         repo \
         aapt \
         sudo \
