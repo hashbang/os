@@ -26,7 +26,7 @@ if [ ! -f "${factory_dir}/${factory_file}" ]; then
 		{ ( >&2 echo "Invalid hash for ${factory_file}" ); exit 1; }
 	mv "${download_dir}/${factory_file}" "${factory_dir}/${factory_file}"
 fi
-echo "${base_dir}/vendor/android-prepare-vendor/execute-all.sh" \
+"${base_dir}/vendor/android-prepare-vendor/execute-all.sh" \
 	--debugfs \
 	--yes \
 	--imgs "${factory_dir}/${factory_file}" \
