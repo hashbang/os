@@ -21,7 +21,7 @@ manifest: image
 	  -it \
 	  -h "android" \
 	  -v android:/home/build \
-	  hashbang/os bash -c "manifest"
+	  hashbang/os bash -c "[ -d '/home/build/manifests' ] || manifest"
 
 fetch: manifest
 	docker run \

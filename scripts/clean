@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+rm -rf "$HOME/external/kernel/*/.repo/manifest*"
+rm -rf "$HOME/base/.repo/manifest*"
 cd "$HOME/base" || exit
 repo forall -c 'git reset --hard ; git clean -fdx'
 make clean

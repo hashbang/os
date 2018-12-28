@@ -142,10 +142,6 @@ if __name__ == "__main__":
         config = yaml.load(data_file.read())
 
     path="%s/manifests" % getcwd()
-    if isdir(path):
-        print("Manifest directory already exists. Not overwriting.")
-        exit()
-
     makedirs(path, exist_ok=True)
 
     kernel_names=[]
