@@ -55,6 +55,13 @@ trustable path to free public AOSP builds patched for privacy and security.
 
 ## Install ##
 
+### Requirements ###
+
+ * OSX/Linux host system
+ * [Android Developer Tools][4]
+
+[4]: https://developer.android.com/studio/releases/platform-tools
+
 ### Extract
 ```
 unzip crosshatch-PQ1A.181205.006-factory-1947dcec.zip
