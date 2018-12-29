@@ -1,11 +1,10 @@
 #!/bin/bash
+
 set -e
 
-rm -rf "$HOME/external/kernel/*/.repo/manifest*"
-rm -rf "$HOME/base/.repo/manifest*"
 cd "$HOME/base" || exit
-repo forall -c 'git reset --hard ; git clean -fdx'
 make clean
+repo forall -c 'git reset --hard ; git clean -fdx'
 mapfile -t -d '' dirs \
 	< <(find "$HOME/external/kernel" -maxdepth 1 -mindepth 1 -type d -print0)
 for dir in "${dirs[@]}"; do (
