@@ -32,8 +32,15 @@ environment = {
     "BUILD_USER": config['user'],
     "BUILD_TYPE": config['type'],
     "BUILD_VARIANT": config['variant'],
-    "BUILD_DATETIME": config['datetime'],
     "BUILD_NUMBER": strftime('%m%d%H%M', gmtime(config['datetime'])),
+    "BUILD_DATETIME": config['datetime'],
+    "KBUILD_BUILD_TIMESTAMP":
+        strftime('%Y-%m-%dT%H:%M:%SZ', gmtime(config['datetime'])),
+    "KBUILD_BUILD_USER": config['user'],
+    "KBUILD_BUILD_HOST": config['host'],
+    "KBUILD_BUILD_VERSION": \
+        strftime('%m%d%H%M', gmtime(config['datetime'])),
+    "KCONFIG_NOTIMESTAMP": 1,
     "CHROMIUM_VERSION": config['apps']['chromium']['version'],
     "CHROMIUM_SRC_REF": config['apps']['chromium']['src_ref'],
     "CHROMIUM_DEPOT_TOOLS_REF": config['apps']['chromium']['depot_tools_ref']
