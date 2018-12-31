@@ -1,4 +1,4 @@
-FROM ubuntu:bionic
+FROM ubuntu:cosmic
 
 MAINTAINER Hashbang Team <team@hashbang.sh>
 
