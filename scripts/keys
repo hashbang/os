@@ -26,3 +26,21 @@ openssl x509 -outform der -in verity.x509.pem -out verity_user.der.x509
 
 echo "Generating Key: \"verity_key\""
 generate_verity_key -convert verity.x509.pem verity_key
+
+echo "Generating Key: \"kernel_key\""
+openssl req \
+	-newkey "rsa:4096" \
+	-nodes \
+	-utf8 \
+	-sha256 \
+	-subj "$cert_subject" \
+	-days 36500 \
+	-batch \
+	-x509 \
+	-outform PEM \
+	-out signing_key.pem \
+	-keyout signing_key.pem \
+	-addext "basicConstraints=critical,CA:FALSE" \
+	-addext	"keyUsage=digitalSignature" \
+	-addext	"subjectKeyIdentifier=hash" \
+	-addext	"authorityKeyIdentifier=keyid"
