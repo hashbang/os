@@ -41,6 +41,7 @@ RUN \
         libxml2 \
         libxml2-utils \
         lzop \
+        libfaketime \
         pngcrush \
         python3 \
         python3-git \

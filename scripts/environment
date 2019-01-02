@@ -7,6 +7,7 @@ from time import strftime, gmtime
 
 cross64 = "prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin"
 cross32 = "prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin"
+libfaketime = "/usr/lib/x86_64-linux-gnu/faketime/libfaketime.so.1"
 if 'BASE_DIR' in os.environ:
     base_dir = os.environ['BASE_DIR']
 else:
@@ -33,6 +34,7 @@ environment = {
     "BUILD_TYPE": config['type'],
     "BUILD_VARIANT": config['variant'],
     "BUILD_NUMBER": strftime('%m%d%H%M', gmtime(config['datetime'])),
+    "FAKETIME": strftime('%y-%m-%d %H:%M:%S', gmtime(config['datetime'])),
     "BUILD_DATETIME": config['datetime'],
     "KBUILD_BUILD_TIMESTAMP":
         strftime('%Y-%m-%dT%H:%M:%SZ', gmtime(config['datetime'])),
@@ -87,3 +89,5 @@ for path in paths:
     print('export PATH="{}/{}:$PATH"'.format(environment['BASE_DIR'], path))
 for name, value in environment.items():
     print('export {}="{}"'.format(name, value))
+
+print("alias date=\"LD_PRELOAD={} /bin/date\"".format(libfaketime))
