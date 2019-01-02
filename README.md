@@ -50,7 +50,7 @@ trustable path to free public AOSP builds patched for privacy and security.
   | Pixel 3    | Blueline   | Untested | Untested | FALSE         | Untested |
   | Pixel 2 XL | Taimen     | TRUE     | TRUE     | FALSE         | Untested |
   | Pixel 2    | Walleye    | Untested | Untested | FALSE         | Untested |
-  | Pixel XL   | Marlin     | Untested | Untested | FALSE         | Untested |
+  | Pixel XL   | Marlin     | TRUE     | TRUE     | FALSE         | Untested |
   | Pixel      | Sailfish   | Untested | Untested | FALSE         | Untested |
 
 ## Install ##
@@ -69,6 +69,31 @@ cd crosshatch-PQ1A.181205.006/
 ```
 
 ### Flash
+
+Unlock the bootloader.
+
+NOTE: You'll have to be in developer mode and enable OEM unlocking
+
+```
+adb reboot bootloader
+fastboot flashing unlock
+```
+
+Once the bootloader is unlocked it will wipe the phone and you'll have to do
+basic setup to be able to drop into fastboot. You can skip everything since
+you'll be starting from scratch again after flashing #!OS
+
+Reboot phone in fastboot and flash
+
+#### Pixel
+
+```
+adb reboot bootloader
+./flash-all.sh
+```
+
+#### Pixel 2+
+
 ```
 adb reboot fastboot
 ./flash-all.sh
