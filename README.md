@@ -61,18 +61,18 @@ Please join us on IRC: ircs://irc.hashbang.sh/#!os
 ### Future
 
  1. Reproducible builds
-   * Allow third parties to prove a build came from expected open source code.
+    * Allow third parties to prove a build came from expected open source code.
  2. Verified Builds
-   * Test builds signed with test keys are automated and used for verification.
-   * Third party verifiers will maintain webhook activated build nodes
-     * Will be in different legal jurisdictions
-     * should have a public reputation to lose if they tamper a build
-     * can offer mirrors signed with their own keys
-     * will publish signatures for test builds to be in 'verified' channel
-   * Updater app will verify signatures from a m-of-n builders (e.g 2 of 3)
-   * Ability to build/sign/update own releases via Terraform automation
+    * Test builds signed with test keys are automated and used for verification.
+    * Third party verifiers will maintain webhook activated build nodes
+      * Will be in different legal jurisdictions
+      * should have a public reputation to lose if they tamper a build
+      * can offer mirrors signed with their own keys
+      * will publish signatures for test builds to be in 'verified' channel
+    * Updater app will verify signatures from a m-of-n builders (e.g 2 of 3)
+    * Ability to build/sign/update own releases via Terraform automation
  3. Compatibility Test Suite
-   * Every device should have a sponsor with an automated CTS test station
+    * Every device should have a sponsor with an automated CTS test station
  4. Hardening
     * Test and integrate [Android Hardening Project][5] patches
       * Hardened Memory Allocator
