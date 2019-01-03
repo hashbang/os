@@ -279,8 +279,8 @@ Giving up Google Play services and stock proprietary applications is a big ask
 for a lot of people that have grown to rely on particular apps for their
 lifestyle.
 
-To address this consider looking at some of the below alternatives for for
-popular applications.
+To address this consider looking at some of the below alternatives for popular
+applications.
 
 Some things won't have alternatives and in those cases you will have to decide
 to sideload a specific proprietary APK via Yalp Store or live without that app.
