@@ -13,7 +13,23 @@ accountability via redundant CI systems all getting the same hash.
 Heavily inspired by the former CopperheadOS (RIP) project. We seek to provide a
 trustable path to free public AOSP builds patched for privacy and security.
 
+## Status ##
+
+Public releases are pending sustainable/automated CI/CD work to do reproducible
+builds and multisig.
+
+Testing is currently manual. "True" implies only all hardware and surface level
+functionality appears to work. E2E testing integration is WIP
+
+Testers, builders, and hosting bandwidth needed.
+
+## Support ##
+
+Please join us on IRC: ircs://irc.hashbang.sh/#!os
+
 ## Features ##
+
+### Current
 
  * 100% Open Source and auditable
    * Except for mandatory vendor blobs hash verified from Google Servers
@@ -42,16 +58,57 @@ trustable path to free public AOSP builds patched for privacy and security.
 [2]: https://github.com/stevesoltys/backup
 [3]: https://github.com/AndroidHardening/platform_packages_apps_Updater
 
+### Future
+
+ 1. Reproducible builds
+   * Allow third parties to prove a build came from expected open source code.
+ 2. Verified Builds
+   * Test builds signed with test keys are automated and used for verification.
+   * Third party verifiers will maintain webhook activated build nodes
+     * Will be in different legal jurisdictions
+     * should have a public reputation to lose if they tamper a build
+     * can offer mirrors signed with their own keys
+     * will publish signatures for test builds to be in 'verified' channel
+   * Updater app will verify signatures from a m-of-n builders (e.g 2 of 3)
+   * Ability to build/sign/update own releases via Terraform automation
+ 3. Compatibility Test Suite
+   * Every device should have a sponsor with an automated CTS test station
+ 4. Hardening
+    * Test and integrate [Android Hardening Project][5] patches
+      * Hardened Memory Allocator
+      * Chromium security/privacy patches
+      * Various platform patches for better permissions controls
+    * BadUSB
+      * Setup global settings option to toggle USB OTG support
+      * Disable all USB devices by default
+    * Allow build options to disable hardware as needed for airgap setups.
+ 5. Remote Attestation
+    * Auditor app integration
+      * -if- @thestinger can be convinced to open source it
+      * He is seeking compensation for his time creating it. [Make An Offer][6]
+ 6. Two Factor Authentication
+    * Replace proprietary Google Play Services U2F with open/auditable one.
+ 7. Accessibility
+    * Global Dark Mode
+    * One Handed Mode
+ 8. Fluff
+    * Wallpaper/boot animation
+    * Support channel link on home screen
+    * Support flashing from windows for confused people we take pity on
+
+[5]: https://github.com/AndroidHardening
+[6]: mailto:danielmicay@gmail.com
+
 ## Devices ##
 
-  | Device     | Codename   | Boots    | All H/W  | Reproducible  | CTS      |
-  |------------|:----------:|:--------:|:--------:|:-------------:|:--------:|
-  | Pixel 3 XL | Crosshatch | TRUE     | TRUE     | FALSE         | Untested |
-  | Pixel 3    | Blueline   | Untested | Untested | FALSE         | Untested |
-  | Pixel 2 XL | Taimen     | TRUE     | TRUE     | FALSE         | Untested |
-  | Pixel 2    | Walleye    | Untested | Untested | FALSE         | Untested |
-  | Pixel XL   | Marlin     | TRUE     | TRUE     | FALSE         | Untested |
-  | Pixel      | Sailfish   | Untested | Untested | FALSE         | Untested |
+  | Device     | Codename   | Tested | Verifiable | Secure Boot | Download |
+  |------------|:----------:|:------:|:----------:|:-----------:|:--------:|
+  | Pixel 3 XL | Crosshatch | TRUE   | FALSE      | AVB 2.0     | Soon™    |
+  | Pixel 3    | Blueline   | FALSE  | FALSE      | AVB 2.0     | Soon™    |
+  | Pixel 2 XL | Taimen     | TRUE   | FALSE      | AVB 1.0     | Soon™    |
+  | Pixel 2    | Walleye    | FALSE  | FALSE      | AVB 1.0     | Soon™    |
+  | Pixel XL   | Marlin     | TRUE   | FALSE      | dm-verity   | Soon™    |
+  | Pixel      | Sailfish   | FALSE  | FALSE      | dm-verity   | Soon™    |
 
 ## Install ##
 
@@ -232,17 +289,18 @@ You may also find popular travel apps like Kayak, Uber ans Lyft have very
 usable mobile webapps you can pin to your desktop for a similar experience to a
 native app.
 
-| Proprietary App | Alternative(s)   | Notes                                  |
-|:---------------:|:----------------:|:---------------------------------------|
-| Play Store      | F-Droid          | Only supports Open Source applications |
-| Chrome          | Chromium         | Built-in to #!os                       |
-| Google Music    | D-Sub            | Will need a Subsonic capable server    |
-| Google Maps     | OsmAnd~          |                                        |
-| Google Auth.    | Yubico Auth.     |                                        |
-| Youtube         | NewPipe, SkyTube |                                        |
-| Drive           | Nextcloud        |                                        |
-| Hangouts        | Weechat, Riot.im |                                        |
-| Voice           | Ring             |                                        |
+| App      | Alternative(s)   | Notes                                  |
+|:--------:|:----------------:|:---------------------------------------|
+| Chrome   | Chromium, OrFox  | Chromium is built-in to #!os           |
+| Play     | F-Droid, Yalp    | F-Droid is built-in to #!oa            |
+| GMail    | K9Mail           |                                        |
+| Drive    | Nextcloud        |                                        |
+| Music    | D-Sub            | Will need a Subsonic capable server    |
+| Maps     | OsmAnd~          |                                        |
+| Auth.    | Yubico Auth.     |                                        |
+| Hangouts | Weechat, Riot.im |                                        |
+| Voice    | Ring             |                                        |
+| Youtube  | NewPipe, SkyTube |                                        |
 
 ## Notes ##
 
