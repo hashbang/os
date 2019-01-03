@@ -1,4 +1,4 @@
-# hashbang-os #
+# #!os #
 
 <http://github.com/hashbang/os>
 
@@ -69,7 +69,7 @@ Please join us on IRC: ircs://irc.hashbang.sh/#!os
       * should have a public reputation to lose if they tamper a build
       * can offer mirrors signed with their own keys
       * will publish signatures for test builds to be in 'verified' channel
-    * Updater app will verify signatures from a m-of-n builders (e.g 2 of 3)
+    * Updater app will verify signatures from m-of-n builders (e.g 2 of 3)
     * Ability to build/sign/update own releases via Terraform automation
  3. Compatibility Test Suite
     * Every device should have a sponsor with an automated CTS test station
