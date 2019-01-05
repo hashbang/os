@@ -89,5 +89,3 @@ for path in paths:
     print('export PATH="{}/{}:$PATH"'.format(environment['BASE_DIR'], path))
 for name, value in environment.items():
     print('export {}="{}"'.format(name, value))
-
-print("alias date=\"LD_PRELOAD={} /bin/date\"".format(libfaketime))
