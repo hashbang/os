@@ -30,6 +30,7 @@ RUN \
         gnupg \
         gperf\
         imagemagick \
+        libncurses5 \
         lib32ncurses5-dev \
         lib32readline-dev \
         lib32z1-dev \
