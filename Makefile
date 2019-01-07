@@ -93,6 +93,16 @@ shell:
 	  -v $(PWD)/release:/home/build/release \
 	  hashbang/os shell
 
+shell-vim:
+	docker run \
+	  -it \
+	  -h "android" \
+	  -v android:/home/build \
+	  -v $(PWD)/release:/home/build/release \
+	  -v $(HOME)/.vim:/home/build/.vim \
+	  -v $(HOME)/.vimrc:/home/build/.vimrc \
+	  hashbang/os shell
+
 diff:
 	docker run \
 	  -v android:/home/build \
