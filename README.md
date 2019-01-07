@@ -149,6 +149,17 @@ adb reboot fastboot
 make install
 ```
 
+### Manually Flashing OTAs ###
+If you're working on a new feature and want to apply it to just your phone for
+testing.
+
+```
+cd <release directory>
+mv <device>-ota_update-<date>.zip ota.zip
+adb reboot recovery
+adb sideload ota.zip
+```
+
 ## Questions ##
 
 ### Who is this project for?
