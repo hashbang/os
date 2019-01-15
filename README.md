@@ -108,7 +108,7 @@ Please join us on IRC: ircs://irc.hashbang.sh/#!os
   | Pixel 2 XL | Taimen     | TRUE   | FALSE      | AVB 1.0     | Soon™    |
   | Pixel 2    | Walleye    | FALSE  | FALSE      | AVB 1.0     | Soon™    |
   | Pixel XL   | Marlin     | TRUE   | FALSE      | dm-verity   | Soon™    |
-  | Pixel      | Sailfish   | FALSE  | FALSE      | dm-verity   | Soon™    |
+  | Pixel      | Sailfish   | TRUE   | FALSE      | dm-verity   | Soon™    |
 
 ## Install ##
 
