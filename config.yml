@@ -17,12 +17,12 @@ platform:
     groups: device
     path: packages/apps/F-Droid
     remote: gitlab
-    revision: refs/tags/1.4
+    revision: refs/tags/1.5.1
   - name: fdroid/privileged-extension
     groups: device
     path: packages/apps/F-DroidPrivilegedExtension
     remote: gitlab
-    revision: refs/tags/0.2.8
+    revision: refs/tags/0.2.9
   - name: anestisb/android-prepare-vendor
     groups: device
     path: vendor/android-prepare-vendor
