@@ -45,7 +45,8 @@ environment = {
     "KCONFIG_NOTIMESTAMP": 1,
     "CHROMIUM_VERSION": config['apps']['chromium']['version'],
     "CHROMIUM_SRC_REF": config['apps']['chromium']['src_ref'],
-    "CHROMIUM_DEPOT_TOOLS_REF": config['apps']['chromium']['depot_tools_ref']
+    "CHROMIUM_DEPOT_TOOLS_REF": config['apps']['chromium']['depot_tools_ref'],
+    "LC_ALL":"C"
 }
 if 'DEVICE' in os.environ:
     device=environment['DEVICE']=os.environ['DEVICE']
