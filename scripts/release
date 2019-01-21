@@ -105,7 +105,7 @@ cat <<-EOF > "${factory_dir}/flash-all.sh"
 EOF
 timestamp=$(date -d "@$build_datetime" "+%y%m%d%H%M.%S")
 find "${factory_dir}" -exec touch -t "$timestamp" {} +
-zip -r "${factory_tmp}" "${factory_dir}"
+zip -X -r "${factory_tmp}" "${factory_dir}"
 rm -rf "${factory_dir}"
 factory_hash="$(sha256sum "${factory_tmp}" | cut -b -8)"
 mv "${factory_tmp}" "${device}-${build_id}-factory-${factory_hash}.zip"
