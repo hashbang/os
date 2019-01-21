@@ -43,6 +43,7 @@ RUN \
         libxml2-utils \
         lzop \
         libfaketime \
+        ninja-build \
         pngcrush \
         python3 \
         python3-git \
