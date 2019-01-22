@@ -110,6 +110,8 @@ Please join us on IRC: ircs://irc.hashbang.sh/#!os
   | Pixel XL   | Marlin     | TRUE   | FALSE      | dm-verity   | Soon™    |
   | Pixel      | Sailfish   | TRUE   | FALSE      | dm-verity   | Soon™    |
 
+  Release hosting is sponsored by [JFrog](https://www.jfrog.com/)
+
 ## Install ##
 
 ### Requirements ###
