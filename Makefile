@@ -94,7 +94,7 @@ shell:
 	  hashbang/os shell
 
 diff:
-	docker run \
+	@docker run \
 	  -v android:/home/build \
 	  hashbang/os bash -c "cd base; repo diff -u"
 
