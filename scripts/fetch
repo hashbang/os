@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e; eval "$(environment)"
 
+cp /etc/gitconfig ~/.gitconfig
+
 base_dir="${BASE_DIR?}"
 manifest_dir="${MANIFEST_DIR?}"
 cores=$(nproc)
