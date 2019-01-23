@@ -1,6 +1,22 @@
-docker run \
-  -v android:/home/build \
-  hashbang/os bash -c "cd base; repo diff -u"
+
+project art/
+diff --git a/art/compiler/Android.bp b/art/compiler/Android.bp
+index 32e42bc02a..0108f804dd 100644
+--- a/art/compiler/Android.bp
++++ b/art/compiler/Android.bp
+@@ -23,6 +23,12 @@ art_cc_defaults {
+     name: "libart-compiler-defaults",
+     defaults: ["art_defaults"],
+     host_supported: true,
++    strip: {
++        keep_symbols: true,
++    },
++    ldflags: [
++       "-Wl,--build-id=none"
++    ],
+     srcs: [
+         "compiled_method.cc",
+         "debug/elf_debug_writer.cc",
 
 project build/make/
 diff --git a/build/make/tools/buildinfo.sh b/build/make/tools/buildinfo.sh
@@ -18,3 +34,52 @@ index 5a5446293..07f84fe4a 100755
  echo "ro.build.tags=$BUILD_VERSION_TAGS"
  echo "ro.build.flavor=$TARGET_BUILD_FLAVOR"
  if [ -n "$BOARD_BUILD_SYSTEM_ROOT_IMAGE" ] ; then
+
+project external/skia/
+diff --git a/external/skia/Android.bp b/external/skia/Android.bp
+index 4001deb6a5..56ad14ce88 100644
+--- a/external/skia/Android.bp
++++ b/external/skia/Android.bp
+@@ -2,6 +2,9 @@
+ 
+ cc_library_static {
+     name: "libskia",
++    strip: {
++        keep_symbols: true,
++    },
+     cflags: [
+         "-U_FORTIFY_SOURCE",
+         "-DATRACE_TAG=ATRACE_TAG_VIEW",
+
+project frameworks/base/
+diff --git a/frameworks/base/libs/hwui/Android.bp b/frameworks/base/libs/hwui/Android.bp
+index cb260b5b4b9..c48671065e3 100644
+--- a/frameworks/base/libs/hwui/Android.bp
++++ b/frameworks/base/libs/hwui/Android.bp
+@@ -11,6 +11,13 @@ cc_defaults {
+ 
+     cpp_std: "c++17",
+ 
++    strip: {
++        keep_symbols: true,
++    },
++    ldflags: [
++       "-Wl,--build-id=none"
++    ],
++
+     cflags: [
+         "-DEGL_EGLEXT_PROTOTYPES",
+         "-DGL_GLEXT_PROTOTYPES",
+@@ -69,6 +76,12 @@ cc_defaults {
+         "libandroidfw",
+         "libRScpp",
+     ],
++    strip: {
++        keep_symbols: true,
++    },
++    ldflags: [
++       "-Wl,--build-id=none"
++    ],
+     static_libs: [
+         "libEGL_blobCache",
+     ],
