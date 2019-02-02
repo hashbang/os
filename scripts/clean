@@ -1,7 +1,9 @@
 #!/bin/bash
 
 set -e
-
+rm -rf "$HOME/.gradle"
+rm -rf "$HOME/.android"
+rm -rf "$HOME/.cache"
 cd "$HOME/base" || exit
 make clean
 repo forall -c 'git reset --hard ; git clean -fdx'
