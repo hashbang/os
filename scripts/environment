@@ -25,6 +25,7 @@ with open(config_file, encoding='utf-8') as data_file:
 environment = {
     "OS_NAME": config['name'],
     "BASE_DIR": base_dir,
+    "ANDROID_HOME": "%s/sdk" % base_dir,
     "MANIFEST_DIR": "%s/manifests" % os.getcwd(),
     "CONFIG_DIR": "/opt/android",
     "EXTERNAL_DIR": "%s/external" % os.getcwd(),
@@ -72,7 +73,6 @@ environment['CROSS_COMPILE'] = \
 environment['CROSS_COMPILE_ARM32'] = \
     '{}/{}/arm-linux-androideabi-'.format(base_dir, cross32)
 
-environment['_JAVA_OPTIONS'] = "-XX:-UsePerfData"
 paths = [
     'opt/android/scripts',
     'build/tools/releasetools',
