@@ -8,26 +8,28 @@ image:
 	docker build -t hashbang/os:latest .
 
 config: image
-	docker run \
+	@docker run \
 	  -it \
 	  -h "android" \
 	  -v android:/home/build \
 	  -e DEVICE=$(device) \
+	  -v $(PWD)/manifests:/home/build/manifests \
 	  hashbang/os bash -c "config" \
 	> config.yml
+	@docker run \
+	  -it \
+	  -h "android" \
+	  -v android:/home/build \
+	  -v $(PWD):/opt/android \
+	  -e DEVICE=$(device) \
+	  hashbang/os bash -c "manifest"
 
-manifest: image
+fetch:
 	docker run \
 	  -it \
 	  -h "android" \
 	  -v android:/home/build \
-	  hashbang/os bash -c "[ -d '/home/build/manifests' ] || manifest"
-
-fetch: manifest
-	docker run \
-	  -it \
-	  -h "android" \
-	  -v android:/home/build \
+	  -v $(PWD):/opt/android \
 	  hashbang/os bash -c "fetch"
 
 tools: fetch
@@ -35,6 +37,7 @@ tools: fetch
 	  -it \
 	  -h "android" \
 	  -v android:/home/build \
+	  -v $(PWD):/opt/android \
 	  hashbang/os bash -c "tools"
 
 keys: tools
@@ -42,6 +45,7 @@ keys: tools
 	  -it \
 	  -h "android" \
 	  -v android:/home/build \
+	  -v $(PWD):/opt/android \
 	  -e DEVICE=$(device) \
 	  hashbang/os keys
 
@@ -50,6 +54,7 @@ build: tools
 	  -it \
 	  -h "android" \
 	  -v android:/home/build \
+	  -v $(PWD):/opt/android \
 	  -e DEVICE=$(device) \
 	  hashbang/os build
 
@@ -58,6 +63,7 @@ kernel: tools
 	  -it \
 	  -h "android" \
 	  -v android:/home/build \
+	  -v $(PWD):/opt/android \
 	  -e DEVICE=$(device) \
 	  hashbang/os build-kernel
 
@@ -66,6 +72,7 @@ vendor: tools
 	  -it \
 	  -h "android" \
 	  -v android:/home/build \
+	  -v $(PWD):/opt/android \
 	  -e DEVICE=$(device) \
 	  hashbang/os build-vendor
 
@@ -74,6 +81,7 @@ chromium: tools
 	  -it \
 	  -h "android" \
 	  -v android:/home/build \
+	  -v $(PWD):/opt/android \
 	  hashbang/os build-chromium
 
 release: tools
@@ -81,6 +89,7 @@ release: tools
 	  -it \
 	  -h "android" \
 	  -v android:/home/build \
+	  -v $(PWD):/opt/android \
 	  -v $(PWD)/release:/home/build/release \
 	  -e DEVICE=$(device) \
 	  hashbang/os release
@@ -90,6 +99,7 @@ shell:
 	  -it \
 	  -h "android" \
 	  -v android:/home/build \
+	  -v $(PWD):/opt/android \
 	  -v $(PWD)/release:/home/build/release \
 	  hashbang/os shell
 

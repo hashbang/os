@@ -1,0 +1,677 @@
+<?xml version="1.0" ?><manifest>  
+
+    <remote fetch="https://android.googlesource.com" name="aosp" review="https://android-review.googlesource.com/"/>  
+    <remote fetch="https://gitlab.com/" name="gitlab"/>  
+  <remote fetch="https://github.com/" name="github"/>  
+  <default remote="aosp" revision="refs/tags/android-9.0.0_r30" sync-j="4"/>  
+
+    <project groups="device" name="AndroidHardening/platform_packages_apps_Updater" path="packages/apps/Updater" remote="github" revision="5fabc651d6f7d6f4c474b3e45c2af54a586185f9" upstream="refs/heads/pie"/>  <project groups="device" name="AndroidHardening/platform_external_chromium" path="external/chromium" remote="github" revision="136b1c581edbd4482ada7e62a59d7ac1d13ab481" upstream="refs/heads/pie"/>  <project groups="device" name="stevesoltys/backup" path="packages/apps/Backup" remote="github" revision="09c8aad2373c9215ec4ed5959b8e7dac40c8efce" upstream="refs/heads/master"/>  <project groups="device" name="anestisb/android-prepare-vendor" path="vendor/android-prepare-vendor" remote="github" revision="2363eee0040b0e730272680ef97ad6f8c2085c88" upstream="refs/heads/master"/>  <project groups="device" name="fdroid/privileged-extension" path="packages/apps/F-DroidPrivilegedExtension" remote="gitlab" revision="bca8571ad311da31931d61f9db2fbf5a249e7abe" upstream="refs/tags/0.2.9"/>  <project groups="device" name="fdroid/fdroidclient" path="packages/apps/F-Droid" remote="gitlab" revision="3cadb5f5facd8ae30414abc603d096faf8866d92" upstream="refs/tags/1.5.1"/>  <project groups="pdk" name="platform/build" path="build/make" revision="6d23f5671b910e7b21b82d67e7055d5005c6c9ed" upstream="refs/tags/android-9.0.0_r30">    
+        <copyfile dest="Makefile" src="core/root.mk"/>    
+        <linkfile dest="build/CleanSpec.mk" src="CleanSpec.mk"/>    
+        <linkfile dest="build/buildspec.mk.default" src="buildspec.mk.default"/>    
+        <linkfile dest="build/core" src="core"/>    
+        <linkfile dest="build/envsetup.sh" src="envsetup.sh"/>    
+        <linkfile dest="build/target" src="target"/>    
+        <linkfile dest="build/tools" src="tools"/>    
+    </project>  
+    <project groups="pdk,tradefed" name="platform/build/blueprint" path="build/blueprint" revision="9a7593afc3d7cccc525052f71d8f4d33e503412e" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk,tradefed" name="platform/build/kati" path="build/kati" revision="ceb34f21dadefded22384ce09046f9836f877611" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk,tradefed" name="platform/build/soong" path="build/soong" revision="f44ca2d70b795f4917a1c752c3bfa08c8ad5d822" upstream="refs/tags/android-9.0.0_r30">    
+        <linkfile dest="Android.bp" src="root.bp"/>    
+        <linkfile dest="bootstrap.bash" src="bootstrap.bash"/>    
+    </project>  
+    <project groups="pdk" name="platform/art" path="art" revision="8d30116eec36c1ecae84f17f941a1bed73308c7c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/bionic" path="bionic" revision="c198c91f0743511e91148a27b3a0d0bdfbcfb7cc" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/bootable/recovery" path="bootable/recovery" revision="efc81545c353908f5a01ba2e46e1c2164b213770" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/compatibility/cdd" path="compatibility/cdd" revision="4635420130f47536f43f411018f2f44ea43ae904" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="cts,pdk-cw-fs,pdk-fs" name="platform/cts" path="cts" revision="d015d827f95eeab58d5c2131b229834f82f9ef19" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/dalvik" path="dalvik" revision="3cba82e7ca29e24fd16c0a078e9ddfe02b357e74" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="developers" name="platform/developers/build" path="developers/build" revision="cbf864fda1f5494d0c9ae26da32d2980932fb904" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="developers" name="platform/developers/demos" path="developers/demos" revision="9d0c2683c115008d0b5907be353db0a321f1884e" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="developers" name="platform/developers/samples/android" path="developers/samples/android" revision="cd0a54f7e42b13ca774e24b01982744b2ae835a3" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="developers,pdk-cw-fs,pdk-fs" name="platform/development" path="development" revision="a2b7080611ef78b80c8a4e7b357e74c3ce4a21f7" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk" name="device/common" path="device/common" revision="604b7c8beb7c4b64eebcef00936f38ab79d50493" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="device/generic/arm64" path="device/generic/arm64" revision="0318ac2fcc708b784e1d45a8df4ac3f46033dbec" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="device/generic/armv7-a-neon" path="device/generic/armv7-a-neon" revision="a13b43ce89284a9e7890450002bc14bf0fdd94bc" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="device/generic/common" path="device/generic/common" revision="bbd0455692df7396201a913e2d713b2fa6b18a2c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="device,pdk" name="device/generic/uml" path="device/generic/uml" revision="8690dd70d7bbd6e28c9f1b0f6a3b64530b133526" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="device/generic/x86" path="device/generic/x86" revision="5301b72f914df200c0261fc5fca38d72434fdc04" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="device/generic/x86_64" path="device/generic/x86_64" revision="d123d5d2e2e1c5405a27d1847bd71adfb5313005" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="device,crosshatch" name="device/google/crosshatch" path="device/google/crosshatch" revision="67c1db15b9e5427925299f4a8ca5688e3f9fbd97" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="device,crosshatch" name="device/google/crosshatch-kernel" path="device/google/crosshatch-kernel" revision="fa1f69ce481e70d8cb038f1d8307e0323b560160" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="device,crosshatch" name="device/google/crosshatch-sepolicy" path="device/google/crosshatch-sepolicy" revision="8c7e646117260c2a3f0c86bc457a4f6277be29fd" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="device,marlin,pdk" name="device/google/marlin" path="device/google/marlin" revision="352a327ea859a2b1ae02cb1c026c4b92668d48f5" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="device,marlin,pdk" name="device/google/marlin-kernel" path="device/google/marlin-kernel" revision="170ba79cc3b7489846992fc18c39ede0eb234fc1" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="device,taimen,pdk" name="device/google/taimen" path="device/google/taimen" revision="f408484f7a7eebe38b8e1e4197d36bfd719a6dc7" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk" name="device/google/vrservices" path="device/google/vrservices" revision="40093f8c312d3ca5cb4819beb61ecc240971dcb6" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="device,wahoo,pdk" name="device/google/wahoo" path="device/google/wahoo" revision="014506b4d2671e0da936a54c775b3b929bbee179" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="device,wahoo,pdk" name="device/google/wahoo-kernel" path="device/google/wahoo-kernel" revision="0f4f3e9eeec32ea86583c6ae733f35db7a4c3825" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project name="device/linaro/bootloader/arm-trusted-firmware" path="device/linaro/bootloader/arm-trusted-firmware" revision="524029765183db92ea8fd85dd3a133c119a333f3" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project name="device/linaro/bootloader/edk2" path="device/linaro/bootloader/edk2" revision="02f6770f8484fd3bdaf2154a237e5aa79ea1ba82" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project name="device/linaro/bootloader/OpenPlatformPkg" path="device/linaro/bootloader/OpenPlatformPkg" revision="852885c5d67f513feffd30b18155dd11c1e90bc8" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="device,hikey,pdk" name="device/linaro/hikey" path="device/linaro/hikey" revision="7bd79fc6ca157bec24d1c813b0cae90015f5d8f3" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="device,hikey,pdk" name="device/linaro/hikey-kernel" path="device/linaro/hikey-kernel" revision="a5e73e6ff76f2534ed9d6d3468484d4fbdd8fe49" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="device/sample" path="device/sample" revision="8def27dc99a65315144612653d50e417f5c98d2b" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/aac" path="external/aac" revision="743c2f903ec09b7871139a0a364c5fe76afb49de" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/abi-compliance-checker" path="external/abi-compliance-checker" revision="90c6d25cd46bb5926b3d99b404b48781748c9070" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/abi-dumper" path="external/abi-dumper" revision="207110832cc66f47cf1fce2bfed21ce40dd89250" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/adhd" path="external/adhd" revision="89f04d057ef9ad64c4b14541ef65aadd9bf0a916" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="adt-infra,notdefault,pdk-fs" name="platform/external/adt-infra" path="external/adt-infra" revision="24d48d4054a215ba76f374a850d3fee719077248" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/android-clat" path="external/android-clat" revision="2342c8b20a9ff12dd95818c498d47ee4705de6cb" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/androidplot" path="external/androidplot" revision="2867bc6b31176db60b66e81834b9eb4c40aa100e" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/annotation-tools" path="external/annotation-tools" revision="52540ba16aeba464e011c9a4e640fdff2cdae91b" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/ant-glob" path="external/ant-glob" revision="9ed7aa3758c060945ba7c0ce341742dc7b3bbf4a" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/antlr" path="external/antlr" revision="343539d90d936027df3a8d0ccd6a99a895545c83" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/apache-commons-math" path="external/apache-commons-math" revision="2cd71c806d595c1a3823e5380dd9f73c134dc1b2" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/apache-harmony" path="external/apache-harmony" revision="0c27e91e60313293c5c146c5e34176b804cc7df9" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/apache-http" path="external/apache-http" revision="5d3edf5e57b290d4b452be8f5ecb48ed819f6a32" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/apache-xml" path="external/apache-xml" revision="2da9879a85df1af4cb65a1ba5d7f6ea24207d49c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/archive-patcher" path="external/archive-patcher" revision="5f2aab6d5ab123b9fe493f5cdd7224ddf5285da2" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vendor" name="platform/external/arm-neon-tests" path="external/arm-neon-tests" revision="ff412351a95b72ed84ffb50fb3d9391cd6abec59" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/external/autotest" path="external/autotest" revision="e60eb017bd86af55d37c7710501d8759667bf321" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/avb" path="external/avb" revision="f81050fa0b50fecb2695d5e88ab1e5f4b29997d5" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/bart" path="external/bart" revision="a5e64e2ddced6118f1cd4077cef60ba8c492bf46" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/blktrace" path="external/blktrace" revision="f63a64158420795219f84bdbe113340848a3ee17" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/boringssl" path="external/boringssl" revision="1933bcf2cda41070a6934c12d13cfaac7552fa0d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/bouncycastle" path="external/bouncycastle" revision="7f5c90988e6fbfac0b53d2d0d26351ae44cb84db" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/brotli" path="external/brotli" revision="166c6c61469dae1c32dbc73d56cea8390e1d91ec" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/bsdiff" path="external/bsdiff" revision="5b2fcc8b218e131bffe2ce5ffa4e573ca6a8b47b" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/bzip2" path="external/bzip2" revision="3c5ed823f68560b048feb75207707cc94ae507c2" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/caliper" path="external/caliper" revision="6af841164bdc37bc6675aa663195446caedd4372" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/capstone" path="external/capstone" revision="3b1118c8f10bf2c29dd2c44ff49900e88b498971" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/cblas" path="external/cblas" revision="985ed10d238acf4525d68599cf2ffed024fcf04e" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/chromium-libpac" path="external/chromium-libpac" revision="b17ee0711fc1c6b5d4c3337f85661061d1ce5404" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/chromium-trace" path="external/chromium-trace" revision="bda4a47e63ac72ce5a0ef5b4895dcc39d8d7b635" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/clang" path="external/clang" revision="b44a465ed96d808816f5fd712e7f6b6337a4f19d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/cmockery" path="external/cmockery" revision="07127787fbbfca98eb50facf334a42eb89968443" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/cn-cbor" path="external/cn-cbor" revision="d3dc469b79fbd8d5472dc2d6767349eb58d9ea7c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/compiler-rt" path="external/compiler-rt" revision="f0e33b2f76b8f48c35c18107017b96a9e89422c8" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/conscrypt" path="external/conscrypt" revision="3527f67cf96d59414169946f863647dae9f3e4b9" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/crcalc" path="external/crcalc" revision="8fd3578f73edba4d6cc61e1e1818cfca6023df3c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/cros/system_api" path="external/cros/system_api" revision="bbcd06f2f5b8539e5fd0dc6a70c0fd6c014cadc5" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/curl" path="external/curl" revision="aa52d3c1437b2f097699c366166a7067aad39549" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/dagger2" path="external/dagger2" revision="212e3e7fbef08d59c51e7909e6c9204534b54fe9" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/external/deqp" path="external/deqp" revision="2867d2a9bbc7938bb69a870bacc851752fc1feaa" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/desugar" path="external/desugar" revision="74c686b40bfe8616f9444b72164862cb1ead7cda" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/devlib" path="external/devlib" revision="5cd6e90c0095d2d756e5ec17b770e228a28a713f" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/dexmaker" path="external/dexmaker" revision="915aac5f7b929c02e6b98edfd7f08f2c61a04aee" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/dhcpcd-6.8.2" path="external/dhcpcd-6.8.2" revision="bec6e4603600347d514c977fe4e2b88fea5e49b7" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/dlmalloc" path="external/dlmalloc" revision="875e9a4abf232dec79af4e3278a9082fb191052f" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/dng_sdk" path="external/dng_sdk" revision="08e52e4586eab66cb69671cbbf175a65718b14f8" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/dnsmasq" path="external/dnsmasq" revision="cd82c3e7970abf28d482f2265833fa81129a66de" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/doclava" path="external/doclava" revision="ac7dc48a1fd4d7981c0e925f19a13413abc0f625" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/drm_gralloc" path="external/drm_gralloc" revision="eb5b163a9cfea966eca8f367ce0c3c054db304dd" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="drm_hwcomposer,pdk-fs" name="platform/external/drm_hwcomposer" path="external/drm_hwcomposer" revision="d78cfce57f2321f5e5ee6dc08c260f88fb8b3e2a" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/droiddriver" path="external/droiddriver" revision="37b73f0c9a97a946851466e36828c6db0827c645" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/drrickorang" path="external/drrickorang" revision="24af8ec1ade5e020bc816beb43723aac5aa62126" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/dtc" path="external/dtc" revision="b5669640cc4ac5446f163a0e91451e87e2d681fb" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/e2fsprogs" path="external/e2fsprogs" revision="d600b8dce8648844fe9571593bf812af73a0f0be" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/easymock" path="external/easymock" revision="38baf3957805d1eba6c96c12eb18d3de6dc65534" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/eigen" path="external/eigen" revision="aa192e5a01b39bd27ceba023af8e55846691d0b4" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/elfutils" path="external/elfutils" revision="0ae72831cfce820a8278328da521a82c22c46f8c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/emma" path="external/emma" revision="42c7c5c88380ad7bf1e3875b0739a5e2c09f2d4d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/error_prone" path="external/error_prone" revision="686fe1dc3d418362947c374414841c157e78f7ae" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/esd" path="external/esd" revision="1658faf813af8a190d245490cb3465027dd2c1ca" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/expat" path="external/expat" revision="b784eb5f96559fa0b9c99f7f8ee6e7a27a53ddc7" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/eyes-free" path="external/eyes-free" revision="1ba8fcf3e928c8f8f612c83cbb83841c4ac67d72" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/f2fs-tools" path="external/f2fs-tools" revision="561d07d15981a9bb72e4f957c814ee0f73fdd630" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/fdlibm" path="external/fdlibm" revision="50cd6eebe2df3b44f646fea1d6eae32964049058" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/fec" path="external/fec" revision="d5ec56ee1c4409bf4157db5c40f3333d84477678" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/fio" path="external/fio" revision="44e4bec6e2039b329ed431aa3dfb14173ae693a7" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/flac" path="external/flac" revision="8f8a1f1f3eaba619772b6491f0101277e99f2e97" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/flatbuffers" path="external/flatbuffers" revision="6a7169fa1a3a8a3ec2f25bc1952ee0ba955be218" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/fonttools" path="external/fonttools" revision="35b8cdf71726d1b41387aaf7c2a02851ad90583d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/freetype" path="external/freetype" revision="320d894fe0e020bab02f5be40cd1bd82de9b23b3" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/fsck_msdos" path="external/fsck_msdos" revision="6fb4197290382ce8741e25e74fa83ed5c9682ecc" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/gemmlowp" path="external/gemmlowp" revision="8f70282f30e2fcac8ad148f4a26500e7f27ffcab" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/gflags" path="external/gflags" revision="7014735300a2c3d969edba827eeb40e852a19e28" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk,qcom_msm8x26" name="platform/external/giflib" path="external/giflib" revision="0f058e2da4e8d48e3785f936c10213bb20808432" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/glide" path="external/glide" revision="808dc319dce4efaa3c1e2accb33dd731616d74f4" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/golang-protobuf" path="external/golang-protobuf" revision="96fefc5ba2eeb78525e1a1afdff7feec44e4ecfe" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/google-api-services-storage" path="external/google-api-services-storage" revision="ec83dd6d17f82d35c56685212a7ee7a0cd6d8353" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/google-benchmark" path="external/google-benchmark" revision="6f7d6a89ea82c5e98a1b2b74aab4b3f99e06134c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/external/google-breakpad" path="external/google-breakpad" revision="993b5cb030dd05a017e9fc8fea9c0b7cd9767050" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/google-fonts/carrois-gothic-sc" path="external/google-fonts/carrois-gothic-sc" revision="8ca60fc645826e0dc3a318806ee9ff3c4fd6715e" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/google-fonts/coming-soon" path="external/google-fonts/coming-soon" revision="11912277bb3f54f9c89a374f28c1468f7c099a3c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/google-fonts/cutive-mono" path="external/google-fonts/cutive-mono" revision="66167dfb8a36b555523c8e0e4c06bfa69a6d29cd" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/google-fonts/dancing-script" path="external/google-fonts/dancing-script" revision="9b2d40c2cfd98f0636a7b6b9841c119c68683560" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/google-styleguide" path="external/google-styleguide" revision="3f4ec63713901b116adab42ac2e600434ce496e5" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/google-tv-pairing-protocol" path="external/google-tv-pairing-protocol" revision="27a6b484756d772da2f97991e0ebfb17b94a7f43" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/googletest" path="external/googletest" revision="9926dbc37b713897214bf7164a88d7356ebab038" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/gptfdisk" path="external/gptfdisk" revision="3a4c9c0634ec296e5f4ff0736a50d5e2fbdef03d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/guava" path="external/guava" revision="9cd7b838210d32e487b96ee81431896378a84368" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/guice" path="external/guice" revision="a56f73cbb70ad601cbf97474ba2100e8cc7d0143" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/hamcrest" path="external/hamcrest" revision="47d0c4ccbd64b5b0d1b25e12acd9f27ed192d194" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk,qcom_msm8x26" name="platform/external/harfbuzz_ng" path="external/harfbuzz_ng" revision="80b908e276912f389359a48adcb98788caba164a" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/honggfuzz" path="external/honggfuzz" revision="15af2bd3fb8e3d7430a25a986b14fa34cf82e2d9" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/hyphenation-patterns" path="external/hyphenation-patterns" revision="040e1b1a6d68305f87e14348ff1054df7ebbb4bf" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/icu" path="external/icu" revision="1965d8f2c98c56c16f5daa9b04391eae8aeef2ea" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/ImageMagick" path="external/ImageMagick" revision="2e12913ab9ae338bf95b4916029c19356fd9265a" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/ims" path="external/ims" revision="c72b51bf9c22760cdf46ab34a9408f93d0ae811b" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/iproute2" path="external/iproute2" revision="85bf368d32b1ff019238816160ce005f9e10ed31" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/ipsec-tools" path="external/ipsec-tools" revision="a499333744d31a020dd4e9dcff0bad3009bb64dd" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/iptables" path="external/iptables" revision="6a1f7327c758dc04370ab42d852b19d5ae581cc1" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/iputils" path="external/iputils" revision="5a2ae3107b587b22b4c8a40be0a00ef39e6c997d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/iw" path="external/iw" revision="4b10feb949adde965aa3406b964c804c7dfb29ba" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/jacoco" path="external/jacoco" revision="271f8aaea05ec0dc48b5a9bb03e9fd6fd94c34c2" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/jarjar" path="external/jarjar" revision="3aac519439e162bbbea347c568a15ed1b5ed871e" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/javaparser" path="external/javaparser" revision="508056d11778654b2de276c080b654c2bdc6c9cc" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/javasqlite" path="external/javasqlite" revision="a874cf5e3286af6d8833a44e4b8f8be5c8e27fb5" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/javassist" path="external/javassist" revision="4d0eaef6b290c851d86af9da9827518be9038ad1" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/jcommander" path="external/jcommander" revision="fe139e3b7b8f49136bb0e56c0de9d9322d0bb349" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/jdiff" path="external/jdiff" revision="291e031c1b43fb2c97c572249b65a6e67ca709f2" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/jemalloc" path="external/jemalloc" revision="23ee81b0e5330007367b0645f6590924e845bd0b" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk,tradefed,pdk-fs" name="platform/external/jline" path="external/jline" revision="29500ef5f42b007cba848ef2e0942eb656bec8c0" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/jmdns" path="external/jmdns" revision="dfec3317db2cceac85dd38640d5eaa9d681f8f07" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/jsilver" path="external/jsilver" revision="08c5465aa69b8b6df6b6fc76614a7eedb4a746d2" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/jsmn" path="external/jsmn" revision="fbfa4a17cb69aa231d323361e6a7944b266bdac0" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/jsoncpp" path="external/jsoncpp" revision="8c58b56e6108b83d443368714dc770296bdc1e8c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/jsr305" path="external/jsr305" revision="c2595762d836fc9e8ff4d8a252a0bd6f10f99c3f" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/jsr330" path="external/jsr330" revision="fe259e2a5a41555fd5df27d7109e269be668e338" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/junit" path="external/junit" revision="dcc5f4d4a21c2aa92f5aec364de70d567d1040ac" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/junit-params" path="external/junit-params" revision="e13c160fb6023ae9d459e79e4ab3858b5158430b" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/kernel-headers" path="external/kernel-headers" revision="b77147939b1102e70ee2b0877b20ef12ef471dae" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/kmod" path="external/kmod" revision="7b427a076f7f5fde2961737d72df3275d47b708c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/kotlinc" path="external/kotlinc" revision="f8db11bce3c6647b453e188afefb6c6c022a325c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/ksoap2" path="external/ksoap2" revision="fd54acff20a2a54b9af1b8775335a3608006c75b" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libavc" path="external/libavc" revision="5aa7ce7eb163e0cd7c4cef5ea25ba7f91c78e4c9" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libbackup" path="external/libbackup" revision="31d680e53ece5d1cf7e84526372114b4a8473e2a" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libbrillo" path="external/libbrillo" revision="be7b9a9bd25bb2964c2b4fbd9c7a9eced96e0a11" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libcap" path="external/libcap" revision="076407535158535fcec0cb97289dbba7e2c6d3fe" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libcap-ng" path="external/libcap-ng" revision="aebf62449bfc3afd9e26537aac5a0d4f8e018c00" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libchrome" path="external/libchrome" revision="91647c584f31bbdf6cd0c308d6817eb91fc37b17" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libconstrainedcrypto" path="external/libconstrainedcrypto" revision="35014d43e3362d950e9fa950c95647c2d5437d0a" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/external/libcups" path="external/libcups" revision="942542cc5b882c52992ff822b205835111146afa" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libcxx" path="external/libcxx" revision="dc98506ac66ff8fec984b337425dd3542db7603f" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libcxxabi" path="external/libcxxabi" revision="8cb4b7d76858ffbbf751cf5f5c686a7b3b917868" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libdaemon" path="external/libdaemon" revision="853c7787322b1c9dcd7e9d8ca3467758fa7471e6" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libdivsufsort" path="external/libdivsufsort" revision="eed71293e964c4731e10eb1451b71db6effd62fc" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libdrm" path="external/libdrm" revision="d1f01f845f242ea7519c36e6240948e15bf43739" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libedit" path="external/libedit" revision="b23d43804d234ad4f863795d98c31a4a36dc8be8" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libese" path="external/libese" revision="cedd6c6dee38daba5eabbb0646f594e7c5231930" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libevent" path="external/libevent" revision="7e3c87e918e45a22f69bebfd1478b03b334e6254" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libexif" path="external/libexif" revision="87e8fb9d3491bd9c861ab7ed2786f1e126c7f072" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libffi" path="external/libffi" revision="2ea31602632d6a7f4ce51656707f2ddbbf36b804" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libgsm" path="external/libgsm" revision="6168cfde005537843dddc8f480d6c41f25d194f8" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libhevc" path="external/libhevc" revision="397414f6d51f105f91b6a917ee92a4b23f10adad" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libjpeg-turbo" path="external/libjpeg-turbo" revision="146dbc9d3a68333ca65eabb09efa30481c0c1839" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libldac" path="external/libldac" revision="5f4d7b945ac2244b1ceec322f79fcab73f2e6520" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libmicrohttpd" path="external/libmicrohttpd" revision="259f6c09096c04cd89b73081053913087dfe2ae6" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libmojo" path="external/libmojo" revision="00a54e9c260659c428a4efb43c8dbee7f1b9de7c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libmpeg2" path="external/libmpeg2" revision="5f57f85e4d1a4d3a7d797e6f4dd9b3659eb181d6" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libmtp" path="external/libmtp" revision="1669c2ee23c3d6c57c83f2d98b2c912c65d678aa" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libnetfilter_conntrack" path="external/libnetfilter_conntrack" revision="6f9830b57391dd750a90b5c264a6d0e1a38e7fdf" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libnfnetlink" path="external/libnfnetlink" revision="16236cf62a7d730243a7c557acf26fc70499c686" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libnl" path="external/libnl" revision="4d684af4da515ee59bee21433a107b08dbe82455" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libogg" path="external/libogg" revision="a1587d911bc3bbb3ce25807888705e22abc14c33" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libopus" path="external/libopus" revision="0ed6d4e5f10bfe75d94ba51880b57cd6c57aa7f8" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libpcap" path="external/libpcap" revision="0e80ea8365f9410718bd5a1f0ef38a1c325c3836" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libphonenumber" path="external/libphonenumber" revision="f36444b23bbeb58c425b02b202743fdf6178e126" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libpng" path="external/libpng" revision="ebe1293ed7180ce74ba6dfe4ec79e3d72cdbc5a7" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libtextclassifier" path="external/libtextclassifier" revision="76c67e3fd1fbe4d0f7949ce3a1d40c3aa970bbee" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libunwind" path="external/libunwind" revision="7a3c03db6fa5310e060af48063dbcee2af261657" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libunwind_llvm" path="external/libunwind_llvm" revision="bfd65460c95673d6145f36f0ed6db3df8d2e24d1" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libusb" path="external/libusb" revision="49db4d6a822b6e441996497771e74b4ae89580c7" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libusb-compat" path="external/libusb-compat" revision="21f376cbf2f514edfaacaf0d9b9ba17c3421018b" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libvncserver" path="external/libvncserver" revision="f701f07f4a24de4a078b5074c985786fd60c9508" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libvpx" path="external/libvpx" revision="e82df25bc53f6fedab37daa8c699458dae01e6f2" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libvterm" path="external/libvterm" revision="9097c8880932cf2cf356c2626edea3e1ae5bd3f7" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libxaac" path="external/libxaac" revision="ae5f1d0eb4d751ba5eabf3864ad359f47093edb6" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libxcam" path="external/libxcam" revision="21a67b619f5f6221022848911feb1c0a119f67f7" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/libxkbcommon" path="external/libxkbcommon" revision="7c9daa50b3dbea9668289553c4b027be58d6f584" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk,libxml2" name="platform/external/libxml2" path="external/libxml2" revision="38d864837002e468d817289034b8ddd1ffa78019" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk,libyuv" name="platform/external/libyuv" path="external/libyuv" revision="60f01c3896990535ff343e736c3ac80848384d3f" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/linux-kselftest" path="external/linux-kselftest" revision="6ccdb0327e806c83aac02bc0c78912d06549f417" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/lisa" path="external/lisa" revision="5a62a9e7a6044767bfc9648434ac99e00f4e4b6e" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/llvm" path="external/llvm" revision="5cf74cd2a07f90db54488bef1521a67075c2d206" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/lmfit" path="external/lmfit" revision="f7a958202ef7c76326ff5b7f60b6f0e19463b301" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/ltp" path="external/ltp" revision="9023496fb2021e51f9da234134d21dc3e8082a43" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/lz4" path="external/lz4" revision="5eae063c4f963a7387458c01a498b40ddb1fd7ad" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/lzma" path="external/lzma" revision="4199d87f0febc0f7435f2b37758f605bee634500" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/markdown" path="external/markdown" revision="6f6eece64c6edb11928f1c0100636574e2498b4a" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/mdnsresponder" path="external/mdnsresponder" revision="4f419d032d012168bf6ddf7f30a093650ef8a482" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/external/mesa3d" path="external/mesa3d" revision="d98f0f568d2f258531f2d02f02879595dd0981d8" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/Microsoft-GSL" path="external/Microsoft-GSL" revision="0e339ff7cddf241b0a30a825545c17455621f01f" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/minijail" path="external/minijail" revision="b755432b9124cfca7d6d7fc5386206d0cd7bb73f" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/mksh" path="external/mksh" revision="6fa9d100c3023c1b313f88852d72f7fc1ba97d17" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/mmc-utils" path="external/mmc-utils" revision="db0a7f4ac53d9ec59d894437b5916c23c8a28348" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/mockftpserver" path="external/mockftpserver" revision="1c44c57247a4507db10b8e42b402531ba473b446" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/mockito" path="external/mockito" revision="bd8c0c77249eb13aad164d5284c7e7732f4ddf8d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/mockwebserver" path="external/mockwebserver" revision="9f2b12202a1357143f303402305d1e4be4f82739" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/modp_b64" path="external/modp_b64" revision="a4ab23b919dc58e80ec6de1c7d22e924401169ba" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/mp4parser" path="external/mp4parser" revision="0a23ab50df9570d0d75ebee4c7e644d7a05923ff" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/mtpd" path="external/mtpd" revision="dc6c7c3668ef133a6cae52362cb7d9592ee97145" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/nanohttpd" path="external/nanohttpd" revision="8daa602594f8b5d8f6c30fd9739434f2a09102bd" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/nanopb-c" path="external/nanopb-c" revision="047663db59167bfc488e001d63f85c794a7afa1f" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/naver-fonts" path="external/naver-fonts" revision="1aebd3bb31059531102f16eadc6b5dc4e59fb35b" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/netcat" path="external/netcat" revision="4a5e7aa8da1246a4bb37648ac5cf7595d071e5ac" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/neven" path="external/neven" revision="0895df0df65c48193a21db625d13d3b0f94b5bfd" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/nfacct" path="external/nfacct" revision="096e0f51534e3d97512c183ae1aed0378852658a" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/nist-pkits" path="external/nist-pkits" revision="11a9cce8b2264d3e72160102384a3c680ec2b245" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/nist-sip" path="external/nist-sip" revision="af62ae6ae6c824006483eefe7285f950cf0075ed" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/nos/host/android" path="external/nos/host/android" revision="d6582ba2bd217414bb793c20db0380eb73739f62" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/nos/host/generic" path="external/nos/host/generic" revision="de6e0da6cd2f57a2eedb326b9b9d5658b990b57f" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/nos/test/system-test-harness" path="external/nos/test/system-test-harness" revision="fff90234d0ede34fa2a7886c6464c3574a5a9f99" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/noto-fonts" path="external/noto-fonts" revision="08c32eece09d1ed3e859e6ac042033ff114405fd" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/oauth" path="external/oauth" revision="8c5e401b894ea2f7074b6315365ee196bc4e93b7" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/objenesis" path="external/objenesis" revision="509288b6f0cd7467254b3f4792081d508e18c444" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/oj-libjdwp" path="external/oj-libjdwp" revision="71331919ec37c9862f091f6c2546e842e6b4d927" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/okhttp" path="external/okhttp" revision="3c8cf8e29a6bb7ace21f2637df34a8d819900ed5" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/one-true-awk" path="external/one-true-awk" revision="a31c1f5874ff8fd5c65cbd400e37dc6588802ff0" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/owasp/sanitizer" path="external/owasp/sanitizer" revision="9da25e532964d4d28cb7984c7fb9447d58deea6e" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/parameter-framework" path="external/parameter-framework" revision="cc8ebfcdaecec8426d9309f93af09819f1cf80bc" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/pcre" path="external/pcre" revision="c3fd95023bbe21c66a3fbabd7dd3f566b77a96ae" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/pdfium" path="external/pdfium" revision="38b6009f66128889ebb394f91f7fa6fd289b11d0" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/perf_data_converter" path="external/perf_data_converter" revision="de06068761388a2564eb1ad173602e972d4b7256" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/perfetto" path="external/perfetto" revision="0e56044427feddafaba3097cd78ab133622c111f" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/piex" path="external/piex" revision="6dfd053d9e310e20067f8f3e7e6bf260634be909" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/ply" path="external/ply" revision="5e95114fad3cc8dba8c55204807b71c13e33917e" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/ppp" path="external/ppp" revision="4a3f2de0b91e09535f6a90abd83bde7126bfbfea" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/proguard" path="external/proguard" revision="2df37851a6ea1af5d5ab9395aa9fd69695c646f6" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/protobuf" path="external/protobuf" revision="e46cb92153827866f262f9f3091825506d330445" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/puffin" path="external/puffin" revision="a94e9dbece140988dea04186033045afb6957c8e" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/appdirs" path="external/python/appdirs" revision="c2759934e00bc91c8244d3b94272471d0f04d358" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/cachetools" path="external/python/cachetools" revision="8a2e7484ecce2670991b2d635fcff598a2937d15" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/python/cpython2" path="external/python/cpython2" revision="f69e83691851d847d114ff9ac18b25cedc1fbfdf" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/python/cpython3" path="external/python/cpython3" revision="a1ab84cd6a174e225aa6faceeb130738382fe295" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/dill" path="external/python/dill" revision="b305cc5ff05153c54385689fa73deb0f3450b4b6" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/enum" path="external/python/enum" revision="bf0e83a73178f3140cdd29a8e7d6ff5770b429e6" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/enum34" path="external/python/enum34" revision="348aa768a19f350b365a258d7412bd634062871d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/future" path="external/python/future" revision="3393d63e2f0fc40a77b4df8e70840d38be4d506c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/futures" path="external/python/futures" revision="6e6f63789d4746b0c979e9cec8180296d36b73cd" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/gapic-google-cloud-pubsub-v1" path="external/python/gapic-google-cloud-pubsub-v1" revision="e78ae89703df731e766f48bf366a6a6dafa708f8" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/google-api-python-client" path="external/python/google-api-python-client" revision="8a820ca88d8902b99d21bc544addaa76280daff3" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/google-auth" path="external/python/google-auth" revision="fb66e30a07150870cb431f24ecdf79ddf6ad7768" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/google-auth-httplib2" path="external/python/google-auth-httplib2" revision="2a4c5d9f2c8a1ba1388aee1a0ed7d9f5d808d161" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/google-cloud-core" path="external/python/google-cloud-core" revision="de260ebfc9eb1893c0d7bf38d0567b535ea21852" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/google-cloud-pubsub" path="external/python/google-cloud-pubsub" revision="c54197db6d0f728b081961fcaecd74290148203c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/google-gax" path="external/python/google-gax" revision="fb00364f19a611c6013332350bc2abca90a1e1a6" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/googleapis" path="external/python/googleapis" revision="b984ec09b8d45d20b5b53867735d0094bcb21480" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/grpc-google-iam-v1" path="external/python/grpc-google-iam-v1" revision="71cb1380a3e791ade9b9386cdf302e64c7e73d6a" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/grpcio" path="external/python/grpcio" revision="12d653839ce730fd32ca79cf3b7485becfb2b956" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/httplib2" path="external/python/httplib2" revision="c5203ff6c3bdabea635c151a5fa1d8dc597be815" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/matplotlib" path="external/python/matplotlib" revision="8c7f883735a635ac6c027d23504a26bb5cdd30bf" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/numpy" path="external/python/numpy" revision="88b01405056ee5acf6a75f76840a1787d7dedbe3" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/oauth2client" path="external/python/oauth2client" revision="85fbb4c3c667d65204243f18e4b0e8a2ac220b4b" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/olefile" path="external/python/olefile" revision="3c7bed3547adc908adf30badddb0280b26e2647e" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/packaging" path="external/python/packaging" revision="9d7724b861fbf1935cec4f88b99ad58b09a705a6" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/parse" path="external/python/parse" revision="c7516deeedb3e79588fa3cf5f0fa9aa5de06646e" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/Pillow" path="external/python/Pillow" revision="039290309a01b157d395ab88e983a7e78060366d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/ply" path="external/python/ply" revision="fffe06660aa73c2ca7015ee6809beccbb8f46b44" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/proto-google-cloud-pubsub-v1" path="external/python/proto-google-cloud-pubsub-v1" revision="b47a6d47558f2682985bf5fa341ee2de4c084401" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/protobuf" path="external/python/protobuf" revision="62f54fb7cedb13dc5f76d4e725fbcde7f5494241" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/pyasn1" path="external/python/pyasn1" revision="51d2896b95a66f7e13a4ba3371a8f8b5beaffff0" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/pyasn1-modules" path="external/python/pyasn1-modules" revision="483e11bb720520c052df4792fb05e424dfcc957d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/pyparsing" path="external/python/pyparsing" revision="ae4aa797b2b09dbd4a3068cf208ab619f8821e8b" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/requests" path="external/python/requests" revision="c30b18adffc810fd60fc7d56c8dd21ff73617e45" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/rsa" path="external/python/rsa" revision="241ecc508f5b9f23ed281ffdbc85c31e108304c9" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/scipy" path="external/python/scipy" revision="b56660dfba70a04b54ca60f19b54381aefb52b74" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/setuptools" path="external/python/setuptools" revision="d0ed2d0ee22a3e5d2963d000ef3e06e063f20780" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/six" path="external/python/six" revision="64a9ade403968792f2436bdcff3eefbcf44ff53c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/external/python/uritemplates" path="external/python/uritemplates" revision="0cbfe67bc234ca960b95eedf2a839592937e3b05" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/rappor" path="external/rappor" revision="ad6854c98dbaaf417e634bd94d0b192fc8dfc735" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/replicaisland" path="external/replicaisland" revision="c38098500429f223957ac6b1eed589ac75123a39" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/rmi4utils" path="external/rmi4utils" revision="7276185845dd6d1092bf9bbf6a360568130a7381" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/external/robolectric" path="external/robolectric" revision="9c7f88f16ff178d62106a076c9ca75b8917bb94f" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/external/robolectric-shadows" path="external/robolectric-shadows" revision="8402e2cbe6fe39a2f2aa49a40e1f7baa35b71d8f" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/roboto-fonts" path="external/roboto-fonts" revision="5c9c245c4cbb5dc24023a6f3fd04f407ff8c8eb6" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/rootdev" path="external/rootdev" revision="8e92eb917812a07e16d1c63f93c523f363dffa2f" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/safe-iop" path="external/safe-iop" revision="085dc4c88455e614b9dba34769836955cf38cd5e" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/external/scapy" path="external/scapy" revision="7a00b00b8a9107ac4f760caed8088c6b7b3e4dd0" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/scrypt" path="external/scrypt" revision="542eb00b16a0d45bec24cbf6c0795c2edf2f9391" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/seccomp-tests" path="external/seccomp-tests" revision="8bb2a1969ca71ffb0dc77f474234a6c12cc3ce87" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/selinux" path="external/selinux" revision="e12baacc82bde2d68e07bf38b4b2e1e93767c0d8" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk,qcom_msm8x26" name="platform/external/sfntly" path="external/sfntly" revision="aa2fd75633bb9e4bdd35df5d2f4e92f67827fff3" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/shaderc/spirv-headers" path="external/shaderc/spirv-headers" revision="8f98ba3357325770c635105c1e99600a4cb33eae" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/shflags" path="external/shflags" revision="1dfcd17ba07fc10a5c5cc81b57d9e3dbe4d7f933" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk,qcom_msm8x26" name="platform/external/skia" path="external/skia" revision="22acadb0e98fee9b4babbcda203949ec9f36844d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="cts" name="platform/external/skqp" path="external/skqp" revision="c23e5107b1f86953493d348d0a00f744881b2ccb" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/sl4a" path="external/sl4a" revision="8a22cec173efdac32379e9618d51d7172a9eb910" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/slf4j" path="external/slf4j" revision="13a6e41034085bd449f9160900594c33eaa14f47" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/smali" path="external/smali" revision="a2244dfff4410b4a9b39cbdfd287279d618ac38b" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/snakeyaml" path="external/snakeyaml" revision="e7682d24978901e88f9868b5cbe45392e7d2e1be" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/sonic" path="external/sonic" revision="db8ea0e72e9e91b8d5e016b0f05f602da928e42d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/sonivox" path="external/sonivox" revision="52fc4f321c21be3a61c51394298128c138b079e7" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/speex" path="external/speex" revision="69e8a6a60ea260d4ff33136564cafe5a327de4e5" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/spirv-llvm" path="external/spirv-llvm" revision="9376eb9ef5c130bd91c13846c03a438f413534d0" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/sqlite" path="external/sqlite" revision="699b9fe34b10516dc89ab75dd15a3ab740897352" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/squashfs-tools" path="external/squashfs-tools" revision="8e321d0343a43ea5a580be9591fdf92e871334bb" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/strace" path="external/strace" revision="2dc0c0dd40ce938d5a5240f3b163d0cec8f16853" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/stressapptest" path="external/stressapptest" revision="6bfca318d7f631eef0eadfcd80ae4bee5e97c67c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" name="platform/external/subsampling-scale-image-view" path="external/subsampling-scale-image-view" revision="d74a7ac9a663d8d5dda581465225a957c226715e" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/swiftshader" path="external/swiftshader" revision="a2a117fe6e2f18da98b14703e07d8ab1051b191f" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/syslinux" path="external/syslinux" revision="9117fdc689576a51945f7ed0402a58be73a5b447" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/tagsoup" path="external/tagsoup" revision="a70558203c532b0cd1492c7b360ba44c3e142a5d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/tcpdump" path="external/tcpdump" revision="805d0916de8d359aa778524d3d078de56cd7527f" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/tensorflow" path="external/tensorflow" revision="0ad4a0e115b1c905e6df0b8b07b5c7e47510978d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/testng" path="external/testng" revision="66db5b3d2a38d1c5bf40795eaaffa13a94e0b221" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/timezonepicker-support" path="external/timezonepicker-support" revision="f713775d2a9fe85dbbce114ebefab44fbf92919b" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/tinyalsa" path="external/tinyalsa" revision="7d30b6fa2bc9fa101606cb51b110920f4374ba01" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/tinycompress" path="external/tinycompress" revision="28e9516e28127a3116188847e89b903ae275af0d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/tinyxml" path="external/tinyxml" revision="e521a7675bfd3c23d992716955f9a06a4cb802cb" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/tinyxml2" path="external/tinyxml2" revision="5ecf063b637fb9dc9b971aa162ea5d5c1f10387a" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project name="platform/external/toolchain-utils" path="external/toolchain-utils" revision="f40d8aac4dc228697ef8b755a2e1ca6747fa05db" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/toybox" path="external/toybox" revision="ae1ed7abdbe81e5514fe44d6a5701b09707a9f8c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/tpm2" path="external/tpm2" revision="730f22fa323c58a3ea83f3dd4d26f88260a93b55" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/trappy" path="external/trappy" revision="35d4149eab15c39a0978629be1807eddc7094630" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/tremolo" path="external/tremolo" revision="15b9a60d27153fe3c52eacfea407afb54981f067" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/turbine" path="external/turbine" revision="7ee0223224031971032936c510cf37d9c109c021" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/unicode" path="external/unicode" revision="192c3710d96f1e8fb859851380c8357a0077c3d8" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project name="platform/external/universal-tween-engine" path="external/universal-tween-engine" revision="f0ca31c38b29bf1f9692e27ae6232fd66301030d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/v4l2_codec2" path="external/v4l2_codec2" revision="c98a39ad57ce7d9713a2635b883cafbf6ffc895e" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/v8" path="external/v8" revision="93225851e22dbf478ac754b12b57894a1f12c0d7" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/valgrind" path="external/valgrind" revision="98e7685a14faaef173bf0c66fe3bb72ef759b47e" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vboot,pdk-fs" name="platform/external/vboot_reference" path="external/vboot_reference" revision="c1bae711d226890cac472df601b514a5345128f4" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/vixl" path="external/vixl" revision="21732ee6fa0da0a2a7e6e4a05e27ed04056b4fd3" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/vogar" path="external/vogar" revision="e758693c1f5b5dd227c6e02e6652383d23d9c3e5" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/volley" path="external/volley" revision="b724f0134b9151617a01dd69e8f890fcdaaebc22" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/vulkan-validation-layers" path="external/vulkan-validation-layers" revision="87c567449363a0b446dc0d1697ab020187dff91b" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/walt" path="external/walt" revision="6749cc13b2d8896ba1aeced01c5cc2334c13498d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/wayland" path="external/wayland" revision="f52846d1b57d4772205f25a32942ef7b62be9cbb" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/wayland-protocols" path="external/wayland-protocols" revision="0540e7978ab4d774e216f98581ec3028e8fae794" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk,qcom_msm8x26" name="platform/external/webp" path="external/webp" revision="ef6e8da0b00f54b6b48697814fddb40268b53491" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/webrtc" path="external/webrtc" revision="1ab3acb8eab7a2aa8488fffde871dfcd3d3141b3" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/webview_support_interfaces" path="external/webview_support_interfaces" revision="2dcee625f85e9fa27ae5ae1534cbfb6b8b8ab45d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/wpa_supplicant_8" path="external/wpa_supplicant_8" revision="177c696b4052b1eb36aba0ce17d4858b7f2f1a29" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/wycheproof" path="external/wycheproof" revision="511725f3f9aa0c6150208298caff237a42b92a39" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/x264" path="external/x264" revision="79407516b44f99d3b7b00118929b6664439de25f" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/xmlrpcpp" path="external/xmlrpcpp" revision="e93b439e5825b29f42d0c2d89b1a78dd8dbd1970" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/xmp_toolkit" path="external/xmp_toolkit" revision="e7e26c6ff8a3be5ee6d1bc73460cf66397d3a688" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/xz-embedded" path="external/xz-embedded" revision="215cbe91dde6ada3c0a20e83e6fea9b76a260d11" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/zlib" path="external/zlib" revision="238b65eeddf1302207af0879a2878b56a6a5f992" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/zopfli" path="external/zopfli" revision="e0cbf14defebff1a338575f764dcf3fbd5a0e467" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/external/zxing" path="external/zxing" revision="f6cc3457182f7c9eefbddec6720cc0c5900f9dfe" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/frameworks/av" path="frameworks/av" revision="fb1af5232b295e47cce259f356e1363dec5fc783" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/frameworks/base" path="frameworks/base" revision="3396afb62cbaf854167970c2bf2af5393f264f56" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/frameworks/compile/libbcc" path="frameworks/compile/libbcc" revision="95780f4ad90dc91deb82ece4726bae4c69ecaf4b" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/frameworks/compile/mclinker" path="frameworks/compile/mclinker" revision="86ab1da2015ebbacb5d5ab5cd2e16ad4708cac41" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/frameworks/compile/slang" path="frameworks/compile/slang" revision="234d569382aa9affda86e2c8d8d1a97b812a7cdc" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/frameworks/data-binding" path="frameworks/data-binding" revision="30f5c68459a8e0baff1985562b46ae264d17d018" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/frameworks/ex" path="frameworks/ex" revision="420777da3b3d8f2d2251f56027e72648ea7694e6" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/frameworks/hardware/interfaces" path="frameworks/hardware/interfaces" revision="b6bb7c9f9c9dddc56d77c6ec92808ed959f3d530" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/frameworks/layoutlib" path="frameworks/layoutlib" revision="e5c9ff76945ca68c05c5e7b41c664e0a912db58d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/frameworks/minikin" path="frameworks/minikin" revision="995041dc98580e58c7b1a7e805a0a73d27e39cae" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/frameworks/ml" path="frameworks/ml" revision="41879d45c5c34a8cfd4f2f1b9d290aa70fb3081e" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/frameworks/multidex" path="frameworks/multidex" revision="839629b49f101926e1674006f5cd27c07bb70d09" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/frameworks/native" path="frameworks/native" revision="b6198104a7fc162a721303eb90b5838b41ae1a0b" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/frameworks/opt/bitmap" path="frameworks/opt/bitmap" revision="421562736e2fe019b644a467828b8adde6ef61a7" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/frameworks/opt/calendar" path="frameworks/opt/calendar" revision="a5b426240bfff9a5f331ed44569e665b42a05166" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/frameworks/opt/car/services" path="frameworks/opt/car/services" revision="02dd3fb0df3206f6625fa015eb7e61c68316970c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/frameworks/opt/car/setupwizard" path="frameworks/opt/car/setupwizard" revision="8b27f475826f365e724cc26714ae871495dfce30" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/frameworks/opt/chips" path="frameworks/opt/chips" revision="35e14e14815ca9e136e56668e9cd0e71fc12997c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/frameworks/opt/colorpicker" path="frameworks/opt/colorpicker" revision="d59a0b848d9bd91abc3979456616c3bd6369f393" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/frameworks/opt/datetimepicker" path="frameworks/opt/datetimepicker" revision="5aba2d04d68e8eb73344f71f6484cf274f5f196b" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/frameworks/opt/inputconnectioncommon" path="frameworks/opt/inputconnectioncommon" revision="8c251ba4c69ecc5bd3f5af2ec51aa6436f1f4900" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/frameworks/opt/inputmethodcommon" path="frameworks/opt/inputmethodcommon" revision="f4880bcbfcb72dc1b0fc2bbf7076c0a98f63573b" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/frameworks/opt/net/ethernet" path="frameworks/opt/net/ethernet" revision="173328758d6e408d0053acced25ab468be559ab3" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="frameworks_ims,pdk-cw-fs,pdk-fs" name="platform/frameworks/opt/net/ims" path="frameworks/opt/net/ims" revision="908fa32e07983cd2cf753abc112924dedf1f0e9d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/frameworks/opt/net/lowpan" path="frameworks/opt/net/lowpan" revision="28c463577dd9a425b9d81491c7a98d974a78a020" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/frameworks/opt/net/voip" path="frameworks/opt/net/voip" revision="898fb707315a4a66ae65742160f22bd7c7cbf47b" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/frameworks/opt/net/wifi" path="frameworks/opt/net/wifi" revision="dd4588ad9076e72f517bf8b3d997995bc1412dce" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/frameworks/opt/photoviewer" path="frameworks/opt/photoviewer" revision="acdf17bd9c8a1cf7e65edf843bf52528b879ffd2" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/frameworks/opt/setupwizard" path="frameworks/opt/setupwizard" revision="ba4f5fbf44c272248861c63061cc5b4574acaf7f" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/frameworks/opt/telephony" path="frameworks/opt/telephony" revision="27e28e8bc0164d8602596a55c6af676a8583a65d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/frameworks/opt/timezonepicker" path="frameworks/opt/timezonepicker" revision="5cfc606199363f02c27bfdf4fc1bc183c29b226b" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/frameworks/opt/vcard" path="frameworks/opt/vcard" revision="bd46984e9a9b352ca0e294cbaa51e2704158989f" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/frameworks/rs" path="frameworks/rs" revision="53ac43a481cd7d8a8c1ce2b08f0aa717849f1f5f" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/frameworks/support" path="frameworks/support" revision="2aeacfd11aebd52cb1f2e54f541fc5083cdb797e" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/frameworks/wilhelm" path="frameworks/wilhelm" revision="7f32b65919e1c365fe732f3e4f0e18b086f6adfc" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/hardware/akm" path="hardware/akm" revision="b9a0d0be41ad9448be5f30ab13a08d2b2b8167ab" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/hardware/broadcom/libbt" path="hardware/broadcom/libbt" revision="4d8005a1fd3681d3b7c3b3999edda08d1b9ed74b" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk,broadcom_wlan" name="platform/hardware/broadcom/wlan" path="hardware/broadcom/wlan" revision="1548aeaf99d9c65403f30b973b5ca30ae35c2836" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/hardware/google/apf" path="hardware/google/apf" revision="45a5cac8afe4f88e0a7b62b797435a40aa828413" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk,easel" name="platform/hardware/google/easel" path="hardware/google/easel" revision="9e7637e67cfdabf3e4e38983090bbde8a6e1d763" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/hardware/google/interfaces" path="hardware/google/interfaces" revision="fee20736a3404237cd77cdcbaf487722b9080b73" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/hardware/google/av" path="hardware/google/av" revision="ae1fbb2c876511283e4cd83a542645734e38faf8" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="intel,pdk" name="platform/hardware/intel/audio_media" path="hardware/intel/audio_media" revision="2fc969941730ce2c3de6bec418abf71667a02d2a" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="intel,pdk" name="platform/hardware/intel/bootstub" path="hardware/intel/bootstub" revision="6b5297b3f65e213f560d0b067ac6f577d3f1197e" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="intel,pdk" name="platform/hardware/intel/common/bd_prov" path="hardware/intel/common/bd_prov" revision="7273716a1450619283f2e0e21825a0479375dd17" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="intel,pdk" name="platform/hardware/intel/common/libmix" path="hardware/intel/common/libmix" revision="fd57d3f9d5b4b996f580d69659af67084443e4c4" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="intel,pdk" name="platform/hardware/intel/common/libstagefrighthw" path="hardware/intel/common/libstagefrighthw" revision="506c621011c8859ebeef70a2554a4b76b178ea10" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="intel,pdk" name="platform/hardware/intel/common/libva" path="hardware/intel/common/libva" revision="8dff4f0c61c0ccbe8510f8505281eeaecd5df5c7" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="intel,pdk" name="platform/hardware/intel/common/libwsbm" path="hardware/intel/common/libwsbm" revision="f18770bf0bf97957603be0e0f85adf1cd3572c8d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="intel,pdk" name="platform/hardware/intel/common/omx-components" path="hardware/intel/common/omx-components" revision="20d1c19d496c7a130d5b858a314e836e8110ecf3" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="intel,pdk" name="platform/hardware/intel/common/utils" path="hardware/intel/common/utils" revision="2b98cbaec744038f3feefe72e0a2c996ec681645" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="intel,pdk" name="platform/hardware/intel/common/wrs_omxil_core" path="hardware/intel/common/wrs_omxil_core" revision="94911a43390b078b8ef68a8059716bf04c4fd394" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="intel,pdk" name="platform/hardware/intel/img/hwcomposer" path="hardware/intel/img/hwcomposer" revision="6ae1f783e6e20bd346aa5236a35b26669ccdf232" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="intel,pdk" name="platform/hardware/intel/img/psb_headers" path="hardware/intel/img/psb_headers" revision="2af45b608128c20c4e00bdbdaeef7edfe08a32a0" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="intel,pdk" name="platform/hardware/intel/img/psb_video" path="hardware/intel/img/psb_video" revision="75c9190730a05c8e57f0ee791180a6ff1f77beb4" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="intel_sensors,pdk" name="platform/hardware/intel/sensors" path="hardware/intel/sensors" revision="f84da997fccc5633671e8a1e2274987885920e2c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/hardware/interfaces" path="hardware/interfaces" revision="6fed226e4367f03b806a5fb14f85bc6c5695e153" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="invensense,pdk" name="platform/hardware/invensense" path="hardware/invensense" revision="55ce607143fef21561761f791c79df46a352c84c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/hardware/libhardware" path="hardware/libhardware" revision="2625cd3e288bb2f394a9432536621a1b457526d7" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/hardware/libhardware_legacy" path="hardware/libhardware_legacy" revision="38c11a3849706f8149e10afae34639be9bbdfda7" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="marvell_bt,pdk" name="platform/hardware/marvell/bt" path="hardware/marvell/bt" revision="60881255dce0a721b3b745c0447d7560f608035f" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/hardware/nxp/nfc" path="hardware/nxp/nfc" revision="d7b5337d9904609c1188a5c92341697548ae8104" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/hardware/nxp/secure_element" path="hardware/nxp/secure_element" revision="1ded9e497db67d9994eab4468c686109b6268bc5" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="qcom,qcom_audio,pdk-qcom" name="platform/hardware/qcom/audio" path="hardware/qcom/audio" revision="219122f28594e954c2b5555e4e207a84e3903832" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-qcom" name="platform/hardware/qcom/bootctrl" path="hardware/qcom/bootctrl" revision="2fe14d186ee43d1fd5186165614d5c3d4028b5d1" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="qcom,pdk-qcom" name="platform/hardware/qcom/bt" path="hardware/qcom/bt" revision="e14e9e2b65c42e3de15ec65b31ff64110dcbe997" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="qcom_camera,pdk-qcom" name="platform/hardware/qcom/camera" path="hardware/qcom/camera" revision="9468b4a8e1bc79f561f7051af12c427425d8fd51" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="qcom,pdk-qcom" name="platform/hardware/qcom/data/ipacfg-mgr" path="hardware/qcom/data/ipacfg-mgr" revision="83f4e10352aab2b69bee5ce89e02097e96b6c392" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-qcom,qcom,qcom_display" name="platform/hardware/qcom/display" path="hardware/qcom/display" revision="cb1d1d97396d38838bfe54cb02966c2340606564" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="qcom,qcom_gps,pdk-qcom" name="platform/hardware/qcom/gps" path="hardware/qcom/gps" revision="f54ad9b8c11b9bcd68cb14225c581eb7ab7dd633" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="qcom,qcom_keymaster,pdk-qcom" name="platform/hardware/qcom/keymaster" path="hardware/qcom/keymaster" revision="a3e13d06430d7ca605b895873c8cfac7808a623d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="qcom,pdk-qcom" name="platform/hardware/qcom/media" path="hardware/qcom/media" revision="b4160ae848c48cf1dbd578aac76311effa83d458" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="qcom_msm8960,pdk-qcom" name="platform/hardware/qcom/msm8960" path="hardware/qcom/msm8960" revision="1f7711304417f9d4119433ae068acf5f13fd8a61" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="qcom_msm8994,pdk-qcom" name="platform/hardware/qcom/msm8994" path="hardware/qcom/msm8994" revision="6ae028eeb750e09d0be67c37bb0b8af2678209e9" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="qcom_msm8996,pdk-qcom" name="platform/hardware/qcom/msm8996" path="hardware/qcom/msm8996" revision="22a93987e922fb04a583ccb2ef08e0ca2c27f480" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="qcom_msm8998,pdk-qcom" name="platform/hardware/qcom/msm8998" path="hardware/qcom/msm8998" revision="7f3ae0bc94c09e4f3a3eee47c49f5772da49a783" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="qcom_msm8x09" name="platform/hardware/qcom/msm8x09" path="hardware/qcom/msm8x09" revision="49c2667b194bd0a7e18a755db86d489d0a5d6068" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="qcom_msm8x26,pdk-qcom" name="platform/hardware/qcom/msm8x26" path="hardware/qcom/msm8x26" revision="b50e2acc8e32a2f3a2fdaadd4407bb9d44cc616c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="qcom_msm8x27,pdk-qcom" name="platform/hardware/qcom/msm8x27" path="hardware/qcom/msm8x27" revision="8d5da2fe2a02a6f9ae10bc64f96efc762e145a8c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="qcom_msm8x84,pdk-qcom" name="platform/hardware/qcom/msm8x84" path="hardware/qcom/msm8x84" revision="ca0343812d5d3c8370ced5d4f16a27a7bd862173" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="wahoo" name="platform/hardware/qcom/neuralnetworks/hvxservice" path="hardware/qcom/neuralnetworks/hvxservice" revision="2301572110c301bf8d97a5f3e7ce0c470ed195ec" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="qcom,pdk-qcom" name="platform/hardware/qcom/power" path="hardware/qcom/power" revision="10f969ad91a3f02b1dea6c2a49a96fbe76743b84" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="qcom_sdm845" name="platform/hardware/qcom/sdm845/bt" path="hardware/qcom/sdm845/bt" revision="a986c350bc486af84301f52af6f0b80affa676ee" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vendor,qcom_sdm845" name="platform/hardware/qcom/sdm845/data/ipacfg-mgr" path="hardware/qcom/sdm845/data/ipacfg-mgr" revision="ee6a069b0a3d0fb1882fd5b0e5d0b9ed9e92a9b8" upstream="refs/tags/android-9.0.0_r30">    
+        <linkfile dest="hardware/qcom/sdm845/Android.mk" src="os_pickup.mk"/>    
+        <linkfile dest="hardware/qcom/sdm845/Android.bp" src="os_pickup.bp"/>    
+    </project>  
+    <project groups="qcom_sdm845" name="platform/hardware/qcom/sdm845/display" path="hardware/qcom/sdm845/display" revision="8b6ff64a3913d4c73ffb8c3e495284cc34551619" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="qcom_sdm845" name="platform/hardware/qcom/sdm845/gps" path="hardware/qcom/sdm845/gps" revision="54e5cdfd1f0b18400ef14a226151d5fc3097698f" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="qcom_sdm845" name="platform/hardware/qcom/sdm845/media" path="hardware/qcom/sdm845/media" revision="e90bbd12d7690b20d4107db8b4774ca5a3786cee" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="qcom_sdm845" name="platform/hardware/qcom/sdm845/thermal" path="hardware/qcom/sdm845/thermal" revision="4f475646dee9ab9e4af73bfe307b9e9f74740f73" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="qcom_sdm845" name="platform/hardware/qcom/sdm845/vr" path="hardware/qcom/sdm845/vr" revision="e9557dcd5d700344b2a9eb56794187004d638c43" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="qcom_wlan,pdk-qcom" name="platform/hardware/qcom/wlan" path="hardware/qcom/wlan" revision="d459a81d255ecc259d6a15ad446515c40c7e9874" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/hardware/ril" path="hardware/ril" revision="857700999fe5a89441dd22c61b9994fea9b239de" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="kernel/configs" path="kernel/configs" revision="9f68cd62b815da79a68cba6e09c2a3051b3cc0f9" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project name="kernel/tests" path="kernel/tests" revision="426e7e71476b35acbad6837d7873242fa09dd8e6" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/libcore" path="libcore" revision="b787e2b64a8ccbb3b9189d31669c0eacc3861778" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/libnativehelper" path="libnativehelper" revision="e73fc13e57b738b9a0eb11840399308a0bf36a44" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/packages/apps/BasicSmsReceiver" path="packages/apps/BasicSmsReceiver" revision="023766b2568693dd427fcefcd2b75257ee82813e" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/packages/apps/Bluetooth" path="packages/apps/Bluetooth" revision="bd1e1884254d1394e7ffe3a39c6d299ebf2c6c45" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Camera2" path="packages/apps/Camera2" revision="57ec9f2f43ec9b00d154a02546014f1eb1cf70b1" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Car/Dialer" path="packages/apps/Car/Dialer" revision="bc52f28c8de68b849b85e56c9eddae75afebc189" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Car/Hvac" path="packages/apps/Car/Hvac" revision="a1bdf22d107a36545153034086b738f300639bbd" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Car/LatinIME" path="packages/apps/Car/LatinIME" revision="3cbb5f40f5f574333a58f05892bb0da7c0745223" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Car/Launcher" path="packages/apps/Car/Launcher" revision="51c37fa199b4d02134b38c72a005c7e098c81abc" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Car/LensPicker" path="packages/apps/Car/LensPicker" revision="c6204de7f7afb3bfa07f2259adccca9caf05d4f8" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Car/LocalMediaPlayer" path="packages/apps/Car/LocalMediaPlayer" revision="d3a06273b7dab50bd7a97d8b895aa7eecf816fd9" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Car/Media" path="packages/apps/Car/Media" revision="53e3eda0d84b4ecd9b0d6bdc0a8df3b13f55f240" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Car/Messenger" path="packages/apps/Car/Messenger" revision="90d9dc9407502c2fb67784d7978a4a07d844ee70" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Car/Overview" path="packages/apps/Car/Overview" revision="3c8ad16744b27cfd17216865695db9a573fc7e39" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Car/Radio" path="packages/apps/Car/Radio" revision="66f103f84f28a4edecfef93171f7d0ab09deb6dc" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Car/Settings" path="packages/apps/Car/Settings" revision="c4832461fa4229dba55cbc08573a19d9b51e7e23" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Car/Stream" path="packages/apps/Car/Stream" revision="73fcaff64f38884c4b9d7a5721cf280dca0bfd74" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Car/SystemUpdater" path="packages/apps/Car/SystemUpdater" revision="38ec2d613bdd9946030f8b52f90a75d58314bba9" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Car/libs" path="packages/apps/Car/libs" revision="8a409ba025e71a7ee0f389f8226640bceaa92d7b" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/packages/apps/CarrierConfig" path="packages/apps/CarrierConfig" revision="823917848f75042578b32004d2e83ad29d6d60cb" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/packages/apps/CellBroadcastReceiver" path="packages/apps/CellBroadcastReceiver" revision="79997d17523b9e29c060678103810c8a55bfa39a" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/packages/apps/CertInstaller" path="packages/apps/CertInstaller" revision="6b8315bfe419eabf91529d3b68307fa59b70a0b0" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Contacts" path="packages/apps/Contacts" revision="3d75a03f3c3fdd9231514a63b0fc5289ebdb8c5c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/DeskClock" path="packages/apps/DeskClock" revision="112331507645fd69e88152b765618cb4b4812198" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/packages/apps/DevCamera" path="packages/apps/DevCamera" revision="db5426a21943ce0b0a3c0a2e506a949ac373b796" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Dialer" path="packages/apps/Dialer" revision="884c72608457ccf5fa5f5bed4b7cff3f1ad6293d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/packages/apps/DocumentsUI" path="packages/apps/DocumentsUI" revision="b3dc340d382e18a8df6609cdd2ea6e04231ffd7a" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Email" path="packages/apps/Email" revision="d83bdc8e5b8f1f7b54b6d69cd1fad96a9c0f3dfe" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/EmergencyInfo" path="packages/apps/EmergencyInfo" revision="9eb6a21bf4fc07950bf108da4ea66227d6f317ee" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/ExactCalculator" path="packages/apps/ExactCalculator" revision="b1145452ae138ca9ac9770a5cb8d41d737892e1a" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Gallery" path="packages/apps/Gallery" revision="4ee5d1dc4714e46f09d8eb64b43afc3a169b7904" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Gallery2" path="packages/apps/Gallery2" revision="bf69b0414adedb2f86ac35401e7457d124f01e8d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/HTMLViewer" path="packages/apps/HTMLViewer" revision="480a1a339922bc10d47f6e58a426ce32d7e41f5f" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/KeyChain" path="packages/apps/KeyChain" revision="408b2ca4219c503a944414bc2cfd1c36ea055b09" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Launcher2" path="packages/apps/Launcher2" revision="84ad631be026d25bcd531b5cf439f4d8c4229131" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Launcher3" path="packages/apps/Launcher3" revision="4395e5e89af5700bd9ed22e0f8bb719f726bdff4" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/LegacyCamera" path="packages/apps/LegacyCamera" revision="b89c4495e9f5ee2d2c20bb414f99f48152fa365d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/ManagedProvisioning" path="packages/apps/ManagedProvisioning" revision="317f11a46527388dae43dc31b9ba1d2c9fb66bd0" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Messaging" path="packages/apps/Messaging" revision="24f5bca6b98fe6671cc73abfddb77229e48771db" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Music" path="packages/apps/Music" revision="cc697edd46eb3547174222593936c7bff37f71bf" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/MusicFX" path="packages/apps/MusicFX" revision="349236d17b84456d5add3216468daef98bca78b2" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="apps_nfc,pdk-fs" name="platform/packages/apps/Nfc" path="packages/apps/Nfc" revision="be0db61463fe4c917e6af4f97322e724d86a86f8" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/OneTimeInitializer" path="packages/apps/OneTimeInitializer" revision="641342e8781626b0831c90bbea0ad51c2b3804dd" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/packages/apps/PackageInstaller" path="packages/apps/PackageInstaller" revision="5b9f5abdea800deb4f27a229a03e77757cb6d58d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/packages/apps/PhoneCommon" path="packages/apps/PhoneCommon" revision="0554e646a238e483e1a40f51e8f27f909b98ae32" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Protips" path="packages/apps/Protips" revision="18dbe73abbe217e9168e8ec123e5b3714240419c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Provision" path="packages/apps/Provision" revision="85f7396a8fcf83dea64793fa66dcbd071d3ce96d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/SafetyRegulatoryInfo" path="packages/apps/SafetyRegulatoryInfo" revision="5f3377f6af620a8b7f92d9e570e29ff3885bc7dd" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="apps_se,pdk-fs" name="platform/packages/apps/SecureElement" path="packages/apps/SecureElement" revision="62f169df4d1b9dc4bce9335c1aa294d7a16a9f49" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Settings" path="packages/apps/Settings" revision="2e9a9c7fe8426e7f052a62621f7ae81d649fc05b" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/SettingsIntelligence" path="packages/apps/SettingsIntelligence" revision="8f94aef851be50a75013d8b3b3ae26d5ba1d9d7d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/SoundRecorder" path="packages/apps/SoundRecorder" revision="ba4ce5ac5e37067e6e81e236a45752d0512b3790" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/SpareParts" path="packages/apps/SpareParts" revision="37db33666d86dc4d4ce16e3144a4d19121b64edf" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="apps_stk,pdk-fs" name="platform/packages/apps/Stk" path="packages/apps/Stk" revision="3bca6fa0392fe0d4bb6de04b4583c78da680fe70" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/StorageManager" path="packages/apps/StorageManager" revision="ac72403b2d3266f478e7d605f8242fa0acda5991" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Tag" path="packages/apps/Tag" revision="d24f6abbbe5b0572e431692dccb59f7053b32169" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Terminal" path="packages/apps/Terminal" revision="f34eb58c87cb4ab9a58407bc8ef32abf61fc7dbf" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/packages/apps/Test/connectivity" path="packages/apps/Test/connectivity" revision="c6668f75b714b8693d6dbb90d7ddcfde07b0fb12" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/packages/apps/TimeZoneData" path="packages/apps/TimeZoneData" revision="b217ea6d3e30db5c93090c10d544b6852f6856c1" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/packages/apps/TimeZoneUpdater" path="packages/apps/TimeZoneUpdater" revision="99383159ca5653686f411a1b811d4b72632ffd16" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/Traceur" path="packages/apps/Traceur" revision="8c6500baf1bd4bf0da15cc5efdf1b1b42ed49698" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/TvSettings" path="packages/apps/TvSettings" revision="6a9f3d394e94f81869bcc175b08e3d1390239373" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project name="platform/packages/apps/TV" path="packages/apps/TV" revision="a480dde6b49254bbf040fe0af86c53dd5c2caf23" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/UnifiedEmail" path="packages/apps/UnifiedEmail" revision="1b3883846e6fd194604ed5459ee1e67e22eefd79" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/apps/WallpaperPicker" path="packages/apps/WallpaperPicker" revision="c1c6a52c157fbf2c3e05a24ce394296fcb7ee0f5" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project name="platform/packages/experimental" path="packages/experimental" revision="3352843715f8408ddaf1bc5cd2540b60a060dfe5" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/inputmethods/LatinIME" path="packages/inputmethods/LatinIME" revision="3db109ff434eaa23db322a07c73111994cfd82e3" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/inputmethods/OpenWnn" path="packages/inputmethods/OpenWnn" revision="a2a5e795b30460a5532061236a0d327d9be60100" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/providers/ApplicationsProvider" path="packages/providers/ApplicationsProvider" revision="aa7dbe8d7d109ea898dc5d37d4d5ba9a2a15d257" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/providers/BlockedNumberProvider" path="packages/providers/BlockedNumberProvider" revision="d239b9eac5f0af67570419e832dff83d272252a5" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/providers/BookmarkProvider" path="packages/providers/BookmarkProvider" revision="193b05d02d242ef87e6d9b6f1f377a49e567a52c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/packages/providers/CalendarProvider" path="packages/providers/CalendarProvider" revision="5f60b1ec977b13422f67f6594e9a8ea9d3e687ac" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/providers/CallLogProvider" path="packages/providers/CallLogProvider" revision="f66a7700c1b56ace4d284befc916ead2e4cda249" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/packages/providers/ContactsProvider" path="packages/providers/ContactsProvider" revision="a95f4d99bed65e01900f7639bfda51cbe6fb06c8" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/packages/providers/DownloadProvider" path="packages/providers/DownloadProvider" revision="e6b064758e0403c8ad19b51cb6c9b9314554204e" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/packages/providers/MediaProvider" path="packages/providers/MediaProvider" revision="4b6531c67c0a60a02e8c6d4f05e498cefa44baae" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/providers/PartnerBookmarksProvider" path="packages/providers/PartnerBookmarksProvider" revision="a752c106c7ad54e82171e90c6f2ec6e3604295e8" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/packages/providers/TelephonyProvider" path="packages/providers/TelephonyProvider" revision="7f8385c1d0960f037c32f15d1dd6e4570a942c46" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/providers/TvProvider" path="packages/providers/TvProvider" revision="b6bfaed2c62ee71c7a1656752001fe539bd6c135" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/packages/providers/UserDictionaryProvider" path="packages/providers/UserDictionaryProvider" revision="8e5e0ea10cd96d20967762a73975a0e339756df8" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/screensavers/Basic" path="packages/screensavers/Basic" revision="b73532e946259bb01b24225b0dfb8ad416bd84fc" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/screensavers/PhotoTable" path="packages/screensavers/PhotoTable" revision="e6a1e9e5ab10c60999e49c4694ff0588bb4433bd" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/screensavers/WebView" path="packages/screensavers/WebView" revision="9c1f12d83f362bfb1df508d3bde24874300aa4f0" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/packages/services/BuiltInPrintService" path="packages/services/BuiltInPrintService" revision="d26056b73c2b40a43b09842fbfbc05d88a9e3e2b" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/packages/services/Car" path="packages/services/Car" revision="85bf8e0a9ea59a86677e6703a9b5c19a3d10351e" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/packages/services/Mms" path="packages/services/Mms" revision="2a10c3d3bde4ff2a9d95839762c0f3eb68ec3858" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/services/NetworkRecommendation" path="packages/services/NetworkRecommendation" revision="63ee94ed5032742b98e403d4eea44541e9a0ae25" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/packages/services/Telecomm" path="packages/services/Telecomm" revision="293b3ef0ead05ae3b16f49dd0a981df6e1ac7912" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/packages/services/Telephony" path="packages/services/Telephony" revision="9b57408299067b1d64681e78f865bb3972fadf96" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs" name="platform/packages/wallpapers/LivePicker" path="packages/wallpapers/LivePicker" revision="d0e4d620670c8596e34873ecde0fdfc8871b3cc9" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/pdk" path="pdk" revision="6bb8857b121aba0b5a476c5b33397106c3cd1eba" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-fs,pdk-cw-fs,cts" name="platform/platform_testing" path="platform_testing" revision="c20154202925f2de4a8a48b83b6d8c242b7fd341" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk-fs" name="platform/prebuilts/abi-dumps/ndk" path="prebuilts/abi-dumps/ndk" revision="72655cc9674e253477bda81beb89f7408224ab02" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk-fs" name="platform/prebuilts/abi-dumps/vndk" path="prebuilts/abi-dumps/vndk" revision="162584c9775c2d982528c931738690b31e53786c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk-fs" name="platform/prebuilts/android-emulator" path="prebuilts/android-emulator" revision="38ea4eb5f20ad35cfa14eb1530e2b0c9b2c47611" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk" name="platform/prebuilts/build-tools" path="prebuilts/build-tools" revision="c3f263a9d288a591a4d1c6491bb6a7faf145ee9e" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk" name="platform/prebuilts/checkcolor" path="prebuilts/checkcolor" revision="9161c18118852c3ca62b2d5815054ef0f15e717d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk" name="platform/prebuilts/checkstyle" path="prebuilts/checkstyle" revision="cd7f66b2589eddeb9dfc1c441597d5939ee1f77e" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk" name="platform/prebuilts/clang-tools" path="prebuilts/clang-tools" revision="6d993447d449c20eb311578834a10140d580f698" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk" name="platform/prebuilts/clang/host/linux-x86" path="prebuilts/clang/host/linux-x86" revision="9c21095572d82722580e018c2c2862d6197f7182" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk-fs" name="platform/prebuilts/deqp" path="prebuilts/deqp" revision="80ee5976791a76a885b3267749c535b90a177ed5" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk-fs" name="platform/prebuilts/devtools" path="prebuilts/devtools" revision="f295ea4c381c0b05925c62e53e58937e861003b7" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk,linux,arm" name="platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9" path="prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9" revision="858b61b62da66b8440e324f5e2ea0504280c9435" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk,linux,arm" name="platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9" path="prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9" revision="d39eb4ee580a0412b57883c9e3ba18d127912021" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk,linux" name="platform/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.15-4.8" path="prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.15-4.8" revision="97e3a5045c8e8f6b7f02f0ef1f7076fb29832fd3" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk-fs" name="platform/prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8" path="prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8" revision="65d71bc451e4d7344dfde9865248f7a31bf8f500" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk,linux,mips" name="platform/prebuilts/gcc/linux-x86/mips/mips64el-linux-android-4.9" path="prebuilts/gcc/linux-x86/mips/mips64el-linux-android-4.9" revision="1b8bd6538f3dc1e07de11e82a9577cd821d51711" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk,linux,x86" name="platform/prebuilts/gcc/linux-x86/x86/x86_64-linux-android-4.9" path="prebuilts/gcc/linux-x86/x86/x86_64-linux-android-4.9" revision="5761687869de974458f94bcd096986f8d4cd3b07" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="linux" name="platform/prebuilts/gdb/linux-x86" path="prebuilts/gdb/linux-x86" revision="3faa4f1228b5f81380fe9910bd1d53f64eec5e0f" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="linux,pdk,tradefed" name="platform/prebuilts/go/linux-x86" path="prebuilts/go/linux-x86" revision="663f3c8e2b9d7501c80e092f9006e71f5f88aaee" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk,pdk-cw-fs,pdk-fs" name="platform/prebuilts/gradle-plugin" path="prebuilts/gradle-plugin" revision="a40f34467d70b6ddd2e6eac37d8327e2655c297e" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk" name="platform/prebuilts/jdk/jdk8" path="prebuilts/jdk/jdk8" revision="4345896ea7d3af4cf8790b899e9ea2b1496e3649" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk" name="platform/prebuilts/jdk/jdk9" path="prebuilts/jdk/jdk9" revision="9ffcd2704f78d09d8f4b25aa35ce05a274428b15" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk-cw-fs,pdk-fs" name="platform/prebuilts/libs/libedit" path="prebuilts/libs/libedit" revision="a01422d4a3265e7686401c7c1df4b76acb1388ee" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk-cw-fs,pdk-fs" name="platform/prebuilts/maven_repo/android" path="prebuilts/maven_repo/android" revision="3ec84761e0035af35ead71d0fc4f2348135648e2" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk-cw-fs,pdk-fs" name="platform/prebuilts/maven_repo/bumptech" path="prebuilts/maven_repo/bumptech" revision="daba372055d9caa525a2cc35e563009ea7218417" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" name="platform/prebuilts/maven_repo/google-play-service-client-libraries-3p" path="prebuilts/maven_repo/google-play-service-client-libraries-3p" revision="6f56520ba9be674efe3083eec5cdeef12977c819" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk" name="platform/prebuilts/misc" path="prebuilts/misc" revision="270caeac2e5f69314ee1ce6716ca27366bdcdf5a" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk" name="platform/prebuilts/ndk" path="prebuilts/ndk" revision="c1250d91093b579517cc7ba725d6f1eaeb9173e2" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" name="platform/prebuilts/ktlint" path="prebuilts/ktlint" revision="59bf4a9353b48a7b708d5c680d60247a28a77795" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="linux,pdk,pdk-cw-fs,pdk-fs" name="platform/prebuilts/python/linux-x86/2.7.5" path="prebuilts/python/linux-x86/2.7.5" revision="5baf514d3d69516c154ec230383af8e268cb1208" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk" name="platform/prebuilts/qemu-kernel" path="prebuilts/qemu-kernel" revision="6aaafa6470b2c6822405baf6fe5f1c6e39c72579" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk" name="platform/prebuilts/r8" path="prebuilts/r8" revision="741fff37c42fdcf58d08d26ca2a26c547541a597" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk" name="platform/prebuilts/sdk" path="prebuilts/sdk" revision="7447677bade7fd6da503b7a9e1810873a30703b9" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk,tools" name="platform/prebuilts/tools" path="prebuilts/tools" revision="3ccf30fd955f5438b8fd4df09fc05921b9b7bc89" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="pdk" name="platform/prebuilts/vndk/v27" path="prebuilts/vndk/v27" revision="36f898f91d0f2b383cbb8b43152e9c1bbcd0fa77" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk-cw-fs,pdk-fs" name="platform/sdk" path="sdk" revision="c55eaeb2def03af41c6a106c60a1bc087b1bf63b" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/system/bt" path="system/bt" revision="0ea473fa6bc8f21a3cc86e1f43bab5a8ba692465" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/system/ca-certificates" path="system/ca-certificates" revision="675ae6c2db07066411e275d37444301356be47d5" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/system/chre" path="system/chre" revision="79c04fc10587ce7a06391655d8e16822f2085b30" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/system/connectivity/wificond" path="system/connectivity/wificond" revision="672416c40ecb36116e063b0acc47638166ddcd19" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/system/connectivity/wifilogd" path="system/connectivity/wifilogd" revision="ead5c33575c1ee998df4819fe86d1a2fc099fba2" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/system/core" path="system/core" revision="3818e3b0d707d53761d4cae8ed933cb775b698b6" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/system/extras" path="system/extras" revision="9535b43744ae7906a73dea6fdc99672c1a07e955" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/system/gatekeeper" path="system/gatekeeper" revision="1c60b171ab96ba8ea265b54696368248b944fc82" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/system/hardware/interfaces" path="system/hardware/interfaces" revision="d66d61b255e1f1f2ebd61ae3213cd27316790f90" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/system/hwservicemanager" path="system/hwservicemanager" revision="38a9482bdfaaf99e08b55d531f06a8537db4f2e2" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/system/iot/attestation" path="system/iot/attestation" revision="897d725b1eb3e61fc4c6cf856333b4d0f19f7ab2" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/system/keymaster" path="system/keymaster" revision="897d8f267af3f3ed36a9c4a89ca5338c8ca8a765" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/system/libfmq" path="system/libfmq" revision="b0ebda1281967dec3813f39909ae5814a9e4a6f9" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/system/libhidl" path="system/libhidl" revision="4612b4a5383a80ae9b6de945a388b450d6f4c2c6" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/system/libhwbinder" path="system/libhwbinder" revision="e8ee978da9d5e5f7d12365730c4b73feffa69035" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/system/libufdt" path="system/libufdt" revision="1b809ea7b27004cd811289849c5797f7de93ca81" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/system/libvintf" path="system/libvintf" revision="93cbe71c980bb5db449a8cf7977586bbc648d69c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/system/media" path="system/media" revision="5dfba720df35991bbff836549e9b1cd567b8e797" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/system/netd" path="system/netd" revision="e41b5ccaa8f280df356ddcdd559646e3dbf9f6b8" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/system/nfc" path="system/nfc" revision="3b723143db8b2ff2ebb3c0d79501ea6fdae5c8ac" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/system/nvram" path="system/nvram" revision="63f6f0ce0f5919ac901507195cafa43b3525f9e7" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/system/security" path="system/security" revision="0852bf18781372d4ecc6d7f60d9b2c29f79d0320" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/system/sepolicy" path="system/sepolicy" revision="807a6e7028615ff9d46c27406712a207e907d0e6" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/system/timezone" path="system/timezone" revision="74c5610fce87553316660559babf4c11dbd1673a" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/system/tools/aidl" path="system/tools/aidl" revision="aad0675e49ac0f1d041988f8b14a17dd8f2b11b8" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/system/tools/hidl" path="system/tools/hidl" revision="25e77a753e6dc19e1c4051278c11c3c3206ad56f" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project name="platform/system/tpm" path="system/tpm" revision="9454ecb5da17395470a7d4e91bac5da4a2856570" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/system/update_engine" path="system/update_engine" revision="ee7003c58653cba48d80a59354110c14eec4d7a4" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/system/vold" path="system/vold" revision="d56136041d2c88102dbce8089db06e56f87ffce5" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/test/framework" path="test/framework" revision="81f4991896f13d2ef338f03e5216194c6dde45ca" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="cts,pdk-cw-fs,pdk-fs" name="platform/test/suite_harness" path="test/suite_harness" revision="9908b4d2023ad924aad9e009843c08222caf395d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/test/vti/alert" path="test/vti/alert" revision="163842330ce37d2b67d3f9615799917c8b9d7ed9" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/test/vti/dashboard" path="test/vti/dashboard" revision="91827106cd89d4cc81e9ef0f905c858fef1d371d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/test/vti/fuzz_test_serving" path="test/vti/fuzz_test_serving" revision="92ee0b0a6fd9858677aa7bacbd682f686c4e854f" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/test/vti/test_serving" path="test/vti/test_serving" revision="c6b83b4829c956b7f24d4da153509c966c0cbbdf" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/test/vts" path="test/vts" revision="0762d357a364e3e8027cc2bb7674f73bcfb0d9dd" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/test/vts-testcase/fuzz" path="test/vts-testcase/fuzz" revision="aca9a8bccb6f012f4725cbeed0242c2493035d21" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/test/vts-testcase/hal" path="test/vts-testcase/hal" revision="e7387476e50baa7141aecf5874e34f0ae3b1c3ab" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/test/vts-testcase/hal-trace" path="test/vts-testcase/hal-trace" revision="d57af0803f4e0bdf1c9e5a8f8b4a6ffecec34b02" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/test/vts-testcase/kernel" path="test/vts-testcase/kernel" revision="9050b9e30154835cfea035edc33b1a42e8d31193" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/test/vts-testcase/nbu" path="test/vts-testcase/nbu" revision="2bd80dec29aaba6f357df375bdd235fbad5f973c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/test/vts-testcase/performance" path="test/vts-testcase/performance" revision="c960d3e4ddf208668f835511b582f780ad99b666" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/test/vts-testcase/security" path="test/vts-testcase/security" revision="947b85de22730c15ffb554302686bdadd9549606" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="vts,pdk" name="platform/test/vts-testcase/vndk" path="test/vts-testcase/vndk" revision="11c93f1ca4905b1cbb4e648e286fbd49245a60e0" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project name="toolchain/benchmark" path="toolchain/benchmark" revision="b6bb5b048ff02c30d48ee2a8dd96855406d3eb22" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="toolchain/binutils" path="toolchain/binutils" revision="50d9272bfb686ab7bf096e6b607b03f1d383ff90" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="toolchain/pgo-profiles" path="toolchain/pgo-profiles" revision="6876debdbfc831287d1d98a1f5041eaa0984eaa5" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="tools,vts,pdk,tradefed" name="platform/tools/acloud" path="tools/acloud" revision="cd2c7e3a01488ff56b54d2c82698448902682890" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project name="platform/tools/appbundle" path="tools/appbundle" revision="68592ec2bed3c270b0aebc4e732109df86352158" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="notdefault,tools" name="platform/tools/adt/idea" path="tools/adt/idea" revision="1683af6ff8e5879828851269beae39d2e0b88509" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk,tradefed" name="platform/tools/apksig" path="tools/apksig" revision="a931888be81a831412697e794f9824535919d5e9" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk,tradefed" name="platform/tools/apkzlib" path="tools/apkzlib" revision="2a88d41b6c793bac17740e3c2563773eb8d89c26" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="notdefault,tools" name="platform/tools/base" path="tools/base" revision="4b05e94535919f138471e409c6e497ed8d4c708e" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="notdefault,tools" name="platform/tools/build" path="tools/build" revision="f9ce476f318e1faa29afd82d475fcb3c83795776" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="tools,pdk-fs" name="platform/tools/dexter" path="tools/dexter" revision="4d1f481c0627fd62c0eb6628501778771f84e6e4" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="tools" name="platform/tools/external/fat32lib" path="tools/external/fat32lib" revision="5aa2bd48c159c95d87ad51fe7fa21cd9677bc9b7" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project clone-depth="1" groups="tools" name="platform/tools/external/gradle" path="tools/external/gradle" revision="13b40c45fdcfe81733253a8944330e2047e64311" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="notdefault,tools" name="platform/tools/idea" path="tools/idea" revision="340a186a9b580f29837f2f7437ad2502e5943740" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="nopresubmit,pdk,tradefed" name="platform/tools/loganalysis" path="tools/loganalysis" revision="c2fc988f09cad55c0cf34759e96de08b4d92fec8" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk,tools" name="platform/tools/metalava" path="tools/metalava" revision="cb66ccde8d08fe8edceb7b60c07e31057c72fec9" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="notdefault,motodev" name="platform/tools/motodev" path="tools/motodev" revision="610e1be79c2e0bb33c47b0622a2612be27d95599" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="adt-infra,cts,developers,motodev,pdk,tools,tradefed" name="platform/tools/repohooks" path="tools/repohooks" revision="452ecfc0234bce7e120eaccd17062b31a6605bb0" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="notdefault,tools" name="platform/tools/studio/cloud" path="tools/studio/cloud" revision="e535caf9f70a633d075a07013a28b356aa67f1ac" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="notdefault,tools" name="platform/tools/swt" path="tools/swt" revision="d793d9b25fd30c11f46458105bb3b9bf17cfc7c9" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk" name="platform/tools/test/connectivity" path="tools/test/connectivity" revision="37744ced6467eaef053c2d8145113ad613d67ff6" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk,tradefed" name="platform/tools/tradefederation" path="tools/tradefederation/core" revision="7fd6d6dcba34ee8f814552c38bd19e54de40879c" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk,tradefed" name="platform/tools/tradefederation/contrib" path="tools/tradefederation/contrib" revision="509d8d25b276b660ad13ae39e13522c94625f17c" upstream="refs/tags/android-9.0.0_r30"/>  
+
+    <repo-hooks enabled-list="pre-upload" in-project="platform/tools/repohooks"/>  
+
+</manifest>

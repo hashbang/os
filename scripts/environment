@@ -26,7 +26,7 @@ environment = {
     "OS_NAME": config['name'],
     "BASE_DIR": base_dir,
     "ANDROID_HOME": "%s/sdk" % base_dir,
-    "MANIFEST_DIR": "%s/manifests" % os.getcwd(),
+    "MANIFEST_DIR": "/opt/android/manifests",
     "CONFIG_DIR": "/opt/android",
     "EXTERNAL_DIR": "%s/external" % os.getcwd(),
     "DEVICES": ",".join(config['devices'].keys()),
