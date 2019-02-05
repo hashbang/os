@@ -83,9 +83,9 @@ platform:
   - darwin
 apps:
   chromium:
-    version: 70.0.3538.110
-    src_ref: ec3092c8d21e20e39698f5272c8a7f71c3ee88a2
-    depot_tools_ref: 61ea30737c65fb3a6ad7096f447465e58f8b915c
+    version: 73.0.3663.1
+    src_ref: e897513c4b46386e89eec9ce67d62666eb738548
+    depot_tools_ref: 367af22db5a97a21c370c0db974de501673e061a
 devices:
   crosshatch:
     global:

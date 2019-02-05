@@ -2,6 +2,7 @@
 set -e; eval "$(environment)"
 
 external_dir="${EXTERNAL_DIR:-$PWD/external}"
+config_dir="${CONFIG_DIR?}"
 chromium_src_ref=${CHROMIUM_SRC_REF?}
 chromium_depot_tools_ref=${CHROMIUM_DEPOT_TOOLS_REF?}
 chromium_version=${CHROMIUM_VERSION?}
@@ -28,7 +29,12 @@ yes Y | gclient sync --with_branch_heads --jobs "${cores}" -RDf
 gclient runhooks
 
 cd "$chromium_dir/src"
-git checkout "$chromium_src_ref" -f
+git reset --hard "$chromium_src_ref"
+
+for patch in "${config_dir}"/patches/chromium/*.patch; do
+	echo "Applying patch: ${patch}"
+	patch -p1 --no-backup-if-mismatch < "${patch}"
+done
 
 mkdir -p "$chromium_dir/src/out/Default"
 cat <<-EOF > out/Default/args.gn
