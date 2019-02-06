@@ -184,14 +184,6 @@ make DEVICE=crosshatch clean build release
 
 ## Develop ##
 
-### Update ###
-
-Build latest manifests/config from upstream sources:
-
-```
-make DEVICE=crosshatch config manifest
-```
-
 ### Edit ###
 ```
 make shell
@@ -207,6 +199,19 @@ make diff > patches/my-feature.patch
 adb reboot fastboot
 make install
 ```
+
+## Release ##
+
+WIP
+
+### Update ###
+
+Build latest config from upstream sources:
+
+```
+make DEVICE=crosshatch config manifest
+```
+
 
 ## Questions ##
 
