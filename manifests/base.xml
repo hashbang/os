@@ -324,7 +324,7 @@
     <project groups="pdk,qcom_msm8x26" name="platform/external/sfntly" path="external/sfntly" revision="aa2fd75633bb9e4bdd35df5d2f4e92f67827fff3" upstream="refs/tags/android-9.0.0_r30"/>  
     <project groups="pdk" name="platform/external/shaderc/spirv-headers" path="external/shaderc/spirv-headers" revision="8f98ba3357325770c635105c1e99600a4cb33eae" upstream="refs/tags/android-9.0.0_r30"/>  
     <project groups="pdk" name="platform/external/shflags" path="external/shflags" revision="1dfcd17ba07fc10a5c5cc81b57d9e3dbe4d7f933" upstream="refs/tags/android-9.0.0_r30"/>  
-    <project groups="pdk,qcom_msm8x26" name="platform/external/skia" path="external/skia" revision="22acadb0e98fee9b4babbcda203949ec9f36844d" upstream="refs/tags/android-9.0.0_r30"/>  
+    <project groups="pdk,qcom_msm8x26" name="platform/external/skia" path="external/skia" revision="0056606ac49688dcf3c08a51ca98fd94d9bf1897" upstream="refs/heads/master"/>  
     <project clone-depth="1" groups="cts" name="platform/external/skqp" path="external/skqp" revision="c23e5107b1f86953493d348d0a00f744881b2ccb" upstream="refs/tags/android-9.0.0_r30"/>  
     <project groups="pdk" name="platform/external/sl4a" path="external/sl4a" revision="8a22cec173efdac32379e9618d51d7172a9eb910" upstream="refs/tags/android-9.0.0_r30"/>  
     <project groups="pdk" name="platform/external/slf4j" path="external/slf4j" revision="13a6e41034085bd449f9160900594c33eaa14f47" upstream="refs/tags/android-9.0.0_r30"/>  
