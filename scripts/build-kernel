@@ -18,7 +18,7 @@ if [[ $kernel_repo == *"manifest"* ]]; then
 	mkdir -p "${kernel_dir}"
 	cd "${kernel_dir}"
 	cat /etc/gitconfig > "$HOME/.gitconfig"
-	repo init -u "${manifest_dir}" -m "kernel-${kernel_name}.xml"
+	repo init -u "${manifest_dir}" -m "manifests/kernel-${kernel_name}.xml"
 	repo sync -c --no-tags --no-clone-bundle --jobs "${cores}"
 	repo forall -c 'git reset --hard ; git clean -fdx'
 	ln -vs \
