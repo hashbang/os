@@ -85,8 +85,8 @@ mkdir -p "${factory_dir}/build/patches" "${factory_dir}/build/manifests"
 cp "${config_dir}/config.yml"  "${factory_dir}/build/config.yml"
 env > "${factory_dir}/build/config.env"
 cp -R "${config_dir}/patches/." "${factory_dir}/build/patches/"
-cp -R "${manifest_dir}/base.xml" "${factory_dir}/build/manifests/"
-[ -f "${manifest_dir}/kernel-${kernel_name}.xml" ] && \
+cp -R "${manifest_dir}/manifests/base.xml" "${factory_dir}/build/manifests/"
+[ -f "${manifest_dir}/manifests/kernel-${kernel_name}.xml" ] && \
 	cp -R "${manifest_dir}/kernel-${kernel_name}.xml" \
 		"${factory_dir}/build/manifests/"
 cat <<-EOF > "${factory_dir}/flash-all.sh"
