@@ -1,4 +1,5 @@
 device = ${DEVICE}
+userid = $(shell id -u)
 
 .DEFAULT_GOAL := default
 
@@ -14,6 +15,7 @@ config: image
 	  -v android:/home/build \
 	  -e DEVICE=$(device) \
 	  -v $(PWD)/manifests:/home/build/manifests \
+	  -u $(userid):$(userid) \
 	  hashbang/os bash -c "config" \
 	> config.yml
 	@docker run \
@@ -21,6 +23,8 @@ config: image
 	  -h "android" \
 	  -v android:/home/build \
 	  -v $(PWD):/opt/android \
+	  -v $(PWD)/manifests:/home/build/manifests \
+	  -u $(userid):$(userid) \
 	  -e DEVICE=$(device) \
 	  hashbang/os bash -c "manifest"
 
@@ -101,6 +105,7 @@ shell:
 	  -v android:/home/build \
 	  -v $(PWD):/opt/android \
 	  -v $(PWD)/release:/home/build/release \
+	  -v $(PWD)/manifests:/home/build/manifests \
 	  hashbang/os shell
 
 diff:
