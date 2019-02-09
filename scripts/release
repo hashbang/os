@@ -15,12 +15,9 @@ device="${DEVICE?}"
 base_dir="${BASE_DIR?}"
 build_number="${BUILD_NUMBER?}"
 build_datetime="${BUILD_DATETIME?}"
-config_dir="${CONFIG_DIR?}"
-manifest_dir="${MANIFEST_DIR?}"
 key_dir="${KEY_DIR?}"
 release_dir="${RELEASE_DIR?}"
 build_id=${BUILD_ID?}
-kernel_name=${KERNEL_NAME?}
 
 prefix=aosp_
 target_files="${device}-target_files-${build_number}.zip"
@@ -81,14 +78,6 @@ cp "${key_dir}/avb_pkmd.bin" "${factory_dir}/${device}-avb_pkmd.bin"
 rm "${factory_dir}/flash-all.sh"
 rm "${factory_dir}/flash-all.bat"
 rm "${factory_dir}/flash-base.sh"
-mkdir -p "${factory_dir}/build/patches" "${factory_dir}/build/manifests"
-cp "${config_dir}/config.yml"  "${factory_dir}/build/config.yml"
-env > "${factory_dir}/build/config.env"
-cp -R "${config_dir}/patches/." "${factory_dir}/build/patches/"
-cp -R "${manifest_dir}/manifests/base.xml" "${factory_dir}/build/manifests/"
-[ -f "${manifest_dir}/manifests/kernel-${kernel_name}.xml" ] && \
-	cp -R "${manifest_dir}/kernel-${kernel_name}.xml" \
-		"${factory_dir}/build/manifests/"
 cat <<-EOF > "${factory_dir}/flash-all.sh"
 	if ! grep -q partition-exists \$(which fastboot); then
 		echo "fastboot too old; please update via your OS package manager"
