@@ -184,12 +184,23 @@ make DEVICE=crosshatch clean build release
 
 ## Develop ##
 
+### Compare ###
+
+Build a given device twice from scratch and compare with diffoscope:
+```
+make shell
+```
+
 ### Edit ###
+
+Create a shell inside the docker environment:
 ```
 make shell
 ```
 
 ### Patch ###
+
+Output all untracked changes in android sources to a patchfile:
 ```
 make diff > patches/my-feature.patch
 ```

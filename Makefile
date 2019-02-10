@@ -48,6 +48,21 @@ chromium: tools
 release: tools
 	@$(contain) release
 
+compare: tools
+	rm -rf releases/compare
+	mkdir -p releases/compare
+	@$(contain) clean
+	@$(contain) build
+	@$(contain) release
+	mv releases/$(device)/* releases/compare/a
+	@$(contain) clean
+	@$(contain) build
+	@$(contain) release
+	mv releases/$(device)/* releases/compare/b
+	@$(contain) diffoscope \
+		releases/compare/a/*target_files.zip \
+		releases/compare/b/*target_files.zip > compare/diff.txt
+
 shell:
 	@$(contain) shell
 
