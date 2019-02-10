@@ -5,6 +5,7 @@ import os
 from os.path import isfile
 from time import strftime, gmtime
 
+cwd = os.getcwd()
 cross64 = "prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin"
 cross32 = "prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin"
 libfaketime = "/usr/lib/x86_64-linux-gnu/faketime/libfaketime.so.1"
@@ -15,8 +16,6 @@ else:
 
 if 'CONFIG_FILE' in os.environ:
     config_file=os.environ['CONFIG_FILE']
-elif os.path.isfile('/opt/android/config.yml'):
-    config_file="/opt/android/config.yml"
 elif os.path.isfile('./config.yml'):
     config_file="./config.yml"
 with open(config_file, encoding='utf-8') as data_file:
@@ -26,9 +25,9 @@ environment = {
     "OS_NAME": config['name'],
     "BASE_DIR": base_dir,
     "ANDROID_HOME": "%s/sdk" % base_dir,
-    "MANIFEST_DIR": "/opt/android",
-    "CONFIG_DIR": "/opt/android",
-    "EXTERNAL_DIR": "%s/external" % os.getcwd(),
+    "MANIFEST_DIR": "%s/manifests" % cwd,
+    "CONFIG_DIR": cwd,
+    "EXTERNAL_DIR": "%s/external" % cwd,
     "DEVICES": ",".join(config['devices'].keys()),
     "BUILD_HOST": config['host'],
     "BUILD_USER": config['user'],
@@ -49,7 +48,7 @@ environment = {
     "CHROMIUM_DEPOT_TOOLS_REF": config['apps']['chromium']['depot_tools_ref'],
     "LC_ALL":"C"
 }
-if 'DEVICE' in os.environ:
+if 'DEVICE' in os.environ and len(os.environ['DEVICE']) > 0:
     device=environment['DEVICE']=os.environ['DEVICE']
     variant=environment['BUILD_VARIANT']
     build_number=environment['BUILD_NUMBER']

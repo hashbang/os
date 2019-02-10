@@ -3,12 +3,16 @@ FROM ubuntu:cosmic
 MAINTAINER Hashbang Team <team@hashbang.sh>
 
 ENV HOME=/home/build
-ENV PATH=/opt/android/scripts:/home/build/out/host/linux-x86/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV PATH=/home/build/scripts:/home/build/out/host/linux-x86/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+ARG UID=1000
+ARG GID=1000
 
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN \
-    useradd -G plugdev,sudo -ms /bin/bash build && \
+    groupadd -g $GID -o build && \
+    useradd -G plugdev,sudo -g $GID -u $UID -ms /bin/bash build && \
     apt-get update && \
     apt-get install -y \
         vim \
@@ -62,7 +66,5 @@ RUN \
 
 USER build
 WORKDIR /home/build
-
-ADD . /opt/android/
 
 CMD [ "/bin/bash", "/usr/local/bin/build.sh" ]

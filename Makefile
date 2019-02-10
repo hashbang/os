@@ -1,133 +1,63 @@
 device = ${DEVICE}
 userid = $(shell id -u)
+groupid = $(shell id -g)
 
 .DEFAULT_GOAL := default
+
+contain := \
+	docker run -it -h "android" \
+		-v $(PWD):/home/build \
+		-u $(userid):$(userid) \
+		-e DEVICE=$(device) \
+		hashbang/os
 
 default: build
 
 image:
-	docker build -t hashbang/os:latest .
+	@docker \
+		build \
+		--build-arg UID=$(userid) \
+		--build-arg GID=$(groupid) \
+		-t hashbang/os:latest .
 
 config: image
-	@docker run \
-	  -it \
-	  -h "android" \
-	  -v android:/home/build \
-	  -e DEVICE=$(device) \
-	  -v $(PWD)/manifests:/home/build/manifests \
-	  -u $(userid):$(userid) \
-	  hashbang/os bash -c "config" \
-	> config.yml
-	@docker run \
-	  -it \
-	  -h "android" \
-	  -v android:/home/build \
-	  -v $(PWD):/opt/android \
-	  -v $(PWD)/manifests:/home/build/manifests \
-	  -u $(userid):$(userid) \
-	  -e DEVICE=$(device) \
-	  hashbang/os bash -c "manifest"
+	#@$(contain) config > config.yml
+	@$(contain) manifest
 
 fetch:
-	docker run \
-	  -it \
-	  -h "android" \
-	  -v android:/home/build \
-	  -v $(PWD):/opt/android \
-	  hashbang/os bash -c "fetch"
+	@$(contain) fetch
 
 tools: fetch
-	docker run \
-	  -it \
-	  -h "android" \
-	  -v android:/home/build \
-	  -v $(PWD):/opt/android \
-	  hashbang/os bash -c "tools"
+	@$(contain) tools
 
 keys: tools
-	docker run \
-	  -it \
-	  -h "android" \
-	  -v android:/home/build \
-	  -v $(PWD):/opt/android \
-	  -e DEVICE=$(device) \
-	  hashbang/os keys
+	@$(contain) keys
 
 build: tools
-	docker run \
-	  -it \
-	  -h "android" \
-	  -v android:/home/build \
-	  -v $(PWD):/opt/android \
-	  -e DEVICE=$(device) \
-	  hashbang/os build
+	@$(contain) build
 
 kernel: tools
-	docker run \
-	  -it \
-	  -h "android" \
-	  -v android:/home/build \
-	  -v $(PWD):/opt/android \
-	  -e DEVICE=$(device) \
-	  hashbang/os build-kernel
+	@$(contain) build-kernel
 
 vendor: tools
-	docker run \
-	  -it \
-	  -h "android" \
-	  -v android:/home/build \
-	  -v $(PWD):/opt/android \
-	  -e DEVICE=$(device) \
-	  hashbang/os build-vendor
+	@$(contain) build-vendor
 
 chromium: tools
-	docker run \
-	  -it \
-	  -h "android" \
-	  -v android:/home/build \
-	  -v $(PWD):/opt/android \
-	  hashbang/os build-chromium
+	@$(contain) build-chromium
 
 release: tools
-	docker run \
-	  -it \
-	  -h "android" \
-	  -v android:/home/build \
-	  -v $(PWD):/opt/android \
-	  -v $(PWD)/release:/home/build/release \
-	  -e DEVICE=$(device) \
-	  hashbang/os release
+	@$(contain) release
 
 shell:
-	docker run \
-	  -it \
-	  -h "android" \
-	  -v android:/home/build \
-	  -v $(PWD):/opt/android \
-	  -v $(PWD)/release:/home/build/release \
-	  -v $(PWD)/manifests:/home/build/manifests \
-	  hashbang/os shell
+	@$(contain) shell
 
 diff:
-	@docker run \
-	  -v android:/home/build \
-	  hashbang/os bash -c "cd base; repo diff -u"
-
-install: tools
-	docker run \
-	  -it \
-	  -h "android" \
-	  --privileged \
-	  -u root \
-	  -v android:/home/build \
-	  -e DEVICE=$(device) \
-	  hashbang/os flash
+	@$(contain) bash -c "cd base; repo diff -u"
 
 clean: image
-	docker run \
-	  -it \
-	  -h "android" \
-	  -v android:/home/build \
-	  hashbang/os clean
+	@$(contain) clean
+
+install: tools
+	@scripts/flash
 
 .PHONY: image build shell diff install update flash clean tools default
