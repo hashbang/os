@@ -48,7 +48,7 @@ chromium: tools
 release: tools
 	@$(contain) release
 
-compare: tools
+compare:
 	@rm -rf compare && \
 	mkdir -p compare && \
 	$(contain) clean && \
@@ -61,8 +61,8 @@ compare: tools
 	mv release/$(device)/* compare/b && \
 	$(contain) diffoscope \
 		--text compare/diff.txt \
-		compare/a/*target_files*.zip \
-		compare/b/*target_files*.zip
+		compare/a/*factory*.zip \
+		compare/b/*factory*.zip
 
 shell:
 	@$(contain) shell
