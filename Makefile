@@ -14,8 +14,7 @@ contain := \
 default: build
 
 image:
-	@docker \
-		build \
+	@docker build \
 		--build-arg UID=$(userid) \
 		--build-arg GID=$(groupid) \
 		-t hashbang/os:latest .
@@ -61,6 +60,8 @@ compare:
 	mv release/$(device)/* compare/b && \
 	$(contain) diffoscope \
 		--text compare/diff.txt \
+		--markdown compare/diff.md \
+		--json compare/diff.json \
 		compare/a/*factory*.zip \
 		compare/b/*factory*.zip
 
