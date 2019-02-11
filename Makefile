@@ -21,7 +21,7 @@ image:
 		-t hashbang/os:latest .
 
 config: image
-	#@$(contain) config > config.yml
+	@$(contain) config > config.yml
 	@$(contain) manifest
 
 fetch:
@@ -60,8 +60,9 @@ compare: tools
 	$(contain) release && \
 	mv release/$(device)/* compare/b && \
 	$(contain) diffoscope \
+		--text compare/diff.txt && \
 		compare/a/*target_files*.zip \
-		compare/b/*target_files*.zip > compare/diff.txt
+		compare/b/*target_files*.zip
 
 shell:
 	@$(contain) shell
