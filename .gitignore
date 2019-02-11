@@ -2,4 +2,5 @@ release/*
 keys/*
 base/*
 external/*
+compare/*
 .*
