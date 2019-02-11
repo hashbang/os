@@ -60,7 +60,7 @@ compare: tools
 	$(contain) release && \
 	mv release/$(device)/* compare/b && \
 	$(contain) diffoscope \
-		--text compare/diff.txt && \
+		--text compare/diff.txt \
 		compare/a/*target_files*.zip \
 		compare/b/*target_files*.zip
 
