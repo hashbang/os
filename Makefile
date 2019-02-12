@@ -19,9 +19,11 @@ image:
 		--build-arg GID=$(groupid) \
 		-t hashbang/os:latest .
 
-config: image
-	@$(contain) config > config.yml
-	@$(contain) manifest
+manifest: image
+	$(contain) manifest
+
+config: manifest
+	$(contain) config
 
 fetch:
 	@$(contain) fetch

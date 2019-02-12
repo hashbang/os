@@ -94,4 +94,5 @@ if __name__ == "__main__":
                     variant,{}
                 )[key] = value
 
-    print(yaml.dump(config,default_flow_style=False))
+    with open('config.yml', 'w') as outfile:
+        yaml.dump(config, outfile, default_flow_style=False)
