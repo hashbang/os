@@ -184,6 +184,13 @@ make DEVICE=crosshatch clean build release
 
 ## Develop ##
 
+### mrproper ###
+
+Clean everything but keys
+```
+make mrproper
+```
+
 ### Compare ###
 
 Build a given device twice from scratch and compare with diffoscope:
