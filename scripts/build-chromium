@@ -50,7 +50,7 @@ cat <<-EOF > out/Default/args.gn
 	symbol_level = 1
 	fieldtrial_testing_like_official_build = true
 	ffmpeg_branding = "Chrome"
-	proprietary_codecs = true
+	proprietary_codecs = false
 EOF
 gn gen "$chromium_dir/src/out/Default"
 
