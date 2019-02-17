@@ -68,6 +68,7 @@ compare:
 	mv release/$(device)/* compare/b && \
 	$(contain) diffoscope \
 		--text compare/diff.txt \
+		--exclude-directory-metadata \
 		--markdown compare/diff.md \
 		--json compare/diff.json \
 		compare/a/*factory*.zip \

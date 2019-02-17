@@ -2,9 +2,8 @@
 [ -f /.dockerenv ] || { echo "please run in supplied container"; exit 1; }
 set -e; eval "$(environment)"
 
-rm -rf "$HOME"/{.gradle,.android,.cache,.repoconfig,base/.repo}
-
 cd "$HOME/base" || { echo "base directory does not exist"; exit 1; }
+
 make clean
 repo forall -c 'git reset --hard ; git clean -fdx'
 mapfile -t -d '' dirs \
@@ -16,3 +15,5 @@ for dir in "${dirs[@]}"; do (
 		rm -rf out
 	EOF
 ) done
+
+rm -rf "$HOME"/{.gradle,.android,.cache,.repoconfig,base/.repo}
