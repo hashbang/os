@@ -73,6 +73,7 @@ environment['CROSS_COMPILE_ARM32'] = \
     '{}/{}/arm-linux-androideabi-'.format(base_dir, cross32)
 
 paths = [
+    'prebuilts/jdk/jdk8/linux-x86/bin',
     'build/tools/releasetools',
     'development/tools',
     'external/avb',
