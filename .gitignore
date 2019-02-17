@@ -1,6 +1,2 @@
-release/*
-keys/*
-base/*
-external/*
-compare/*
+build/*
 .*

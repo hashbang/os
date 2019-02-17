@@ -6,7 +6,12 @@ groupid = $(shell id -g)
 
 contain := \
 	docker run -it -h "android" \
-		-v $(PWD):/home/build \
+		-v $(PWD)/build:/home/build \
+		-v $(PWD)/keys:/home/build/keys \
+		-v $(PWD)/manifests:/home/build/manifests \
+		-v $(PWD)/scripts:/home/build/scripts \
+		-v $(PWD)/patches:/home/build/patches \
+		-v $(PWD)/config.yml:/home/build/config.yml \
 		-u $(userid):$(userid) \
 		-e DEVICE=$(device) \
 		hashbang/os
@@ -25,7 +30,8 @@ manifest: image
 config: manifest
 	$(contain) config
 
-fetch:
+fetch: image
+	mkdir -p build
 	@$(contain) fetch
 
 tools: fetch
@@ -75,7 +81,10 @@ diff:
 
 clean: image
 	@$(contain) clean
+
+mrproper:
 	@docker image rm -f hashbang/os
+	rm -rf build
 
 install: tools
 	@scripts/flash
