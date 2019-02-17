@@ -4,6 +4,8 @@ set -e; eval "$(environment)"
 
 cd "$HOME/base" || { echo "base directory does not exist"; exit 1; }
 
+rm -rf "$HOME"/external/chromium/out
+
 make clean
 repo forall -c 'git reset --hard ; git clean -fdx'
 mapfile -t -d '' dirs \
