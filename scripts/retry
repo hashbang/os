@@ -1,0 +1,10 @@
+#!/bin/bash
+
+n=0
+try=$1
+cmd="${@: 2}"
+[[ $# -le 1 ]] && { echo "Usage $0 <retry_number> <Command>"; }
+
+until [[ $n -ge $try ]]; do
+    $cmd && break || { echo "Command Failed. Retry #$n"; ((n++)); sleep 1; }
+done
