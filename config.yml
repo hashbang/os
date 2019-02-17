@@ -6,7 +6,7 @@ datetime: 1543792453
 host: android
 user: build
 platform:
-  ref: android-9.0.0_r30
+  ref: android-9.0.0_r33
   extra_remotes:
   - name: github
     fetch: https://github.com/
