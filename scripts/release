@@ -1,5 +1,6 @@
 #!/bin/bash
 # shellcheck disable=SC1091,SC1090
+[ -f /.dockerenv ] || { echo "please run in supplied container"; exit 1; }
 set -e; eval "$(environment)"
 
 img_path() {

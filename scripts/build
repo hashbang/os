@@ -1,4 +1,5 @@
 #!/bin/bash
+[ -f /.dockerenv ] || { echo "please run in supplied container"; exit 1; }
 set -e; eval "$(environment)"
 
 device="${DEVICE?}"

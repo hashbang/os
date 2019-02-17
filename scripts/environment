@@ -73,7 +73,6 @@ environment['CROSS_COMPILE_ARM32'] = \
     '{}/{}/arm-linux-androideabi-'.format(base_dir, cross32)
 
 paths = [
-    'opt/android/scripts',
     'build/tools/releasetools',
     'development/tools',
     'external/avb',
@@ -86,6 +85,8 @@ envsetup = '{}/build/envsetup.sh'.format(base_dir)
 if isfile(envsetup):
     print('source {}'.format(envsetup))
 for path in paths:
-    print('export PATH="{}/{}:$PATH"'.format(environment['BASE_DIR'], path))
+    print('export PATH="/home/build/scripts:{}/{}:$PATH"'.format(
+        environment['BASE_DIR'], path
+    ))
 for name, value in environment.items():
     print('export {}="{}"'.format(name, value))

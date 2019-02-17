@@ -75,6 +75,7 @@ diff:
 
 clean: image
 	@$(contain) clean
+	@docker image rm -f hashbang/os
 
 install: tools
 	@scripts/flash
