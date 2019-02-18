@@ -54,4 +54,7 @@ cat <<-EOF > out/Default/args.gn
 EOF
 gn gen "$chromium_dir/src/out/Default"
 
-autoninja -C "$chromium_dir/src/out/Default/" monochrome_public_apk
+# Chromium builds often don't have dependency graphs working properly
+# As a result the first build often breaks and only on the second build
+# will it complete.
+retry 2 autoninja -C "$chromium_dir/src/out/Default/" monochrome_public_apk
