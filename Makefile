@@ -83,7 +83,7 @@ diff:
 clean: image
 	@$(contain) clean
 
-mrproper:
+mrproper: clean
 	@docker image rm -f hashbang/os
 	rm -rf build
 
