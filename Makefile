@@ -5,6 +5,7 @@ groupid = $(shell id -g)
 .DEFAULT_GOAL := default
 
 contain := \
+	mkdir -p keys build && \
 	docker run -it -h "android" \
 		-v $(PWD)/build:/home/build \
 		-v $(PWD)/keys:/home/build/keys \
