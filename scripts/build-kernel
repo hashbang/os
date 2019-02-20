@@ -7,6 +7,7 @@ device="${DEVICE?}"
 base_dir="${BASE_DIR?}"
 external_dir="${EXTERNAL_DIR?}"
 manifest_dir="${MANIFEST_DIR?}"
+manifest_work_tree="$HOME/.cache/manifests"
 key_dir="${KEY_DIR:-${PWD}/keys/${device}}"
 kernel_name="${KERNEL_NAME?}"
 kernel_repo="${KERNEL_REPO?}"
@@ -19,7 +20,7 @@ if [[ $kernel_repo == *"manifest"* ]]; then
 	mkdir -p "${kernel_dir}"
 	cd "${kernel_dir}"
 	cat /etc/gitconfig > "$HOME/.gitconfig"
-	repo init -u "${manifest_dir}" -m "kernel-${kernel_name}.xml"
+	repo init -u "${manifest_work_tree}" -m "kernel-${kernel_name}.xml"
 	repo sync -c --no-tags --no-clone-bundle --jobs "${cores}"
 	repo forall -c 'git reset --hard ; git clean -fdx'
 	ln -vs \
