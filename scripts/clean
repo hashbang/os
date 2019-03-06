@@ -3,19 +3,22 @@
 set -e; eval "$(environment)"
 
 cd "$HOME/base" || { echo "base directory does not exist"; exit 1; }
+[ -d ".repo/manifests/.git/HEAD" ] && {
+	repo forall -c 'git reset --hard ; git clean -fdx';
+}
+make clean;
 
-rm -rf "$HOME"/external/chromium/out
-
-make clean
-repo forall -c 'git reset --hard ; git clean -fdx'
 mapfile -t -d '' dirs \
 	< <(find "$HOME/external/kernel" -maxdepth 1 -mindepth 1 -type d -print0)
 for dir in "${dirs[@]}"; do (
-	cat <<-EOF | bash
-		cd "$dir" || exit;
-		repo forall -c 'git reset --hard ; git clean -fdx';
-		rm -rf out
-	EOF
+	[ ! -d "$dir/.repo/manifests/.git/HEAD" ] || {
+		cat <<-EOF | bash
+			cd "$dir" || exit;
+			repo forall -c 'git reset --hard ; git clean -fdx';
+			rm -rf out
+		EOF
+	}
 ) done
 
-rm -rf "$HOME"/{.gradle,.android,.cache,.repoconfig,base/.repo}
+
+rm -rf "$HOME"/{external/chromium/out,.gradle,.android,.cache,.repoconfig,base/.repo}

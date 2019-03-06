@@ -1,0 +1,28 @@
+#!/bin/bash
+[ -f /.dockerenv ] || { echo "please run in supplied container"; exit 1; }
+set -e; eval "$(environment)"
+
+device="${DEVICE?}"
+
+rm -rf compare || true
+mkdir -p compare
+
+clean
+fetch
+build
+release
+mv release/"${device}"/* compare/a
+
+clean
+fetch
+build
+release
+mv release/"${device}"/* compare/b
+
+diffoscope \
+	--text compare/diff.txt \
+	--exclude-directory-metadata \
+	--markdown compare/diff.md \
+	--json compare/diff.json \
+	compare/a/*factory*.zip \
+	compare/b/*factory*.zip

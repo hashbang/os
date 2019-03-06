@@ -9,13 +9,13 @@ contain := \
 	docker run -it -h "android" \
 		-v $(PWD)/build:/home/build \
 		-v $(PWD)/keys:/home/build/keys \
-		-v $(PWD)/manifests:/home/build/manifests \
+		-v $(PWD)/manifests:/opt/android/manifests \
 		-v $(PWD)/scripts:/home/build/scripts \
 		-v $(PWD)/patches:/home/build/patches \
 		-v $(PWD)/config.yml:/home/build/config.yml \
 		-u $(userid):$(userid) \
 		-e DEVICE=$(device) \
-		hashbang/os
+		hashbang-os
 
 default: build
 
@@ -23,19 +23,20 @@ image:
 	@docker build \
 		--build-arg UID=$(userid) \
 		--build-arg GID=$(groupid) \
-		-t hashbang/os:latest .
+		-t hashbang-os:latest .
 
 manifest: image
 	$(contain) manifest
 
 config: manifest
 	$(contain) config
+	cp build/manifests/* manifests
 
-fetch: image
+fetch:
 	mkdir -p build
 	@$(contain) fetch
 
-tools: fetch
+tools: fetch image
 	@$(contain) tools
 
 keys: tools
@@ -54,26 +55,13 @@ chromium: tools
 	@$(contain) build-chromium
 
 release: tools
+	mkdir -p build/release
 	@$(contain) release
 
-compare:
-	@rm -rf compare && \
-	mkdir -p compare && \
-	$(contain) clean && \
-	$(contain) build && \
-	$(contain) release && \
-	mv release/$(device)/* compare/a && \
-	$(contain) clean && \
-	$(contain) build && \
-	$(contain) release && \
-	mv release/$(device)/* compare/b && \
-	$(contain) diffoscope \
-		--text compare/diff.txt \
-		--exclude-directory-metadata \
-		--markdown compare/diff.md \
-		--json compare/diff.json \
-		compare/a/*factory*.zip \
-		compare/b/*factory*.zip
+test-repro:
+	@$(contain) test-repro
+
+test: test-repro
 
 shell:
 	@$(contain) shell

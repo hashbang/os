@@ -28,9 +28,8 @@ bootloader=$(img_path bootloader "${base_dir}/vendor/google_devices/${device}")
 radio=$(img_path baseband "${base_dir}/vendor/google_devices/${device}")
 
 cd "$base_dir"
-[ -d "${release_dir}" ] && sudo rm -rf "${release_dir}"
-sudo mkdir -p "$release_dir"
-sudo chown -R build:build "$release_dir"
+[ -d "${release_dir}" ] && rm -rf "${release_dir}"
+mkdir -p "$release_dir"
 
 echo "Running sign_target_files_apks"
 sign_target_files_apks \
