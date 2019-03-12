@@ -9,13 +9,13 @@ contain := \
 	docker run -it -h "android" \
 		-v $(PWD)/build:/home/build \
 		-v $(PWD)/keys:/home/build/keys \
-		-v $(PWD)/manifests:/opt/android/manifests \
+		-v $(PWD)/manifests:/opt/android/manifests:ro \
 		-v $(PWD)/scripts:/home/build/scripts \
 		-v $(PWD)/patches:/home/build/patches \
 		-v $(PWD)/config.yml:/home/build/config.yml \
 		-u $(userid):$(userid) \
 		-e DEVICE=$(device) \
-		hashbang-os
+		hashbang-os:latest
 
 default: build
 
@@ -73,7 +73,7 @@ clean: image
 	@$(contain) clean
 
 mrproper: clean
-	@docker image rm -f hashbang/os
+	@docker image rm -f hashbang-os:latest
 	rm -rf build
 
 install: tools
