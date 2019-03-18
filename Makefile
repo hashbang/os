@@ -8,18 +8,21 @@ contain := \
 	docker run -it -h "android" \
 		-v $(PWD)/build:/home/build \
 		-v $(PWD)/keys:/home/build/keys \
+		-v $(PWD)/terraform:/home/build/terraforms \
 		-v $(PWD)/manifests:/home/build/manifests \
 		-v $(PWD)/scripts:/home/build/scripts \
 		-v $(PWD)/patches:/home/build/patches \
 		-v $(PWD)/config.yml:/home/build/config.yml \
 		-u $(userid):$(userid) \
 		-e DEVICE=$(device) \
+		--env-file=$(PWD)/terraform.env \
 		hashbang/os
 
 default: build
 
 image:
 	@docker build \
+		--squash \
 		--build-arg UID=$(userid) \
 		--build-arg GID=$(groupid) \
 		-t hashbang/os:latest .
