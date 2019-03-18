@@ -25,6 +25,7 @@ environment = {
     "OS_NAME": config['name'],
     "BASE_DIR": base_dir,
     "ANDROID_HOME": "%s/sdk" % base_dir,
+    "MANIFEST_REPO": "/opt/android/manifests",
     "MANIFEST_DIR": "%s/manifests" % cwd,
     "CONFIG_DIR": cwd,
     "EXTERNAL_DIR": "%s/external" % cwd,
@@ -73,6 +74,7 @@ environment['CROSS_COMPILE_ARM32'] = \
     '{}/{}/arm-linux-androideabi-'.format(base_dir, cross32)
 
 paths = [
+    '.repo/repo/',
     'prebuilts/jdk/jdk8/linux-x86/bin',
     'build/tools/releasetools',
     'development/tools',

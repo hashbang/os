@@ -5,14 +5,26 @@ set -e; eval "$(environment)"
 cp /etc/gitconfig ~/.gitconfig
 
 base_dir="${BASE_DIR?}"
-manifest_dir="${MANIFEST_DIR?}"
 cores=$(nproc)
+manifest_dir="${MANIFEST_DIR?}"
+manifest_repo="${MANIFEST_REPO?}"
 
-mkdir -p "${base_dir}"
+mkdir -p "${base_dir}" "${manifest_dir}"
+
+rsync -Pav "${manifest_repo}/" "${manifest_dir}/"
+
+[ -d "${manifest_dir}/.git" ] || {
+	export GIT_WORK_TREE="$manifest_dir"
+	export GIT_DIR="${manifest_dir}/.git"
+	git init
+	git add .
+	git commit -a -m "automated cache commit"
+}
+
 cd "${base_dir}"
 
 repo init -u "${manifest_dir}" -m base.xml
 
-retry 3 repo sync -c --no-tags --no-clone-bundle --jobs "${cores}" && break
+retry 3 repo sync -c --no-tags --no-clone-bundle --jobs "${cores}"
 
 repo forall -c 'git reset --hard ; git clean -fdx'
