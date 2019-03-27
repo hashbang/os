@@ -23,7 +23,6 @@ RUN \
         android-tools-adb \
         bc \
         bsdmainutils \
-        repo \
         cgpt \
         bison \
         build-essential \
