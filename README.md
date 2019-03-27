@@ -265,9 +265,9 @@ series of mobile handsets.
 Pixel devices start at $100-200 and we will try to maintain support for at
 least one device at this price point to keep the project accessible.
 
-### Why not use LineageOS, AOKP, or insert-project-here ?
+### Why not use LineageOS, AOKP, or insert-project-here?
 
-As of the time of this writing most popular ROMs are virtually unusuable
+As of the time of this writing most popular ROMs are virtually unusable
 without Google Play Services and the proprietary parts of android. They also
 tend to make changes that make taking upstream source code time consuming thus
 often delaying security updates.
