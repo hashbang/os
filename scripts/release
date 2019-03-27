@@ -19,6 +19,7 @@ build_datetime="${BUILD_DATETIME?}"
 key_dir="${KEY_DIR?}"
 release_dir="${RELEASE_DIR?}"
 build_id=${BUILD_ID?}
+avb_mode="${AVB_MODE?}"
 
 prefix=aosp_
 target_files="${device}-target_files-${build_number}.zip"
@@ -67,14 +68,13 @@ cat <<-EOF | bash
 	source "${base_dir}/device/common/generate-factory-images-common.sh"
 EOF
 
-echo "Copy avb key and scripts into factory zip"
+echo "Copy scripts and optionally the avb key into factory zip"
 cd "${release_dir}"
 factory_zip="$(ls "${device}"-"${build_id}"-factory-*.zip)"
 factory_tmp="${device}-${build_id}-factory.zip"
 factory_dir="${device}-${build_id}"
 unzip "${factory_zip}"
 rm "${factory_zip}"
-cp "${key_dir}/avb_pkmd.bin" "${factory_dir}/${device}-avb_pkmd.bin"
 rm "${factory_dir}/flash-all.sh"
 rm "${factory_dir}/flash-all.bat"
 rm "${factory_dir}/flash-base.sh"
@@ -83,7 +83,16 @@ cat <<-EOF > "${factory_dir}/flash-all.sh"
 		echo "fastboot too old; please update via your OS package manager"
 		exit 1
 	fi
+EOF
+
+if [ "$avb_mode" != "verity_only" ]; then
+	cp "${key_dir}/avb_pkmd.bin" "${factory_dir}/${device}-avb_pkmd.bin"
+	cat <<-EOF >> "${factory_dir}/flash-all.sh"
 	fastboot flash avb_custom_key ${device}-avb_pkmd.bin
+EOF
+fi
+
+cat <<-EOF >> "${factory_dir}/flash-all.sh"
 	fastboot flash bootloader bootloader-${device}-${bootloader}.img
 	fastboot reboot-bootloader
 	sleep 5
