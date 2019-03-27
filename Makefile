@@ -13,7 +13,7 @@ contain := \
 		-v $(PWD)/scripts:/home/build/scripts \
 		-v $(PWD)/patches:/home/build/patches \
 		-v $(PWD)/config.yml:/home/build/config.yml \
-		-u $(userid):$(userid) \
+		-u $(userid):$(groupid) \
 		-e DEVICE=$(device) \
 		hashbang-os:latest
 
