@@ -63,7 +63,7 @@ RUN \
         wget \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
-    && echo "[color]\nui = auto\n[user]\nemail = aosp@null.com\nname = AOSP User" >> /etc/gitconfig
+    && echo "[color]\nui = auto\n[user]\nemail = aosp@example.org\nname = AOSP User" >> /etc/gitconfig
 
 ADD ./manifests /home/build/manifests
 ADD ./scripts /home/build/scripts
