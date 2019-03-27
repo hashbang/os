@@ -101,6 +101,7 @@ cat <<-EOF >> "${factory_dir}/flash-all.sh"
 	sleep 5
 	fastboot -w update image-${device}-${build_id}.zip
 EOF
+chmod +x "${factory_dir}/flash-all.sh"
 timestamp=$(date -d "@$build_datetime" "+%y%m%d%H%M.%S")
 find "${factory_dir}" -exec touch -t "$timestamp" {} +
 zip -X -r "${factory_tmp}" "${factory_dir}"
