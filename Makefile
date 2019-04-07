@@ -6,14 +6,14 @@ groupid = $(shell id -g)
 
 contain := \
 	mkdir -p keys build && \
-	docker run -it -h "android" \
+	docker run -it --rm -h "android" \
 		-v $(PWD)/build:/home/build \
 		-v $(PWD)/keys:/home/build/keys \
 		-v $(PWD)/manifests:/opt/android/manifests:ro \
 		-v $(PWD)/scripts:/home/build/scripts \
 		-v $(PWD)/patches:/home/build/patches \
 		-v $(PWD)/config.yml:/home/build/config.yml \
-		-u $(userid):$(userid) \
+		-u $(userid):$(groupid) \
 		-e DEVICE=$(device) \
 		hashbang-os:latest
 
