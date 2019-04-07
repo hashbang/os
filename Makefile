@@ -1,4 +1,5 @@
 device = ${DEVICE}
+config = ${CONFIG}
 userid = $(shell id -u)
 groupid = $(shell id -g)
 
@@ -11,10 +12,11 @@ contain := \
 		-v $(PWD)/keys:/home/build/keys \
 		-v $(PWD)/manifests:/opt/android/manifests:ro \
 		-v $(PWD)/scripts:/home/build/scripts \
+		-v $(PWD)/config:/home/build/config \
 		-v $(PWD)/patches:/home/build/patches \
-		-v $(PWD)/config.yml:/home/build/config.yml \
 		-u $(userid):$(groupid) \
 		-e DEVICE=$(device) \
+		-e CONFIG=$(config) \
 		hashbang-os:latest
 
 default: build
@@ -42,7 +44,7 @@ tools: fetch image
 keys: tools
 	@$(contain) keys
 
-build: tools
+build: image tools
 	@$(contain) build
 
 kernel: tools

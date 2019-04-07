@@ -1,0 +1,167 @@
+version: '9'
+name: HashbangOS
+type: release
+variant: user
+datetime: 1543792453
+host: android
+user: build
+platform:
+  ref: android-9.0.0_r34
+  extra_remotes:
+  - name: github
+    fetch: https://github.com/
+  - name: gitlab
+    fetch: https://gitlab.com/
+  extra_projects:
+  - name: fdroid/fdroidclient
+    groups: device
+    path: packages/apps/F-Droid
+    remote: gitlab
+    revision: refs/tags/1.5.1
+  - name: fdroid/privileged-extension
+    groups: device
+    path: packages/apps/F-DroidPrivilegedExtension
+    remote: gitlab
+    revision: refs/tags/0.2.9
+  - name: anestisb/android-prepare-vendor
+    groups: device
+    path: vendor/android-prepare-vendor
+    remote: github
+    revision: refs/heads/master
+  - name: stevesoltys/backup
+    groups: device
+    path: packages/apps/Backup
+    remote: github
+    revision: refs/heads/master
+  - name: AndroidHardening/platform_external_chromium
+    groups: device
+    path: external/chromium
+    remote: github
+    revision: refs/heads/pie
+  - name: AndroidHardening/platform_packages_apps_Updater
+    groups: device
+    path: packages/apps/Updater
+    remote: github
+    revision: refs/heads/pie
+  remove_paths:
+  - external/chromium-webview
+  - packages/apps/Calendar
+  - packages/apps/QuickSearchBox
+  - packages/apps/Browser2
+  - platform/prebuilts/qemu-kernel
+  - platform/developers/samples/android
+  - platform/developers/demos
+  - device/generic/car
+  - device/generic/qemu
+  - device/generic/goldfish
+  - device/generic/goldfish-opengl
+  - device/lenaro/bootloader/arm-trusted-firmware
+  - device/lenaro/bootloader/edk2
+  - device/lenaro/bootloader/OpenPlatformPkg
+  - device/lenaro/hikey
+  - device/lenaro/hikey-kernel
+  - device/lenaro/
+  - device/google/atv
+  - device/google/contexthub
+  - device/google/cuttlefish
+  - device/google/cuttlefish_kernel
+  - device/google/cuttlefish_sepolicy
+  - device/google/cuttlefish_common
+  - device/google/muskie
+  - device/generic/mips
+  - device/google/hikey-kernel
+  - device/generic/mips64
+  - device/generic/mini-emulator-arm64
+  - device/generic/mini-emulator-armv7-a-neon
+  - device/generic/mini-emulator-mips
+  - device/generic/mini-emulator-mips64
+  - device/generic/mini-emulator-x86
+  - device/generic/mini-emulator-x86_64
+  - device/google/accessory/arduino
+  - device/google/accessory/demokit
+  remove_groups:
+  - darwin
+apps:
+  chromium:
+    version: 74.0.3709.1
+    src_ref: 1d8d8272ffef0e1324b08b25437686c6ff0c3aa7
+    depot_tools_ref: 4debfe4555414cf95a06dac28aa13955f4787aa6
+devices:
+  crosshatch:
+    global:
+      kernel_name: bluecross
+      kernel_ref: origin/android-msm-bluecross-4.9-pie-qpr1
+      kernel_repo: kernel/manifest
+      avb_mode: vbmeta_chained
+      factory_build: PQ2A.190305.002
+      factory_hash: dc7e9ca44a19fa2ce5a5ed54fc7be5f2f830006b4a0958842f90d5bc514ab91e
+    verizon:
+      factory_hash: 7e9da376a846c934eb3b4ca39833996ee453c3ad67bb23a365ba09862c286d03
+      factory_build: PD1A.180720.031
+    docomo:
+      factory_build: PQ1A.181205.006.A1
+      factory_hash: 99bead334525f4d26ef5777ebc910648674597e1322a2a95e9e2d4f9df5d69cf
+  blueline:
+    global:
+      kernel_name: bluecross
+      kernel_ref: origin/android-msm-bluecross-4.9-pie-qpr1
+      kernel_repo: kernel/manifest
+      avb_mode: vbmeta_chained
+      factory_build: PQ2A.190305.002
+      factory_hash: b8869812509521216f02bac1d24bf146e0fc11175dc79645b0a91b4029d7ddf8
+    verizon:
+      factory_build: PD1A.180720.031
+      factory_hash: 3df41a2b65335bb6c130f36b0bbd87c3f90822b7ef04f210232daacc3693142a
+    docomo:
+      factory_build: PQ1A.181205.006.A1
+      factory_hash: e0442d3b0a9e5636f4979b5780b6173635fe73917e88ffe1b9d36c2bc45aa7bc
+  taimen:
+    global:
+      kernel_name: wahoo
+      kernel_ref: android-msm-wahoo-4.4-pie-qpr1
+      kernel_repo: kernel/msm
+      avb_mode: vbmeta_simple
+      factory_build: PQ2A.190305.002
+      factory_hash: 8f42be1a67742c3ddb7a71539ad59e036d0e256e2cee6dd0d9a9a8c7c458f1ae
+    telstra:
+      factory_build: PPR1.180610.011
+      factory_hash: 9f0cb004c3b42789c150293aa6a6eecb0f289324ce1403befde93b106da59829
+  walleye:
+    global:
+      kernel_name: wahoo
+      kernel_ref: android-msm-wahoo-4.4-pie-qpr1
+      kernel_repo: kernel/msm
+      avb_mode: vbmeta_simple
+      factory_build: PQ2A.190305.002
+      factory_hash: 73bd98dee9844d0322e84a134ba541fa682061446cfe32cd8d88ae803d971a30
+    telstra:
+      factory_build: PPR1.180610.011
+      factory_hash: 0fbd304845b6a1e8c5960deedb70aab0f804a4b1bb93242b3bbcdad586982769
+  marlin:
+    global:
+      kernel_name: marlin
+      kernel_ref: android-msm-marlin-3.18-pie-qpr1-s2
+      kernel_repo: kernel/msm
+      avb_mode: verity_only
+      factory_build: PQ2A.190305.002
+      factory_hash: adea2e1109a841867f336f91087274e90cdec36a7c9a5f8a78f5bcf500f570d8
+    telus:
+      factory_build: PPR1.181005.003.A1
+      factory_hash: 960a173f0f84e2c3c0c5d96643e6ca3f99d5a898a932c6e3a62c52282d6fb3f4
+    verizon:
+      factory_build: PPR2.180905.006.A1
+      factory_hash: a78fe26434e04f8d5015bab79f717fc7b03b13286370b079b7e96d1f7562512a
+  sailfish:
+    global:
+      kernel_name: marlin
+      kernel_ref: android-msm-marlin-3.18-pie-qpr1-s2
+      kernel_repo: kernel/msm
+      avb_mode: verity_only
+      factory_build: PQ2A.190305.002
+      factory_hash: 73582e64a61bd909c460b3a6687d6c9d2d8c1ba0ea18250c1ec7643714fdae6b
+    telus:
+      factory_build: PPR1.181005.003.A1
+      factory_hash: 6a2c3b69a43f93e576f953d7c8368648bd26f7d23667556a65af40282a72f7af
+    verizon:
+      factory_build: PPR2.180905.006.A1
+      factory_hash: b063909b211beea28e6879a12db1dade1eb4c007900082c10ea160f15c6feae7
