@@ -13,13 +13,13 @@ mkdir --parents "${base_dir}" "${manifest_dir}"
 
 rsync -P --archive --verbose "${manifest_repo}/" "${manifest_dir}/"
 
-[ -d "${manifest_dir}/.git" ] || {
+[ -d "${manifest_dir}/.git" ] || (
 	export GIT_WORK_TREE="$manifest_dir"
 	export GIT_DIR="${manifest_dir}/.git"
 	git init
 	git add .
 	git commit --all --message "automated cache commit"
-}
+)
 
 cd "${base_dir}"
 
