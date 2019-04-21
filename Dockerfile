@@ -68,7 +68,7 @@ RUN \
 ADD ./manifests /home/build/manifests
 ADD ./scripts /home/build/scripts
 ADD ./patches /home/build/patches
-ADD ./config.yml /home/build/config.yml
+ADD ./configs /home/build/configs
 
 USER build
 WORKDIR /home/build

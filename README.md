@@ -184,7 +184,30 @@ make DEVICE=crosshatch clean build release
 
 ## Develop ##
 
-### mrproper ###
+## Configure ##
+
+In addition to the hashbang (default) configuration, configurations exist to
+build using default sources from other compatible android projects:
+
+  | Config     | Tested | Verifiable | Sources                        |
+  |------------|:------:|:----------:|:------------------------------:|
+  | AOSP       | TRUE   | FALSE      | https://source.android.com/    |
+  | CalyxOS    | FALSE  | FALSE      | https://github.com/grapheneos  |
+  | GrapheneOS | FALSE  | FALSE      | https://gitlab.com/calyxos     |
+
+You need only pass ```CONFIG=configname``` to make to select alternate configs.
+
+For instance To build crosshatch with an alternative overlay such as AOSP do:
+```
+make DEVICE=crosshatch CONFIG=aosp build
+```
+
+### clean ###
+
+Do basic cleaning without deleting cached artifacts/sources:
+```
+make clean
+```
 
 Clean everything but keys
 ```

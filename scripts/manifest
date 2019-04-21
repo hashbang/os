@@ -6,7 +6,7 @@ from xml.etree import ElementTree
 from xml.etree.ElementTree import Element
 from xml.dom import minidom
 from sys import argv, exit
-from os import environ, getcwd, makedirs
+from os import environ, getcwd, getenv, makedirs
 from os.path import isfile, isdir
 import re
 import yaml
@@ -132,16 +132,13 @@ class AndroidManifest:
 
 if __name__ == "__main__":
 
-    if 'CONFIG_FILE' in environ:
-        config_file=environ['CONFIG_FILE']
-    elif isfile('/opt/android/config.yml'):
-        config_file="/opt/android/config.yml"
-    elif isfile('./config.yml'):
-        config_file="./config.yml"
+    config_name = getenv('CONFIG', 'hashbang')
+    if config_name == "": config_name = "hashbang"
+    config_file='%s/configs/%s.yml' % (getcwd(), config_name)
     with open(config_file, encoding='utf-8') as data_file:
         config = yaml.load(data_file.read())
 
-    path="%s/manifests" % getcwd()
+    path="%s/manifests/%s" % (getcwd(), config_name)
     makedirs(path, exist_ok=True)
 
     kernel_names=[]
@@ -160,10 +157,10 @@ if __name__ == "__main__":
 
     manifest = AndroidManifest(
         ref=config['platform']['ref'],
-        extra_remotes = config['platform']['extra_remotes'],
-        extra_projects = config['platform']['extra_projects'],
-        remove_paths = config['platform']['remove_paths'],
-        remove_groups = config['platform']['remove_groups'],
+        extra_remotes = config.get('platform',{}).get('extra_remotes',[]),
+        extra_projects = config.get('platform',{}).get('extra_projects',[]),
+        remove_paths = config.get('platform',{}).get('remove_paths',[]),
+        remove_groups = config.get('platform',{}).get('remove_groups',[]),
     ).pretty_print()
     open('%s/base.xml' % (path),'w').write(manifest)
 

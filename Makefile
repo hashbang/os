@@ -12,7 +12,7 @@ contain := \
 		-v $(PWD)/keys:/home/build/keys \
 		-v $(PWD)/manifests:/opt/android/manifests:ro \
 		-v $(PWD)/scripts:/home/build/scripts \
-		-v $(PWD)/config:/home/build/config \
+		-v $(PWD)/configs:/home/build/configs \
 		-v $(PWD)/patches:/home/build/patches \
 		-u $(userid):$(groupid) \
 		-e DEVICE=$(device) \
@@ -29,10 +29,10 @@ image:
 
 manifest: image
 	$(contain) manifest
+	cp -R build/manifests/* manifests
 
 config: manifest
 	$(contain) config
-	cp build/manifests/* manifests
 
 fetch:
 	mkdir -p build
