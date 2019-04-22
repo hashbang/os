@@ -4,10 +4,11 @@ set -e; eval "$(environment)"
 
 cp /etc/gitconfig ~/.gitconfig
 
+config_name="${CONFIG_NAME?}"
 base_dir="${BASE_DIR?}"
 cores=$(nproc)
-manifest_dir="${MANIFEST_DIR?}"
-manifest_repo="${MANIFEST_REPO?}"
+manifest_dir="${MANIFEST_DIR?}/${config_name}"
+manifest_repo="${MANIFEST_REPO?}/${config_name}"
 
 mkdir --parents "${base_dir}" "${manifest_dir}"
 

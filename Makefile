@@ -29,7 +29,8 @@ image:
 
 manifest: image
 	$(contain) manifest
-	cp -R build/manifests/* manifests
+	cp build/manifests/aosp/*.xml manifests/aosp/ || :
+	cp build/manifests/hashbang/*.xml manifests/hashbang/ || :
 
 config: manifest
 	$(contain) config

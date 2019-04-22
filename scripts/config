@@ -3,7 +3,7 @@
 import yaml
 import re
 import os.path
-from os import environ
+from os import environ, getenv, getcwd
 from html.parser import HTMLParser
 from urllib.request import urlopen
 from collections import OrderedDict, Counter
@@ -70,12 +70,10 @@ yaml.add_constructor(BaseResolver.DEFAULT_MAPPING_TAG, dict_constructor)
 
 if __name__ == "__main__":
 
-    if 'CONFIG_FILE' in environ:
-        config_file=environ['CONFIG_FILE']
-    elif os.path.isfile('/opt/android/config.yml'):
-        config_file="/opt/android/config.yml"
-    elif os.path.isfile('./config.yml'):
-        config_file="./config.yml"
+    config_name = getenv('CONFIG', 'hashbang')
+    if config_name == "": config_name = "hashbang"
+
+    config_file='%s/configs/%s.yml' % (getcwd(), config_name)
     with open(config_file, encoding='utf-8') as data_file:
         config = yaml.load(data_file.read())
 
@@ -94,5 +92,5 @@ if __name__ == "__main__":
                     variant,{}
                 )[key] = value
 
-    with open('config.yml', 'w') as outfile:
+    with open(config_file, 'w') as outfile:
         yaml.dump(config, outfile, default_flow_style=False)

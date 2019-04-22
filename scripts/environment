@@ -52,14 +52,13 @@ environment = {
     "KCONFIG_NOTIMESTAMP": 1,
     "LC_ALL":"C"
 }
-
 environment['BUILD_CHROMIUM'] = "false"
 if config.get("apps", {}).get("chromium"):
     environment['BUILD_CHROMIUM'] = "true"
     environment["CHROMIUM_VERSION"] = \
         config['apps']['chromium']['version']
     environment["CHROMIUM_SRC_REF"] = \
-        config['apps']['chromium']['src_ref'],
+        config['apps']['chromium']['src_ref']
     environment["CHROMIUM_DEPOT_TOOLS_REF"] = \
         config['apps']['chromium']['depot_tools_ref']
 

@@ -31,6 +31,7 @@ cd "$chromium_dir"
 yes Y | gclient sync --with_branch_heads --jobs "${cores}" -RDf
 gclient runhooks
 
+echo "$chromium_src_ref"
 cd "$chromium_dir/src"
 git reset --hard "$chromium_src_ref"
 
