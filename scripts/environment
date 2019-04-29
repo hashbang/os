@@ -69,7 +69,7 @@ if 'DEVICE' in environ and len(environ['DEVICE']) > 0:
     device_config=config['devices'][device]['global']
     for key, value in device_config.items():
         environment[key.upper()]=value.lower()
-    if variant == "user":
+    if variant == "user" or variant == "userdebug":
         key_dir = "%s/keys/%s" % (cwd, device)
     else:
         key_dir = "%s/build/target/product/security/" % base_dir

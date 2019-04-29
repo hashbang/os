@@ -1,7 +1,7 @@
 version: '9'
 name: HashbangOS
 type: release
-variant: user
+variant: userdebug
 datetime: 1555835843
 host: android
 user: build
@@ -33,12 +33,12 @@ platform:
     path: packages/apps/Backup
     remote: github
     revision: refs/heads/master
-  - name: AndroidHardening/platform_external_chromium
+  - name: GrapheneOS/platform_external_chromium
     groups: device
     path: external/chromium
     remote: github
     revision: refs/heads/pie
-  - name: AndroidHardening/platform_packages_apps_Updater
+  - name: GrapheneOS/platform_packages_apps_Updater
     groups: device
     path: packages/apps/Updater
     remote: github
@@ -67,6 +67,9 @@ platform:
   - device/google/cuttlefish_kernel
   - device/google/cuttlefish_sepolicy
   - device/google/cuttlefish_common
+  - device/google/crosshatch-kernel
+  - device/google/wahoo-kernel
+  - device/google/marlin-kernel
   - device/google/muskie
   - device/generic/mips
   - device/google/hikey-kernel
@@ -101,8 +104,8 @@ apps:
 devices:
   crosshatch:
     global:
-      kernel_name: bluecross
-      kernel_ref: origin/android-msm-bluecross-4.9-pie-qpr1
+      kernel_name: crosshatch
+      kernel_ref: origin/android-msm-crosshatch-4.9-pie-qpr2
       kernel_repo: kernel/manifest
       avb_mode: vbmeta_chained
       factory_build: PQ2A.190405.003
@@ -115,8 +118,8 @@ devices:
       factory_hash: 99bead334525f4d26ef5777ebc910648674597e1322a2a95e9e2d4f9df5d69cf
   blueline:
     global:
-      kernel_name: bluecross
-      kernel_ref: origin/android-msm-bluecross-4.9-pie-qpr1
+      kernel_name: crosshatch
+      kernel_ref: origin/android-msm-crosshatch-4.9-pie-qpr2
       kernel_repo: kernel/manifest
       avb_mode: vbmeta_chained
       factory_build: PQ2A.190405.003
