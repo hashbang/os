@@ -38,10 +38,12 @@ openssl req \
 	-days 36500 \
 	-batch \
 	-x509 \
-	-outform PEM \
-	-out signing_key.pem \
-	-keyout signing_key.pem \
+	-outform pem \
+	-out kernel.pem \
+	-keyout kernel.pem \
 	-addext "basicConstraints=critical,CA:FALSE" \
 	-addext	"keyUsage=digitalSignature" \
 	-addext	"subjectKeyIdentifier=hash" \
 	-addext	"authorityKeyIdentifier=keyid"
+openssl pkey -in kernel.pem -out kernel.key
+openssl x509 -outform der -in kernel.pem -out kernel.crt

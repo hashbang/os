@@ -14,18 +14,24 @@ mkdir --parents "${base_dir}" "${manifest_dir}"
 
 rsync -P --archive --verbose "${manifest_repo}/" "${manifest_dir}/"
 
-[ -d "${manifest_dir}/.git" ] || (
-	export GIT_WORK_TREE="$manifest_dir"
-	export GIT_DIR="${manifest_dir}/.git"
-	git init
-	git add .
-	git commit --all --message "automated cache commit"
-)
+export GIT_WORK_TREE="$manifest_dir"
+export GIT_DIR="${manifest_dir}/.git"
+[ -d "${manifest_dir}/.git" ] || git init
+git add .
+git commit --all --message "automated cache commit" || :
+unset GIT_DIR GIT_WORK_TREE
 
 cd "${base_dir}"
+[ -d "${base_dir}/.repo" ] || \
+	repo init \
+		--no-clone-bundle \
+		--manifest-url "${manifest_dir}" \
+		--manifest-name base.xml
 
-repo init --manifest-url "${manifest_dir}" --manifest-name base.xml
-
-retry 3 repo sync --current-branch --no-tags --no-clone-bundle --jobs "${cores}"
+retry 3 repo sync \
+	--current-branch \
+	--no-tags \
+	--no-clone-bundle \
+	--jobs "${cores}"
 
 repo forall -c 'git reset --hard ; git clean --force -dx'

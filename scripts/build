@@ -31,8 +31,9 @@ function build_external(){
 	fi
 
 	local kernel_dir="${external_dir}/kernel/${kernel_name}"
-	local kernel_dist="${kernel_dir}/out/android-msm-${kernel_name}-4.9/dist/"
+	local kernel_dist="${kernel_dir}/dist/"
 	local kernel_dest="${base_dir}/device/google/${device}-kernel/"
+	mkdir -p "${kernel_dest}"
 	[ -d "$kernel_dist" ] || build-kernel
 	cp -R "${kernel_dist}." "${kernel_dest}"
 }

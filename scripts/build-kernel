@@ -4,47 +4,28 @@
 set -e; eval "$(environment)"
 
 device="${DEVICE?}"
-base_dir="${BASE_DIR?}"
+config_name="${CONFIG_NAME?}"
 external_dir="${EXTERNAL_DIR?}"
-manifest_dir="${MANIFEST_DIR?}"
+manifest_dir="${MANIFEST_DIR?}/${config_name}"
 key_dir="${KEY_DIR:-${PWD}/keys/${device}}"
 kernel_name="${KERNEL_NAME?}"
-kernel_repo="${KERNEL_REPO?}"
-kernel_ref="${KERNEL_REF?}"
 kernel_dir="${external_dir}/kernel/${kernel_name}"
 cores=$(nproc)
 
-if [[ $kernel_repo == *"manifest"* ]]; then
+mkdir -p "${kernel_dir}"
+cd "${kernel_dir}"
+cat /etc/gitconfig > "$HOME/.gitconfig"
+repo init \
+	--manifest-url "${manifest_dir}" \
+	--manifest-name "kernel-${kernel_name}.xml"
+repo sync -c --no-tags --no-clone-bundle --jobs "${cores}"
+repo forall -c 'git reset --hard ; git clean -fdx'
+ln -vs \
+	"${key_dir}/kernel.pem" \
+	"${kernel_dir}/private/msm-google/certs/signing_key.pem"
 
-	mkdir -p "${kernel_dir}"
-	cd "${kernel_dir}"
-	cat /etc/gitconfig > "$HOME/.gitconfig"
-	repo init -u "${manifest_dir}" -m "kernel-${kernel_name}.xml"
-	repo sync -c --no-tags --no-clone-bundle --jobs "${cores}"
-	repo forall -c 'git reset --hard ; git clean -fdx'
-	ln -vs \
-		"${key_dir}/signing_key.pem" \
-		"${kernel_dir}/private/msm-google/certs/signing_key.pem"
-
-	source "${kernel_dir}/build/envsetup.sh"
-	bash "${kernel_dir}/build/build.sh"
-
-else
-	cd "$base_dir"
-	kernel_url="https://android.googlesource.com/${kernel_repo}"
-	kernel_dist="${kernel_dir}/out/android-msm-${kernel_name}-4.9/dist/"
-	[ ! -d "$kernel_dir" ] && git clone "$kernel_url" "$kernel_dir"
-	cd "$kernel_dir"
-	git checkout "$kernel_ref"
-
-	[ ! -f "${kernel_dir}/verity_user.der.x509" ] && \
-		ln -vs \
-			"${key_dir}/verity_user.der.x509" \
-			"${kernel_dir}/verity_user.der.x509"
-
-	make "${kernel_name}_defconfig"
-	make
-	mkdir -p "${kernel_dist}"
-	cp -R arch/arm64/boot/. "${kernel_dist}"
-
-fi
+cat <<-EOF | bash
+	export OUT_DIR="${kernel_dir}/out"
+	export DIST_DIR="${kernel_dir}/dist"
+	bash "${kernel_dir}/build/build.sh" -j$(cores)
+EOF
