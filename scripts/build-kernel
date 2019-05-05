@@ -20,9 +20,14 @@ repo init \
 	--manifest-name "kernel-${kernel_name}.xml"
 repo sync -c --no-tags --no-clone-bundle --jobs "${cores}"
 repo forall -c 'git reset --hard ; git clean -fdx'
-ln -vs \
-	"${key_dir}/kernel.pem" \
-	"${kernel_dir}/private/msm-google/certs/signing_key.pem"
+
+# This seems like it -should- work but the AOSP kernel build system
+# seems to ignore it and generate new keys anyway
+# It is better for determinism and security to disable loadable module support
+# anyway, which some patchsets choose to do.
+#ln -vs \
+#	"${key_dir}/kernel.pem" \
+#	"${kernel_dir}/private/msm-google/certs/signing_key.pem"
 
 cat <<-EOF | bash
 	export OUT_DIR="${kernel_dir}/out"
