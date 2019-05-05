@@ -65,11 +65,6 @@ RUN \
     && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
     && echo "[color]\nui = auto\n[user]\nemail = aosp@example.org\nname = AOSP User" >> /etc/gitconfig
 
-ADD ./manifests /home/build/manifests
-ADD ./scripts /home/build/scripts
-ADD ./patches /home/build/patches
-ADD ./configs /home/build/configs
-
 USER build
 WORKDIR /home/build
 

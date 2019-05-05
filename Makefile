@@ -10,10 +10,8 @@ contain := \
 	docker run -it --rm -h "android" \
 		-v $(PWD)/build:/home/build \
 		-v $(PWD)/keys:/home/build/keys \
-		-v $(PWD)/manifests:/opt/android/manifests:ro \
 		-v $(PWD)/scripts:/home/build/scripts \
 		-v $(PWD)/configs:/home/build/configs \
-		-v $(PWD)/patches:/home/build/patches \
 		-u $(userid):$(groupid) \
 		-e DEVICE=$(device) \
 		-e CONFIG=$(config) \
@@ -29,8 +27,9 @@ image:
 
 manifest: image
 	$(contain) manifest
-	cp build/manifests/aosp/*.xml manifests/aosp/ || :
-	cp build/manifests/hashbang/*.xml manifests/hashbang/ || :
+	cp \
+		build/configs/$(config)/manifests/*.xml \
+		configs/$(config)/manifests/ || :
 
 config: manifest
 	$(contain) config

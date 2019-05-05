@@ -13,6 +13,14 @@ accountability via redundant CI systems all getting the same hash.
 Heavily inspired by the former CopperheadOS (RIP) project. We seek to provide a
 trustable path to free public AOSP builds patched for privacy and security.
 
+Additionally, this build system is intended to make it easy to build, sign
+and publish your own custom AOSP rom from patches/configs/branding as you see
+fit.
+
+A common build system/strategy for vanilla AOSP and AOSP forks also makes it
+easy to change between them as you see fit while still controlling your own
+keys making debugging and comparisons easier.
+
 ## Status ##
 
 Public releases are pending sustainable/automated CI/CD work to do reproducible
