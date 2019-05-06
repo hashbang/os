@@ -67,5 +67,6 @@ RUN \
 
 USER build
 WORKDIR /home/build
+ADD scripts/ /usr/local/bin/
 
 CMD [ "/bin/bash", "/usr/local/bin/build.sh" ]

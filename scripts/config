@@ -70,10 +70,7 @@ yaml.add_constructor(BaseResolver.DEFAULT_MAPPING_TAG, dict_constructor)
 
 if __name__ == "__main__":
 
-    config_name = getenv('CONFIG', 'hashbang')
-    if config_name == "": config_name = "hashbang"
-
-    config_file='%s/configs/%s.yml' % (getcwd(), config_name)
+    config_file='%s/config/config.yml' % getcwd()
     with open(config_file, encoding='utf-8') as data_file:
         config = yaml.load(data_file.read())
 

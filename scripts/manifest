@@ -132,13 +132,11 @@ class AndroidManifest:
 
 if __name__ == "__main__":
 
-    config_name = getenv('CONFIG', 'hashbang')
-    if config_name == "": config_name = "hashbang"
-    config_file='%s/configs/%s.yml' % (getcwd(), config_name)
+    config_file='%s/config/config.yml' % getcwd()
     with open(config_file, encoding='utf-8') as data_file:
         config = yaml.load(data_file.read())
 
-    path="%s/manifests/%s" % (getcwd(), config_name)
+    path="%s/config/manifests" % getcwd()
     makedirs(path, exist_ok=True)
 
     kernel_names=[]

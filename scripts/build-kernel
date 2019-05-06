@@ -3,11 +3,8 @@
 [ -f /.dockerenv ] || { echo "please run in supplied container"; exit 1; }
 set -e; eval "$(environment)"
 
-device="${DEVICE?}"
-config_name="${CONFIG_NAME?}"
 external_dir="${EXTERNAL_DIR?}"
-manifest_dir="${MANIFEST_DIR?}/${config_name}"
-key_dir="${KEY_DIR:-${PWD}/keys/${device}}"
+manifest_dir="${MANIFEST_DIR?}"
 kernel_name="${KERNEL_NAME?}"
 kernel_dir="${external_dir}/kernel/${kernel_name}"
 cores=$(nproc)
@@ -15,6 +12,7 @@ cores=$(nproc)
 mkdir -p "${kernel_dir}"
 cd "${kernel_dir}"
 cat /etc/gitconfig > "$HOME/.gitconfig"
+rm -f "${kernel_dir}/.repo"
 repo init \
 	--manifest-url "${manifest_dir}" \
 	--manifest-name "kernel-${kernel_name}.xml"

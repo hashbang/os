@@ -6,12 +6,16 @@ groupid = $(shell id -g)
 .DEFAULT_GOAL := default
 
 contain := \
-	mkdir -p keys build && \
+	mkdir -p keys build/$(config)/base && \
+	mkdir -p keys build/$(config)/external && \
 	docker run -it --rm -h "android" \
-		-v $(PWD)/build:/home/build \
+		-v $(PWD)/build/$(config)/base:/home/build/base \
+		-v $(PWD)/build/$(config)/external:/home/build/external \
 		-v $(PWD)/keys:/home/build/keys \
 		-v $(PWD)/scripts:/home/build/scripts \
-		-v $(PWD)/configs:/home/build/configs \
+		-v $(PWD)/configs/$(config)/config.yml:/home/build/config.yml \
+		-v $(PWD)/configs/$(config)/manifests:/home/build/manifests \
+		-v $(PWD)/configs/$(config)/patches:/home/build/patches \
 		-u $(userid):$(groupid) \
 		-e DEVICE=$(device) \
 		-e CONFIG=$(config) \

@@ -14,10 +14,7 @@ if 'BASE_DIR' in environ:
 else:
     base_dir = "%s/base" % cwd
 
-config_name = getenv('CONFIG', 'hashbang')
-if config_name == "": config_name = "hashbang"
-
-config_file='%s/configs/%s/config.yml' % (cwd, config_name)
+config_file='%s/config.yml' % cwd
 with open(config_file, encoding='utf-8') as data_file:
     config = yaml.load(data_file.read())
 
@@ -25,14 +22,13 @@ patches = ", ".join(config.get('platform',{}).get('patches',[]))
 
 environment = {
     "OS_NAME": config['name'],
-    "CONFIG_NAME": config_name,
     "CONFIG_FILE": config_file,
-    "CONFIG_DIR": "%s/configs/%s" % (cwd, config_name),
+    "CONFIG_DIR": cwd,
     "BASE_DIR": base_dir,
     "ANDROID_HOME": "%s/sdk" % base_dir,
-    "MANIFEST_REPO": "%s/configs/%s/manifests" % (cwd, config_name),
-    "MANIFEST_DIR": "%s/configs/%s/manifests" % (cwd, config_name),
-    "PATCH_DIR": "%s/configs/%s/patches" % (cwd, config_name),
+    "MANIFEST_REPO": "%s/manifests" % cwd,
+    "MANIFEST_DIR": "%s/manifests" % cwd,
+    "PATCH_DIR": "%s/patches" % cwd,
     "EXTERNAL_DIR": "%s/external" % cwd,
     "DEVICES": ",".join(config['devices'].keys()),
     "PLATFORM_PATCHES": patches,
