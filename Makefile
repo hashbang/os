@@ -7,9 +7,11 @@ groupid = $(shell id -g)
 
 contain := \
 	mkdir -p keys build/$(config)/base && \
+	mkdir -p keys build/$(config)/release && \
 	mkdir -p keys build/$(config)/external && \
 	docker run -it --rm -h "android" \
 		-v $(PWD)/build/$(config)/base:/home/build/base \
+		-v $(PWD)/build/$(config)/release:/home/build/release \
 		-v $(PWD)/build/$(config)/external:/home/build/external \
 		-v $(PWD)/keys:/home/build/keys \
 		-v $(PWD)/scripts:/home/build/scripts \
