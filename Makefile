@@ -1,41 +1,30 @@
+image_hash = "c44d46d616f817c96fabb0735252e819302c0488b04200d2a2e3e22aa4a72111"
+image = "hashbang/aosp-build@sha256:$(image_hash)"
 device = ${DEVICE}
-config = ${CONFIG}
-userid = $(shell id -u)
-groupid = $(shell id -g)
 
 .DEFAULT_GOAL := default
 
 contain := \
-	mkdir -p keys build/$(config)/base && \
-	mkdir -p keys build/$(config)/release && \
-	mkdir -p keys build/$(config)/external && \
+	mkdir -p keys build/base && \
+	mkdir -p keys build/release && \
+	mkdir -p keys build/external && \
 	docker run -it --rm -h "android" \
-		-v $(PWD)/build/$(config)/base:/home/build/base \
-		-v $(PWD)/build/$(config)/release:/home/build/release \
-		-v $(PWD)/build/$(config)/external:/home/build/external \
+		-v $(PWD)/build/base:/home/build/base \
+		-v $(PWD)/build/release:/home/build/release \
+		-v $(PWD)/build/external:/home/build/external \
 		-v $(PWD)/keys:/home/build/keys \
 		-v $(PWD)/scripts:/home/build/scripts \
-		-v $(PWD)/configs/$(config)/config.yml:/home/build/config.yml \
-		-v $(PWD)/configs/$(config)/manifests:/home/build/manifests \
-		-v $(PWD)/configs/$(config)/patches:/home/build/patches \
-		-u $(userid):$(groupid) \
+		-v $(PWD)/config.yml:/home/build/config.yml \
+		-v $(PWD)/manifests:/home/build/manifests \
+		-v $(PWD)/patches:/home/build/patches \
+		-u $(shell id -u):$(shell id -g) \
 		-e DEVICE=$(device) \
-		-e CONFIG=$(config) \
-		hashbang-os:latest
+		$(image)
 
 default: build
 
-image:
-	@docker build \
-		--build-arg UID=$(userid) \
-		--build-arg GID=$(groupid) \
-		-t hashbang-os:latest .
-
 manifest: image
 	$(contain) manifest
-	cp \
-		build/configs/$(config)/manifests/*.xml \
-		configs/$(config)/manifests/ || :
 
 config: manifest
 	$(contain) config
@@ -69,7 +58,8 @@ release: tools
 test-repro:
 	@$(contain) test-repro
 
-test: test-repro
+test:
+	@$(contain) test-repro
 
 shell:
 	@$(contain) shell
@@ -81,10 +71,6 @@ clean: image
 	@$(contain) clean
 
 mrproper: clean
-	@docker image rm -f hashbang-os:latest
 	rm -rf build
 
-install: tools
-	@scripts/flash
-
-.PHONY: image build shell diff install update flash clean tools default
+.PHONY: build shell diff install update flash clean tools default
