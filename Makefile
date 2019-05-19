@@ -23,7 +23,7 @@ contain := \
 
 default: build
 
-manifest: image
+manifest:
 	$(contain) manifest
 
 config: manifest
@@ -33,13 +33,13 @@ fetch:
 	mkdir -p build
 	@$(contain) fetch
 
-tools: fetch image
+tools: fetch
 	@$(contain) tools
 
 keys: tools
 	@$(contain) keys
 
-build: image tools
+build: tools
 	@$(contain) build
 
 kernel: tools
@@ -67,7 +67,7 @@ shell:
 diff:
 	@$(contain) bash -c "cd base; repo diff -u"
 
-clean: image
+clean:
 	@$(contain) clean
 
 mrproper: clean
