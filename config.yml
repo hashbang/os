@@ -6,48 +6,275 @@ datetime: 1555835843
 host: android
 user: build
 platform:
-  ref: android-9.0.0_r35
+  ref: android-9.0.0_r37
   extra_remotes:
   - name: github
     fetch: https://github.com/
   - name: gitlab
     fetch: https://gitlab.com/
   extra_projects:
+
   - name: fdroid/fdroidclient
     groups: device
     path: packages/apps/F-Droid
     remote: gitlab
     revision: refs/tags/1.5.1
+
   - name: fdroid/privileged-extension
     groups: device
     path: packages/apps/F-DroidPrivilegedExtension
     remote: gitlab
     revision: refs/tags/0.2.9
-  - name: anestisb/android-prepare-vendor
-    groups: device
-    path: vendor/android-prepare-vendor
-    remote: github
-    revision: refs/heads/master
+
   - name: stevesoltys/backup
     groups: device
     path: packages/apps/Backup
     remote: github
     revision: refs/heads/master
-  - name: GrapheneOS/platform_external_chromium
-    groups: device
+
+  - name: GrapheneOS/platform_build
+    groups: pdk
     path: external/chromium
     remote: github
     revision: refs/heads/pie
-  - name: GrapheneOS/platform_packages_apps_Updater
-    groups: device
-    path: packages/apps/Updater
+		children:
+		- tag: copyfile
+			src: core/root.mk
+			dest: Makefile
+		- tag: linkfile
+			src: CleanSpec.mk
+			dest: build/CleanSpec.mk
+		- tag: linkfile
+			src: buildspec.mk.default
+			dest: build/buildspec.mk.default
+		- tag: linkfile
+			src: core
+			dest: build/core
+		- tag: linkfile
+			src: envsetup.sh
+			dest: build/envsetup.sh
+		- tag: linkfile
+			src: target
+			dest: build/target
+		- tag: linkfile
+			src: tools
+			dest: build/tools
+
+  - name: GrapheneOS/platform_art
+    groups: pdk
+    path: art
     remote: github
     revision: refs/heads/pie
+
+  - name: GrapheneOS/platform_bionic
+    groups: pdk
+    path: bionic
+    remote: github
+
+  - name: GrapheneOS/platform_bootable_recovery
+    groups: pdk
+    path: bootable/recovery
+    remote: github
+
+  - name: GrapheneOS/device_common
+    path: device/common
+		groups: pdk-cw-fs,pdk
+    remote: github
+
+  - name: GrapheneOS/device_google_crosshatch
+    path: device/google/crosshatch
+		groups: device,crosshatch
+    remote: github
+
+  - name: GrapheneOS/device_google_crosshatch-sepolicy
+    path: device/google/crosshatch-sepolicy
+		groups: device,crosshatch
+    remote: github
+
+  - name: GrapheneOS/device_google_marlin
+    path: device/google/marlin
+		groups: device,marlin,pdk
+    remote: github
+
+  - name: GrapheneOS/device_google_muskie
+    path: device/google/muskie
+		groups: device,muskie,pdk
+    remote: github
+
+  - name: GrapheneOS/device_google_taimen
+    path: device/google/taimen
+		groups: device,taimen,pdk
+    remote: github
+
+  - name: GrapheneOS/device_google_wahoo
+    path: device/google/wahoo
+		groups: device,wahoo,pdk
+    remote: github
+
+  - name: GrapheneOS/platform_external_Auditor
+    path: external/Auditor
+    remote: github
+
+  - name: GrapheneOS/platform_external_chromium
+    path: external/chromium
+    remote: github
+
+  - name: GrapheneOS/platform_external_conscrypt
+    path: external/conscrypt
+    groups: pdk
+    remote: github
+
+  - name: GrapheneOS/hardened_malloc
+    path: external/hardened_malloc
+    remote: github
+
+  - name: GrapheneOS/platform_frameworks_av
+    path: frameworks/av
+    groups: pdk
+    remote: github
+
+  - name: GrapheneOS/platform_frameworks_base
+    path: frameworks/base
+    groups: pdk-cw-fs,pdk-fs
+    remote: github
+
+  - name: GrapheneOS/platform_frameworks_native
+    path: frameworks/native
+    groups: pdk
+    remote: github
+
+  - name: GrapheneOS/platform_frameworks_opt_net_wifi
+    path: frameworks/opt/net/wifi
+    groups: pdk
+    remote: github
+
+  - name: GrapheneOS/kernel_configs
+    path: kernel/configs
+    groups: vts,pdk
+    remote: github
+
+  - name: GrapheneOS/kernel_google_crosshatch
+    path: kernel/google/crosshatch
+    remote: github
+
+  - name: GrapheneOS/kernel_google_marlin
+    path: kernel/google/crosshatch
+    remote: github
+
+  - name: GrapheneOS/kernel_google_wahoo
+    path: kernel/google/crosshatch
+    remote: github
+
+  - name: GrapheneOS/platform_libcore
+    path: libcore
+    groups: pdk
+    remote: github
+
+  - name: GrapheneOS/platform_packages_apps_Bluetooth
+    path: packages/apps/Bluetooth
+    groups: pdk-cw-fs,pdk-fs
+    remote: github
+
+  - name: GrapheneOS/platform_packages_apps_Camera2
+    path: packages/apps/Camera2
+    groups: pdk-fs
+    remote: github
+
+  - name: GrapheneOS/platform_packages_apps_Contacts
+    path: packages/apps/Contacts
+    groups: pdk-fs
+    remote: github
+
+  - name: GrapheneOS/platform_packages_apps_ExactCalculator
+    path: packages/apps/Contacts
+    groups: pdk-fs
+    remote: github
+
+  - name: GrapheneOS/platform_packages_apps_Launcher3
+    path: packages/apps/Launcher3
+    groups: pdk-fs
+    remote: github
+
+  - name: GrapheneOS/platform_packages_apps_Music
+    path: packages/apps/Music
+    groups: pdk-fs
+    remote: github
+
+  - name: GrapheneOS/platform_packages_apps_Nfc
+    path: packages/apps/Nfc
+    groups: pdk-fs
+    remote: github
+
+  - name: GrapheneOS/platform_packages_apps_PackageInstaller
+    path: packages/apps/PackageInstaller
+    groups: pdk-cw-fs,pdk-fs
+    remote: github
+
+  - name: GrapheneOS/platform_packages_apps_Settings
+    path: packages/apps/Settings
+    groups: pdk-fs
+    remote: github
+
+  - name: GrapheneOS/platform_packages_apps_Updater
+    path: packages/apps/Updater
+    remote: github
+
+  - name: GrapheneOS/platform_packages_inputmethods_LatinIME
+    path: packages/inputmethods/LatinIME
+    groups: pdk-fs
+    remote: github
+
+  - name: GrapheneOS/platform_packages_providers_DownloadProvider
+    path: packages/providers/DownloadProvider
+    groups: pdk-cw-fs,pdk-fs
+    remote: github
+
+  - name: GrapheneOS/platform_packages_services_Telephony
+    path: packages/services/Telephony
+    groups: pdk-cw-fs,pdk-fs
+    remote: github
+
+  - name: GrapheneOS/script
+    path: script
+    remote: github
+
+  - name: GrapheneOS/platform_system_bt
+    path: system/bt
+    groups: pdk
+    remote: github
+
+  - name: GrapheneOS/platform_system_core
+    path: system/core
+    groups: pdk
+    remote: github
+
+  - name: GrapheneOS/platform_system_extras
+    path: system/extras
+    groups: pdk
+    remote: github
+
+  - name: GrapheneOS/platform_system_netd
+    path: system/netd
+    groups: pdk
+    remote: github
+
+  - name: GrapheneOS/platform_system_sepolicy
+    path: system/sepolicy
+    groups: pdk
+    remote: github
+
+  - name: GrapheneOS/android-prepare-vendor
+    groups: device
+    path: vendor/android-prepare-vendor
+    remote: github
+
+  - name: GrapheneOS/vendor_linaro
+    path: vendor/linaro
+    groups: pdk
+    remote: github
+
   remove_paths:
   - external/chromium-webview
-  - packages/apps/Calendar
-  - packages/apps/QuickSearchBox
-  - packages/apps/Browser2
   - platform/prebuilts/qemu-kernel
   - platform/developers/samples/android
   - platform/developers/demos
@@ -85,17 +312,6 @@ platform:
   remove_groups:
   - darwin
   patches:
-  - platform/accept-sdk-licenses.patch
-  - platform/add-backup.patch
-  - platform/add-chromium.patch
-  - platform/add-determinism.patch
-  - platform/add-fdroid.patch
-  - platform/add-updater.patch
-  - platform/fix-devicenames.patch
-  - platform/remove-browser2.patch
-  - platform/remove-calendar.patch
-  - platform/remove-quicksearch.patch
-  - platform/remove-webview.patch
 apps:
   chromium:
     version: 76.0.3772.1
