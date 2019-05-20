@@ -7,25 +7,15 @@ host: android
 user: build
 platform:
   ref: android-9.0.0_r37
+
   extra_remotes:
   - name: github
-    fetch: https://github.com/
+    fetch: https://github.com
+    revision: refs/heads/pie
   - name: gitlab
-    fetch: https://gitlab.com/
+    fetch: https://gitlab.com
+
   extra_projects:
-
-  - name: fdroid/fdroidclient
-    groups: device
-    path: packages/apps/F-Droid
-    remote: gitlab
-    revision: refs/tags/1.5.1
-
-  - name: fdroid/privileged-extension
-    groups: device
-    path: packages/apps/F-DroidPrivilegedExtension
-    remote: gitlab
-    revision: refs/tags/0.2.9
-
   - name: stevesoltys/backup
     groups: device
     path: packages/apps/Backup
@@ -34,31 +24,31 @@ platform:
 
   - name: GrapheneOS/platform_build
     groups: pdk
-    path: external/chromium
+    path: build/make
     remote: github
     revision: refs/heads/pie
-		children:
-		- tag: copyfile
-			src: core/root.mk
-			dest: Makefile
-		- tag: linkfile
-			src: CleanSpec.mk
-			dest: build/CleanSpec.mk
-		- tag: linkfile
-			src: buildspec.mk.default
-			dest: build/buildspec.mk.default
-		- tag: linkfile
-			src: core
-			dest: build/core
-		- tag: linkfile
-			src: envsetup.sh
-			dest: build/envsetup.sh
-		- tag: linkfile
-			src: target
-			dest: build/target
-		- tag: linkfile
-			src: tools
-			dest: build/tools
+    children:
+    - tag: copyfile
+      src: core/root.mk
+      dest: Makefile
+    - tag: linkfile
+      src: CleanSpec.mk
+      dest: build/CleanSpec.mk
+    - tag: linkfile
+      src: buildspec.mk.default
+      dest: build/buildspec.mk.default
+    - tag: linkfile
+      src: core
+      dest: build/core
+    - tag: linkfile
+      src: envsetup.sh
+      dest: build/envsetup.sh
+    - tag: linkfile
+      src: target
+      dest: build/target
+    - tag: linkfile
+      src: tools
+      dest: build/tools
 
   - name: GrapheneOS/platform_art
     groups: pdk
@@ -78,37 +68,37 @@ platform:
 
   - name: GrapheneOS/device_common
     path: device/common
-		groups: pdk-cw-fs,pdk
+    groups: pdk-cw-fs,pdk
     remote: github
 
   - name: GrapheneOS/device_google_crosshatch
     path: device/google/crosshatch
-		groups: device,crosshatch
+    groups: device,crosshatch
     remote: github
 
   - name: GrapheneOS/device_google_crosshatch-sepolicy
     path: device/google/crosshatch-sepolicy
-		groups: device,crosshatch
+    groups: device,crosshatch
     remote: github
 
   - name: GrapheneOS/device_google_marlin
     path: device/google/marlin
-		groups: device,marlin,pdk
+    groups: device,marlin,pdk
     remote: github
 
   - name: GrapheneOS/device_google_muskie
     path: device/google/muskie
-		groups: device,muskie,pdk
+    groups: device,muskie,pdk
     remote: github
 
   - name: GrapheneOS/device_google_taimen
     path: device/google/taimen
-		groups: device,taimen,pdk
+    groups: device,taimen,pdk
     remote: github
 
   - name: GrapheneOS/device_google_wahoo
     path: device/google/wahoo
-		groups: device,wahoo,pdk
+    groups: device,wahoo,pdk
     remote: github
 
   - name: GrapheneOS/platform_external_Auditor
@@ -266,11 +256,6 @@ platform:
   - name: GrapheneOS/android-prepare-vendor
     groups: device
     path: vendor/android-prepare-vendor
-    remote: github
-
-  - name: GrapheneOS/vendor_linaro
-    path: vendor/linaro
-    groups: pdk
     remote: github
 
   remove_paths:
