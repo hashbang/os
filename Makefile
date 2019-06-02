@@ -1,13 +1,13 @@
-image_hash = "c44d46d616f817c96fabb0735252e819302c0488b04200d2a2e3e22aa4a72111"
+image_hash = "2d53e2dfcaa0905bdaed25ce79e1ee36bbeeb93d3a7046bcc859dd0d253c3d6a"
 image = "hashbang/aosp-build@sha256:$(image_hash)"
 device = ${DEVICE}
 
 .DEFAULT_GOAL := default
 
 contain := \
-	mkdir -p keys build/base && \
-	mkdir -p keys build/release && \
-	mkdir -p keys build/external && \
+	mkdir -p keys build/base ; \
+	mkdir -p keys build/release ; \
+	mkdir -p keys build/external ; \
 	docker run -it --rm -h "android" \
 		-v $(PWD)/build/base:/home/build/base \
 		-v $(PWD)/build/release:/home/build/release \
@@ -52,7 +52,6 @@ chromium: tools
 	@$(contain) build-chromium
 
 release: tools
-	mkdir -p build/release
 	@$(contain) release
 
 test-repro:

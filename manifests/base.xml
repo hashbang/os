@@ -5,7 +5,7 @@
   <remote fetch="https://github.com" name="github" revision="refs/heads/pie"/>  
   <default remote="aosp" revision="refs/tags/android-9.0.0_r37" sync-j="4"/>  
 
-    <project groups="device" name="GrapheneOS/android-prepare-vendor" path="vendor/android-prepare-vendor" remote="github" revision="799e1a8b70701d8ffebe7aa231e189fd7b3fcfaf" upstream="refs/heads/pie">
+    <project groups="device" name="GrapheneOS/android-prepare-vendor" path="vendor/android-prepare-vendor" remote="github" revision="8515bdbbca59c51450796d68d3231f076fec4ae2" upstream="refs/heads/pie">
 </project>  
   <project groups="pdk" name="GrapheneOS/platform_system_sepolicy" path="system/sepolicy" remote="github" revision="62d98782db4c3a911967ac71bf868b3c0549b416" upstream="refs/heads/pie">
 </project>  
@@ -19,7 +19,7 @@
 </project>  
   <project name="GrapheneOS/script" path="script" remote="github" revision="5e46ccf0f34bbf3bf91c755ab60a5b516d5df1bf" upstream="refs/heads/pie">
 </project>  
-  <project groups="pdk-cw-fs,pdk-fs" name="GrapheneOS/platform_packages_services_Telephony" path="packages/services/Telephony" remote="github" revision="404958e8f6980ebef5757b8bc50137492efc5fd3" upstream="refs/heads/pie">
+  <project groups="pdk-cw-fs,pdk-fs" name="GrapheneOS/platform_packages_services_Telephony" path="packages/services/Telephony" remote="github" revision="fc375c499eed7a46fb1b32b62d68dbaba1f444dc" upstream="refs/heads/pie">
 </project>  
   <project groups="pdk-cw-fs,pdk-fs" name="GrapheneOS/platform_packages_providers_DownloadProvider" path="packages/providers/DownloadProvider" remote="github" revision="b3bc3bac0a831c223b1866b575eab265961d2717" upstream="refs/heads/pie">
 </project>  
@@ -37,7 +37,7 @@
 </project>  
   <project groups="pdk-fs" name="GrapheneOS/platform_packages_apps_Launcher3" path="packages/apps/Launcher3" remote="github" revision="4910a1085b0e935dbecfd5e6e8b45044f15c5c28" upstream="refs/heads/pie">
 </project>  
-  <project groups="pdk-fs" name="GrapheneOS/platform_packages_apps_ExactCalculator" path="packages/apps/Contacts" remote="github" revision="fba8345c2d1d3920b754812dd9266fdae1282110" upstream="refs/heads/pie">
+  <project groups="pdk-fs" name="GrapheneOS/platform_packages_apps_ExactCalculator" path="packages/apps/ExactCalculator" remote="github" revision="fba8345c2d1d3920b754812dd9266fdae1282110" upstream="refs/heads/pie">
 </project>  
   <project groups="pdk-fs" name="GrapheneOS/platform_packages_apps_Contacts" path="packages/apps/Contacts" remote="github" revision="790dad0b411ec66e8c746ecd11823fef25bd0fb8" upstream="refs/heads/pie">
 </project>  
@@ -47,9 +47,9 @@
 </project>  
   <project groups="pdk" name="GrapheneOS/platform_libcore" path="libcore" remote="github" revision="635bafc2f057f1679260eb13e720e934ffbc0550" upstream="refs/heads/pie">
 </project>  
-  <project name="GrapheneOS/kernel_google_wahoo" path="kernel/google/crosshatch" remote="github" revision="6fae40e91ce9fc824b6c65c4ef56297700b27b83" upstream="refs/heads/pie">
+  <project name="GrapheneOS/kernel_google_wahoo" path="kernel/google/wahoo" remote="github" revision="6fae40e91ce9fc824b6c65c4ef56297700b27b83" upstream="refs/heads/pie">
 </project>  
-  <project name="GrapheneOS/kernel_google_marlin" path="kernel/google/crosshatch" remote="github" revision="6222553322f4ee079d097a1dbe75782bf4761020" upstream="refs/heads/pie">
+  <project name="GrapheneOS/kernel_google_marlin" path="kernel/google/marlin" remote="github" revision="6222553322f4ee079d097a1dbe75782bf4761020" upstream="refs/heads/pie">
 </project>  
   <project name="GrapheneOS/kernel_google_crosshatch" path="kernel/google/crosshatch" remote="github" revision="8ee1b0671bde8000716a7033000ab274aba66a3b" upstream="refs/heads/pie">
 </project>  
@@ -59,17 +59,17 @@
 </project>  
   <project groups="pdk" name="GrapheneOS/platform_frameworks_native" path="frameworks/native" remote="github" revision="745255973b287ad00f0f49b551a483c4be1dc040" upstream="refs/heads/pie">
 </project>  
-  <project groups="pdk-cw-fs,pdk-fs" name="GrapheneOS/platform_frameworks_base" path="frameworks/base" remote="github" revision="5ceb949750b9a8d9c8070a878dfd9b08977b2a13" upstream="refs/heads/pie">
+  <project groups="pdk-cw-fs,pdk-fs" name="GrapheneOS/platform_frameworks_base" path="frameworks/base" remote="github" revision="7628558954149cbff3d534b49114f66e186bc967" upstream="refs/heads/pie">
 </project>  
   <project groups="pdk" name="GrapheneOS/platform_frameworks_av" path="frameworks/av" remote="github" revision="45cbc4e8531fdcef74cf84772bc475510ae48a7e" upstream="refs/heads/pie">
 </project>  
-  <project name="GrapheneOS/hardened_malloc" path="external/hardened_malloc" remote="github" revision="99bd5083fd41aead2dcee6dad90de8a70e97e90c" upstream="refs/heads/pie">
+  <project name="GrapheneOS/hardened_malloc" path="external/hardened_malloc" remote="github" revision="d7af91392f2d66b21f2789a292d7090425b897e5" upstream="refs/heads/pie">
 </project>  
   <project groups="pdk" name="GrapheneOS/platform_external_conscrypt" path="external/conscrypt" remote="github" revision="253247fc3955ecf18ff42bf8b73d075134e8f1f2" upstream="refs/heads/pie">
 </project>  
   <project name="GrapheneOS/platform_external_chromium" path="external/chromium" remote="github" revision="9aeb655c91b2100cdb90f1bbcf2fa40069b2b219" upstream="refs/heads/pie">
 </project>  
-  <project name="GrapheneOS/platform_external_Auditor" path="external/Auditor" remote="github" revision="8d3d60a0a5600e962c767107fd303d14c1702b62" upstream="refs/heads/pie">
+  <project name="GrapheneOS/platform_external_Auditor" path="external/Auditor" remote="github" revision="387f08a1d9623e856e6dd9cad5437f99a460c72e" upstream="refs/heads/pie">
 </project>  
   <project groups="device,wahoo,pdk" name="GrapheneOS/device_google_wahoo" path="device/google/wahoo" remote="github" revision="513c4ddf876cd675039595070da90bb51b34d228" upstream="refs/heads/pie">
 </project>  
@@ -91,7 +91,7 @@
 </project>  
   <project groups="pdk" name="GrapheneOS/platform_art" path="art" remote="github" revision="ea9689165958e2b14293e4c413944b27014f103c" upstream="refs/heads/pie">
 </project>  
-  <project groups="pdk" name="GrapheneOS/platform_build" path="build/make" remote="github" revision="c1c9ae2a95d7ecb4aefe49c31c17bff46cd52b64" upstream="refs/heads/pie">    
+  <project groups="pdk" name="GrapheneOS/platform_build" path="build/make" remote="github" revision="a46b1266b2767a712ebf14ea3304c0df908dc502" upstream="refs/heads/pie">    
     <copyfile dest="Makefile" src="core/root.mk"/>    
     <linkfile dest="build/CleanSpec.mk" src="CleanSpec.mk"/>    
     <linkfile dest="build/buildspec.mk.default" src="buildspec.mk.default"/>    
@@ -574,7 +574,6 @@
     <project groups="pdk-cw-fs,pdk-fs" name="platform/packages/apps/DocumentsUI" path="packages/apps/DocumentsUI" revision="9253131f3cf5f94bb768ec99e14e716f759f4f8b" upstream="refs/tags/android-9.0.0_r37"/>  
     <project groups="pdk-fs" name="platform/packages/apps/Email" path="packages/apps/Email" revision="777f7cb8bafb1af9ce9d4b8c0e72222cb6676d76" upstream="refs/tags/android-9.0.0_r37"/>  
     <project groups="pdk-fs" name="platform/packages/apps/EmergencyInfo" path="packages/apps/EmergencyInfo" revision="3e60a0efe65ebf4faaa60d1e717ba9e0df53a485" upstream="refs/tags/android-9.0.0_r37"/>  
-    <project groups="pdk-fs" name="platform/packages/apps/ExactCalculator" path="packages/apps/ExactCalculator" revision="f0e306a5e6d62eebc0fc0681a2fb8c6854a861dc" upstream="refs/tags/android-9.0.0_r37"/>  
     <project groups="pdk-fs" name="platform/packages/apps/Gallery" path="packages/apps/Gallery" revision="8a37e0064aebe5fa7824bda012fd595016ef257e" upstream="refs/tags/android-9.0.0_r37"/>  
     <project groups="pdk-fs" name="platform/packages/apps/Gallery2" path="packages/apps/Gallery2" revision="c7ad7681a6310b74516e2938d742bbcf7e5c708a" upstream="refs/tags/android-9.0.0_r37"/>  
     <project groups="pdk-fs" name="platform/packages/apps/HTMLViewer" path="packages/apps/HTMLViewer" revision="6ba595db922b343f51520120ef9f71c6ce708e0f" upstream="refs/tags/android-9.0.0_r37"/>  
