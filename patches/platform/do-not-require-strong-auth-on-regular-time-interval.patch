@@ -1,0 +1,52 @@
+[PATCH] Don’t require strong auth on regular time interval
+
+This disables the need to provide strong authentication except when booting the
+device. The idea behind this is that you are no longer forced to enter your
+strong authentication credentials in random locations where it might be easy to
+snoop your strong authentication credentials allowing an adversary to boot and
+decrypt your device against your will.
+
+Changing DEFAULT_STRONG_AUTH_TIMEOUT_MS is not enough. Rather, it has the
+opposite effect for some reason. In my tests, it caused the strong auth to be
+required every hour rather than a 42 d interval.
+
+In my tests, dpm.getRequiredStrongAuthTimeout(null, userId)) returned 3600000.
+
+project frameworks/base/
+diff --git a/frameworks/base/core/java/android/app/admin/DevicePolicyManager.java b/frameworks/base/core/java/android/app/admin/DevicePolicyManager.java
+index f73e13f4dbd..82c05c71e30 100644
+--- a/frameworks/base/core/java/android/app/admin/DevicePolicyManager.java
++++ b/frameworks/base/core/java/android/app/admin/DevicePolicyManager.java
+@@ -488,7 +488,7 @@ public class DevicePolicyManager {
+      *
+      * @hide
+      */
+-    public static final long DEFAULT_STRONG_AUTH_TIMEOUT_MS = 72 * 60 * 60 * 1000; // 72h
++    public static final long DEFAULT_STRONG_AUTH_TIMEOUT_MS = 42 * 24 * 60 * 60 * 1000; // 42d
+ 
+     /**
+      * A {@link android.os.Parcelable} extra of type {@link android.os.PersistableBundle} that
+diff --git a/frameworks/base/services/core/java/com/android/server/locksettings/LockSettingsStrongAuth.java b/frameworks/base/services/core/java/com/android/server/locksettings/LockSettingsStrongAuth.java
+index c4f1f3d7369..f25e2d9b891 100644
+--- a/frameworks/base/services/core/java/com/android/server/locksettings/LockSettingsStrongAuth.java
++++ b/frameworks/base/services/core/java/com/android/server/locksettings/LockSettingsStrongAuth.java
+@@ -128,18 +128,7 @@ public class LockSettingsStrongAuth {
+     private void handleScheduleStrongAuthTimeout(int userId) {
+         final DevicePolicyManager dpm =
+                 (DevicePolicyManager) mContext.getSystemService(Context.DEVICE_POLICY_SERVICE);
+-        long when = SystemClock.elapsedRealtime() + dpm.getRequiredStrongAuthTimeout(null, userId);
+-        // cancel current alarm listener for the user (if there was one)
+-        StrongAuthTimeoutAlarmListener alarm = mStrongAuthTimeoutAlarmListenerForUser.get(userId);
+-        if (alarm != null) {
+-            mAlarmManager.cancel(alarm);
+-        } else {
+-            alarm = new StrongAuthTimeoutAlarmListener(userId);
+-            mStrongAuthTimeoutAlarmListenerForUser.put(userId, alarm);
+-        }
+-        // schedule a new alarm listener for the user
+-        mAlarmManager.set(AlarmManager.ELAPSED_REALTIME, when, STRONG_AUTH_TIMEOUT_ALARM_TAG,
+-                alarm, mHandler);
++        Slog.d(TAG, "getRequiredStrongAuthTimeout: " + dpm.getRequiredStrongAuthTimeout(null, userId));
+     }
+ 
+     private void notifyStrongAuthTrackers(int strongAuthReason, int userId) {
