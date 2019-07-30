@@ -24,6 +24,6 @@ index b9fc22f..b36dfeb 100644
 @@ -1,4 +1,4 @@
  <?xml version="1.0" encoding="utf-8"?>
  <resources>
--    <string name="url" translatable="false">https://seamlessupdate.app/</string>
+-    <string name="url" translatable="false">https://releases.grapheneos.org/</string>
 +    <string name="url" translatable="false">https://os.hashbang.sh/</string>
  </resources>

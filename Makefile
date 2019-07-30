@@ -39,7 +39,7 @@ tools: fetch
 keys: tools
 	@$(contain) keys
 
-build: tools
+build:
 	@$(contain) build
 
 kernel: tools

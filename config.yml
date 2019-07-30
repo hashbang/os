@@ -1,12 +1,12 @@
 version: '9'
 name: HashbangOS
 type: release
-variant: userdebug
-datetime: 1555835843
+variant: user
+datetime: 1564341863
 host: android
 user: build
 platform:
-  ref: android-9.0.0_r35
+  ref: android-9.0.0_r45
   extra_remotes:
   - name: github
     fetch: https://github.com/
@@ -17,7 +17,7 @@ platform:
     groups: device
     path: packages/apps/F-Droid
     remote: gitlab
-    revision: refs/tags/1.5.1
+    revision: refs/tags/1.7
   - name: fdroid/privileged-extension
     groups: device
     path: packages/apps/F-DroidPrivilegedExtension
@@ -108,11 +108,11 @@ devices:
       kernel_ref: origin/android-msm-crosshatch-4.9-pie-qpr2
       kernel_repo: kernel/manifest
       avb_mode: vbmeta_chained
-      factory_build: PQ2A.190405.003
-      factory_hash: 379f92bd93a5cece17f5123ef6668099f71ddbc4add05f252bfe45f3066e7104
+      factory_build: PQ3A.190705.003
+      factory_hash: e59cf7a412e48d0f78463a67dc0085d98b811026d7c593b8d61925c2d9895e02
     verizon:
-      factory_hash: 7e9da376a846c934eb3b4ca39833996ee453c3ad67bb23a365ba09862c286d03
-      factory_build: PD1A.180720.031
+      factory_hash: 0933f2080c5bba78f2858c892ec899cda67c6c01373a25bbcae013fb906a7fc6
+      factory_build: PQ3A.190605.004.A1
     docomo:
       factory_build: PQ1A.181205.006.A1
       factory_hash: 99bead334525f4d26ef5777ebc910648674597e1322a2a95e9e2d4f9df5d69cf
@@ -122,11 +122,11 @@ devices:
       kernel_ref: origin/android-msm-crosshatch-4.9-pie-qpr2
       kernel_repo: kernel/manifest
       avb_mode: vbmeta_chained
-      factory_build: PQ2A.190405.003
-      factory_hash: c12f40f0b189eb2daa80d029917bc9a8841da89cfcafa21b8f61b0d9f90826e7
+      factory_build: PQ3A.190705.003
+      factory_hash: c14bfb79b6660398f0454279b98ab45ace896e115c462643c0685089f5f1758f
     verizon:
-      factory_build: PD1A.180720.031
-      factory_hash: 3df41a2b65335bb6c130f36b0bbd87c3f90822b7ef04f210232daacc3693142a
+      factory_build: PQ3A.190605.004.A1
+      factory_hash: da940910bf3ac99af6ae53be3971698737ba7cb86f42b4d19e67078fd19d7a58
     docomo:
       factory_build: PQ1A.181205.006.A1
       factory_hash: e0442d3b0a9e5636f4979b5780b6173635fe73917e88ffe1b9d36c2bc45aa7bc
@@ -136,8 +136,8 @@ devices:
       kernel_ref: android-msm-wahoo-4.4-pie-qpr1
       kernel_repo: kernel/msm
       avb_mode: vbmeta_simple
-      factory_build: PQ2A.190405.003
-      factory_hash: 3d72fe7129d0be55f92df8cc15b8fc9bf77db5a5043f06bb0919f896126d5d1e
+      factory_build: PQ3A.190705.001
+      factory_hash: 884e074c374080550450d6b9356e9732043d38a5e4957aedcac9c82ec6f20fb5
     telstra:
       factory_build: PPR1.180610.011
       factory_hash: 9f0cb004c3b42789c150293aa6a6eecb0f289324ce1403befde93b106da59829
@@ -147,8 +147,8 @@ devices:
       kernel_ref: android-msm-wahoo-4.4-pie-qpr1
       kernel_repo: kernel/msm
       avb_mode: vbmeta_simple
-      factory_build: PQ2A.190405.003
-      factory_hash: e9a0ea4ca785784e23004033e13b6ba3610e31257c21609689c089190bb254c6
+      factory_build: PQ3A.190705.001
+      factory_hash: cc471c8c7ffaa899e30438fa30b8d33b92b12a3c92d3e592c53bfc5983de205b
     telstra:
       factory_build: PPR1.180610.011
       factory_hash: 0fbd304845b6a1e8c5960deedb70aab0f804a4b1bb93242b3bbcdad586982769
@@ -158,8 +158,8 @@ devices:
       kernel_ref: android-msm-marlin-3.18-pie-qpr1-s2
       kernel_repo: kernel/msm
       avb_mode: verity_only
-      factory_build: PQ2A.190405.003
-      factory_hash: d30b60f0716850430dad505b928b917d61c502603250b4e7e9206a086f62b106
+      factory_build: PQ3A.190705.001
+      factory_hash: 522f27c4d50055f6402ca9d4d62fb07425e3af7c4766b647a4096ce3041984ba
     telus:
       factory_build: PPR1.181005.003.A1
       factory_hash: 960a173f0f84e2c3c0c5d96643e6ca3f99d5a898a932c6e3a62c52282d6fb3f4
@@ -172,8 +172,8 @@ devices:
       kernel_ref: android-msm-marlin-3.18-pie-qpr1-s2
       kernel_repo: kernel/msm
       avb_mode: verity_only
-      factory_build: PQ2A.190405.003
-      factory_hash: 3b16bbc758cc201b276157a9852e49c19d046f3d9a9891aa96f7cc84571c03de
+      factory_build: PQ3A.190705.001
+      factory_hash: 7f9ff7f7fd447ecb9a3724878c71afc8ea64969cb085b900ce6827da3cc97a1a
     telus:
       factory_build: PPR1.181005.003.A1
       factory_hash: 6a2c3b69a43f93e576f953d7c8368648bd26f7d23667556a65af40282a72f7af

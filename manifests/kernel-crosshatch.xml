@@ -2,7 +2,7 @@
     <remote fetch="https://android.googlesource.com" name="aosp" review="https://android-review.googlesource.com/"/>  
     <default remote="aosp" revision="android-msm-crosshatch-4.9-pie-qpr2" sync-j="4"/>  
 
-    <project name="kernel/build" path="build" revision="96a7e233eced4caae3c6a2bf96b1dadcc2af1628" upstream="refs/heads/master"/>  
+    <project name="kernel/build" path="build" revision="468fab0928a4fd68a3599466bf0a246f3e89e438" upstream="refs/heads/master"/>  
     <project name="kernel/msm" path="private/msm-google" revision="86541eee09c49fc4005e0aaa94a88be789ddba3b" upstream="refs/heads/android-msm-crosshatch-4.9-pie-qpr2">    
         <linkfile dest="build.config" src="build.config"/>    
     </project>  
