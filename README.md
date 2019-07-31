@@ -109,14 +109,16 @@ Please join us on IRC: ircs://irc.hashbang.sh/#!os
 
 ## Devices ##
 
-  | Device     | Codename   | Tested | Verifiable | Secure Boot | Download |
-  |------------|:----------:|:------:|:----------:|:-----------:|:--------:|
-  | Pixel 3 XL | Crosshatch | TRUE   | FALSE      | AVB 2.0     | Soon™    |
-  | Pixel 3    | Blueline   | FALSE  | FALSE      | AVB 2.0     | Soon™    |
-  | Pixel 2 XL | Taimen     | TRUE   | FALSE      | AVB 1.0     | Soon™    |
-  | Pixel 2    | Walleye    | FALSE  | FALSE      | AVB 1.0     | Soon™    |
-  | Pixel XL   | Marlin     | TRUE   | FALSE      | dm-verity   | Soon™    |
-  | Pixel      | Sailfish   | TRUE   | FALSE      | dm-verity   | Soon™    |
+  | Device      | Codename   | Tested | Verifiable | Secure Boot | Download |
+  |-------------|:----------:|:------:|:----------:|:-----------:|:--------:|
+  | Pixel 3a XL | Bonito     | FALSE  | FALSE      | AVB 2.0     | Soon™    |
+  | Pixel 3a    | Sargo      | FALSE  | FALSE      | AVB 2.0     | Soon™    |
+  | Pixel 3 XL  | Crosshatch | TRUE   | FALSE      | AVB 2.0     | Soon™    |
+  | Pixel 3     | Blueline   | FALSE  | FALSE      | AVB 2.0     | Soon™    |
+  | Pixel 2 XL  | Taimen     | TRUE   | FALSE      | AVB 1.0     | Soon™    |
+  | Pixel 2     | Walleye    | FALSE  | FALSE      | AVB 1.0     | Soon™    |
+  | Pixel XL    | Marlin     | FALSE  | FALSE      | dm-verity   | Soon™    |
+  | Pixel       | Sailfish   | FALSE  | FALSE      | dm-verity   | Soon™    |
 
   Release hosting is sponsored by [JFrog](https://www.jfrog.com/)
 
@@ -129,15 +131,17 @@ Please join us on IRC: ircs://irc.hashbang.sh/#!os
 
 [4]: https://developer.android.com/studio/releases/platform-tools
 
-### Extract
+
+### Steps
+
+1. Extract
+
 ```
 unzip crosshatch-PQ1A.181205.006-factory-1947dcec.zip
 cd crosshatch-PQ1A.181205.006/
 ```
 
-### Flash
-
-Unlock the bootloader.
+1. Unlock the bootloader.
 
 NOTE: You'll have to be in developer mode and enable OEM unlocking
 
@@ -146,23 +150,21 @@ adb reboot bootloader
 fastboot flashing unlock
 ```
 
+2. Reboot into fastboot
+
 Once the bootloader is unlocked it will wipe the phone and you'll have to do
 basic setup to be able to drop into fastboot. You can skip everything since
 you'll be starting from scratch again after flashing #!OS
 
-Reboot phone in fastboot and flash
-
-#### Pixel
+Reboot phone into the fastboot bootloader.
 
 ```
 adb reboot bootloader
-./flash-all.sh
 ```
 
-#### Pixel 2+
+3. Run Flashing script
 
 ```
-adb reboot fastboot
 ./flash-all.sh
 ```
 
@@ -174,7 +176,7 @@ adb reboot fastboot
  * Docker
  * x86_64 CPU
  * 10GB+ available memory
- * 60GB+ disk
+ * 250GB+ free disk space
 
 ### Generate Signing Keys ###
 
@@ -192,23 +194,6 @@ make DEVICE=crosshatch clean build release
 
 ## Develop ##
 
-## Configure ##
-
-In addition to the hashbang (default) configuration, configurations exist to
-build using default sources from other compatible android projects:
-
-  | Config     | Tested | Verifiable | Sources                        |
-  |------------|:------:|:----------:|:------------------------------:|
-  | AOSP       | TRUE   | FALSE      | https://source.android.com/    |
-  | CalyxOS    | FALSE  | FALSE      | https://github.com/grapheneos  |
-  | GrapheneOS | FALSE  | FALSE      | https://gitlab.com/calyxos     |
-
-You need only pass ```CONFIG=configname``` to make to select alternate configs.
-
-For instance To build crosshatch with an alternative overlay such as AOSP do:
-```
-make DEVICE=crosshatch CONFIG=aosp build
-```
 
 ### clean ###
 
@@ -258,7 +243,7 @@ WIP
 Build latest config from upstream sources:
 
 ```
-make DEVICE=crosshatch config manifest
+make config
 ```
 
 
