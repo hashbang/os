@@ -126,47 +126,51 @@ Please join us on IRC: ircs://irc.hashbang.sh/#!os
 
 ### Requirements ###
 
- * OSX/Linux host system
  * [Android Developer Tools][4]
 
 [4]: https://developer.android.com/studio/releases/platform-tools
 
-
-### Steps
-
-1. Extract
-
+### Extract
 ```
 unzip crosshatch-PQ1A.181205.006-factory-1947dcec.zip
 cd crosshatch-PQ1A.181205.006/
 ```
 
-1. Unlock the bootloader.
+### Flash
 
-NOTE: You'll have to be in developer mode and enable OEM unlocking
+ 1. Unlock "Developer Settings" by tapping "About -> Build" several times
+ 2. Ensure "Enable OEM Unlocking" is enabled under "Developer Settings".
+ 3. Unlock the bootloader.
+   ```
+   adb reboot bootloader
+   fastboot flashing unlock
+   ```
 
-```
-adb reboot bootloader
-fastboot flashing unlock
-```
+ 4. Repeat steps #1 and #2
+ 5. Flash new factory images
+   ```
+   ./flash-all.sh
+   ```
+ 6. Verify phone behaves as expected for your use case
+ 7. Lock the bootloader
+   ```
+   adb reboot bootloader
+   fastboot flashing lock
+   ```
+ 8. Repeat step #1
+ 9. Ensure "Enable OEM Unlocking" is disabled under "Developer Settings".
 
-2. Reboot into fastboot
+### Update ###
 
-Once the bootloader is unlocked it will wipe the phone and you'll have to do
-basic setup to be able to drop into fastboot. You can skip everything since
-you'll be starting from scratch again after flashing #!OS
-
-Reboot phone into the fastboot bootloader.
-
-```
-adb reboot bootloader
-```
-
-3. Run Flashing script
-
-```
-./flash-all.sh
-```
+ 1. Reboot to recovery
+   ```
+   adb reboot recovery
+   ```
+ 2. Select "Apply Update from ADB"
+ 3. Apply Update
+   ```
+   adb sideload crosshatch-ota_update-08050423.zip
+   ```
 
 ## Building ##
 
