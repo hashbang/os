@@ -138,39 +138,42 @@ cd crosshatch-PQ1A.181205.006/
 
 ### Flash
 
- 1. Unlock "Developer Settings" by tapping "About -> Build" several times
- 2. Ensure "Enable OEM Unlocking" is enabled under "Developer Settings".
- 3. Unlock the bootloader.
+ 1. Go to "Settings > System > About" and tap "Build Number" several times.
+ 2. Go to "Settings > System > Developer options" and enable "OEM Unlocking"
+ 3. Go to "Settings > System > Developer options" and enable "USB Debugging"
+ 4. Unlock the bootloader.
    ```
    adb reboot bootloader
    fastboot flashing unlock
    ```
 
- 4. Repeat steps #1 and #2
- 5. Flash new factory images
+ 5. Repeat steps #1 and #2
+ 6. Flash new factory images
    ```
    ./flash-all.sh
    ```
- 6. Verify phone behaves as expected for your use case
- 7. Lock the bootloader
+ 7. Verify phone behaves as expected for your use case
+ 8. Lock the bootloader
    ```
    adb reboot bootloader
    fastboot flashing lock
    ```
- 8. Repeat step #1
- 9. Ensure "Enable OEM Unlocking" is disabled under "Developer Settings".
+ 9. Repeat step #1
+ 10. Go to "Settings > System > Developer options" and disable "OEM Unlocking"
 
 ### Update ###
 
- 1. Reboot to recovery
+ 1. Go to "Settings > System > Developer options" and enable "USB Debugging"
+ 2. Reboot to recovery
    ```
    adb reboot recovery
    ```
- 2. Select "Apply Update from ADB"
- 3. Apply Update
+ 3. Select "Apply Update from ADB"
+ 4. Apply Update
    ```
    adb sideload crosshatch-ota_update-08050423.zip
    ```
+ 5. Go to "Settings > System > Developer options" and disable "USB Debugging"
 
 ## Building ##
 
