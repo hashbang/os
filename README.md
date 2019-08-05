@@ -68,9 +68,9 @@ Please join us on IRC: ircs://irc.hashbang.sh/#!os
 
 ### Future
 
- 1. Reproducible builds
+ * Reproducible builds
     * Allow third parties to prove a build came from expected open source code.
- 2. Verified Builds
+ * Verified Builds
     * Test builds signed with test keys are automated and used for verification.
     * Third party verifiers will maintain webhook activated build nodes
       * Will be in different legal jurisdictions
@@ -79,10 +79,10 @@ Please join us on IRC: ircs://irc.hashbang.sh/#!os
       * will publish signatures for test builds to be in 'verified' channel
     * Updater app will verify signatures from m-of-n builders (e.g 2 of 3)
     * Ability to build/sign/update own releases via Terraform automation
- 3. Compatibility Test Suite
+ * Compatibility Test Suite
     * Every device should have a sponsor with an automated CTS test station
- 4. Hardening
-    * Test and integrate [Android Hardening Project][5] patches
+ * Hardening
+    * Test and integrate [GrapheneOS][5] patches in dedicated release channel
       * Hardened Memory Allocator
       * Chromium security/privacy patches
       * Various platform patches for better permissions controls
@@ -90,22 +90,19 @@ Please join us on IRC: ircs://irc.hashbang.sh/#!os
       * Setup global settings option to toggle USB OTG support
       * Disable all USB devices by default
     * Allow build options to disable hardware as needed for airgap setups.
- 5. Remote Attestation
+ * Remote Attestation
     * Auditor app integration
-      * -if- @thestinger can be convinced to open source it
-      * He is seeking compensation for his time creating it. [Make An Offer][6]
- 6. Two Factor Authentication
+ * Two Factor Authentication
     * Replace proprietary Google Play Services U2F with open/auditable one.
- 7. Accessibility
+ * Accessibility
     * Global Dark Mode
     * One Handed Mode
- 8. Fluff
+ * Fluff
     * Wallpaper/boot animation
     * Support channel link on home screen
     * Support flashing from windows for confused people we take pity on
 
-[5]: https://github.com/AndroidHardening
-[6]: mailto:danielmicay@gmail.com
+[5]: https://github.com/GrapheneOS
 
 ## Devices ##
 
