@@ -1,4 +1,4 @@
-image_hash = "f909bc4e3f39e81549f514958f7de01aaf14b3d12bf323f856e728eb491ee455"
+image_hash = "af0a3a46b2b6008ce070ca7a76f1d1dce975b1c302f1b11f2a3deec06724b76b"
 image = "hashbang/aosp-build@sha256:$(image_hash)"
 device = ${DEVICE}
 
