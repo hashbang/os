@@ -68,9 +68,9 @@ Please join us on IRC: ircs://irc.hashbang.sh/#!os
 
 ### Future
 
- 1. Reproducible builds
+ * Reproducible builds
     * Allow third parties to prove a build came from expected open source code.
- 2. Verified Builds
+ * Verified Builds
     * Test builds signed with test keys are automated and used for verification.
     * Third party verifiers will maintain webhook activated build nodes
       * Will be in different legal jurisdictions
@@ -79,10 +79,10 @@ Please join us on IRC: ircs://irc.hashbang.sh/#!os
       * will publish signatures for test builds to be in 'verified' channel
     * Updater app will verify signatures from m-of-n builders (e.g 2 of 3)
     * Ability to build/sign/update own releases via Terraform automation
- 3. Compatibility Test Suite
+ * Compatibility Test Suite
     * Every device should have a sponsor with an automated CTS test station
- 4. Hardening
-    * Test and integrate [Android Hardening Project][5] patches
+ * Hardening
+    * Test and integrate [GrapheneOS][5] patches in dedicated release channel
       * Hardened Memory Allocator
       * Chromium security/privacy patches
       * Various platform patches for better permissions controls
@@ -90,22 +90,19 @@ Please join us on IRC: ircs://irc.hashbang.sh/#!os
       * Setup global settings option to toggle USB OTG support
       * Disable all USB devices by default
     * Allow build options to disable hardware as needed for airgap setups.
- 5. Remote Attestation
+ * Remote Attestation
     * Auditor app integration
-      * -if- @thestinger can be convinced to open source it
-      * He is seeking compensation for his time creating it. [Make An Offer][6]
- 6. Two Factor Authentication
+ * Two Factor Authentication
     * Replace proprietary Google Play Services U2F with open/auditable one.
- 7. Accessibility
+ * Accessibility
     * Global Dark Mode
     * One Handed Mode
- 8. Fluff
+ * Fluff
     * Wallpaper/boot animation
     * Support channel link on home screen
     * Support flashing from windows for confused people we take pity on
 
-[5]: https://github.com/AndroidHardening
-[6]: mailto:danielmicay@gmail.com
+[5]: https://github.com/GrapheneOS
 
 ## Devices ##
 
@@ -126,47 +123,85 @@ Please join us on IRC: ircs://irc.hashbang.sh/#!os
 
 ### Requirements ###
 
- * OSX/Linux host system
  * [Android Developer Tools][4]
 
 [4]: https://developer.android.com/studio/releases/platform-tools
 
+### Connect
 
-### Steps
+ 1. Go to "Settings > About Phone"
+ 2. Tap "Build number" 7 times.
+ 3. Go to "Settings > System > Advanced > Developer options"
+ 4. Enable "USB Debugging"
+ 5. Connect to device to laptop via short USB C cable
+ 6. Hit "OK" on "Allow USB Debugging?" prompt on device if present.
+ 7. Verify ADB connectivity
+   ```
+   adb devices
+   ```
+   Note: Should return something like: "7CKY1QD3F       device"
 
-1. Extract
+### Flash
 
-```
-unzip crosshatch-PQ1A.181205.006-factory-1947dcec.zip
-cd crosshatch-PQ1A.181205.006/
-```
+ 1. Extract
 
-1. Unlock the bootloader.
+   ```
+   unzip crosshatch-PQ1A.181205.006-factory-1947dcec.zip
+   cd crosshatch-PQ1A.181205.006
+   ```
 
-NOTE: You'll have to be in developer mode and enable OEM unlocking
+ 2. [Connect](#Connect)
+ 3. Go to "Settings > System > Advanced > Developer options"
+ 4. Enable "OEM Unlocking"
+ 5. Unlock the bootloader via ADB
 
-```
-adb reboot bootloader
-fastboot flashing unlock
-```
+   ```
+   adb reboot bootloader
+   fastboot flashing unlock
+   ```
+   Note: You must manually accept prompt on device.
 
-2. Reboot into fastboot
+ 6. Flash new factory images
 
-Once the bootloader is unlocked it will wipe the phone and you'll have to do
-basic setup to be able to drop into fastboot. You can skip everything since
-you'll be starting from scratch again after flashing #!OS
+   ```
+   ./flash-all.sh
+  ```
 
-Reboot phone into the fastboot bootloader.
+### Harden
 
-```
-adb reboot bootloader
-```
+ 1. [Connect](#Connect)
+ 2. Lock the bootloader
+   ```
+   adb reboot bootloader
+   fastboot flashing lock
+   ```
+ 3. Go to "Settings > About Phone"
+ 4. Tap "Build number" 7 times.
+ 5. Go to "Settings > System > Advanced > Developer options"
+ 6. Disable "OEM unlocking"
+ 7. Reboot
+ 8. Verify boot message: "Your device is loading a different operating system"
+ 9. Go to "Settings > System > Advanced > Developer options"
+ 10. Verify "OEM unlocking" is still disabled
 
-3. Run Flashing script
+#### Notes
 
-```
-./flash-all.sh
-```
+  * Failure to run these hardening steps means -anyone- can flash your device.
+  * Past this point if signing keys are lost, all devices are bricked. Backup!
+
+### Update ###
+
+ 1. Go to "Settings > System > Developer options" and enable "USB Debugging"
+ 2. Reboot to recovery
+   ```
+   adb reboot recovery
+   ```
+ 3. Select "Apply Update from ADB"
+ 4. Apply Update
+   ```
+   adb sideload crosshatch-ota_update-08050423.zip
+   ```
+ 5. Go to "Settings > System > Developer options" and disable "USB Debugging"
 
 ## Building ##
 
@@ -228,23 +263,30 @@ Output all untracked changes in android sources to a patchfile:
 make diff > patches/my-feature.patch
 ```
 
-### Flash ###
-```
-adb reboot fastboot
-make install
-```
+### Release ###
 
-## Release ##
+1. Update to latest upstream sources.
 
-WIP
+  ```
+  make config
+  ```
 
-### Update ###
+2. Build all targets impacted by given change
 
-Build latest config from upstream sources:
+  ```
+  make DEVICE=crosshatch release
+  ```
 
-```
-make config
-```
+3. Commit changes to a PR
+4. Author or reviewer manually tests and documents in CHANGELOG
+5. Reviewer security audits local/upstream changes and documents in CHANGELOG
+6. Maintainer does signed merge of changes to master
+7. Maintainer makes signed release tag. (E.g: "9.0.1_r37-hb37")
+
+#### Notes
+
+* Release process does not yet include OTA updates or binary hosting.
+* Volunteers needed! Join #!os on irc.freenode.net to help.
 
 
 ## Questions ##
