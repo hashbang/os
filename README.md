@@ -176,7 +176,7 @@ adb reboot bootloader
  * Docker
  * x86_64 CPU
  * 10GB+ available memory
- * 250GB+ free disk space
+ * 350GB+ free disk space
 
 ### Generate Signing Keys ###
 
@@ -211,7 +211,7 @@ make mrproper
 
 Build a given device twice from scratch and compare with diffoscope:
 ```
-make shell
+make compare
 ```
 
 ### Edit ###

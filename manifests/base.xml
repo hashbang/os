@@ -1,11 +1,21 @@
 <?xml version="1.0" ?><manifest>  
 
     <remote fetch="https://android.googlesource.com" name="aosp" review="https://android-review.googlesource.com/"/>  
-    <remote fetch="https://gitlab.com/" name="gitlab"/>  
-  <remote fetch="https://github.com/" name="github"/>  
+    <remote fetch="https://gitlab.com" name="gitlab"/>  
+  <remote fetch="https://github.com" name="github"/>  
   <default remote="aosp" revision="refs/tags/android-9.0.0_r45" sync-j="4"/>  
 
-    <project groups="device" name="GrapheneOS/platform_packages_apps_Updater" path="packages/apps/Updater" remote="github" revision="d3ee2c407d15b34923aaeb376e2cab09d9d7fd14" upstream="refs/heads/pie"/>  <project groups="device" name="GrapheneOS/platform_external_chromium" path="external/chromium" remote="github" revision="40533f686b8d954ff24086df3ac58f4bfe9c8b84" upstream="refs/heads/pie"/>  <project groups="device" name="stevesoltys/backup" path="packages/apps/Backup" remote="github" revision="bd599db492aaba82171a76ae1530196855b96ebc" upstream="refs/heads/master"/>  <project groups="device" name="anestisb/android-prepare-vendor" path="vendor/android-prepare-vendor" remote="github" revision="e853d17c89f6962d3fd6f408db8576e6b445f643" upstream="refs/heads/master"/>  <project groups="device" name="fdroid/privileged-extension" path="packages/apps/F-DroidPrivilegedExtension" remote="gitlab" revision="bca8571ad311da31931d61f9db2fbf5a249e7abe" upstream="refs/tags/0.2.9"/>  <project groups="device" name="fdroid/fdroidclient" path="packages/apps/F-Droid" remote="gitlab" revision="b815e23a9acd3abc3e3dd86ef0e3f883f3639c44" upstream="refs/tags/1.7"/>  <project groups="pdk" name="platform/build" path="build/make" revision="9550bc6b713b7e1c1eebe62295d03e3e7e019d09" upstream="refs/tags/android-9.0.0_r45">    
+    <project groups="device" name="GrapheneOS/platform_packages_apps_Updater" path="packages/apps/Updater" remote="github" revision="d3ee2c407d15b34923aaeb376e2cab09d9d7fd14" upstream="refs/heads/pie">
+</project>  
+  <project groups="device" name="stevesoltys/backup" path="packages/apps/Backup" remote="github" revision="bd599db492aaba82171a76ae1530196855b96ebc" upstream="refs/heads/master">
+</project>  
+  <project groups="device" name="anestisb/android-prepare-vendor" path="vendor/android-prepare-vendor" remote="github" revision="e853d17c89f6962d3fd6f408db8576e6b445f643" upstream="refs/heads/master">
+</project>  
+  <project groups="device" name="fdroid/privileged-extension" path="packages/apps/F-DroidPrivilegedExtension" remote="gitlab" revision="bca8571ad311da31931d61f9db2fbf5a249e7abe" upstream="refs/tags/0.2.9">
+</project>  
+  <project groups="device" name="fdroid/fdroidclient" path="packages/apps/F-Droid" remote="gitlab" revision="b815e23a9acd3abc3e3dd86ef0e3f883f3639c44" upstream="refs/tags/1.7">
+</project>  
+  <project groups="pdk" name="platform/build" path="build/make" revision="9550bc6b713b7e1c1eebe62295d03e3e7e019d09" upstream="refs/tags/android-9.0.0_r45">    
         <copyfile dest="Makefile" src="core/root.mk"/>    
         <linkfile dest="build/CleanSpec.mk" src="CleanSpec.mk"/>    
         <linkfile dest="build/buildspec.mk.default" src="buildspec.mk.default"/>    

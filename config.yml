@@ -2,16 +2,16 @@ version: '9'
 name: HashbangOS
 type: release
 variant: user
-datetime: 1564341863
+datetime: 1565064592
 host: android
 user: build
 platform:
   ref: android-9.0.0_r45
   extra_remotes:
   - name: github
-    fetch: https://github.com/
+    fetch: https://github.com
   - name: gitlab
-    fetch: https://gitlab.com/
+    fetch: https://gitlab.com
   extra_projects:
   - name: fdroid/fdroidclient
     groups: device
@@ -33,11 +33,6 @@ platform:
     path: packages/apps/Backup
     remote: github
     revision: refs/heads/master
-  - name: GrapheneOS/platform_external_chromium
-    groups: device
-    path: external/chromium
-    remote: github
-    revision: refs/heads/pie
   - name: GrapheneOS/platform_packages_apps_Updater
     groups: device
     path: packages/apps/Updater
@@ -108,8 +103,8 @@ devices:
       kernel_ref: origin/android-msm-crosshatch-4.9-pie-qpr2
       kernel_repo: kernel/manifest
       avb_mode: vbmeta_chained
-      factory_build: PQ3A.190705.003
-      factory_hash: e59cf7a412e48d0f78463a67dc0085d98b811026d7c593b8d61925c2d9895e02
+      factory_build: PQ3A.190801.002
+      factory_hash: 15db810de7d3aa3ad660ffe6bcd572178c8d7c3fa363fef308cde29e0225b6c1
     verizon:
       factory_hash: 0933f2080c5bba78f2858c892ec899cda67c6c01373a25bbcae013fb906a7fc6
       factory_build: PQ3A.190605.004.A1
@@ -122,8 +117,8 @@ devices:
       kernel_ref: origin/android-msm-crosshatch-4.9-pie-qpr2
       kernel_repo: kernel/manifest
       avb_mode: vbmeta_chained
-      factory_build: PQ3A.190705.003
-      factory_hash: c14bfb79b6660398f0454279b98ab45ace896e115c462643c0685089f5f1758f
+      factory_build: PQ3A.190801.002
+      factory_hash: f3d66c498994c7ca8c63a97f74bbd2634db7f91e1e114e7924cb721a149ddd2b
     verizon:
       factory_build: PQ3A.190605.004.A1
       factory_hash: da940910bf3ac99af6ae53be3971698737ba7cb86f42b4d19e67078fd19d7a58
@@ -136,8 +131,8 @@ devices:
       kernel_ref: android-msm-wahoo-4.4-pie-qpr1
       kernel_repo: kernel/msm
       avb_mode: vbmeta_simple
-      factory_build: PQ3A.190705.001
-      factory_hash: 884e074c374080550450d6b9356e9732043d38a5e4957aedcac9c82ec6f20fb5
+      factory_build: PQ3A.190801.002
+      factory_hash: b26aa2d7f03fd3ebb3d5de4840efe2614043bffac46b918f24ed8791d94f90a2
     telstra:
       factory_build: PPR1.180610.011
       factory_hash: 9f0cb004c3b42789c150293aa6a6eecb0f289324ce1403befde93b106da59829
@@ -147,8 +142,8 @@ devices:
       kernel_ref: android-msm-wahoo-4.4-pie-qpr1
       kernel_repo: kernel/msm
       avb_mode: vbmeta_simple
-      factory_build: PQ3A.190705.001
-      factory_hash: cc471c8c7ffaa899e30438fa30b8d33b92b12a3c92d3e592c53bfc5983de205b
+      factory_build: PQ3A.190801.002
+      factory_hash: f9a5e2307ff6d36afc94899f88d094e4468e9211e5181cfc5d0db5ff4ab417f2
     telstra:
       factory_build: PPR1.180610.011
       factory_hash: 0fbd304845b6a1e8c5960deedb70aab0f804a4b1bb93242b3bbcdad586982769
@@ -158,8 +153,8 @@ devices:
       kernel_ref: android-msm-marlin-3.18-pie-qpr1-s2
       kernel_repo: kernel/msm
       avb_mode: verity_only
-      factory_build: PQ3A.190705.001
-      factory_hash: 522f27c4d50055f6402ca9d4d62fb07425e3af7c4766b647a4096ce3041984ba
+      factory_build: PQ3A.190801.002
+      factory_hash: 13dbb265fb7ab74473905705d2e34d019ffc0bae601d1193e71661133aba9653
     telus:
       factory_build: PPR1.181005.003.A1
       factory_hash: 960a173f0f84e2c3c0c5d96643e6ca3f99d5a898a932c6e3a62c52282d6fb3f4
@@ -172,8 +167,8 @@ devices:
       kernel_ref: android-msm-marlin-3.18-pie-qpr1-s2
       kernel_repo: kernel/msm
       avb_mode: verity_only
-      factory_build: PQ3A.190705.001
-      factory_hash: 7f9ff7f7fd447ecb9a3724878c71afc8ea64969cb085b900ce6827da3cc97a1a
+      factory_build: PQ3A.190801.002
+      factory_hash: 029a3376237220354c6bddc98a38a893976fb280a42b8c091200d5527ccbcd45
     telus:
       factory_build: PPR1.181005.003.A1
       factory_hash: 6a2c3b69a43f93e576f953d7c8368648bd26f7d23667556a65af40282a72f7af
