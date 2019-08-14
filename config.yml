@@ -2,11 +2,11 @@ version: '9'
 name: HashbangOS
 type: release
 variant: user
-datetime: 1565064592
+datetime: 1565741867
 host: android
 user: build
 platform:
-  ref: android-9.0.0_r45
+  ref: android-9.0.0_r47
   extra_remotes:
   - name: github
     fetch: https://github.com
@@ -93,9 +93,9 @@ platform:
   - platform/remove-webview.patch
 apps:
   chromium:
-    version: 76.0.3772.1
-    src_ref: 81a47ce765daab7199c94a0237dc5b86c49ec5e2
-    depot_tools_ref: 8dfc0bce4ac7aeb9b03f0783fe0a22660ea4d796
+    version: 78.0.3881.2
+    src_ref: 0712ce29fd5a1abba8b2a94a84d977251fa7928b
+    depot_tools_ref: 9185e4495d6d17e1ee27313fffdaaf6ca50060ca
 devices:
   crosshatch:
     global:
