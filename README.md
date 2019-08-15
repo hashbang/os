@@ -111,7 +111,7 @@ Please join us on IRC: ircs://irc.hashbang.sh/#!os
   | Pixel 3a XL | Bonito     | FALSE  | FALSE      | AVB 2.0     | Soon™    |
   | Pixel 3a    | Sargo      | FALSE  | FALSE      | AVB 2.0     | Soon™    |
   | Pixel 3 XL  | Crosshatch | TRUE   | FALSE      | AVB 2.0     | Soon™    |
-  | Pixel 3     | Blueline   | FALSE  | FALSE      | AVB 2.0     | Soon™    |
+  | Pixel 3     | Blueline   | TRUE   | FALSE      | AVB 2.0     | Soon™    |
   | Pixel 2 XL  | Taimen     | TRUE   | FALSE      | AVB 1.0     | Soon™    |
   | Pixel 2     | Walleye    | FALSE  | FALSE      | AVB 1.0     | Soon™    |
   | Pixel XL    | Marlin     | FALSE  | FALSE      | dm-verity   | Soon™    |
