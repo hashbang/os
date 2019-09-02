@@ -1,5 +1,5 @@
-image_hash = "af0a3a46b2b6008ce070ca7a76f1d1dce975b1c302f1b11f2a3deec06724b76b"
-image = "hashbang/aosp-build@sha256:$(image_hash)"
+CPUS := "$(shell nproc)"
+image = "local/aosp-build:latest"
 device = ${DEVICE}
 
 .DEFAULT_GOAL := default
@@ -12,6 +12,7 @@ contain := \
 		-v $(PWD)/build/base:/home/build/base \
 		-v $(PWD)/build/release:/home/build/release \
 		-v $(PWD)/build/external:/home/build/external \
+		-v $(PWD)/build/.rnd:/home/build/.rnd \
 		-v $(PWD)/keys:/home/build/keys \
 		-v $(PWD)/scripts:/home/build/scripts \
 		-v $(PWD)/config.yml:/home/build/config.yml \
@@ -19,6 +20,7 @@ contain := \
 		-v $(PWD)/patches:/home/build/patches \
 		-u $(shell id -u):$(shell id -g) \
 		-e DEVICE=$(device) \
+		--cpus $(CPUS) \
 		$(image)
 
 default: build
@@ -29,12 +31,16 @@ manifest:
 config: manifest
 	$(contain) config
 
-fetch:
+fetch: random
+	docker build -t local/aosp-build .
 	mkdir -p build
 	@$(contain) fetch
 
 tools: fetch
 	@$(contain) tools
+
+random:
+	test -f $(PWD)/build/.rnd || head -c 1G </dev/urandom > $(PWD)/build/.rnd
 
 keys: tools
 	@$(contain) keys
