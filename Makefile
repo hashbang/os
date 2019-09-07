@@ -1,6 +1,7 @@
 CPUS := "$(shell nproc)"
 image = "local/aosp-build:latest"
 device = ${DEVICE}
+OTA_CHANNEL ?= beta
 
 .DEFAULT_GOAL := default
 
@@ -20,6 +21,7 @@ contain := \
 		-v $(PWD)/patches:/home/build/patches \
 		-u $(shell id -u):$(shell id -g) \
 		-e DEVICE=$(device) \
+		-e OTA_CHANNEL=$(OTA_CHANNEL) \
 		--cpus $(CPUS) \
 		$(image)
 
