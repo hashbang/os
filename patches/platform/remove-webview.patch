@@ -1,14 +1,9 @@
-
-project build/make/
-diff --git a/build/make/target/product/core_minimal.mk b/build/make/target/product/core_minimal.mk
-index 85646c1af..8d6b731a6 100644
---- a/build/make/target/product/core_minimal.mk
-+++ b/build/make/target/product/core_minimal.mk
-@@ -88,7 +88,6 @@ PRODUCT_PACKAGES += \
-     uncrypt \
-     vndk_snapshot_package \
-     voip-common \
--    webview \
-     webview_zygote \
+diff --git a/build/make/target/product/media_product.mk b/build/make/target/product/media_product.mk
+index 17c24eef1..2f67a1014 100644
+--- a/build/make/target/product/media_product.mk
++++ b/build/make/target/product/media_product.mk
+@@ -22,4 +22,3 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/base_product.mk)
  
- # Wifi modules
+ # /product packages
+ PRODUCT_PACKAGES += \
+-    webview \

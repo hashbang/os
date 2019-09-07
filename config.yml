@@ -2,11 +2,11 @@ version: '9'
 name: HashbangOS
 type: release
 variant: user
-datetime: 1567407847
+datetime: 1567667514
 host: android
 user: build
 platform:
-  ref: android-9.0.0_r47
+  ref: android-10.0.0_r2
   extra_remotes:
   - name: github
     fetch: https://github.com
@@ -48,8 +48,6 @@ platform:
   - platform/developers/demos
   - device/generic/car
   - device/generic/qemu
-  - device/generic/goldfish
-  - device/generic/goldfish-opengl
   - device/lenaro/bootloader/arm-trusted-firmware
   - device/lenaro/bootloader/edk2
   - device/lenaro/bootloader/OpenPlatformPkg
@@ -58,10 +56,6 @@ platform:
   - device/lenaro/
   - device/google/atv
   - device/google/contexthub
-  - device/google/cuttlefish
-  - device/google/cuttlefish_kernel
-  - device/google/cuttlefish_sepolicy
-  - device/google/cuttlefish_common
   - device/google/crosshatch-kernel
   - device/google/wahoo-kernel
   - device/google/marlin-kernel
@@ -81,15 +75,11 @@ platform:
   - darwin
   patches:
   - platform/accept-sdk-licenses.patch
-  - platform/add-backup.patch
+  - platform/set-packages.patch
   - platform/add-chromium.patch
-  - platform/add-determinism.patch
   - platform/add-fdroid.patch
   - platform/add-updater.patch
   - platform/fix-devicenames.patch
-  - platform/remove-browser2.patch
-  - platform/remove-calendar.patch
-  - platform/remove-quicksearch.patch
   - platform/remove-webview.patch
 apps:
   chromium:

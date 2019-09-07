@@ -1,63 +1,53 @@
 
 project device/google/crosshatch/
 diff --git a/device/google/crosshatch/aosp_blueline.mk b/device/google/crosshatch/aosp_blueline.mk
-index 77f9c7f..a73c479 100644
+index 9a38f9fb..4f657ae0 100644
 --- a/device/google/crosshatch/aosp_blueline.mk
 +++ b/device/google/crosshatch/aosp_blueline.mk
-@@ -33,7 +33,7 @@ PRODUCT_MANUFACTURER := Google
+@@ -30,4 +30,4 @@ PRODUCT_MANUFACTURER := Google
  PRODUCT_BRAND := Android
  PRODUCT_NAME := aosp_blueline
  PRODUCT_DEVICE := blueline
 -PRODUCT_MODEL := AOSP on blueline
 +PRODUCT_MODEL := Pixel 3
- 
- # Audio XMLs
- PRODUCT_COPY_FILES += \
 diff --git a/device/google/crosshatch/aosp_crosshatch.mk b/device/google/crosshatch/aosp_crosshatch.mk
-index 9e871a4..8811c5a 100644
+index 7db148cf..a54202c4 100644
 --- a/device/google/crosshatch/aosp_crosshatch.mk
 +++ b/device/google/crosshatch/aosp_crosshatch.mk
-@@ -33,7 +33,7 @@ PRODUCT_MANUFACTURER := Google
+@@ -30,4 +30,4 @@ PRODUCT_MANUFACTURER := Google
  PRODUCT_BRAND := Android
  PRODUCT_NAME := aosp_crosshatch
  PRODUCT_DEVICE := crosshatch
 -PRODUCT_MODEL := AOSP on crosshatch
 +PRODUCT_MODEL := Pixel 3 XL
- 
- # Audio XMLs
- PRODUCT_COPY_FILES += \
 
 project device/google/marlin/
 diff --git a/device/google/marlin/aosp_marlin.mk b/device/google/marlin/aosp_marlin.mk
-index b82aaf73..1b9d9e7f 100644
+index 96cc5e95..1b9d9e7f 100644
 --- a/device/google/marlin/aosp_marlin.mk
 +++ b/device/google/marlin/aosp_marlin.mk
-@@ -24,8 +24,8 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
+@@ -24,7 +24,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
  PRODUCT_NAME := aosp_marlin
  PRODUCT_DEVICE := marlin
  PRODUCT_BRAND := Android
 -PRODUCT_MODEL := AOSP on msm8996
--PRODUCT_MANUFACTURER := google
 +PRODUCT_MODEL := Pixel XL
-+PRODUCT_MANUFACTURER := Google
+ PRODUCT_MANUFACTURER := Google
  PRODUCT_RESTRICT_VENDOR_FILES := true
  
- PRODUCT_COPY_FILES += device/google/marlin/fstab.common:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.marlin
 diff --git a/device/google/marlin/aosp_sailfish.mk b/device/google/marlin/aosp_sailfish.mk
-index 4c0ef719..675f11a6 100644
+index b6e6427c..67d3e048 100644
 --- a/device/google/marlin/aosp_sailfish.mk
 +++ b/device/google/marlin/aosp_sailfish.mk
-@@ -24,8 +24,8 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
+@@ -24,7 +24,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
  PRODUCT_NAME := aosp_sailfish
  PRODUCT_DEVICE := sailfish
  PRODUCT_BRAND := Android
 -PRODUCT_MODEL := AOSP on msm8996
--PRODUCT_MANUFACTURER := google
 +PRODUCT_MODEL := Pixel
-+PRODUCT_MANUFACTURER := Google
+ PRODUCT_MANUFACTURER := Google
  PRODUCT_RESTRICT_VENDOR_FILES := true
  
- PRODUCT_COPY_FILES += device/google/marlin/fstab.common:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.sailfish
 
 project device/google/taimen/
 diff --git a/device/google/taimen/aosp_taimen.mk b/device/google/taimen/aosp_taimen.mk

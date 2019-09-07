@@ -1,21 +1,3 @@
-docker run \
-  -v android:/home/build \
-  hashbang/os bash -c "cd base; repo diff -u"
-
-project build/make/
-diff --git a/build/make/target/product/core.mk b/build/make/target/product/core.mk
-index c72bb2f26..5fb0ec350 100644
---- a/build/make/target/product/core.mk
-+++ b/build/make/target/product/core.mk
-@@ -60,6 +60,7 @@ PRODUCT_PACKAGES += \
-     Telecom \
-     TeleService \
-     Traceur \
-+    Updater \
-     VpnDialogs \
-     vr \
-     MmsService
-
 project packages/apps/Updater/
 diff --git a/packages/apps/Updater/res/values/config.xml b/packages/apps/Updater/res/values/config.xml
 index b9fc22f..b36dfeb 100644
@@ -25,5 +7,5 @@ index b9fc22f..b36dfeb 100644
  <?xml version="1.0" encoding="utf-8"?>
  <resources>
 -    <string name="url" translatable="false">https://releases.grapheneos.org/</string>
-+    <string name="url" translatable="false">https://os.hashbang.sh/</string>
++    <string name="url" translatable="false">https://releases.mobile.hashbang.sh/</string>
  </resources>
