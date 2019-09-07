@@ -283,10 +283,23 @@ make diff > patches/my-feature.patch
 6. Maintainer does signed merge of changes to master
 7. Maintainer makes signed release tag. (E.g: "9.0.1_r37-hb37")
 
+### OTAs ###
+
+If you'd like to manage you own OTAs with your own signing keys, you can make
+the following changes:
+
+1. Update `patches/platform/add-updater.patch` and change `os.hashbang.sh` to
+   whatever server you'll be placing these images.
+2. `make DEVICE=<device-name> OTA_CHANNEL=stable build release`
+  a. `OTA_CHANNEL` will default to `beta`
+3. Upload files from `build/release/*` to your server.
+4. Your server should be configured to have wherever you OTAs are being shipped
+   to as part of the root directory. SSL is highly recommended.
+
 #### Notes
 
 * Release process does not yet include OTA updates or binary hosting.
-* Volunteers needed! Join #!os on irc.freenode.net to help.
+* Volunteers needed! Join #!os on irc.hashbang.sh/6697 to help.
 
 
 ## Questions ##
