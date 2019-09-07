@@ -2,7 +2,7 @@ version: '9'
 name: HashbangOS
 type: release
 variant: user
-datetime: 1567667514
+datetime: 1567667515
 host: android
 user: build
 platform:
