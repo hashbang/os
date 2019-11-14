@@ -81,6 +81,7 @@ platform:
   - platform/add-updater.patch
   - platform/fix-devicenames.patch
   - platform/remove-webview.patch
+  - platform/ignore-allowbackup-false.patch
 apps:
   chromium:
     version: 78.0.3881.2
