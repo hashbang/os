@@ -63,7 +63,7 @@ Please join us on IRC: ircs://irc.hashbang.sh/#!os
    * [Updater][3] - Patched to use os.hashbang.sh update server
 
 [1]: https://gist.github.com/thestinger/171b5ffdc54a50ee44497028aa137ed8
-[2]: https://github.com/stevesoltys/backup
+[2]: https://github.com/stevesoltys/seedvault
 [3]: https://github.com/AndroidHardening/platform_packages_apps_Updater
 
 ### Future
