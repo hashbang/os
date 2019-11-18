@@ -9,7 +9,6 @@ index 0d100b267..a7fc47754 100644
  PRODUCT_PACKAGES += \
 -    Browser2 \
 -    Calendar \
-+    Backup \
      Camera2 \
 +    Chromium \
      Contacts \
