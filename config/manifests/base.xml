@@ -5,6 +5,8 @@
   <remote fetch="https://github.com" name="github"/>  
   <default remote="aosp" revision="refs/tags/android-10.0.0_r11" sync-j="4"/>  
 
+    <project groups="pdk" name="GrapheneOS/platform_external_chromium-webview" path="external/chromium-webview" remote="github" revision="66f34a0a6608ca2a423b65fcfd042f89a962ff0e" upstream="refs/heads/10">
+</project>  
     <project groups="device" name="GrapheneOS/platform_packages_apps_Updater" path="packages/apps/Updater" remote="github" revision="b45f0757093e0f3bcc4cb5823d6bb6b14ca2beb8" upstream="refs/heads/pie">
 </project>  
   <project groups="device" name="stevesoltys/backup" path="packages/apps/Backup" remote="github" revision="8686ee6c903b0d22bbd616733dd3dcdb62a9c2a8" upstream="refs/heads/develop">
