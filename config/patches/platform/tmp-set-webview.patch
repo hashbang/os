@@ -1,0 +1,14 @@
+
+project frameworks/base/
+diff --git a/frameworks/base/core/res/res/xml/config_webview_packages.xml b/frameworks/base/core/res/res/xml/config_webview_packages.xml
+index 5c21c7ffb40..238d7173041 100644
+--- a/frameworks/base/core/res/res/xml/config_webview_packages.xml
++++ b/frameworks/base/core/res/res/xml/config_webview_packages.xml
+@@ -15,6 +15,6 @@
+ -->
+ 
+ <webviewproviders>
+-    <webviewprovider description="Chromium" packageName="org.chromium.chrome" availableByDefault="true">
++	<webviewprovider description="Android WebView" packageName="com.google.android.webview" availableByDefault="true">
+     </webviewprovider>
+ </webviewproviders>
