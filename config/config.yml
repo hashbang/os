@@ -43,6 +43,11 @@ platform:
     path: external/chromium-webview
     remote: github
     revision: refs/heads/10
+  - name: GrapheneOS/platform_packages_apps_DeskClock
+    groups: pdk-fs
+    path: packages/apps/DeskClock
+    remote: github
+    revision: refs/heads/10
   remove_paths:
   - packages/apps/Calendar
   - packages/apps/QuickSearchBox
