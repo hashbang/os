@@ -15,7 +15,7 @@
 </project>  
   <project groups="device" name="hashbang/android-prepare-vendor" path="vendor/android-prepare-vendor" remote="github" revision="8b55b6865a34449a4195a3a76e6b0a77c8f80018" upstream="refs/heads/10.0">
 </project>  
-  <project groups="device" name="fdroid/privileged-extension" path="packages/apps/F-DroidPrivilegedExtension" remote="gitlab" revision="cb9ecca8969e62b8351498d8ea1c3625c095bf87" upstream="refs/tags/0.2.10">
+  <project groups="device" name="fdroid/privileged-extension" path="packages/apps/F-DroidPrivilegedExtension" remote="gitlab" revision="594658fb297fb7e9ce0dff3a1982dfb0dadf5926" upstream="refs/tags/0.2.11">
 </project>  
   <project groups="device" name="fdroid/fdroidclient" path="packages/apps/F-Droid" remote="gitlab" revision="b815e23a9acd3abc3e3dd86ef0e3f883f3639c44" upstream="refs/tags/1.7">
 </project>  

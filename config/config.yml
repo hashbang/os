@@ -22,7 +22,7 @@ platform:
     groups: device
     path: packages/apps/F-DroidPrivilegedExtension
     remote: gitlab
-    revision: refs/tags/0.2.10
+    revision: refs/tags/0.2.11
   - name: hashbang/android-prepare-vendor
     groups: device
     path: vendor/android-prepare-vendor
