@@ -27,7 +27,7 @@ Public releases are pending sustainable/automated CI/CD work to do reproducible
 builds and multisig.
 
 Testing is currently manual. "True" implies only all hardware and surface level
-functionality appears to work. E2E testing integration is WIP
+functionality appears to work. E2E testing integration is WIP.
 
 Testers, builders, and hosting bandwidth needed.
 
@@ -114,167 +114,27 @@ Please join us on IRC: ircs://irc.hashbang.sh/#!os
   | Pixel 3     | Blueline   | TRUE   | FALSE      | AVB 2.0     | Soon™    |
   | Pixel 2 XL  | Taimen     | TRUE   | FALSE      | AVB 1.0     | Soon™    |
   | Pixel 2     | Walleye    | FALSE  | FALSE      | AVB 1.0     | Soon™    |
-  | Pixel XL    | Marlin     | FALSE  | FALSE      | dm-verity   | Soon™    |
-  | Pixel       | Sailfish   | FALSE  | FALSE      | dm-verity   | Soon™    |
 
   Release hosting is sponsored by [JFrog](https://www.jfrog.com/)
 
-## Install ##
+## Install, build, flash, update ##
 
-### Requirements ###
-
- * [Android Developer Tools][4]
-
-[4]: https://developer.android.com/studio/releases/platform-tools
-
-### Connect
-
- 1. Go to "Settings > About Phone"
- 2. Tap "Build number" 7 times.
- 3. Go to "Settings > System > Advanced > Developer options"
- 4. Enable "USB Debugging"
- 5. Connect to device to laptop via short USB C cable
- 6. Hit "OK" on "Allow USB Debugging?" prompt on device if present.
- 7. Verify ADB connectivity
-   ```
-   adb devices
-   ```
-   Note: Should return something like: "7CKY1QD3F       device"
-
-### Flash
-
- 1. Extract
-
-   ```
-   unzip crosshatch-PQ1A.181205.006-factory-1947dcec.zip
-   cd crosshatch-PQ1A.181205.006
-   ```
-
- 2. [Connect](#Connect)
- 3. Go to "Settings > System > Advanced > Developer options"
- 4. Enable "OEM Unlocking"
- 5. Unlock the bootloader via ADB
-
-   ```
-   adb reboot bootloader
-   fastboot flashing unlock
-   ```
-   Note: You must manually accept prompt on device.
-
- 6. Flash new factory images
-
-   ```
-   ./flash-all.sh
-  ```
-
-### Harden
-
- 1. [Connect](#Connect)
- 2. Lock the bootloader
-   ```
-   adb reboot bootloader
-   fastboot flashing lock
-   ```
- 3. Go to "Settings > About Phone"
- 4. Tap "Build number" 7 times.
- 5. Go to "Settings > System > Advanced > Developer options"
- 6. Disable "OEM unlocking"
- 7. Reboot
- 8. Verify boot message: "Your device is loading a different operating system"
- 9. Go to "Settings > System > Advanced > Developer options"
- 10. Verify "OEM unlocking" is still disabled
-
-#### Notes
-
-  * Failure to run these hardening steps means -anyone- can flash your device.
-  * Past this point if signing keys are lost, all devices are bricked. Backup!
-
-### Update ###
-
- 1. Go to "Settings > System > Developer options" and enable "USB Debugging"
- 2. Reboot to recovery
-   ```
-   adb reboot recovery
-   ```
- 3. Select "Apply Update from ADB"
- 4. Apply Update
-   ```
-   adb sideload crosshatch-ota_update-08050423.zip
-   ```
- 5. Go to "Settings > System > Developer options" and disable "USB Debugging"
-
-## Building ##
-
-### Requirements ###
-
- * Linux host system
- * Docker
- * x86_64 CPU
- * 10GB+ available memory
- * 350GB+ free disk space
-
-### Generate Signing Keys ###
-
-Each device needs its own set of keys:
-```
-make DEVICE=crosshatch keys
-```
-
-### Build Factory Image ###
-
-Build flashable images for desired device:
-```
-make DEVICE=crosshatch clean build release
-```
+Those steps are the same for AOSP and are thus documented by [aosp-build](https://github.com/hashbang/aosp-build).
 
 ## Develop ##
-
-
-### clean ###
-
-Do basic cleaning without deleting cached artifacts/sources:
-```
-make clean
-```
-
-Clean everything but keys
-```
-make mrproper
-```
-
-### Compare ###
-
-Build a given device twice from scratch and compare with diffoscope:
-```
-make compare
-```
-
-### Edit ###
-
-Create a shell inside the docker environment:
-```
-make shell
-```
-
-### Patch ###
-
-Output all untracked changes in android sources to a patchfile:
-```
-make diff > patches/my-feature.patch
-```
 
 ### Release ###
 
 1. Update to latest upstream sources.
 
   ```
-  make config
+  make manifest
   ```
 
 2. Build all targets impacted by given change
 
   ```
-  make DEVICE=crosshatch release
+  make DEVICE=crosshatch build release
   ```
 
 3. Commit changes to a PR
