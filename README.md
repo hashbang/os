@@ -317,7 +317,7 @@ Play Services can be tricked with [MicroG][mg] but this increases attack
 surface and though it will probably work in many cases, this is not supported
 or recommended.
 
-Yalp store is an open source browser for Google Play Store and is available
+Aurora Store is an open source browser for Google Play Store and is available
 on F-Droid.
 
 Also see "Alternatives" below to find alternatives for popular apps.
@@ -379,24 +379,24 @@ To address this consider looking at some of the below alternatives for popular
 applications.
 
 Some things won't have alternatives and in those cases you will have to decide
-to sideload a specific proprietary APK via Yalp Store or live without that app.
+to sideload a specific proprietary APK via Aurora Store or live without that app.
 
 You may also find popular travel apps like Kayak, Uber ans Lyft have very
 usable mobile webapps you can pin to your desktop for a similar experience to a
 native app.
 
-| App      | Alternative(s)   | Notes                                  |
-|:--------:|:----------------:|:---------------------------------------|
-| Chrome   | Chromium, OrFox  | Chromium is built-in to #!os           |
-| Play     | F-Droid, Yalp    | F-Droid is built-in to #!oa            |
-| GMail    | K9Mail           |                                        |
-| Drive    | Nextcloud        |                                        |
-| Music    | D-Sub            | Will need a Subsonic capable server    |
-| Maps     | OsmAnd~          |                                        |
-| Auth.    | Yubico Auth.     |                                        |
-| Hangouts | Weechat, Riot.im |                                        |
-| Voice    | Ring             |                                        |
-| Youtube  | NewPipe, SkyTube |                                        |
+| App      | Alternative(s)        | Notes                                  |
+|:--------:|:---------------------:|:---------------------------------------|
+| Chrome   | Chromium, OrFox       | Chromium is built-in to #!os           |
+| Play     | F-Droid, Aurora Store | F-Droid is built-in to #!oa            |
+| GMail    | K9Mail                |                                        |
+| Drive    | Nextcloud             |                                        |
+| Music    | D-Sub                 | Will need a Subsonic capable server    |
+| Maps     | OsmAnd~               |                                        |
+| Auth.    | Yubico Auth.          |                                        |
+| Hangouts | Weechat, Riot.im      |                                        |
+| Voice    | Ring                  |                                        |
+| Youtube  | NewPipe, SkyTube      |                                        |
 
 ## Notes ##
 
