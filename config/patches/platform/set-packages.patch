@@ -1,10 +1,10 @@
 
 project build/make/
 diff --git a/build/make/target/product/handheld_product.mk b/build/make/target/product/handheld_product.mk
-index 0d100b267..a2bb8d254 100644
+index 0d100b267..806c005bd 100644
 --- a/build/make/target/product/handheld_product.mk
 +++ b/build/make/target/product/handheld_product.mk
-@@ -22,23 +22,22 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/media_product.mk)
+@@ -22,23 +22,23 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/media_product.mk)
  
  # /product packages
  PRODUCT_PACKAGES += \
@@ -29,3 +29,4 @@ index 0d100b267..a2bb8d254 100644
 +    Updater \
      WallpaperCropper \
      frameworks-base-overlays
+ 
