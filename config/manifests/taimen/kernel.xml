@@ -1,9 +1,9 @@
 <?xml version="1.0" ?><manifest>  
     <remote fetch="https://android.googlesource.com" name="aosp" review="https://android-review.googlesource.com/"/>  
-    <default remote="aosp" revision="android-msm-marlin-3.18-pie-qpr2" sync-j="4"/>  
+    <default remote="aosp" revision="android-msm-wahoo-4.4-pie-qpr2" sync-j="4"/>  
 
-    <project name="kernel/build" path="build" revision="0a4f497803a2f3f2a162ca1176d082924d7764f1" upstream="refs/heads/master"/>  
-    <project name="kernel/msm" path="private/msm-google" revision="665c9a1d4de133b320772698066d8ec060a218f6" upstream="refs/heads/android-msm-marlin-3.18-pie-qpr2">    
+    <project name="kernel/build" path="build" revision="c9ccaee371dbf1233f4b6699699865a10388fa52" upstream="refs/heads/master"/>  
+    <project name="kernel/msm" path="private/msm-google" revision="9db9532ae32d13333d5f394e5775fb99fafaad45" upstream="refs/heads/android-msm-wahoo-4.4-pie-qpr2">    
         <linkfile dest="build.config" src="build.config"/>    
     </project>  
     <project clone-depth="1" name="platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9" path="prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9" revision="961622e926a1b21382dba4dd9fe0e5fb3ee5ab7c" upstream="refs/heads/pie-release"/>  
