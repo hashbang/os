@@ -7,14 +7,14 @@ contain-base-extend = \
 		--volume $(PWD)/aosp-build/config:/opt/aosp-build/config \
 		--volume $(PWD)/aosp-build/config/manifests:/home/build/config/manifests-aosp
 
-.PHONY: HashbangOS-setup
-HashbangOS-setup:
+.PHONY: HashbangMobile-setup
+HashbangMobile-setup:
 	cd aosp-build/ && ln -sf ../build
 
-.PHONY: HashbangOS-release
-HashbangOS-review: HashbangOS-setup
+.PHONY: HashbangMobile-release
+HashbangMobile-review: HashbangMobile-setup
 	make -C aosp-build config ensure-git-status-clean
 	make -C aosp-build manifest ensure-git-status-clean fetch
 	make fetch review
 
-HashbangOS-build: clean fetch build release
+HashbangMobile-build: clean fetch build release

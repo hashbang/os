@@ -6,15 +6,15 @@ SPDX-FileCopyrightText: 2020-2021 Robin Schneider <ypid@riseup.net>
 
 SPDX-License-Identifier: MIT
 
-Daniel Micay is listed here because HashbangOS is based on GrapheneOS so this
+Daniel Micay is listed here because HashbangMobile is based on GrapheneOS so this
 documentation either links to https://grapheneos.org/ to avoid redundancy or
 parts are copied from the GrapheneOS docs and then adapted here. Daniel Micay
 did not contribute those parts himself and his copyright does not endorse
-HashbangOS.
+HashbangMobile.
 
 -->
 
-# #!os #
+# #!mobile (HashbangMobile) #
 
 <http://github.com/hashbang/os>
 
@@ -49,7 +49,7 @@ Testers, builders, and hosting bandwidth needed.
 
 ## Support ##
 
-Please join us on IRC: ircs://irc.hashbang.sh/#!os
+Please join us on IRC: ircs://irc.hashbang.sh/#!mobile
 
 ## Features ##
 
@@ -232,7 +232,7 @@ the following changes:
 #### Notes
 
 * Release process does not yet include OTA updates or binary hosting.
-* Volunteers needed! Join #!os on irc.hashbang.sh/6697 to help.
+* Volunteers needed! Join #!mobile on irc.hashbang.sh/6697 to help.
 
 
 ## Questions ##
@@ -320,8 +320,8 @@ native app.
 
 | App      | Alternative(s)        | Notes                                  |
 |:--------:|:---------------------:|:---------------------------------------|
-| Chrome   | Chromium, OrFox       | Chromium is built-in to #!os           |
-| Play     | F-Droid, Aurora Store | F-Droid is built-in to #!os            |
+| Chrome   | Chromium, OrFox       | Chromium is built-in to #!mobile       |
+| Play     | F-Droid, Aurora Store | F-Droid is built-in to #!mobile        |
 | GMail    | K9Mail                |                                        |
 | Drive    | Nextcloud             |                                        |
 | Music    | D-Sub                 | Will need a Subsonic capable server    |
