@@ -127,6 +127,11 @@ Those steps are the same for AOSP and are thus documented by [aosp-build](https:
 
 1. Update to latest upstream sources.
 
+  You can find the latest releases on
+  https://source.android.com/setup/start/build-numbers. You will need to update
+  the `platform.ref` (the `ref` key below the `platform` key) in `config.yml`
+  and then update the manifest and config files using:
+
   ```
   make manifest
   ```

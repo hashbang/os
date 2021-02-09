@@ -114,7 +114,7 @@ test: test-repro
 
 .PHONY: patches
 patches:
-	@$(contain) bash -c "cd base; repo diff -u"
+	@$(contain) bash -c "cd base; repo diff --absolute"
 
 .PHONY: shell
 shell:
