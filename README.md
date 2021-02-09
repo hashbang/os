@@ -1,4 +1,20 @@
-# #!os #
+<!--
+
+SPDX-FileCopyrightText: Daniel Micay
+SPDX-FileCopyrightText: 2018-2019 Lance R. Vick <lance@lrvick.net>
+SPDX-FileCopyrightText: 2020-2021 Robin Schneider <ypid@riseup.net>
+
+SPDX-License-Identifier: MIT
+
+Daniel Micay is listed here because HashbangMobile is based on GrapheneOS so this
+documentation either links to https://grapheneos.org/ to avoid redundancy or
+parts are copied from the GrapheneOS docs and then adapted here. Daniel Micay
+did not contribute those parts himself and his copyright does not endorse
+HashbangMobile.
+
+-->
+
+# #!mobile (HashbangMobile) #
 
 <http://github.com/hashbang/os>
 
@@ -33,7 +49,7 @@ Testers, builders, and hosting bandwidth needed.
 
 ## Support ##
 
-Please join us on IRC: ircs://irc.hashbang.sh/#!os
+Please join us on IRC: ircs://irc.hashbang.sh/#!mobile
 
 ## Features ##
 
@@ -117,36 +133,88 @@ Please join us on IRC: ircs://irc.hashbang.sh/#!os
 
   Release hosting is sponsored by [JFrog](https://www.jfrog.com/)
 
-## Install, build, flash, update ##
+## Install ##
 
-Those steps are the same for AOSP and are thus documented by [aosp-build](https://github.com/hashbang/aosp-build).
+Refer to [GrapheneOS CLI install] and [aosp-build].
+
+[GrapheneOS CLI install]: https://grapheneos.org/install/cli
+
+## Building ##
+
+### Requirements ###
+
+ * 35 GiB of memory or more. Link-Time Optimization (LTO) creates huge peaks
+   during linking and is mandatory for Control Flow Integrity (CFI). Linking
+   Vanadium (Chromium) and the Linux kernel with LTO + CFI are the most memory
+   demanding tasks.
+ * 350 GiB+ of additional free storage space for a typical build of the entire
+   OS for a multiarch device.
+
+### Generate Signing Keys ###
+
+Each device needs its own set of keys:
+```
+make DEVICE=crosshatch keys
+```
+
+### Build Factory Image ###
+
+Build flashable images for desired device:
+```
+make DEVICE=crosshatch clean build release
+```
 
 ## Develop ##
 
+
+### clean ###
+
+Do basic cleaning without deleting cached artifacts/sources:
+```
+make clean
+```
+
+Clean everything but keys
+```
+make mrproper
+```
+
+### Compare ###
+
+Build a given device twice from scratch and compare with diffoscope:
+```
+make compare
+```
+
+### Edit ###
+
+Create a shell inside the docker environment:
+```
+make shell
+```
+
+### Patch ###
+
+Output all untracked changes in android sources to a patchfile:
+```
+make diff > patches/my-feature.patch
+```
+
 ### Release ###
 
-1. Update to latest upstream sources.
+1. `make config manifest` see [aosp-build].
 
-  You can find the latest releases on
-  https://source.android.com/setup/start/build-numbers. You will need to update
-  the `platform.ref` (the `ref` key below the `platform` key) in `config.yml`
-  and then update the manifest and config files using:
+1. Build all targets impacted by given change
 
   ```
-  make manifest
+  make DEVICE=crosshatch release
   ```
 
-2. Build all targets impacted by given change
-
-  ```
-  make DEVICE=crosshatch build release
-  ```
-
-3. Commit changes to a PR
-4. Author or reviewer manually tests and documents in CHANGELOG
-5. Reviewer security audits local/upstream changes and documents in CHANGELOG
-6. Maintainer does signed merge of changes to master
-7. Maintainer makes signed release tag. (E.g: "9.0.1_r37-hb37")
+1. Commit changes to a PR
+1. Author or reviewer manually tests and documents in CHANGELOG
+1. Reviewer security audits local/upstream changes and documents in CHANGELOG
+1. Maintainer does signed merge of changes to master
+1. Maintainer makes signed release tag. (E.g: "9.0.1_r37-hb37")
 
 ### OTAs ###
 
@@ -164,7 +232,7 @@ the following changes:
 #### Notes
 
 * Release process does not yet include OTA updates or binary hosting.
-* Volunteers needed! Join #!os on irc.hashbang.sh/6697 to help.
+* Volunteers needed! Join #!mobile on irc.hashbang.sh/6697 to help.
 
 
 ## Questions ##
@@ -220,6 +288,8 @@ Lastly, they almost all source binaries from sketchy locations like the
 infamous "[TheMuppets][tm]" repo which an unknown number of people have push
 access to. This sort of activity acts as a security SPOF for popular roms.
 
+[tm]: https://github.com/TheMuppets
+
 ### Why should anyone trust this project?
 
 Trust, but Verify. While we may be upstanding people today, we might be
@@ -232,8 +302,6 @@ maintainers. Maintaining a system that requires zero trust on the maintainers
 is a core part of our plan to be resistant to Australia-style strongarm
 backdoor requests.
 
-[tm]: https://github.com/TheMuppets
-
 ## Alternatives ##
 
 Giving up Google Play services and stock proprietary applications is a big ask
@@ -244,7 +312,7 @@ To address this consider looking at some of the below alternatives for popular
 applications.
 
 Some things won't have alternatives and in those cases you will have to decide
-to sideload a specific proprietary APK via Aurora Store or live without that app.
+to sideload a specific proprietary APK via Yalp Store or live without that app.
 
 You may also find popular travel apps like Kayak, Uber ans Lyft have very
 usable mobile webapps you can pin to your desktop for a similar experience to a
@@ -252,8 +320,8 @@ native app.
 
 | App      | Alternative(s)        | Notes                                  |
 |:--------:|:---------------------:|:---------------------------------------|
-| Chrome   | Chromium, OrFox       | Chromium is built-in to #!os           |
-| Play     | F-Droid, Aurora Store | F-Droid is built-in to #!oa            |
+| Chrome   | Chromium, OrFox       | Chromium is built-in to #!mobile       |
+| Play     | F-Droid, Aurora Store | F-Droid is built-in to #!mobile        |
 | GMail    | K9Mail                |                                        |
 | Drive    | Nextcloud             |                                        |
 | Music    | D-Sub                 | Will need a Subsonic capable server    |
@@ -266,3 +334,5 @@ native app.
 ## Notes ##
 
 Use at your own risk. You might be eaten by a grue.
+
+[aosp-build]: https://github.com/hashbang/aosp-build

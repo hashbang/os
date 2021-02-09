@@ -1,31 +1,14 @@
 
 project build/make/
 diff --git a/build/make/target/product/handheld_product.mk b/build/make/target/product/handheld_product.mk
-index 54dcaf25e..73e1c70aa 100644
+index f504f61874..e997b8be4b 100644
 --- a/build/make/target/product/handheld_product.mk
 +++ b/build/make/target/product/handheld_product.mk
-@@ -22,22 +22,23 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/media_product.mk)
- 
- # /product packages
- PRODUCT_PACKAGES += \
--    Browser2 \
--    Calendar \
-     Camera2 \
+@@ -28,6 +28,7 @@ PRODUCT_PACKAGES += \
      Contacts \
      DeskClock \
+     ExactCalculator \
 +    F-DroidPrivilegedExtension \
      Gallery2 \
      LatinIME \
-     Launcher3QuickStep \
      Music \
-     OneTimeInitializer \
-     Provision \
--    QuickSearchBox \
-     Settings \
-     SettingsIntelligence \
-     StorageManager \
-     SystemUI \
-+    Updater \
-     WallpaperCropper \
-     frameworks-base-overlays
- 

@@ -1,11 +1,31 @@
+
 project packages/apps/Updater/
 diff --git a/packages/apps/Updater/res/values/config.xml b/packages/apps/Updater/res/values/config.xml
-index b9fc22f..b36dfeb 100644
+index a32f136..2eaaca0 100644
 --- a/packages/apps/Updater/res/values/config.xml
 +++ b/packages/apps/Updater/res/values/config.xml
-@@ -1,4 +1,4 @@
+@@ -1,6 +1,6 @@
  <?xml version="1.0" encoding="utf-8"?>
  <resources>
 -    <string name="url" translatable="false">https://releases.grapheneos.org/</string>
 +    <string name="url" translatable="false">https://releases.mobile.hashbang.sh/</string>
- </resources>
+     <string name="channel_default" translatable="false">stable</string>
+     <string name="network_type_default" translatable="false">1</string>
+     <string name="battery_not_low_default" translatable="false">false</string>
+
+project build/make/
+diff --git a/build/make/target/product/media_system.mk b/build/make/target/product/media_system.mk
+index 77b77fef89..6099d88f74 100644
+--- a/build/make/target/product/media_system.mk
++++ b/build/make/target/product/media_system.mk
+@@ -37,9 +37,7 @@ PRODUCT_PACKAGES += \
+     requestsync \
+     StatementService \
+ 
+-ifeq ($(OFFICIAL_BUILD),true)
+-    PRODUCT_PACKAGES += Updater
+-endif
++PRODUCT_PACKAGES += Updater
+ 
+ PRODUCT_PACKAGES += Seedvault
+ 
