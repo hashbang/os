@@ -1,0 +1,36 @@
+#!/bin/bash
+[ -f /.dockerenv ] || { echo "please run in supplied container"; exit 1; }
+set -e; eval "$(environment)"
+
+base_dir="${BASE_DIR?}"
+device="${DEVICE?}"
+
+case $device in
+	sargo|bonito) kernel_repo="crosshatch"; big_brother_device="bonito" ;;
+    # Pixel 3, Pixel 3 XL, Pixel 3a, Pixel 3a XL: crosshatch
+    #     Pixel 3: blueline
+    #     Pixel 3 XL: crosshatch
+    #     Pixel 3a, Pixel 3a XL: bonito
+    # Pixel 4, Pixel 4 XL: coral
+    # Pixel 4a: sunfish
+    # Pixel 4a 5G, Pixel 5: redbull
+    #     Pixel 4a 5G: redfin
+    #     Pixel 5: bramble
+esac
+
+cd "$base_dir/kernel/google/$kernel_repo"
+
+if [ -f "done_${device}" ]; then
+	echo "Kernel for $device was already build. Skipping"
+	exit 0
+fi
+
+# Fix submodule support.
+mkdir -p "../../../../.repo/project-objects/kernel_google_${kernel_repo}.git/modules"
+ln -s "../../../../.repo/project-objects/kernel_google_${kernel_repo}.git/modules" .git 2>/dev/null || :
+
+git submodule sync
+git submodule update --init --recursive
+./build.sh "$big_brother_device"
+
+touch "done_${device}"

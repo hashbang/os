@@ -1,0 +1,6 @@
+<?xml version="1.0" ?><manifest>
+
+  <project name="platform/external/cldr" path="external/cldr" revision="db543826195c4822405a83544bb3401e9ed2e9ea" upstream="refs/tags/android-11.0.0_r17" dest-branch="refs/tags/android-11.0.0_r17" groups="pdk"/>
+  <project name="platform/external/icu" path="external/icu" revision="d9dce1df12d15409e0701366c845418e75445a34" upstream="refs/tags/android-11.0.0_r17" dest-branch="refs/tags/android-11.0.0_r17" groups="pdk"/>
+
+</manifest>
