@@ -1,21 +1,18 @@
+
 project build/make/
 diff --git a/build/make/target/product/handheld_product.mk b/build/make/target/product/handheld_product.mk
-index 0d100b267..a7fc47754 100644
+index 54dcaf25e..73e1c70aa 100644
 --- a/build/make/target/product/handheld_product.mk
 +++ b/build/make/target/product/handheld_product.mk
-@@ -22,23 +22,25 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/media_product.mk)
+@@ -22,22 +22,23 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/media_product.mk)
  
  # /product packages
  PRODUCT_PACKAGES += \
 -    Browser2 \
 -    Calendar \
-+    Backup \
      Camera2 \
-+    Chromium \
      Contacts \
      DeskClock \
-     Email \
-+    F-Droid \
 +    F-DroidPrivilegedExtension \
      Gallery2 \
      LatinIME \
@@ -31,3 +28,4 @@ index 0d100b267..a7fc47754 100644
 +    Updater \
      WallpaperCropper \
      frameworks-base-overlays
+ 

@@ -1,0 +1,14 @@
+
+project frameworks/base/
+diff --git a/frameworks/base/core/res/res/xml/config_webview_packages.xml b/frameworks/base/core/res/res/xml/config_webview_packages.xml
+index f062b59a008..9c4d65aed6a 100644
+--- a/frameworks/base/core/res/res/xml/config_webview_packages.xml
++++ b/frameworks/base/core/res/res/xml/config_webview_packages.xml
+@@ -16,6 +16,6 @@
+ 
+ <webviewproviders>
+     <!-- The default WebView implementation -->
+-    <webviewprovider description="Android WebView" packageName="com.android.webview" availableByDefault="true">
++    <webviewprovider description="Android WebView" packageName="com.google.android.webview" availableByDefault="true">
+     </webviewprovider>
+ </webviewproviders>

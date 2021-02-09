@@ -1,0 +1,145 @@
+version: '10'
+name: HashbangOS
+type: release
+variant: user
+datetime: 1583772201
+host: android
+user: build
+build_kernel: true
+platform:
+  extra_remotes:
+  - name: github
+    fetch: https://github.com
+  - name: gitlab
+    fetch: https://gitlab.com
+  extra_projects:
+  - name: fdroid/fdroidclient
+    groups: device
+    path: packages/apps/F-Droid
+    remote: gitlab
+    revision: refs/tags/1.7
+  - name: fdroid/privileged-extension
+    groups: device
+    path: packages/apps/F-DroidPrivilegedExtension
+    remote: gitlab
+    revision: refs/tags/0.2.11
+  - name: hashbang/android-prepare-vendor
+    groups: device
+    path: vendor/android-prepare-vendor
+    remote: github
+    revision: refs/heads/10.0
+  - name: stevesoltys/backup
+    groups: device
+    path: packages/apps/Backup
+    remote: github
+    revision: refs/heads/develop
+  - name: GrapheneOS/platform_packages_apps_Updater
+    groups: device
+    path: packages/apps/Updater
+    remote: github
+    revision: refs/heads/pie
+  - name: GrapheneOS/platform_external_chromium-webview
+    groups: pdk
+    path: external/chromium-webview
+    remote: github
+    revision: refs/heads/10
+  - name: GrapheneOS/platform_packages_apps_DeskClock
+    groups: pdk-fs
+    path: packages/apps/DeskClock
+    remote: github
+    revision: refs/heads/10
+  remove_paths:
+  - packages/apps/Calendar
+  - packages/apps/QuickSearchBox
+  - packages/apps/Browser2
+  - platform/prebuilts/qemu-kernel
+  - platform/developers/samples/android
+  - platform/developers/demos
+  - device/generic/car
+  - device/generic/qemu
+  - device/lenaro/bootloader/arm-trusted-firmware
+  - device/lenaro/bootloader/edk2
+  - device/lenaro/bootloader/OpenPlatformPkg
+  - device/lenaro/hikey
+  - device/lenaro/hikey-kernel
+  - device/lenaro/
+  - device/google/atv
+  - device/google/contexthub
+  - device/google/crosshatch-kernel
+  - device/google/wahoo-kernel
+  - device/google/marlin-kernel
+  - device/google/muskie
+  - device/generic/mips
+  - device/google/hikey-kernel
+  - device/generic/mips64
+  - device/generic/mini-emulator-arm64
+  - device/generic/mini-emulator-armv7-a-neon
+  - device/generic/mini-emulator-mips
+  - device/generic/mini-emulator-mips64
+  - device/generic/mini-emulator-x86
+  - device/generic/mini-emulator-x86_64
+  - device/google/accessory/arduino
+  - device/google/accessory/demokit
+  remove_groups:
+  - darwin
+  patches:
+  - platform/accept-sdk-licenses.patch
+  - platform/set-packages.patch
+  - platform/add-chromium.patch
+  - platform/add-fdroid.patch
+  - platform/add-updater.patch
+  - platform/fix-devicenames.patch
+  - platform/tmp-set-webview.patch
+  - platform/ignore-allowbackup-false.patch
+apps:
+  chromium:
+    version: 78.0.3881.2
+    src_ref: 0712ce29fd5a1abba8b2a94a84d977251fa7928b
+    depot_tools_ref: 9185e4495d6d17e1ee27313fffdaaf6ca50060ca
+devices:
+  bonito:
+    kernel_name: bluecross
+    kernel_ref: origin/android-msm-bluecross-4.9-pie-qpr1
+    build_id: QQ2A.200305.002
+    factory_hash: 418015e0a8841aeaebd98eff8212102c6d9bb8cb7764d34365d72e4be5526d0d
+    ota_hash: 6b8498f7488ae0ff67809c54a842619ac399801159516b57afb57b4b1f40ab23
+    platform_ref: android-10.0.0_r30
+  sargo:
+    kernel_name: bluecross
+    kernel_ref: origin/android-msm-bluecross-4.9-pie-qpr1
+    build_id: QQ2A.200305.002
+    factory_hash: e03d9a432164579b13e3f015ba501fb785c7a1ac9f76d8cabda2752f498625dd
+    ota_hash: be77b91cb875061cef95fe8990ce741a500c86a0031a07b84e61a0b037035203
+    platform_ref: android-10.0.0_r30
+  crosshatch:
+    kernel_name: bluecross
+    kernel_ref: origin/android-msm-bluecross-4.9-pie-qpr1
+    avb_mode: vbmeta_chained
+    build_id: QQ2A.200305.002
+    factory_hash: f08faf04c8d22782546a2db608ff4c6433469c3102b750d8fbfd7ee7f737ebbb
+    ota_hash: a440277477f646cf6fec9f08e6e224f2a4e345499d5250cfdcd70d8b2d6afab2
+    platform_ref: android-10.0.0_r30
+  blueline:
+    kernel_name: bluecross
+    kernel_ref: origin/android-msm-bluecross-4.9-pie-qpr1
+    avb_mode: vbmeta_chained
+    build_id: QQ2A.200305.002
+    factory_hash: d781450808addd8c210999bdd2c2fcd91458d07c0b39be185ad114d041247100
+    ota_hash: b24267ae4a6ab1000e78cbc6aed451868f7f79a4af6c89de45b497ba86dc6305
+    platform_ref: android-10.0.0_r30
+  taimen:
+    kernel_name: wahoo
+    kernel_ref: origin/android-msm-wahoo-4.4-pie-qpr2
+    avb_mode: vbmeta_simple
+    build_id: QQ2A.200305.002
+    factory_hash: 0e3198556031148a94e281768aeec3825f81d2a28be8162716a41ae79c2aea2c
+    ota_hash: ad1c133174950e54f2d047f6fe7995343f4074930359c41b889a683ec52b5da7
+    platform_ref: android-10.0.0_r30
+  walleye:
+    kernel_name: wahoo
+    kernel_ref: origin/android-msm-wahoo-4.4-pie-qpr2
+    avb_mode: vbmeta_simple
+    build_id: QQ2A.200305.002
+    factory_hash: e5da4d98ce71af9f6cdb2192fa7f921443769682539b58959f83ccf6f9004b49
+    ota_hash: beb950219e29584e7d52aa6bdc286f4387f326cea480fcc68d5c0a7aaa96a019
+    platform_ref: android-10.0.0_r30

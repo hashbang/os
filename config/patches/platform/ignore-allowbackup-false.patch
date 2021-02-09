@@ -1,0 +1,56 @@
+project frameworks/base/
+diff --git a/frameworks/base/core/java/android/content/pm/PackageParser.java b/frameworks/base/core/java/android/content/pm/PackageParser.java
+index b3776787cc2..039fdfd52bd 100644
+--- a/frameworks/base/core/java/android/content/pm/PackageParser.java
++++ b/frameworks/base/core/java/android/content/pm/PackageParser.java
+@@ -3447,8 +3447,7 @@ public class PackageParser {
+                     outError);
+         }
+ 
+-        boolean allowBackup = sa.getBoolean(
+-                com.android.internal.R.styleable.AndroidManifestApplication_allowBackup, true);
++        boolean allowBackup = true;
+         if (allowBackup) {
+             ai.flags |= ApplicationInfo.FLAG_ALLOW_BACKUP;
+ 
+diff --git a/frameworks/base/services/backup/java/com/android/server/backup/utils/AppBackupUtils.java b/frameworks/base/services/backup/java/com/android/server/backup/utils/AppBackupUtils.java
+index 35dfccf3292..7b2ac6bdec4 100644
+--- a/frameworks/base/services/backup/java/com/android/server/backup/utils/AppBackupUtils.java
++++ b/frameworks/base/services/backup/java/com/android/server/backup/utils/AppBackupUtils.java
+@@ -72,10 +72,6 @@ public class AppBackupUtils {
+     @VisibleForTesting
+     static boolean appIsEligibleForBackup(
+             ApplicationInfo app, PackageManagerInternal packageManager, int userId) {
+-        // 1. their manifest states android:allowBackup="false"
+-        if ((app.flags & ApplicationInfo.FLAG_ALLOW_BACKUP) == 0) {
+-            return false;
+-        }
+ 
+         // 2. they run as a system-level uid
+         if (UserHandle.isCore(app.uid)) {
+diff --git a/frameworks/base/services/core/java/com/android/server/pm/ShortcutPackageInfo.java b/frameworks/base/services/core/java/com/android/server/pm/ShortcutPackageInfo.java
+index 8c7871ffaf9..caa78eca023 100644
+--- a/frameworks/base/services/core/java/com/android/server/pm/ShortcutPackageInfo.java
++++ b/frameworks/base/services/core/java/com/android/server/pm/ShortcutPackageInfo.java
+@@ -84,7 +84,7 @@ class ShortcutPackageInfo {
+         mLastUpdateTime = lastUpdateTime;
+         mIsShadow = isShadow;
+         mSigHashes = sigHashes;
+-        mBackupAllowed = false; // By default, we assume false.
++        mBackupAllowed = true; // By default, we assume true.
+         mBackupSourceBackupAllowed = false;
+     }
+ 
+diff --git a/frameworks/base/services/core/java/com/android/server/pm/ShortcutService.java b/frameworks/base/services/core/java/com/android/server/pm/ShortcutService.java
+index 2d8a2acd575..6312ee913b8 100644
+--- a/frameworks/base/services/core/java/com/android/server/pm/ShortcutService.java
++++ b/frameworks/base/services/core/java/com/android/server/pm/ShortcutService.java
+@@ -3575,7 +3575,7 @@ public class ShortcutService extends IShortcutService.Stub {
+     }
+ 
+     static boolean shouldBackupApp(PackageInfo pi) {
+-        return (pi.applicationInfo.flags & ApplicationInfo.FLAG_ALLOW_BACKUP) != 0;
++        return true;
+     }
+ 
+     @Override

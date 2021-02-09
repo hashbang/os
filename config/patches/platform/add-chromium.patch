@@ -9,6 +9,6 @@ index f062b59a008..5c21c7ffb40 100644
  <webviewproviders>
 -    <!-- The default WebView implementation -->
 -    <webviewprovider description="Android WebView" packageName="com.android.webview" availableByDefault="true">
-+    <webviewprovider description="Chromium" packageName="org.chromium.chrome" availableByDefault="true">
++    <webviewprovider description="Vanadium" packageName="org.grapheneos.vanadium.webview" availableByDefault="true">
      </webviewprovider>
  </webviewproviders>
