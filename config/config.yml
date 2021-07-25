@@ -58,11 +58,6 @@ platform:
   - sunfish
   patches:
   - platform/set-packages.patch
-  - ypid/add-updater.patch
-  - ypid/revert-pad-filenames.patch
-  # - ypid-android-patches/patches/do-not-require-strong-auth-on-regular-time-interval.patch
-  # - patches/intended-to-upstream/0001-Dynamically-detect-number-of-system-cores-but-not-av.patch
-  # - ypid-android-patches/patches/full-iso-8601-support-for-en_CA-cldr-locale.patch
 devices:
   bonito:
     kernel_ref: android-msm-bonito-4.9-android11
