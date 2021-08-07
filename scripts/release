@@ -1,0 +1,117 @@
+#!/bin/bash
+# shellcheck disable=SC1091,SC1090
+[ -f /.dockerenv ] || { echo "please run in supplied container"; exit 1; }
+set -e; eval "$(environment)"
+
+img_path() {
+	image=${1?}
+	path=${2?}
+ 	grep -Po \
+ 		"require version-${image}=\\K.+" \
+ 		"${path}/vendor-board-info.txt" \
+ 	| tr '[:upper:]' '[:lower:]'
+}
+
+device="${DEVICE?}"
+base_dir="${BASE_DIR?}"
+build_number="${BUILD_NUMBER?}"
+build_datetime="${BUILD_DATETIME?}"
+key_dir="${KEY_DIR?}"
+release_dir="${RELEASE_DIR?}"
+build_id=${BUILD_ID?}
+
+prefix=""
+target_files="${device}-target_files-${build_number}.zip"
+target_out_dir="${base_dir}/out/target/product/${device}"
+inter_dir="${target_out_dir}/obj/PACKAGING/target_files_intermediates"
+bootloader=$(img_path bootloader "${base_dir}/vendor/google_devices/${device}")
+radio=$(img_path baseband "${base_dir}/vendor/google_devices/${device}")
+
+sudo chown -R "$(id -u)":"$(id -g)" "$HOME/release"
+
+cd "$base_dir"
+mkdir -p "$release_dir"
+
+echo "Running sign_target_files_apks"
+sign_target_files_apks \
+	-o \
+	-d "$key_dir" \
+	--avb_vbmeta_key "${key_dir}/avb.pem" \
+	--avb_vbmeta_algorithm SHA256_RSA2048 \
+	--avb_system_key "${key_dir}/avb.pem" \
+	--avb_system_algorithm SHA256_RSA2048 \
+  	"${inter_dir}/${prefix}${device}-target_files-${build_number}.zip" \
+	"$release_dir/$target_files"
+
+echo "Running ota_from_target_files"
+ota_from_target_files \
+	--block \
+	-k "${key_dir}/releasekey" \
+  	"${release_dir}/${target_files}" \
+	"${release_dir}/${device}-ota_update-${build_number}.zip"
+
+echo 'Generating OTA metadata'
+generate-metadata \
+  "${release_dir}/${device}-ota_update-${build_number}.zip"
+
+echo "Running img_from_target_files"
+img_from_target_files \
+	"${release_dir}/${target_files}" \
+	"${release_dir}/${device}-img-${build_number}.zip"
+
+echo "Running generate-factory-images"
+cat <<-EOF | bash
+	cd "$release_dir"
+	source "${base_dir}/device/common/clear-factory-images-variables.sh"
+	export BUILD="$build_number"
+	export DEVICE="$device"
+	export PRODUCT="$device"
+	export VERSION="$build_id"
+	export BOOTLOADER="$bootloader"
+	export RADIO="$radio"
+	source "${base_dir}/device/common/generate-factory-images-common.sh"
+EOF
+
+echo "Copy scripts and the avb key into factory zip"
+cd "${release_dir}"
+factory_zip="$(ls -t "${device}"-"${build_id}"-factory-*.zip | head -1)"
+factory_tmp="${device}-${build_id}-factory.zip"
+factory_dir="${device}-${build_id}"
+unzip "${factory_zip}"
+rm "${factory_zip}"
+rm "${factory_dir}/flash-all.sh"
+rm "${factory_dir}/flash-all.bat"
+rm "${factory_dir}/flash-base.sh"
+
+cat <<-EOF >> "${factory_dir}/flash-all.sh"
+if ! [ \$(\$(which fastboot) --version | grep "version" | cut -c18-23 | sed 's/\.//g' ) -ge 2802 ]; then
+  echo "fastboot too old; please download the latest version at https://developer.android.com/studio/releases/platform-tools.html"
+  exit 1
+fi
+
+fastboot flashing unlock
+fastboot flash bootloader bootloader-${device}-${bootloader}.img
+fastboot reboot-bootloader
+sleep 5
+fastboot flash radio radio-${device}-${radio}.img
+fastboot reboot-bootloader
+sleep 5
+fastboot erase avb_custom_key
+fastboot flash avb_custom_key ${device}-avb_pkmd.bin
+fastboot reboot-bootloader
+sleep 5
+fastboot -w --skip-reboot update image-${device}-${build_id}.zip
+fastboot reboot-bootloader
+sleep 5
+fastboot flashing lock
+EOF
+chmod +x "${factory_dir}/flash-all.sh"
+
+cp "${key_dir}/avb_pkmd.bin" "${factory_dir}/${device}-avb_pkmd.bin"
+
+timestamp=$(date -d "@$build_datetime" "+%y%m%d%H%M.%S")
+find "${factory_dir}" -exec touch -t "$timestamp" {} +
+zip -X -r "${factory_tmp}" "${factory_dir}"
+rm -rf "${factory_dir}"
+factory_hash="$(sha256sum "${factory_tmp}" | cut -b -8)"
+mv "${factory_tmp}" "${device}-${build_id}-factory-${factory_hash}.zip"

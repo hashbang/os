@@ -2,8 +2,7 @@ version: '11'
 name: HashbangMobile
 type: release
 variant: user
-# variant: userdebug
-datetime: 1609226148
+datetime: 1628023022
 host: android
 user: build
 build_kernel: true
@@ -61,17 +60,17 @@ platform:
 devices:
   bonito:
     kernel_ref: android-msm-bonito-4.9-android11
-    build_id: RQ1A.210205.004
-    factory_hash: 980275f444f67c23638304ed72b3c569f3f008302263a26aab1af161a9dbfbe5
-    ota_hash: 8ac14105c1a1ef2d7960c27c61417a65b4672dc899a290315b2ab6154202e5c8
-    platform_ref: RQ1A.210205.004.2021.02.02.09
+    build_id: RQ3A.210805.001.A1
+    factory_hash: 4deed5603ff2fcedf9bfe5650cf439b74dd033516d4bb07e02b0125154cb08c7
+    ota_hash: 8920cb15c9fb996c22a8d581a2f4f97c0aaf484595d11acd58d015fe27b90d99
+    platform_ref: RQ3A.210805.001.A1.2021.08.03.03
     platform_pubkey: daniel.micay.asc
   sargo:
     kernel_ref: android-msm-bonito-4.9-android11
-    build_id: RQ1A.210205.004
-    factory_hash: cfe24f6ea039d362991a2d3de8e85f37914004b7bf1df446b25de1214fb92cfe
-    ota_hash: d7345ef80dea3f397a5624a5080c2916190f04ce79169547a08eb0982012c06d
-    platform_ref: RQ1A.210205.004.2021.02.02.09
+    build_id: RQ3A.210805.001.A1
+    factory_hash: 32a5c41f8395857973cad4f6b5a33659b5aee4791f0c9a9f79ce7eb31690624f
+    ota_hash: ebb9b740bd630191d6193e1a01c4af041e5ddf01325169c197d8bdf194986dda
+    platform_ref: RQ3A.210805.001.A1.2021.08.03.03
     platform_pubkey: daniel.micay.asc
   crosshatch:
     kernel_name: bluecross
