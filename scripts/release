@@ -40,14 +40,15 @@ sign_target_files_apks \
 	--avb_vbmeta_algorithm SHA256_RSA2048 \
 	--avb_system_key "${key_dir}/avb.pem" \
 	--avb_system_algorithm SHA256_RSA2048 \
-  	"${inter_dir}/${prefix}${device}-target_files-${build_number}.zip" \
+	--extra_apks OsuLogin.apk,ServiceWifiResources.apk="${key_dir}/releasekey" \
+	"${inter_dir}/${prefix}${device}-target_files-${build_number}.zip" \
 	"$release_dir/$target_files"
 
 echo "Running ota_from_target_files"
 ota_from_target_files \
 	--block \
 	-k "${key_dir}/releasekey" \
-  	"${release_dir}/${target_files}" \
+	"${release_dir}/${target_files}" \
 	"${release_dir}/${device}-ota_update-${build_number}.zip"
 
 echo 'Generating OTA metadata'
@@ -100,6 +101,7 @@ fastboot erase avb_custom_key
 fastboot flash avb_custom_key ${device}-avb_pkmd.bin
 fastboot reboot-bootloader
 sleep 5
+fastboot oem uart disable
 fastboot -w --skip-reboot update image-${device}-${build_id}.zip
 fastboot reboot-bootloader
 sleep 5
