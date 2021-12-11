@@ -41,6 +41,54 @@ sign_target_files_apks \
 	--avb_system_key "${key_dir}/avb.pem" \
 	--avb_system_algorithm SHA256_RSA2048 \
 	--extra_apks OsuLogin.apk,ServiceWifiResources.apk="${key_dir}/releasekey" \
+	--extra_apks com.android.adbd.apex="${key_dir}/releasekey" \
+	--extra_apex_payload_key com.android.adbd.apex="${key_dir}/avb.pem" \
+	--extra_apks com.android.apex.cts.shim.apex="${key_dir}/releasekey" \
+	--extra_apex_payload_key com.android.apex.cts.shim.apex="${key_dir}/avb.pem" \
+	--extra_apks com.android.appsearch.apex="${key_dir}/releasekey" \
+	--extra_apex_payload_key com.android.appsearch.apex="${key_dir}/avb.pem" \
+	--extra_apks com.android.art.apex="${key_dir}/releasekey" \
+	--extra_apex_payload_key com.android.art.apex="${key_dir}/avb.pem" \
+	--extra_apks com.android.cellbroadcast.apex="${key_dir}/releasekey" \
+	--extra_apex_payload_key com.android.cellbroadcast.apex="${key_dir}/avb.pem" \
+	--extra_apks com.android.conscrypt.apex="${key_dir}/releasekey" \
+	--extra_apex_payload_key com.android.conscrypt.apex="${key_dir}/avb.pem" \
+	--extra_apks com.android.extservices.apex="${key_dir}/releasekey" \
+	--extra_apex_payload_key com.android.extservices.apex="${key_dir}/avb.pem" \
+	--extra_apks com.android.i18n.apex="${key_dir}/releasekey" \
+	--extra_apex_payload_key com.android.i18n.apex="${key_dir}/avb.pem" \
+	--extra_apks com.android.ipsec.apex="${key_dir}/releasekey" \
+	--extra_apex_payload_key com.android.ipsec.apex="${key_dir}/avb.pem" \
+	--extra_apks com.android.media.apex="${key_dir}/releasekey" \
+	--extra_apex_payload_key com.android.media.apex="${key_dir}/avb.pem" \
+	--extra_apks com.android.media.swcodec.apex="${key_dir}/releasekey" \
+	--extra_apex_payload_key com.android.media.swcodec.apex="${key_dir}/avb.pem" \
+	--extra_apks com.android.mediaprovider.apex="${key_dir}/releasekey" \
+	--extra_apex_payload_key com.android.mediaprovider.apex="${key_dir}/avb.pem" \
+	--extra_apks com.android.neuralnetworks.apex="${key_dir}/releasekey" \
+	--extra_apex_payload_key com.android.neuralnetworks.apex="${key_dir}/avb.pem" \
+	--extra_apks com.android.os.statsd.apex="${key_dir}/releasekey" \
+	--extra_apex_payload_key com.android.os.statsd.apex="${key_dir}/avb.pem" \
+	--extra_apks com.android.permission.apex="${key_dir}/releasekey" \
+	--extra_apex_payload_key com.android.permission.apex="${key_dir}/avb.pem" \
+	--extra_apks com.android.resolv.apex="${key_dir}/releasekey" \
+	--extra_apex_payload_key com.android.resolv.apex="${key_dir}/avb.pem" \
+	--extra_apks com.android.runtime.apex="${key_dir}/releasekey" \
+	--extra_apex_payload_key com.android.runtime.apex="${key_dir}/avb.pem" \
+	--extra_apks com.android.scheduling.apex="${key_dir}/releasekey" \
+	--extra_apex_payload_key com.android.scheduling.apex="${key_dir}/avb.pem" \
+	--extra_apks com.android.sdkext.apex="${key_dir}/releasekey" \
+	--extra_apex_payload_key com.android.sdkext.apex="${key_dir}/avb.pem" \
+	--extra_apks com.android.tethering.apex="${key_dir}/releasekey" \
+	--extra_apex_payload_key com.android.tethering.apex="${key_dir}/avb.pem" \
+	--extra_apks com.android.tzdata.apex="${key_dir}/releasekey" \
+	--extra_apex_payload_key com.android.tzdata.apex="${key_dir}/avb.pem" \
+	--extra_apks com.android.vndk.current.apex="${key_dir}/releasekey" \
+	--extra_apex_payload_key com.android.vndk.current.apex="${key_dir}/avb.pem" \
+	--extra_apks com.android.wifi.apex="${key_dir}/releasekey" \
+	--extra_apex_payload_key com.android.wifi.apex="${key_dir}/avb.pem" \
+	--extra_apks com.google.pixel.camera.hal.apex="${key_dir}/releasekey" \
+	--extra_apex_payload_key com.google.pixel.camera.hal.apex="${key_dir}/avb.pem" \
 	"${inter_dir}/${prefix}${device}-target_files-${build_number}.zip" \
 	"$release_dir/$target_files"
 
