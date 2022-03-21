@@ -1,0 +1,67 @@
+#!/bin/bash
+[ -f /.dockerenv ] || { echo "please run in supplied container"; exit 1; }
+set -e; eval "$(environment)"
+
+device="${DEVICE?}"
+base_dir="${BASE_DIR?}"
+build_type="${BUILD_TYPE?}"
+build_id="${BUILD_ID?}"
+build_variant="${BUILD_VARIANT?}"
+external_dir="${EXTERNAL_DIR?}"
+patch_dir="${PATCH_DIR?}"
+build_id="${BUILD_ID?}"
+platform_patches="${PLATFORM_PATCHES?}"
+public_key_dir="${PUBLIC_KEY_DIR?}"
+
+function apply_patches(){
+	cd "${base_dir}"
+	local fdroid_org="packages/apps/F-DroidPrivilegedExtension/app/src/main/java/org"
+	local fdroid_whitelist="${fdroid_org}/fdroid/fdroid/privileged/ClientWhitelist.java"
+	test -r "${public_key_dir}/platform.x509.pem" || { echo "${public_key_dir}/platform.x509.pem not readable" 1>&2; exit 1; }
+	local platform_key_hash; platform_key_hash=$( \
+		openssl x509 -in "${public_key_dir}/platform.x509.pem" -outform DER \
+		| sha256sum | cut -c1-64; \
+	)
+	echo "Platform Key Hash: ${platform_key_hash}"
+	if [ -f "${base_dir}/${fdroid_whitelist}" ]; then
+		echo "patching file ${fdroid_whitelist}"
+		sed -i \
+			"s/[a-f0-9]\\{64\\}/${platform_key_hash}/g" \
+			"${base_dir}/${fdroid_whitelist}"
+	fi
+	for patch in ${platform_patches//,/ }; do
+		echo "Applying patch: $patch_dir/${patch}"
+		patch -p1 --no-backup-if-mismatch < "${patch_dir}/${patch}"
+	done
+	cd -
+}
+
+function build_external(){
+	local vendor_dist="${external_dir}/vendor/out/${device}/${build_id,,}/vendor"
+	local vendor_dest="${base_dir}/vendor/"
+	[ -d "${vendor_dist}" ] || build-vendor
+	cp -R "${vendor_dist}/." "${vendor_dest}"
+	build-kernel
+}
+
+function build_platform(){
+	cd "$base_dir"
+	unset BUILD_ID
+	choosecombo "${build_type}" "${device}" "${build_variant}"
+	# Not reliable on Android 11?:
+	# (cd "$base_dir/external/icu/tools" && ./updatecldrdata.py && ./updateicudata.py)
+	# (cd "$base_dir/external/icu/tools/srcgen" && ./generate_android_icu4j.sh)
+	clear
+	if [ "$build_variant" == "user" ]; then
+		(set -o xtrace; m target-files-package brillo_update_payload otatools-package)
+	else
+		(set -o xtrace; m)
+	fi
+	cd -
+}
+
+function main(){
+	apply_patches
+	build_external
+	build_platform
+}; main

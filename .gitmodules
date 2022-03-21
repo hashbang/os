@@ -1,0 +1,3 @@
+[submodule "aosp-build"]
+	path = aosp-build
+	url = https://github.com/hashbang/aosp-build.git

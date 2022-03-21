@@ -1,6 +1,1 @@
-build/*
-config/keys/*
-config/env/*
-config/container/Dockerfile.*
-release/*
-.*
+aosp-build/.gitignore

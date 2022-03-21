@@ -1,145 +1,110 @@
-version: '10'
-name: HashbangOS
+version: '11'
+name: HashbangMobile
 type: release
 variant: user
-datetime: 1583772201
+datetime: 1628023022
 host: android
 user: build
 build_kernel: true
 platform:
+  manifest_url: https://github.com/GrapheneOS/platform_manifest.git
   extra_remotes:
-  - name: github
-    fetch: https://github.com
-  - name: gitlab
-    fetch: https://gitlab.com
+  - name: fdroid
+    fetch: https://gitlab.com/fdroid
   extra_projects:
-  - name: fdroid/fdroidclient
-    groups: device
-    path: packages/apps/F-Droid
-    remote: gitlab
-    revision: refs/tags/1.7
-  - name: fdroid/privileged-extension
+  - name: privileged-extension
     groups: device
     path: packages/apps/F-DroidPrivilegedExtension
-    remote: gitlab
+    remote: fdroid
     revision: refs/tags/0.2.11
-  - name: hashbang/android-prepare-vendor
-    groups: device
-    path: vendor/android-prepare-vendor
-    remote: github
-    revision: refs/heads/10.0
-  - name: stevesoltys/backup
-    groups: device
-    path: packages/apps/Backup
-    remote: github
-    revision: refs/heads/develop
-  - name: GrapheneOS/platform_packages_apps_Updater
-    groups: device
-    path: packages/apps/Updater
-    remote: github
-    revision: refs/heads/pie
-  - name: GrapheneOS/platform_external_chromium-webview
-    groups: pdk
-    path: external/chromium-webview
-    remote: github
-    revision: refs/heads/10
-  - name: GrapheneOS/platform_packages_apps_DeskClock
-    groups: pdk-fs
-    path: packages/apps/DeskClock
-    remote: github
-    revision: refs/heads/10
   remove_paths:
-  - packages/apps/Calendar
-  - packages/apps/QuickSearchBox
-  - packages/apps/Browser2
-  - platform/prebuilts/qemu-kernel
-  - platform/developers/samples/android
-  - platform/developers/demos
   - device/generic/car
+  - device/generic/mini-emulator-arm64
+  - device/generic/mini-emulator-armv7-a-neon
+  - device/generic/mini-emulator-x86
+  - device/generic/mini-emulator-x86_64
   - device/generic/qemu
-  - device/lenaro/bootloader/arm-trusted-firmware
-  - device/lenaro/bootloader/edk2
-  - device/lenaro/bootloader/OpenPlatformPkg
-  - device/lenaro/hikey
-  - device/lenaro/hikey-kernel
-  - device/lenaro/
   - device/google/atv
   - device/google/contexthub
   - device/google/crosshatch-kernel
-  - device/google/wahoo-kernel
-  - device/google/marlin-kernel
   - device/google/muskie
-  - device/generic/mips
-  - device/google/hikey-kernel
-  - device/generic/mips64
-  - device/generic/mini-emulator-arm64
-  - device/generic/mini-emulator-armv7-a-neon
-  - device/generic/mini-emulator-mips
-  - device/generic/mini-emulator-mips64
-  - device/generic/mini-emulator-x86
-  - device/generic/mini-emulator-x86_64
-  - device/google/accessory/arduino
-  - device/google/accessory/demokit
+  - device/google/wahoo-kernel
+  - device/lenaro/bootloader/arm-trusted-firmware
+  - device/linaro/bootloader/OpenPlatformPkg
+  - device/linaro/bootloader/arm-trusted-firmware
+  - device/linaro/bootloader/edk2
+  - device/linaro/dragonboard
+  - device/linaro/dragonboard-kernel
+  - device/linaro/poplar
+  - device/linaro/poplar-kernel
+  - platform/developers/demos
+  - platform/developers/samples/android
+  - platform/prebuilts/qemu-kernel
+  - prebuilts/android-emulator
   remove_groups:
   - darwin
+  - beagle_x15
+  - mips
+  - yukawa
+
+  # Needed for m otatools-package:
+  # - hikey
+
+  - crosshatch
+  - coral
+  - taimen
+  - wahoo
+  - sunfish
   patches:
-  - platform/accept-sdk-licenses.patch
   - platform/set-packages.patch
-  - platform/add-chromium.patch
-  - platform/add-fdroid.patch
-  - platform/add-updater.patch
-  - platform/fix-devicenames.patch
-  - platform/tmp-set-webview.patch
-  - platform/ignore-allowbackup-false.patch
-apps:
-  chromium:
-    version: 78.0.3881.2
-    src_ref: 0712ce29fd5a1abba8b2a94a84d977251fa7928b
-    depot_tools_ref: 9185e4495d6d17e1ee27313fffdaaf6ca50060ca
 devices:
   bonito:
-    kernel_name: bluecross
-    kernel_ref: origin/android-msm-bluecross-4.9-pie-qpr1
-    build_id: QQ2A.200305.002
-    factory_hash: 418015e0a8841aeaebd98eff8212102c6d9bb8cb7764d34365d72e4be5526d0d
-    ota_hash: 6b8498f7488ae0ff67809c54a842619ac399801159516b57afb57b4b1f40ab23
-    platform_ref: android-10.0.0_r30
+    kernel_ref: android-msm-bonito-4.9-android11
+    build_id: RQ3A.210805.001.A1
+    factory_hash: 4deed5603ff2fcedf9bfe5650cf439b74dd033516d4bb07e02b0125154cb08c7
+    ota_hash: 8920cb15c9fb996c22a8d581a2f4f97c0aaf484595d11acd58d015fe27b90d99
+    platform_ref: RQ3A.210805.001.A1.2021.08.03.03
+    platform_pubkey: daniel.micay.asc
   sargo:
-    kernel_name: bluecross
-    kernel_ref: origin/android-msm-bluecross-4.9-pie-qpr1
-    build_id: QQ2A.200305.002
-    factory_hash: e03d9a432164579b13e3f015ba501fb785c7a1ac9f76d8cabda2752f498625dd
-    ota_hash: be77b91cb875061cef95fe8990ce741a500c86a0031a07b84e61a0b037035203
-    platform_ref: android-10.0.0_r30
+    kernel_ref: android-msm-bonito-4.9-android11
+    build_id: RQ3A.210805.001.A1
+    factory_hash: 32a5c41f8395857973cad4f6b5a33659b5aee4791f0c9a9f79ce7eb31690624f
+    ota_hash: ebb9b740bd630191d6193e1a01c4af041e5ddf01325169c197d8bdf194986dda
+    platform_ref: RQ3A.210805.001.A1.2021.08.03.03
+    platform_pubkey: daniel.micay.asc
   crosshatch:
     kernel_name: bluecross
     kernel_ref: origin/android-msm-bluecross-4.9-pie-qpr1
     avb_mode: vbmeta_chained
-    build_id: QQ2A.200305.002
-    factory_hash: f08faf04c8d22782546a2db608ff4c6433469c3102b750d8fbfd7ee7f737ebbb
-    ota_hash: a440277477f646cf6fec9f08e6e224f2a4e345499d5250cfdcd70d8b2d6afab2
-    platform_ref: android-10.0.0_r30
+    build_id: RQ1A.210205.004
+    factory_hash: c9b061a5491bd26e1d8a96326d97651dbf1ad64e5fc0ec4608b64a84c194d285
+    ota_hash: 8b7aecf5636758290b42ad577128ce83e106ccfc7053346ca370d6de9a3e12ae
+    platform_ref: RQ1A.210205.004.2021.02.02.09
+    platform_pubkey: daniel.micay.asc
   blueline:
     kernel_name: bluecross
     kernel_ref: origin/android-msm-bluecross-4.9-pie-qpr1
     avb_mode: vbmeta_chained
-    build_id: QQ2A.200305.002
-    factory_hash: d781450808addd8c210999bdd2c2fcd91458d07c0b39be185ad114d041247100
-    ota_hash: b24267ae4a6ab1000e78cbc6aed451868f7f79a4af6c89de45b497ba86dc6305
-    platform_ref: android-10.0.0_r30
+    build_id: RQ1A.210205.004
+    factory_hash: 3ab98ba8d8e94c16908255a3ed8d75d784a188c0d6aa49f5198cc9d10b887042
+    ota_hash: 6715408e433b0040020b38110a7cfbc741efa1c71023880dee6d3e82b94e838a
+    platform_ref: RQ1A.210205.004.2021.02.02.09
+    platform_pubkey: daniel.micay.asc
   taimen:
     kernel_name: wahoo
     kernel_ref: origin/android-msm-wahoo-4.4-pie-qpr2
     avb_mode: vbmeta_simple
-    build_id: QQ2A.200305.002
-    factory_hash: 0e3198556031148a94e281768aeec3825f81d2a28be8162716a41ae79c2aea2c
-    ota_hash: ad1c133174950e54f2d047f6fe7995343f4074930359c41b889a683ec52b5da7
-    platform_ref: android-10.0.0_r30
+    build_id: RP1A.201005.004.A1
+    factory_hash: 2f5c4987a8e1c29bb2843d7f7d36721d52f2eb25a0fe4c74b3590e34a06eb44f
+    ota_hash: 9de3b96223cf14e8afd69ed9b21b801a15a96990781a7058ac8418ffd78e0dd7
+    platform_ref: RQ1A.210205.004.2021.02.02.09
+    platform_pubkey: daniel.micay.asc
   walleye:
     kernel_name: wahoo
     kernel_ref: origin/android-msm-wahoo-4.4-pie-qpr2
     avb_mode: vbmeta_simple
-    build_id: QQ2A.200305.002
-    factory_hash: e5da4d98ce71af9f6cdb2192fa7f921443769682539b58959f83ccf6f9004b49
-    ota_hash: beb950219e29584e7d52aa6bdc286f4387f326cea480fcc68d5c0a7aaa96a019
-    platform_ref: android-10.0.0_r30
+    build_id: RP1A.201005.004.A1
+    factory_hash: 0c23f6cf9e2194a3e72b1288f65c5a7f2f6c020080af49c8a494ee99ab3eb543
+    ota_hash: ccd1069bde76fc2ef3414d619ddb5fb840addae955e85d9829df9a7e8d2484a9
+    platform_ref: RQ1A.210205.004.2021.02.02.09
+    platform_pubkey: daniel.micay.asc
