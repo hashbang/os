@@ -49,6 +49,8 @@ sign_target_files_apks \
 	--extra_apex_payload_key com.android.appsearch.apex="${key_dir}/avb.pem" \
 	--extra_apks com.android.art.apex="${key_dir}/releasekey" \
 	--extra_apex_payload_key com.android.art.apex="${key_dir}/avb.pem" \
+	--extra_apks com.android.art.debug.apex="${key_dir}/releasekey" \
+	--extra_apex_payload_key com.android.art.debug.apex="${key_dir}/avb.pem" \
 	--extra_apks com.android.cellbroadcast.apex="${key_dir}/releasekey" \
 	--extra_apex_payload_key com.android.cellbroadcast.apex="${key_dir}/avb.pem" \
 	--extra_apks com.android.conscrypt.apex="${key_dir}/releasekey" \
@@ -150,6 +152,7 @@ fastboot flash avb_custom_key ${device}-avb_pkmd.bin
 fastboot reboot-bootloader
 sleep 5
 fastboot oem uart disable
+fastboot snapshot-update cancel
 fastboot -w --skip-reboot update image-${device}-${build_id}.zip
 fastboot reboot-bootloader
 sleep 5
